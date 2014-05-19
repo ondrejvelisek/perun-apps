@@ -1,0 +1,107 @@
+<!DOCTYPE html>                                                                                                                                                                                
+<html>
+  <head>
+    <title>User profile in eInfrastructure</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/layout.css" rel="stylesheet">
+
+    <script src="/utils/jquery-1.8.2.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/Configuration.js"></script>
+    <script src="/js/PerunUtils.js"></script>
+    <script src="/js/PerunTable.js"></script>
+    <script src="/js/PerunLoader.js"></script>
+    <script src="js/UserProfileLoader.js"></script>
+
+  </head>
+  <body>
+    <!--    <div id="cesnet_linker_placeholder"></div> -->
+    <div class="container-fluid header"> <!-- main container -->
+      <div class="row-fluid">
+        <div class="span2 logo">e-Infrastructure CESNET</div>
+        <div class="span10 title"><h3>eInfrastructure User Profile</h3></div>
+      </div>
+    </div>
+ 
+    <div class="container-fluid"> <!-- main container -->
+     <div class="row-fluid">  <!--  whole content -->
+        <div class="span2"> <!-- left menu -->
+          <div class="tabbable">
+          <br/>
+          <ul class="nav nav-pills nav-stacked">  
+            <li class="nav-header">Menu</li>  
+            <li class="active"><a href="#profile" data-toggle="tab"><i class="icon-user"></i> My Profile</a></li>  
+            <li><a href="#projects" data-toggle="tab" id="projectsLink"><i class="icon-align-justify"></i> Projects</a></li>  
+            <li><a href="https://perun.metacentrum.cz/perun-password-reset/?login-namespace=einfra"><i class="icon-repeat"></i> <span class="red">Password reset</span></a></li>  
+            <li class="nav-header">Authentications</li>  
+            <li><a href="#identities" data-toggle="tab" id="identitiesLink"><i class="icon-tasks"></i> Identities</a></li>  
+            <li><a href="#sshkeys" data-toggle="tab" id="sshkeysLink"><i class="icon-cog"></i> SSH Keys</a></li>  
+            <li class="divider"></li>  
+            <li><a href="#help" data-toggle="tab" id="helpLink"><i class="icon-flag"></i> Help</a></li>  
+          </ul>  
+          </div>
+        </div> <!-- left menu -->
+
+        <div class="span10">
+        <div class="tab-content"> <!-- content -->
+          <div class="tab-pane active" id="profile"> <!-- profile tab -->
+            <div class="page-header"><h2>My Profile</h2></div>
+            <address>
+              <h4><span id="user-firstName"></span>&nbsp;<span id="user-lastName"></span></h4><br>
+              <strong>E-mail:</strong> <span id="user-preferredMail"></span>
+            </address>
+
+            <address>
+              <strong>Organization: </strong> <span id="user-organization"></span><br>
+              <strong>Phone:</strong> <span id="user-phone"></span><br>
+            </address>
+
+            <address>
+              <strong>Preferred language:</strong> <span id="user-preferredLanguage"></span></br>
+              <strong>Login:</strong> <span id="user-login"></span>
+            </address>
+            <!--            <p><button class="btn btn-success">Update profile</button></p> -->
+
+          </div> <!-- profile tab -->
+
+          <div class="tab-pane" id="projects"> <!-- projects tab -->
+            <div class="page-header"><h2>List of projects you are associated with</h2></div>
+            <div id="projects-table"></div>
+          </div> <!-- projects tab -->
+
+          <div class="tab-pane" id="identities"> <!-- identities tab -->
+            <div class="page-header"><h2>List of your registered digital identities</h2></div>
+            <h3>Federated identities</h3>
+            <div id="identities-table-fed"></div>
+            <p><a href="/ic-fed/index-fed.html"><button class="btn btn-success" id="new-identity">Add new federated identity</button></a></p>
+            <h3>Digital certificates</h3>
+            <div id="identities-table-cert"></div>
+            <p><a href="/ic-fed/index-cert.html"><button class="btn btn-success" id="new-identity">Add new certificate</button></a></p>
+          </div> <!-- identities tab -->
+
+
+          <div class="tab-pane" id="sshkeys"> <!-- sshkeys tab -->
+            <div class="page-header"><h2>List of your registered SSH keys</h2></div>
+           <div id="sshkeys-table"></div>
+            <div class="newSSHKey">
+              <input type="text" id="newSSHKey" placeholder="Paste SSH key here...">&nbsp;<button class="btn btn-success btn-small" id="addNewSSHKey">Add new</button>
+            </div>
+           </div> <!-- sshkeys tab -->
+
+           <div class="tab-pane" id="help"> <!-- help tab -->
+            <div class="page-header"><h2>Help</h2></div>
+          </div>
+
+        </div> <!-- conent -->
+        </div>
+
+      </div> <!-- whole content -->
+
+    </div> <!-- main container -->
+
+    <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
+ </body>
+</html>
