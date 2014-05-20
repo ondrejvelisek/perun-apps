@@ -166,23 +166,51 @@ $(document).ready(function(){
       }
     });
     
-    $("#changeLang").click(function(){
+    $("#languageChangeEn").click(function(){
 
-      // Get current SSH keys
+      // Get current value of the attribute
       var langAttribute = {};
-      callPerunSync("attributesManager", "getAttribute", lang, { user : user.id, attributeName : "urn:perun:user:attribute-def:def:preferredLanguage" });
+      callPerunSync("attributesManager", "getAttribute", langAttribute, { user : user.id, attributeName : "urn:perun:user:attribute-def:def:preferredLanguage" });
 
-      lang.value.push($("#newLang")[0].value);
+      langAttribute.value = "en";
 
       // Store the new attribute
       var data = {};
       callPerunSyncPost("attributesManager", "setAttribute", data, { user : user.id, attribute : langAttribute });
 
-      // Reload the table
-      var elem = document.getElementById("lang");
-      if (typeof elem.onclick == "function") {
-          elem.onclick.apply(elem);
-      }
+      // Show new value in GUI
+      $("#user-preferredLanguage").text("en");
     });
 
+    $("#languageChangeCs").click(function(){
+
+      // Get current value of the attribute
+      var langAttribute = {};
+      callPerunSync("attributesManager", "getAttribute", langAttribute, { user : user.id, attributeName : "urn:perun:user:attribute-def:def:preferredLanguage" });
+
+      langAttribute.value = "cs";
+
+      // Store the new attribute
+      var data = {};
+      callPerunSyncPost("attributesManager", "setAttribute", data, { user : user.id, attribute : langAttribute });
+
+      // Show new value in GUI
+      $("#user-preferredLanguage").text("cs");
+    });
+
+
+    $("#user-timezone-list li").click(function(){
+      // Get current value of the attribute
+      var timezoneAttribute = {};
+      callPerunSync("attributesManager", "getAttribute", timezoneAttribute, { user : user.id, attributeName : "urn:perun:user:attribute-def:def:timezone" });
+
+      timezoneAttribute.value = $(this).text().trim();
+
+      // Store the new attribute
+      var data = {};
+      callPerunSyncPost("attributesManager", "setAttribute", data, { user : user.id, attribute : timezoneAttribute });
+
+      // Show new value in GUI
+      $("#user-timezone").text($(this).text());
+    });
 });
