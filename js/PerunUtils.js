@@ -28,33 +28,8 @@ function callPerun(manager, method, args) {
     }
 
 
-}
-;
+};
 
-/**
- * Method which calls Perun RPC interface in sync mode.
- * Arguments: similar to callPerun()
- */
-function callPerunSync(manager, method, variable, args) {
-    return $.ajax({
-        async: false,
-        url: configuration.RPC_URL + manager + "/" + method,
-        data: args,
-        success: function(data, textStatus, jqXHR)
-        {
-            if (typeof data.errorId !== "undefined")
-            {
-                alert(data.errorText);
-            } else {
-                // Copy objects
-                jQuery.extend(variable, data);
-            }
-        },
-        dataType: "jsonp",
-        type: "get"
-    });
-}
-;
 
 /**
  * Method which calls Perun RPC interface in sync mode with POST
@@ -78,7 +53,28 @@ function callPerunSyncPost(manager, method, variable, args) {
     });
 }
 ;
+function callPerunPost(manager, method, args) {
 
+    return function(callBack) {
+        $.ajax({
+            url: configuration.RPC_URL + manager + "/" + method,
+            data: JSON.stringify(args),
+            success: function(data, textStatus, jqXHR)
+            {
+                if (typeof data.errorId !== "undefined")
+                {
+                    alert(data.errorText);
+                } else {
+                    callBack(data);
+                }
+            },
+            dataType: "jsonp",
+            contentType: "application/json; charset=utf-8",
+            type: "post"
+        });
+    }
+    
+};
 
 /**
  * Method which calls Perun RPC interface
