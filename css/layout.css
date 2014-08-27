@@ -22,14 +22,6 @@
 .red {
   color: #FF0000;
 }
-#newSSHKey {
-  vertical-align: baseline;
-}
-.hidden {
-  color: #ffffff;
-  width: 0px;
-  height: 0px;
-}
 #message {
   display: none;
 }
