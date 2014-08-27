@@ -1,0 +1,34 @@
+.header {
+  background-color: #00529b;
+  color: #fff;
+  margin: 0px -20px;
+  padding: 0px 20px;
+}
+.navigation {
+  padding-top: 30px;
+}
+.content {
+  overflow: visible;
+  padding-top: 30px;
+}
+.content dl .btn-group {
+  height: 18px;
+}
+.content dl .btn-group .btn {
+  height: 18px;
+  vertical-align: top;
+}
+.red {
+  color: #FF0000;
+}
+#newSSHKey {
+  vertical-align: baseline;
+}
+.hidden {
+  color: #ffffff;
+  width: 0px;
+  height: 0px;
+}
+#message {
+  display: none;
+}
