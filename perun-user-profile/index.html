@@ -89,19 +89,19 @@
                             </div>
 
                             <dl class="dl-horizontal">
-                                <dt>login</dt>
+                                <dt>Login</dt>
                                 <dd id="user-login">xvelisek</dd>
-                                <dt>Organization:</dt>
+                                <dt>Organization</dt>
                                 <dd id="user-organization">Organzation</dd>
-                                <dt>E-mail:</dt>
+                                <dt>E-mail</dt>
                                 <dd id="user-prefferedEmail">sample@gmail.com</dd>
-                                <dt>phone:</dt>
+                                <dt>Phone</dt>
                                 <dd id="user-phone">777 666 555</dd>
-                                <dt>Your timezone:</dt>
-                                <dd id="user-timezone">
-                                    +1:00 (Pregue, Wien, Bratislava)
+                                <dt>Your timezone</dt>
+                                <dd>
+                                    <span id="user-timezone">+1:00 (Prague, Wien, Bratislava)</span>
                                     <div class="btn-group">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
                                             <i class="icon caret"></i>
                                         </button>
                                         <ul class="dropdown-menu">
@@ -120,11 +120,11 @@
                                         </ul>
                                     </div>
                                 </dd>
-                                <dt>Preffered language:</dt>
-                                <dd id="user-lsnguege">
-                                    Česky
+                                <dt>Preffered language</dt>
+                                <dd>
+                                    <span id="user-languege">Česky</span>
                                     <div class="btn-group">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
                                             <i class="caret"></i>
                                         </button>
                                         <ul class="dropdown-menu">
@@ -147,34 +147,55 @@
 
                         </div> <!-- profile tab -->
 
+                        
                         <div class="tab-pane" id="projects"> <!-- projects tab -->
-                            <div class="page-header"><h2>List of projects you are associated with</h2></div>
+                            <div class="page-header">
+                                <h2>List of projects you are associated with</h2>
+                            </div>
                             <div id="projects-table"></div>
                         </div> <!-- projects tab -->
 
+                        
                         <div class="tab-pane" id="identities"> <!-- identities tab -->
-                            <div class="page-header"><h2>List of your registered digital identities</h2></div>
+                            <div class="page-header">
+                                <h2>List of your registered digital identities</h2>
+                            </div>
                             <h3>Federated identities</h3>
                             <div id="identities-table-fed"></div>
-                            <p><a href="/ic-fed/index-fed-en.html?target=https://einfra.cesnet.cz/user-profile/"><button class="btn btn-success" id="new-identity">Add new federated identity</button></a></p>
+                            <p>
+                                <a href="/ic-fed/index-fed-en.html?target=https://einfra.cesnet.cz/user-profile/">
+                                    <button class="btn btn-success" id="new-identity">Add new federated identity</button>
+                                </a>
+                            </p>
                             <h3>Digital certificates</h3>
                             <div id="identities-table-cert"></div>
-                            <p><a href="/ic-fed/index-cert-en.html?target=https://einfra.cesnet.cz/user-profile/"><button class="btn btn-success" id="new-identity">Add new certificate</button></a></p>
+                            <p>
+                                <a href="/ic-fed/index-cert-en.html?target=https://einfra.cesnet.cz/user-profile/">
+                                    <button class="btn btn-success" id="new-identity">Add new certificate</button>
+                                </a>
+                            </p>
                         </div> <!-- identities tab -->
 
 
                         <div class="tab-pane" id="sshkeys"> <!-- sshkeys tab -->
-                            <div class="page-header"><h2>List of your registered SSH keys</h2></div>
+                            <div class="page-header">
+                                <h2>List of your registered SSH keys</h2>
+                            </div>
                             <div id="sshkeys-table"></div>
                             <div class="newSSHKey">
-                                <input type="text" id="newSSHKey" placeholder="Paste SSH key here...">&nbsp;<button class="btn btn-success btn-small" id="addNewSSHKey">Add new</button>
+                                <input type="text" id="newSSHKey" placeholder="Paste SSH key here...">
+                                <button class="btn btn-success" id="addNewSSHKey">Add new</button>
                             </div>
                         </div> <!-- sshkeys tab -->
 
+                        
                         <div class="tab-pane" id="help"> <!-- help tab -->
-                            <div class="page-header"><h2>Help</h2></div>
+                            <div class="page-header">
+                                <h2>Help</h2>
+                            </div>
                         </div> <!-- help tab -->
 
+                        
                     </div> 
                 </div> <!-- content -->
 

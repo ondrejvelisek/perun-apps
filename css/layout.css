@@ -11,10 +11,11 @@
   overflow: visible;
   padding-top: 30px;
 }
-.content dl .btn-group {
-  height: 18px;
+.content dl dd,
+.content dl dt {
+  margin-bottom: 4px;
 }
-.content dl .btn-group .btn {
+.content dl .btn-group {
   height: 18px;
   vertical-align: top;
 }
