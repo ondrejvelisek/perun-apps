@@ -22,15 +22,15 @@ function PerunTable() {
     this.setValues = function (values) {
         this.values = values;
     }
-    this.addList = function(values) {
+    this.setList = function(values) {
         this.values = values;
         this.type = "list";
     }
-    this.addListOfObjects = function (values) {
+    this.setListOfObjects = function(values) {
         this.values = values;
         this.type = "listOfObjects";
     }
-    this.addArray = function (functionvalues) {
+    this.setArray = function (values) {
         this.values = values;
         this.type = "array";
     }

@@ -3,9 +3,8 @@ var user = {};
 var userAttributes = [];
 
 $(document).ready(function() {
-    
-    loadUser();
 
+    loadUser();
 });
 
 
@@ -16,14 +15,14 @@ function loadUser() {
         }
         user = perunPrincipal.user;
         fillUserInfo(user);
-        callPerun("attributesManager", "getAttributes", {user: user.id})(function(userAttributesRaw) {
-            if (userAttributesRaw === null) {
+        callPerun("attributesManager", "getAttributes", {user: user.id})(function(userAttrs) {
+            if (userAttrs === null) {
                 return null;
             }
-            for (var attrId in userAttributesRaw) {
-                userAttributes[userAttributesRaw[attrId].friendlyName] = userAttributesRaw[attrId].value;
-            }
+            userAttributes = userAttrs;
             fillUserAttributes(userAttributes);
+            drawMessage(new Message("User data","was loaded successfully.","success"));
+
             entryPoint();
         });
     });
@@ -40,12 +39,8 @@ function fillUserInfo(user) {
     $("#user-titleAfter").text((user.titleAfter !== null) ? user.titleAfter : "");
 }
 function fillUserAttributes(userAttributes) {
-    // Fill basic info about the user attributes
-    $("#user-displayName").text(userAttributes.displayName);
-    $("#user-organization").text(userAttributes.organization);
-    $("#user-workplace").text(userAttributes.workplace);
-    $("#user-preferredMail").text(userAttributes.preferredMail);
-    $("#user-phone").text(userAttributes.phone);
-    $("#user-login").text(userAttributes['login-namespace:einfra']);
-    $("#user-preferredLanguage").text(userAttributes.preferredLanguage);
+    for (var attrId in userAttributes) {
+        $("#user-"+userAttributes[attrId].friendlyName).text(userAttributes[attrId].value);
+        //alert("#user-"+userAttributes[attrId].friendlyName+" = "+userAttributes[attrId].value);
+    }
 }

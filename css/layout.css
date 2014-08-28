@@ -22,6 +22,24 @@
 .red {
   color: #FF0000;
 }
-#message {
-  display: none;
+#messager {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 10;
+  width: 40%;
+}
+#messager .alert {
+  float: right;
+  clear: both;
+  margin-bottom: 0px;
+  opacity: 0.9;
+}
+@media (max-width: 480px) {
+  #messager {
+    width: 100%;
+  }
+  #messager .alert {
+    float: none;
+  }
 }

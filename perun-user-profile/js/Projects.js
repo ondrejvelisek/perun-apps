@@ -14,6 +14,7 @@ function loadVOs() {
         }
         vos = vosResult;
         fillVOs(vos);
+        drawMessage(new Message("Your projcts","was loaded successfully.","success"));
     });
 }
 

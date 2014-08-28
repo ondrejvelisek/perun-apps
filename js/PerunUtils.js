@@ -10,17 +10,23 @@
 function callPerun(manager, method, args) {
 
     return function(callBack) {
+
         $.ajax({
             url: configuration.RPC_URL + manager + "/" + method,
             data: args,
             success: function(data, textStatus, jqXHR)
             {
-                if (typeof data.errorId !== "undefined")
-                {
-                    alert(data.errorText);
+                if (data === null) {
+                    callBack();
+                } else if (typeof data.errorId !== "undefined") {
+                    drawMessage(new Message( data.name, data.message, "error"));
                 } else {
                     callBack(data);
                 }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                drawMessage(new Message( errorThrown, textStatus, "error"));
             },
             dataType: "jsonp",
             type: "get"
@@ -28,31 +34,10 @@ function callPerun(manager, method, args) {
     }
 
 
-};
-
-
-/**
- * Method which calls Perun RPC interface in sync mode with POST
- * Arguments: similar to callPerun()
- */
-function callPerunSyncPost(manager, method, variable, args) {
-    return $.ajax({
-        async: false,
-        url: configuration.RPC_URL + manager + "/" + method,
-        data: JSON.stringify(args),
-        success: function(data, textStatus, jqXHR)
-        {
-            if (typeof data.errorId !== "undefined")
-            {
-                alert(data.errorText);
-            }
-        },
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        type: "post"
-    });
 }
 ;
+
+
 function callPerunPost(manager, method, args) {
 
     return function(callBack) {
@@ -61,20 +46,26 @@ function callPerunPost(manager, method, args) {
             data: JSON.stringify(args),
             success: function(data, textStatus, jqXHR)
             {
-                if (typeof data.errorId !== "undefined")
-                {
-                    alert(data.errorText);
+                if (data === null) {
+                    callBack();
+                } else if (typeof data.errorId !== "undefined") {
+                    drawMessage(new Message( data.name, data.message, "error"));
                 } else {
                     callBack(data);
                 }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                drawMessage(new Message( errorThrown, textStatus, "error"));
             },
             dataType: "jsonp",
             contentType: "application/json; charset=utf-8",
             type: "post"
         });
     }
-    
-};
+
+}
+;
 
 /**
  * Method which calls Perun RPC interface
@@ -109,4 +100,17 @@ function callPerunAndFillText(manager, method, elementId, attribute, args) {
  */
 function getURLParameter(name) {
     return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
+}
+
+
+
+function getAttributeByFriendlyName(attributes, friendlyName) {
+    for (var attr in attributes) {
+        if (attributes[attr].friendlyName === friendlyName) {
+            return attributes[attr];
+        }
+    }
+    drawMessage(new Message( "Attribute "+friendlyName, "not found", "warning"));
+    return null;
+
 }
