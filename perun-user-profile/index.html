@@ -142,14 +142,14 @@
                                 <h2>List of your registered digital identities</h2>
                             </div>
                             <h3>Federated identities</h3>
-                            <div id="identities-table-fed"></div>
+                            <div id="federations-table"></div>
                             <p>
                                 <a href="/ic-fed/index-fed-en.html?target=https://einfra.cesnet.cz/user-profile/">
                                     <button class="btn btn-success" id="new-identity">Add new federated identity</button>
                                 </a>
                             </p>
                             <h3>Digital certificates</h3>
-                            <div id="identities-table-cert"></div>
+                            <div id="certificates-table"></div>
                             <p>
                                 <a href="/ic-fed/index-cert-en.html?target=https://einfra.cesnet.cz/user-profile/">
                                     <button class="btn btn-success" id="new-identity">Add new certificate</button>
@@ -164,8 +164,10 @@
                             </div>
                             <div id="sshkeys-table"></div>
                             <div class="newSSHKey">
-                                <input type="text" id="newSSHKey" placeholder="Paste SSH key here...">
-                                <button class="btn btn-success" id="addNewSSHKey">Add new</button>
+                                <div class="input-append">
+                                    <input class="input-xlarge" type="text" id="newSSHKey" placeholder="Paste SSH key here...">
+                                    <button class="btn btn-success" id="addNewSSHKey">Add new SSH key</button>
+                                </div>
                             </div>
                         </div> <!-- sshkeys tab -->
 
@@ -199,9 +201,9 @@
         <script src="../js/Messager.js"></script>
 
         <script src="js/EntryPoint.js"></script>
-        <script src="js/UserProfileLoader.js"></script>
         <script src="js/Profile.js"></script>
         <script src="js/Projects.js"></script>
+        <script src="js/Identities.js"></script>
         <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
     </body>
 </html>

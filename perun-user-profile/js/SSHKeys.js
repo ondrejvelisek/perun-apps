@@ -5,7 +5,3 @@
  */
 
 
-function entryPoint() {
-    loadVOs();
-    loadIdentities();
-}

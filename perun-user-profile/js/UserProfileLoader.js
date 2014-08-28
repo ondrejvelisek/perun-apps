@@ -4,7 +4,7 @@ $(document).ready(function() {
     // Reaction on button click
     //
     $("#projectsLink").click(function() {
-        $("#projects-table").html(Configuration.LOADER_IMAGE);
+        $("#projects-table").html(configuration.LOADER_IMAGE);
 
         var data = {};
         callPerunSync("usersManager", "getVosWhereUserIsMember", data, {user: user.id});
@@ -17,7 +17,7 @@ $(document).ready(function() {
     });
 
     $("#sshkeysLink").click(function() {
-        $("#sshkeys-table").html(Configuration.LOADER_IMAGE);
+        $("#sshkeys-table").html(configuration.LOADER_IMAGE);
 
         var data = {};
         callPerunSync("attributesManager", "getAttribute", data, {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"});
@@ -50,7 +50,7 @@ $(document).ready(function() {
      */
 
     $("#identitiesLink").click(function() {
-        $("#identities-table-fed").html(Configuration.LOADER_IMAGE);
+        $("#identities-table-fed").html(configuration.LOADER_IMAGE);
 
         var data = {};
         callPerunSync("usersManager", "getUserExtSources", data, {user: user.id});
@@ -120,7 +120,7 @@ $(document).ready(function() {
         $("#identities-table-fed").html(tableHtml);
 
         userExtSources = [];
-        $("#identities-table-cert").html(Configuration.LOADER_IMAGE);
+        $("#identities-table-cert").html(configuration.LOADER_IMAGE);
         for (var i in data) {
             var obj = data[i];
             if (obj.extSource.type == 'cz.metacentrum.perun.core.impl.ExtSourceX509') {
