@@ -4,23 +4,25 @@
  * and open the template in the editor.
  */
 
+$(document).ready(function() {
+    $("#projectsLink").click(function() { 
+       loadProjects();
+    });
+});
+    
 
-var vos = [];
-
-function loadVOs() {
-    callPerun("usersManager", "getVosWhereUserIsMember", {user: user.id})(function(vosResult) {
-        if (vos === null) {
+function loadProjects() {
+    callPerun("usersManager", "getVosWhereUserIsMember", {user: user.id})(function(projects) {
+        if (projects === null) {
             return null;
         }
-        vos = vosResult;
-        fillVOs(vos);
-        drawMessage(new Message("Your projcts","was loaded successfully.","success"));
+        fillProjects(projects);
+        drawMessage(new Message("Projects","was loaded successfully.","success"));
     });
 }
 
-function fillVOs(vos) {
+function fillProjects(vos) {
     var projectTable = new PerunTable();
-    projectTable.addColumn("id", "ID");
     projectTable.addColumn("name", "Project");
     projectTable.setValues(vos);
     var tableHtml = projectTable.draw();

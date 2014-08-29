@@ -7,6 +7,7 @@
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link href="../css/layout.css" rel="stylesheet">
+        <link href="../css/multilevelDropdown.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
 
     </head>
@@ -40,7 +41,7 @@
                                 Menu
                             </li>  
                             <li class="active">
-                                <a href="#profile" data-toggle="tab">
+                                <a href="#profile" data-toggle="tab" id="profileLink">
                                     <i class="icon-user"></i> My Profile
                                 </a>
                             </li>  
@@ -51,7 +52,7 @@
                             </li>  
                             <li>
                                 <a href="https://perun.metacentrum.cz/perun-password-reset/?login-namespace=einfra">
-                                    <i class="icon-repeat"></i> <span class="red">Password reset</span>
+                                    <i class="icon-repeat"></i> Password reset <i class="icon-share" style="opacity: 0.3;"></i>
                                 </a>
                             </li>  
                             <li class="nav-header">Authentications</li>  
@@ -104,10 +105,10 @@
                                         </button>
                                         <ul class="dropdown-menu" id="preferredLanguage">
                                             <li>
-                                                <a>en</a>
+                                                <a value="en">en</a>
                                             </li>
                                             <li>
-                                                <a>cs</a>
+                                                <a value="cs">cs</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -119,7 +120,7 @@
                                         <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
                                             <i class="icon caret"></i>
                                         </a>
-                                        <ul class="dropdown-menu" id="timezone">
+                                        <ul class="dropdown-menu multi-level" id="timezone">
                                             <!-- fill via javaScript -->
                                         </ul>
                                     </div>
@@ -163,11 +164,9 @@
                                 <h2>List of your registered SSH keys</h2>
                             </div>
                             <div id="sshkeys-table"></div>
-                            <div class="newSSHKey">
-                                <div class="input-append">
-                                    <input class="input-xlarge" type="text" id="newSSHKey" placeholder="Paste SSH key here...">
-                                    <button class="btn btn-success" id="addNewSSHKey">Add new SSH key</button>
-                                </div>
+                            <div class="input-append">
+                                <input class="input-xlarge" type="text" id="newSSHKey" placeholder="Paste SSH key here...">
+                                <button class="btn btn-success" id="addNewSSHKey">Add new SSH key</button>
                             </div>
                         </div> <!-- sshkeys tab -->
 
@@ -204,6 +203,7 @@
         <script src="js/Profile.js"></script>
         <script src="js/Projects.js"></script>
         <script src="js/Identities.js"></script>
+        <script src="js/SSHKeys.js"></script>
         <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
     </body>
 </html>

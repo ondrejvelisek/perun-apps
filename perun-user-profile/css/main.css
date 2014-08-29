@@ -13,24 +13,6 @@ and open the template in the editor.
 .content #profile .dropdown-menu {
   min-width: 0px;
 }
-.content #profile .dropdown-menu li a {
+.content #profile .dropdown-menu a[value] {
   cursor: pointer;
-}
-.content #profile #timezone {
-  position: absolute;
-  width: 100%;
-}
-.content #profile #timezone li {
-  overflow: hidden;
-  width: 33.3333%;
-  display: inline-block;
-}
-@media (max-width: 480px) {
-  .content #profile #timezone li {
-    display: block;
-    width: 100%;
-  }
-  .content #profile #timezone br {
-    display: none;
-  }
 }

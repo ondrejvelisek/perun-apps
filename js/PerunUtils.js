@@ -110,7 +110,6 @@ function getAttributeByFriendlyName(attributes, friendlyName) {
             return attributes[attr];
         }
     }
-    drawMessage(new Message( "Attribute "+friendlyName, "not found", "warning"));
     return null;
 
 }

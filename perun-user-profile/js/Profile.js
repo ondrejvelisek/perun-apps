@@ -6,25 +6,33 @@
 
 
 $(document).ready(function() {
-
     fillTimezones();
 
+    $("#profileLink").click(function() {
+        loadUserAttributes();
+    });
+
     $("#preferredLanguage.dropdown-menu > li > a").click(function() {
-        var preferredLanguage = getAttributeByFriendlyName(userAttributes, 'preferredLanguage');
-        preferredLanguage.value = $(this).text().trim();
-        callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: preferredLanguage})(function() {
-            fillUserAttributes(userAttributes);
-            drawMessage(new Message("Preffered language","was saved successfully","success"));
+        var clicked = this;
+        callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:preferredLanguage"})(function(preferredLanguage) {
+            preferredLanguage.value = $(clicked).text().trim();
+            callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: preferredLanguage})(function() {
+                userAttributesFriendly.preferredLanguage = preferredLanguage.value;
+                fillUserAttributes(userAttributesFriendly);
+                drawMessage(new Message("Preffered language " + userAttributesFriendly.preferredLanguage, "was saved successfully", "success"));
+            });
         });
     });
 
-    $("#timezone.dropdown-menu > li > a").click(function() {
-        var timezone = getAttributeByFriendlyName(userAttributes, 'timezone');
-        timezone.value = $(this).text().trim();
-        callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: timezone})(function() {
-            alert("work");
-            fillUserAttributes(userAttributes);
-            drawMessage(new Message("Timezone","was saved successfully.","success"));
+    $("#timezone.dropdown-menu.multi-level li>a[value]").click(function() {
+        var clicked = this;
+        callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:timezone"})(function(timezone) {
+            timezone.value = $(clicked).attr( "value" ).trim();
+            callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: timezone})(function() {
+                userAttributesFriendly.timezone = timezone.value;
+                fillUserAttributes(userAttributesFriendly);
+                drawMessage(new Message("Timezone " + userAttributesFriendly.timezone, "was saved successfully", "success"));
+            });
         });
     });
 
@@ -33,17 +41,58 @@ $(document).ready(function() {
 
 
 function fillTimezones() {
-    $("#timezone").parent(".btn-group").css("position", "static");
-    var i = 0;
-    for(var timezone in timezones) {
-        $("#timezone").append("<li><a>"+timezones[timezone]+"</a></li>");
-        i++;
-        if (i % 3 === 0) {
-            $("#timezone").append("<br>");
+    var timezones = parseTimezones(timezonesArray);
+    for (var timezone in timezones) {
+        if (typeof timezones[timezone] === "string") {
+            $("#timezone").append("<li><a value='"+timezones[timezone]+"'>" + timezones[timezone] + "</a></li>");
+        } else {
+            $("#timezone").append("<li class='dropdown-submenu "+timezone+"'><a>" + timezone + "</a>");
+            $("#timezone>."+timezone).append("<ul class='dropdown-menu'>");
+            for (var timezoneIner in timezones[timezone]) {
+                if (typeof timezones[timezone][timezoneIner] === "string") {
+                    $("#timezone>."+timezone+">.dropdown-menu")
+                            .append("<li><a value='"+timezone+"/"+timezones[timezone][timezoneIner]+"'>" + 
+                            timezones[timezone][timezoneIner] + 
+                            "</a></li>");
+                } else {
+                    $("#timezone>."+timezone+">.dropdown-menu").append("<li class='dropdown-submenu " + timezoneIner + "'><a>" + timezoneIner + "</a>");
+                    $("#timezone>."+timezone+">.dropdown-menu>."+timezoneIner).append("<ul class='dropdown-menu'>");
+                    for (var timezoneInest in timezones[timezone][timezoneIner]) {
+                        $("#timezone>."+timezone+">.dropdown-menu>."+timezoneIner+">.dropdown-menu")
+                                .append("<li><a value='"+timezone+"/"+timezoneIner+"/"+timezones[timezone][timezoneIner][timezoneInest]+"'>" + 
+                                timezones[timezone][timezoneIner][timezoneInest] + 
+                                "</a></li>");
+                    }
+                    $("#timezone>."+timezone+">.dropdown-menu>."+timezoneIner).append("</ul></li>");
+                }
+            }
+            $("#timezone>."+timezone).append("</ul></li>");
         }
     }
+
 }
-timezones = ["Africa/Abidjan",
+function parseTimezones(timezonesArray) {
+    var timezones = {};
+    var current = timezones;
+    for (var timezoneId in timezonesArray) {
+        var timezoneSplited = timezonesArray[timezoneId].split('/');
+        for (var itemId in timezoneSplited) {
+            if (itemId == timezoneSplited.length-1) {
+                current[timezoneSplited[itemId]] = timezoneSplited[itemId];
+                current = timezones;
+            } else {
+                if (current[timezoneSplited[itemId]] == null) {
+                    current[timezoneSplited[itemId]] = {};
+                }
+                current = current[timezoneSplited[itemId]];
+            }
+        }
+    }
+    return timezones;
+    //alert(JSON.stringify(timezones));
+}
+
+timezonesArray = ["Africa/Abidjan",
     "Africa/Accra",
     "Africa/Addis_Ababa",
     "Africa/Algiers",

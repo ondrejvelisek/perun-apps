@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
-var extSources = [];
+$(document).ready(function() {
+    $("#identitiesLink").click(function() { 
+        loadIdentities();
+    });
+});
 
 function loadIdentities() {
-    callPerun("usersManager", "getUserExtSources", {user: user.id})(function(externalSources) {
-        if (externalSources === null) {
+    callPerun("usersManager", "getUserExtSources", {user: user.id})(function(extSources) {
+        if (extSources === null) {
             return null;
         }
-        extSources = externalSources;
         fillExtSources(extSources);
         drawMessage(new Message("Identities","was loaded successfully.","success"));
     });
@@ -38,15 +38,13 @@ function fillExtSources(extSources) {
 
 function fillFederations(extSources) {
     var federationsTable = new PerunTable();
-    federationsTable.addColumn("id", "ID");
     federationsTable.addColumn("name", "Federation");
     federationsTable.setValues(extSources);
     $("#federations-table").html(federationsTable.draw());
 }
 function fillCertificates(extSources) {
     var certificatesTable = new PerunTable();
-    certificatesTable.addColumn("id", "ID");
-    certificatesTable.addColumn("name", "certificate");
+    certificatesTable.addColumn("name", "Certificate");
     certificatesTable.setValues(extSources);
     $("#certificates-table").html(certificatesTable.draw());
 }

@@ -6,6 +6,9 @@
 
 
 function entryPoint() {
-    loadVOs();
+    /*
+    loadProjects();
     loadIdentities();
+    loadSSHKeys();
+    */
 }

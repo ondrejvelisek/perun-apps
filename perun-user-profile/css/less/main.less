@@ -13,30 +13,9 @@ and open the template in the editor.
         position: relative;
         .dropdown-menu {
             min-width: 0px;
-            li {
-                a {
-                    cursor: pointer;
-                }
-            }
-        }
-        #timezone {
-            position: absolute;
-            width: 100%;
-            li {
-                overflow: hidden;
-                width: 33.3333%;
-                display: inline-block;
-            }
-            @media (max-width: 480px) { 
-                li {
-                    display: block;
-                width: 100%;
-                }
-                br {
-                    display: none;
-                }
-            }
-
+            a[value] {
+                cursor: pointer;
+            }            
         }
     }
 }

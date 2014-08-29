@@ -39,7 +39,7 @@ function PerunTable() {
      */
     this.draw = function () {
 
-        var html = "<table class=\"table table-hover\">";
+        var html = "<table class=\"table table-bordered\">";
 
         // draw headers
 
@@ -113,8 +113,12 @@ function PerunTable() {
                 html += rowHtml;
             }
         }
-
+        if (html.search("<td>") < 0) {
+            html += "<tr><td>no items</td></tr>";
+        }
         html += "</tbody></table>";
+
+
 
         return html;
     }
