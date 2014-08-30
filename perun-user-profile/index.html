@@ -81,22 +81,22 @@
                         <div class="tab-pane active" id="profile"> <!-- profile tab -->
                             <div class="page-header">
                                 <h2>
-                                    <span id="user-displayName">&nbsp;</span>
+                                    <span id="user-displayName"> ... </span>
                                 </h2>
                             </div>
 
-                            <dl class="dl-horizontal">
+                            <dl class="dl-horizontal" id="user-attributes">
                                 <dt>Login</dt>
-                                <dd id="user-kerberosLogins">&nbsp;</dd>
+                                <dd id="user-kerberosLogins"> ... </dd>
                                 <dt>Organization</dt>
-                                <dd id="user-organization">&nbsp;</dd>
+                                <dd id="user-organization"> ... </dd>
                                 <dt>E-mail</dt>
-                                <dd id="user-preferredMail">&nbsp;</dd>
+                                <dd id="user-preferredMail"> ... </dd>
                                 <dt>Phone</dt>
-                                <dd id="user-phone">&nbsp;</dd>
+                                <dd id="user-phone"> ... </dd>
                                 <dt>Preffered language</dt>
                                 <dd>
-                                    <span id="user-preferredLanguage"></span>
+                                    <span id="user-preferredLanguage"> ... </span>
                                     <div class="btn-group">
                                         <button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
                                             <i class="caret"></i>
@@ -113,7 +113,7 @@
                                 </dd>
                                 <dt>Your timezone</dt>
                                 <dd>
-                                    <span id="user-timezone"></span>
+                                    <span id="user-timezone"> ... </span>
                                     <div class="btn-group">
                                         <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
                                             <i class="icon caret"></i>
@@ -197,7 +197,8 @@
         <script src="../js/PerunUserLoader.js"></script>
         <script src="../js/PreunConnectionTester.js"></script>
         <script src="../js/Messager.js"></script>
-
+        <script src="../js/LoadImage.js"></script>
+        
         <script src="js/Profile.js"></script>
         <script src="js/Projects.js"></script>
         <script src="js/Identities.js"></script>

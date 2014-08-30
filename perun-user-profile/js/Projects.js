@@ -15,12 +15,15 @@ function loadProjects(user) {
         drawMessage(new Message("Projects","can't be loaded because user isn't loaded.","error"));
         return;
     }
+    var loadImage = new LoadImage($("#projects-table"), "auto");
+    
     callPerun("usersManager", "getVosWhereUserIsMember", {user: user.id}, function(projects) {
         if (!projects) {
             drawMessage(new Message("Projects","can't be loaded.","error"));
             return;
         }
         fillProjects(projects);
+        loadImage.hide();
         //drawMessage(new Message("Projects","was loaded successfully.","success"));
     });
 }

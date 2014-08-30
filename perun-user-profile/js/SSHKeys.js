@@ -17,6 +17,8 @@ $(document).ready(function() {
         }
         var newSSHKey = $("#newSSHKey").val().trim();
         $("#newSSHKey").val("");
+        var loadImage = new LoadImage($("#sshkeys-table"), "auto");
+        
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
             if (!sshPublicKey) {
                 drawMessage(new Message("SSH keys", "can't be loaded", "error"));
@@ -29,6 +31,7 @@ $(document).ready(function() {
             sshPublicKey.value.push(newSSHKey);
             callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: sshPublicKey}, function() {
                 fillSSHKeys(sshPublicKey);
+                loadImage.hide();
                 drawMessage(new Message("SSH key", "was added successfully", "success"));
             });
         });
@@ -41,12 +44,15 @@ function loadSSHKeys(user) {
         drawMessage(new Message("SSH keys", "can't be loaded becouse user isn't loaded.", "error"));
         return;
     }
+    var loadImage = new LoadImage($("#sshkeys-table"), "auto");
+    
     callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
         if (!sshPublicKey) {
             drawMessage(new Message("SSH keys", "can't be loaded", "error"));
             return;
         }
         fillSSHKeys(sshPublicKey);
+        loadImage.hide();
         //drawMessage(new Message("SSH keys", "was loaded successfully.", "success"));
     });
 }

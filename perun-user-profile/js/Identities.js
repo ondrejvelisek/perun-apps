@@ -14,6 +14,7 @@ function loadIdentities(user) {
         drawMessage(new Message("Identities","can't be loaded because user isn't loaded","error"));
         return;
     }
+    var loadImage = new LoadImage($("#federations-table, #certificates-table"), "auto");
     
     callPerun("usersManager", "getUserExtSources", {user: user.id}, function(extSources) {
         if (!extSources) {
@@ -21,6 +22,7 @@ function loadIdentities(user) {
             return;
         }
         fillExtSources(extSources);
+        loadImage.hide();
         //drawMessage(new Message("Identities","was loaded successfully.","success"));
     });
 }

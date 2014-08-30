@@ -79,6 +79,16 @@ body {
     }    
 }
 
+.load-image {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    img {
+        margin: 0px auto;
+        width: 100%;
+    }
+}
 
 .icon-white,
 .nav-pills > .active > a > [class^="icon-"],
@@ -98,17 +108,17 @@ body {
 .dropdown-submenu:hover > a > [class*=" icon-"],
 .dropdown-submenu:focus > a > [class*=" icon-"] {
     &.icon-key {
-        background-image: url('../bootstrap/img/more-icons/icon-key-white.png');
+        background-image: url('../img/icons/icon-key-white.png');
     }
     &.icon-help {
-        background-image: url('../bootstrap/img/more-icons/icon-help-white.png');
+        background-image: url('../img/icons/icon-help-white.png');
     }
 }
 .icon-key {
-    background-image: url('../bootstrap/img/more-icons/icon-key.png');
+    background-image: url('../img/icons/icon-key.png');
     background-position: center center;
 }
 .icon-help {
-    background-image: url('../bootstrap/img/more-icons/icon-help.png');
+    background-image: url('../img/icons/icon-help.png');
     background-position: center center;
 }

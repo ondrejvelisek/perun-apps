@@ -76,6 +76,16 @@ body {
     float: none;
   }
 }
+.load-image {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+}
+.load-image img {
+  margin: 0px auto;
+  width: 100%;
+}
 .icon-white.icon-key,
 .nav-pills > .active > a > [class^="icon-"].icon-key,
 .nav-pills > .active > a > [class*=" icon-"].icon-key,
@@ -93,7 +103,7 @@ body {
 .dropdown-submenu:focus > a > [class^="icon-"].icon-key,
 .dropdown-submenu:hover > a > [class*=" icon-"].icon-key,
 .dropdown-submenu:focus > a > [class*=" icon-"].icon-key {
-  background-image: url('../bootstrap/img/more-icons/icon-key-white.png');
+  background-image: url('../img/icons/icon-key-white.png');
 }
 .icon-white.icon-help,
 .nav-pills > .active > a > [class^="icon-"].icon-help,
@@ -112,13 +122,13 @@ body {
 .dropdown-submenu:focus > a > [class^="icon-"].icon-help,
 .dropdown-submenu:hover > a > [class*=" icon-"].icon-help,
 .dropdown-submenu:focus > a > [class*=" icon-"].icon-help {
-  background-image: url('../bootstrap/img/more-icons/icon-help-white.png');
+  background-image: url('../img/icons/icon-help-white.png');
 }
 .icon-key {
-  background-image: url('../bootstrap/img/more-icons/icon-key.png');
+  background-image: url('../img/icons/icon-key.png');
   background-position: center center;
 }
 .icon-help {
-  background-image: url('../bootstrap/img/more-icons/icon-help.png');
+  background-image: url('../img/icons/icon-help.png');
   background-position: center center;
 }
