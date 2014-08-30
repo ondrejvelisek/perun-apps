@@ -21,7 +21,7 @@ function loadIdentities(user) {
             return;
         }
         fillExtSources(extSources);
-        drawMessage(new Message("Identities","was loaded successfully.","success"));
+        //drawMessage(new Message("Identities","was loaded successfully.","success"));
     });
 }
 

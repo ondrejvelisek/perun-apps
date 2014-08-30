@@ -17,7 +17,7 @@ function callPerun(manager, method, args, callBack) {
         success: function(data, textStatus, jqXHR)
         {
             if (!data) {
-                drawMessage(new Message(manager+" "+method, "hasn't returned data", "warning"));
+                drawMessage(new Message(manager + " " + method, "hasn't returned data", "warning"));
                 callBack();
             } else if (typeof data.errorId !== "undefined") {
                 drawMessage(new Message(data.name, data.message, "error"));
@@ -94,3 +94,15 @@ function callPerunAndFillText(manager, method, elementId, attribute, args) {
 function getURLParameter(name) {
     return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
 }
+
+
+$(document).ready(function() {
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-stacked a[href=#' + url.split('#')[1] + ']').tab('show');
+    }
+    $('.nav-stacked a').on('shown', function(e) {
+        window.location.hash = e.target.hash;
+        window.scrollTo(0, 0);
+    });
+});

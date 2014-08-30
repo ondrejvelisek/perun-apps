@@ -7,6 +7,9 @@
 
 function entryPoint(user) {
     loadUserAttributes(user);
+    loadProjects(user);
+    loadIdentities(user);
+    loadSSHKeys(user);
 }
 
 $(document).ready(function() {
@@ -58,7 +61,7 @@ function loadUserAttributes(user) {
             userAttributesFriendly[userAttributes[attrId].friendlyName] = userAttributes[attrId].value;
         }
         fillUserAttributes(userAttributesFriendly);
-        drawMessage(new Message("User data", "was loaded successfully.", "success"));
+        //drawMessage(new Message("User data", "was loaded successfully.", "success"));
     });
 }
 

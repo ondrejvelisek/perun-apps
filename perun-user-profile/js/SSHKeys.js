@@ -47,7 +47,7 @@ function loadSSHKeys(user) {
             return;
         }
         fillSSHKeys(sshPublicKey);
-        drawMessage(new Message("SSH keys", "was loaded successfully.", "success"));
+        //drawMessage(new Message("SSH keys", "was loaded successfully.", "success"));
     });
 }
 

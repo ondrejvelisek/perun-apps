@@ -21,7 +21,7 @@ function loadProjects(user) {
             return;
         }
         fillProjects(projects);
-        drawMessage(new Message("Projects","was loaded successfully.","success"));
+        //drawMessage(new Message("Projects","was loaded successfully.","success"));
     });
 }
 
