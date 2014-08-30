@@ -13,6 +13,15 @@ and open the template in the editor.
 .content #profile .dropdown-menu {
   min-width: 0px;
 }
-.content #profile .dropdown-menu a[value] {
+.content #profile .dropdown-menu a[data-value] {
   cursor: pointer;
+}
+@media (max-width: 480px) {
+  .content #profile .btn-group {
+    position: static;
+  }
+  .content #profile .btn-group .dropdown-menu.multi-level {
+    position: absolute;
+    left: 0px;
+  }
 }

@@ -13,9 +13,18 @@ and open the template in the editor.
         position: relative;
         .dropdown-menu {
             min-width: 0px;
-            a[value] {
+            a[data-value] {
                 cursor: pointer;
             }            
+        }
+        @media (max-width: 480px) {
+            .btn-group {
+                position: static;
+                .dropdown-menu.multi-level {
+                    position: absolute;
+                    left: 0px;
+                }
+            }
         }
     }
 }

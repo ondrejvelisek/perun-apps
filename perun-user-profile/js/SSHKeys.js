@@ -5,48 +5,60 @@
  */
 
 $(document).ready(function() {
-    $("#sshkeysLink").click(function() { 
-        loadSSHKeys();
+
+    $("#sshkeysLink").click(function() {
+        loadSSHKeys(user);
     });
-});
 
-sshPublicKey = {};
-
-$(document).ready(function() {
-    
     $("#addNewSSHKey").click(function() {
         if (!$("#newSSHKey").val().trim()) {
-            drawMessage(new Message("SSH key","field can't be empty","warning"));
-            return null;
+            drawMessage(new Message("SSH key", "field can't be empty", "warning"));
+            return;
         }
-        if (sshPublicKey.value === null) {
-            sshPublicKey.value = [];
-        }
-        sshPublicKey.value.push($("#newSSHKey").val().trim());
-        callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: sshPublicKey})(function() {
-            fillSSHKeys(sshPublicKey);
-            $("#newSSHKey").val("");
-            drawMessage(new Message("SSH key","was added successfully","success"));
+        var newSSHKey = $("#newSSHKey").val().trim();
+        $("#newSSHKey").val("");
+        callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
+            if (!sshPublicKey) {
+                drawMessage(new Message("SSH keys", "can't be loaded", "error"));
+                return;
+            }
+            // if it's first SSH key.
+            if (!sshPublicKey.value) {
+                sshPublicKey.value = [];
+            }
+            sshPublicKey.value.push(newSSHKey);
+            callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: sshPublicKey}, function() {
+                fillSSHKeys(sshPublicKey);
+                drawMessage(new Message("SSH key", "was added successfully", "success"));
+            });
         });
     });
 
 });
 
-function loadSSHKeys() {
-    callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"})(function(sshKey) {
-        if (sshKey === null) {
-            return null;
+function loadSSHKeys(user) {
+    if (!user) {
+        drawMessage(new Message("SSH keys", "can't be loaded becouse user isn't loaded.", "error"));
+        return;
+    }
+    callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
+        if (!sshPublicKey) {
+            drawMessage(new Message("SSH keys", "can't be loaded", "error"));
+            return;
         }
-        sshPublicKey = sshKey;
-        fillSSHKeys(sshKey);
-        drawMessage(new Message("SSH keys","was loaded successfully.","success"));
+        fillSSHKeys(sshPublicKey);
+        drawMessage(new Message("SSH keys", "was loaded successfully.", "success"));
     });
 }
 
-function fillSSHKeys(sshKey) {
+function fillSSHKeys(sshPublicKey) {
+    if (!sshPublicKey) {
+        drawMessage(new Message("SSH keys", "can't be fill", "error"));
+        return;
+    }
     var sshKeysTable = new PerunTable();
     sshKeysTable.addColumn("value", "SSH key");
-    sshKeysTable.setList(sshKey);
+    sshKeysTable.setList(sshPublicKey);
     var tableHtml = sshKeysTable.draw();
     $("#sshkeys-table").html(tableHtml);
 }

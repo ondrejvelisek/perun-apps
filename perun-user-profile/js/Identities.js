@@ -5,14 +5,20 @@
  */
 $(document).ready(function() {
     $("#identitiesLink").click(function() { 
-        loadIdentities();
+        loadIdentities(user);
     });
 });
 
-function loadIdentities() {
-    callPerun("usersManager", "getUserExtSources", {user: user.id})(function(extSources) {
-        if (extSources === null) {
-            return null;
+function loadIdentities(user) {
+    if (!user) {
+        drawMessage(new Message("Identities","can't be loaded because user isn't loaded","error"));
+        return;
+    }
+    
+    callPerun("usersManager", "getUserExtSources", {user: user.id}, function(extSources) {
+        if (!extSources) {
+            drawMessage(new Message("Identities","can't be loaded","error"));
+            return;
         }
         fillExtSources(extSources);
         drawMessage(new Message("Identities","was loaded successfully.","success"));
@@ -20,31 +26,47 @@ function loadIdentities() {
 }
 
 function fillExtSources(extSources) {
-    var federated = [];
+    if (!extSources) {
+        drawMessage(new Message("Identities","can't be fill","error"));
+        return;
+    }
+    
+    var federations = [];
     var certificates = [];
     for(var extSourcesId in extSources) {
         switch (extSources[extSourcesId].extSource.type) {
             case "cz.metacentrum.perun.core.impl.ExtSourceIdp":
-                federated.push(extSources[extSourcesId].extSource);
+                federations.push(extSources[extSourcesId].extSource);
                 break;
             case "cz.metacentrum.perun.core.impl.ExtSourceX509":
                 certificates.push(extSources[extSourcesId].extSource);
                 break;
         }
     }
-    fillFederations(federated);
+    fillFederations(federations);
     fillCertificates(certificates);
 }
 
-function fillFederations(extSources) {
+function fillFederations(federations) {
+    if (!federations) {
+        drawMessage(new Message("Federations","can't be fill","error"));
+        return;
+    }
+    
     var federationsTable = new PerunTable();
     federationsTable.addColumn("name", "Federation");
-    federationsTable.setValues(extSources);
+    federationsTable.setValues(federations);
     $("#federations-table").html(federationsTable.draw());
 }
-function fillCertificates(extSources) {
+
+function fillCertificates(certificates) {
+    if (!certificates) {
+        drawMessage(new Message("Certificates","can't be fill","error"));
+        return;
+    }
+    
     var certificatesTable = new PerunTable();
     certificatesTable.addColumn("name", "Certificate");
-    certificatesTable.setValues(extSources);
+    certificatesTable.setValues(certificates);
     $("#certificates-table").html(certificatesTable.draw());
 }

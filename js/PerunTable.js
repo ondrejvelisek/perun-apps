@@ -48,8 +48,15 @@ function PerunTable() {
             var value = this.columnTitles[i];
             html += "    <th>" + value + "</th>";
         }
-        html += "</thead></tr><tbody>";
-
+        
+        html += "</thead></tr>";
+        html += "<tbody>";
+        if ($.isEmptyObject(this.values)) {
+            html += "<tr><td style='color: #999;'>no items</td></tr>\n\
+            </tbody></table>";
+            return html;
+        }
+        
         if (this.type == "list") {
             for (var n in this.columnNames) {
                 var colName = this.columnNames[n];
@@ -112,9 +119,6 @@ function PerunTable() {
 
                 html += rowHtml;
             }
-        }
-        if (html.search("<td>") < 0) {
-            html += "<tr><td>no items</td></tr>";
         }
         html += "</tbody></table>";
 

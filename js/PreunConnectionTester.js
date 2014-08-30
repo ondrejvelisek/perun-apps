@@ -1,10 +1,9 @@
+
 $(document).ready(function() {
-    
-    // Methods which check if the Perun connection is OK
     if (configuration.TESTING_CONNECTION) {
+        // Methods which check if the Perun connection is OK
         setTimeout(executeQuery, 5000);
     }
-
 });
 
 
@@ -35,5 +34,4 @@ function executeQuery() {
                 reloadMsg();
             }
         });
-    
 }

@@ -5,18 +5,22 @@
  */
 
 
+function entryPoint(user) {
+    loadUserAttributes(user);
+}
+
 $(document).ready(function() {
-    fillTimezones();
+    fillTimezones(parseTimezones(timezonesArray), $("#timezone"));
 
     $("#profileLink").click(function() {
-        loadUserAttributes();
+        loadUserAttributes(user);
     });
 
-    $("#preferredLanguage.dropdown-menu > li > a").click(function() {
+    $("#preferredLanguage.dropdown-menu > li > a[data-value]").click(function() {
         var clicked = this;
-        callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:preferredLanguage"})(function(preferredLanguage) {
-            preferredLanguage.value = $(clicked).text().trim();
-            callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: preferredLanguage})(function() {
+        callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:preferredLanguage"}, function(preferredLanguage) {
+            preferredLanguage.value = $(clicked).attr("data-value").trim();
+            callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: preferredLanguage}, function() {
                 userAttributesFriendly.preferredLanguage = preferredLanguage.value;
                 fillUserAttributes(userAttributesFriendly);
                 drawMessage(new Message("Preffered language " + userAttributesFriendly.preferredLanguage, "was saved successfully", "success"));
@@ -24,11 +28,11 @@ $(document).ready(function() {
         });
     });
 
-    $("#timezone.dropdown-menu.multi-level li>a[value]").click(function() {
+    $("#timezone.dropdown-menu.multi-level li>a[data-value]").click(function() {
         var clicked = this;
-        callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:timezone"})(function(timezone) {
-            timezone.value = $(clicked).attr( "value" ).trim();
-            callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: timezone})(function() {
+        callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:timezone"}, function(timezone) {
+            timezone.value = $(clicked).attr("data-value").trim();
+            callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: timezone}, function() {
                 userAttributesFriendly.timezone = timezone.value;
                 fillUserAttributes(userAttributesFriendly);
                 drawMessage(new Message("Timezone " + userAttributesFriendly.timezone, "was saved successfully", "success"));
@@ -39,45 +43,47 @@ $(document).ready(function() {
 });
 
 
-
-function fillTimezones() {
-    var timezones = parseTimezones(timezonesArray);
-    for (var timezone in timezones) {
-        if (typeof timezones[timezone] === "string") {
-            $("#timezone").append("<li><a value='"+timezones[timezone]+"'>" + timezones[timezone] + "</a></li>");
-        } else {
-            $("#timezone").append("<li class='dropdown-submenu "+timezone+"'><a>" + timezone + "</a>");
-            $("#timezone>."+timezone).append("<ul class='dropdown-menu'>");
-            for (var timezoneIner in timezones[timezone]) {
-                if (typeof timezones[timezone][timezoneIner] === "string") {
-                    $("#timezone>."+timezone+">.dropdown-menu")
-                            .append("<li><a value='"+timezone+"/"+timezones[timezone][timezoneIner]+"'>" + 
-                            timezones[timezone][timezoneIner] + 
-                            "</a></li>");
-                } else {
-                    $("#timezone>."+timezone+">.dropdown-menu").append("<li class='dropdown-submenu " + timezoneIner + "'><a>" + timezoneIner + "</a>");
-                    $("#timezone>."+timezone+">.dropdown-menu>."+timezoneIner).append("<ul class='dropdown-menu'>");
-                    for (var timezoneInest in timezones[timezone][timezoneIner]) {
-                        $("#timezone>."+timezone+">.dropdown-menu>."+timezoneIner+">.dropdown-menu")
-                                .append("<li><a value='"+timezone+"/"+timezoneIner+"/"+timezones[timezone][timezoneIner][timezoneInest]+"'>" + 
-                                timezones[timezone][timezoneIner][timezoneInest] + 
-                                "</a></li>");
-                    }
-                    $("#timezone>."+timezone+">.dropdown-menu>."+timezoneIner).append("</ul></li>");
-                }
-            }
-            $("#timezone>."+timezone).append("</ul></li>");
+function loadUserAttributes(user) {
+    if (!user) {
+        drawMessage(new Message("User attributes", "can't be loaded because user isn't loaded.", "error"));
+        return;
+    }
+    callPerun("attributesManager", "getAttributes", {user: user.id}, function(userAttributes) {
+        if (!userAttributes) {
+            drawMessage(new Message("User attributes", "can't be loaded.", "error"));
+            return;
         }
+        var userAttributesFriendly = {};
+        for (var attrId in userAttributes) {
+            userAttributesFriendly[userAttributes[attrId].friendlyName] = userAttributes[attrId].value;
+        }
+        fillUserAttributes(userAttributesFriendly);
+        drawMessage(new Message("User data", "was loaded successfully.", "success"));
+    });
+}
+
+function fillUserAttributes(userAttributesFriendly) {
+    if (!userAttributesFriendly) {
+        drawMessage(new Message("User attributes", "can't be fill.", "error"));
+        return;
+    }
+    for (var attrId in userAttributesFriendly) {
+        $("#user-" + attrId).text(userAttributesFriendly[attrId]);
+    }
+}
+
+function parseTimezones(timezonesArray) {
+    if (!timezonesArray) {
+        drawMessage(new Message("Timezones", "can't be parse", "error"));
+        return;
     }
 
-}
-function parseTimezones(timezonesArray) {
     var timezones = {};
     var current = timezones;
     for (var timezoneId in timezonesArray) {
         var timezoneSplited = timezonesArray[timezoneId].split('/');
         for (var itemId in timezoneSplited) {
-            if (itemId == timezoneSplited.length-1) {
+            if (itemId == timezoneSplited.length - 1) {
                 current[timezoneSplited[itemId]] = timezoneSplited[itemId];
                 current = timezones;
             } else {
@@ -89,10 +95,35 @@ function parseTimezones(timezonesArray) {
         }
     }
     return timezones;
-    //alert(JSON.stringify(timezones));
 }
 
-timezonesArray = ["Africa/Abidjan",
+function fillTimezones(timezones, where, dataValue) {
+    if (!timezones) {
+        drawMessage(new Message("Timezones", "can't be fill", "error"));
+        return;
+    }
+    if (!where) {
+        drawMessage(new Message("Timezones", "can't be fill", "error"));
+        return;
+    }
+    if (!dataValue) {
+        dataValue = "";
+    }
+
+    for (var timezone in timezones) {
+        if (typeof timezones[timezone] === "string") {
+            where.append("<li><a data-value='" + dataValue + timezones[timezone] + "'>" + timezones[timezone] + "</a></li>");
+        } else {
+            where.append("<li class='dropdown-submenu' id='" + timezone + "'><a>" + timezone + "</a>\n\
+                <ul class='dropdown-menu'>");
+            fillTimezones(timezones[timezone], where.find("#" + timezone + ">.dropdown-menu"), dataValue + timezone + "/");
+            where.find("#" + timezone).append("</ul></li>");
+        }
+    }
+}
+
+timezonesArray = [
+    "Africa/Abidjan",
     "Africa/Accra",
     "Africa/Addis_Ababa",
     "Africa/Algiers",

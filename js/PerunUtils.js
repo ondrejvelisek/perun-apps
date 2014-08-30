@@ -7,63 +7,56 @@
  * arguments which will be passed to the managers method
  * done - method which is started
  */
-function callPerun(manager, method, args) {
+function callPerun(manager, method, args, callBack) {
 
-    return function(callBack) {
-
-        $.ajax({
-            url: configuration.RPC_URL + manager + "/" + method,
-            data: args,
-            success: function(data, textStatus, jqXHR)
-            {
-                if (data === null) {
-                    callBack();
-                } else if (typeof data.errorId !== "undefined") {
-                    drawMessage(new Message( data.name, data.message, "error"));
-                } else {
-                    callBack(data);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-                drawMessage(new Message( errorThrown, textStatus, "error"));
-            },
-            dataType: "jsonp",
-            type: "get"
-        });
-    }
-
-
+    $.ajax({
+        url: configuration.RPC_URL + manager + "/" + method,
+        data: args,
+        dataType: "jsonp",
+        type: "get",
+        success: function(data, textStatus, jqXHR)
+        {
+            if (!data) {
+                drawMessage(new Message(manager+" "+method, "hasn't returned data", "warning"));
+                callBack();
+            } else if (typeof data.errorId !== "undefined") {
+                drawMessage(new Message(data.name, data.message, "error"));
+            } else {
+                callBack(data);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            drawMessage(new Message(errorThrown, textStatus, "error"));
+        }
+    });
 }
 ;
 
 
-function callPerunPost(manager, method, args) {
+function callPerunPost(manager, method, args, callBack) {
 
-    return function(callBack) {
-        $.ajax({
-            url: configuration.RPC_URL + manager + "/" + method,
-            data: JSON.stringify(args),
-            success: function(data, textStatus, jqXHR)
-            {
-                if (data === null) {
-                    callBack();
-                } else if (typeof data.errorId !== "undefined") {
-                    drawMessage(new Message( data.name, data.message, "error"));
-                } else {
-                    callBack(data);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-                drawMessage(new Message( errorThrown, textStatus, "error"));
-            },
-            dataType: "jsonp",
-            contentType: "application/json; charset=utf-8",
-            type: "post"
-        });
-    }
-
+    $.ajax({
+        url: configuration.RPC_URL + manager + "/" + method,
+        data: JSON.stringify(args),
+        dataType: "jsonp",
+        contentType: "application/json; charset=utf-8",
+        type: "post",
+        success: function(data, textStatus, jqXHR)
+        {
+            if (!data) {
+                callBack();
+            } else if (typeof data.errorId !== "undefined") {
+                drawMessage(new Message(data.name, data.message, "error"));
+            } else {
+                callBack(data);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            drawMessage(new Message(errorThrown, textStatus, "error"));
+        }
+    });
 }
 ;
 
@@ -100,16 +93,4 @@ function callPerunAndFillText(manager, method, elementId, attribute, args) {
  */
 function getURLParameter(name) {
     return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
-}
-
-
-
-function getAttributeByFriendlyName(attributes, friendlyName) {
-    for (var attr in attributes) {
-        if (attributes[attr].friendlyName === friendlyName) {
-            return attributes[attr];
-        }
-    }
-    return null;
-
 }

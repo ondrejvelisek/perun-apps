@@ -7,7 +7,6 @@
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link href="../css/layout.css" rel="stylesheet">
-        <link href="../css/multilevelDropdown.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
 
     </head>
@@ -47,7 +46,7 @@
                             </li>  
                             <li>
                                 <a href="#projects" data-toggle="tab" id="projectsLink">
-                                    <i class="icon-align-justify"></i> Projects
+                                    <i class="icon-briefcase"></i> Projects
                                 </a>
                             </li>  
                             <li>
@@ -55,15 +54,15 @@
                                     <i class="icon-repeat"></i> Password reset <i class="icon-share" style="opacity: 0.3;"></i>
                                 </a>
                             </li>  
-                            <li class="nav-header">Authentications</li>  
+                            <!-- <li class="nav-header">Authentications</li> -->
                             <li>
                                 <a href="#identities" data-toggle="tab" id="identitiesLink">
-                                    <i class="icon-tasks"></i> Identities
+                                    <i class="icon-eye-open"></i> Identities
                                 </a>
                             </li>  
                             <li>
                                 <a href="#sshkeys" data-toggle="tab" id="sshkeysLink">
-                                    <i class="icon-cog"></i> SSH Keys
+                                    <i class="icon-lock"></i> SSH Keys
                                 </a>
                             </li>  
                             <li class="divider"></li>  
@@ -105,10 +104,10 @@
                                         </button>
                                         <ul class="dropdown-menu" id="preferredLanguage">
                                             <li>
-                                                <a value="en">en</a>
+                                                <a data-value="en">English</a>
                                             </li>
                                             <li>
-                                                <a value="cs">cs</a>
+                                                <a data-value="cs">Česky</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -199,7 +198,6 @@
         <script src="../js/PreunConnectionTester.js"></script>
         <script src="../js/Messager.js"></script>
 
-        <script src="js/EntryPoint.js"></script>
         <script src="js/Profile.js"></script>
         <script src="js/Projects.js"></script>
         <script src="js/Identities.js"></script>

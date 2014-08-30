@@ -14,6 +14,10 @@ function Message(title, text, type) {
 }
 
 function drawMessage(message) {
+    if (!message) {
+        alert("Messager error: No message to show.");
+    }
+    
     $("#messager").append(
             '<div class="alert alert-'+message.type+' alert-dismissible" role="alert" id="message'+message.id+'" >' +
                 '<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>' +
@@ -25,6 +29,4 @@ function drawMessage(message) {
     $("#messager #message"+message.id).show(200);
     
     setTimeout(function(){$("#messager #message"+message.id).hide(200);}, 8000);
-        
-    
 }
