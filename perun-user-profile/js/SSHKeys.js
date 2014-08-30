@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     $("#addNewSSHKey").click(function() {
         if (!$("#newSSHKey").val().trim()) {
-            drawMessage(new Message("SSH key", "field can't be empty", "warning"));
+            (new Message("SSH key", "field can't be empty", "warning")).draw();
             return;
         }
         var newSSHKey = $("#newSSHKey").val().trim();
@@ -21,7 +21,7 @@ $(document).ready(function() {
         
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
             if (!sshPublicKey) {
-                drawMessage(new Message("SSH keys", "can't be loaded", "error"));
+                (new Message("SSH keys", "can't be loaded", "error")).draw();
                 return;
             }
             // if it's first SSH key.
@@ -32,7 +32,7 @@ $(document).ready(function() {
             callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: sshPublicKey}, function() {
                 fillSSHKeys(sshPublicKey);
                 loadImage.hide();
-                drawMessage(new Message("SSH key", "was added successfully", "success"));
+                (new Message("SSH key", "was added successfully", "success")).draw();
             });
         });
     });
@@ -41,25 +41,25 @@ $(document).ready(function() {
 
 function loadSSHKeys(user) {
     if (!user) {
-        drawMessage(new Message("SSH keys", "can't be loaded becouse user isn't loaded.", "error"));
+        (new Message("SSH keys", "can't be loaded becouse user isn't loaded.", "error")).draw();
         return;
     }
     var loadImage = new LoadImage($("#sshkeys-table"), "auto");
     
     callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
         if (!sshPublicKey) {
-            drawMessage(new Message("SSH keys", "can't be loaded", "error"));
+            (new Message("SSH keys", "can't be loaded", "error")).draw();
             return;
         }
         fillSSHKeys(sshPublicKey);
         loadImage.hide();
-        //drawMessage(new Message("SSH keys", "was loaded successfully.", "success"));
+        //(new Message("SSH keys", "was loaded successfully.", "success")).draw();
     });
 }
 
 function fillSSHKeys(sshPublicKey) {
     if (!sshPublicKey) {
-        drawMessage(new Message("SSH keys", "can't be fill", "error"));
+        (new Message("SSH keys", "can't be fill", "error")).draw();
         return;
     }
     var sshKeysTable = new PerunTable();

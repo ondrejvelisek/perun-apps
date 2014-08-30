@@ -31,7 +31,7 @@ $(document).ready(function() {
                 userAttributesFriendly.preferredLanguage = preferredLanguage.value;
                 fillUserAttributes(userAttributesFriendly);
                 loadImage.hide();
-                drawMessage(new Message("Preffered language " + userAttributesFriendly.preferredLanguage, "was saved successfully", "success"));
+                (new Message("Preffered language " + userAttributesFriendly.preferredLanguage, "was saved successfully", "success")).draw();
             });
         });
     });
@@ -48,7 +48,7 @@ $(document).ready(function() {
                 userAttributesFriendly.timezone = timezone.value;
                 fillUserAttributes(userAttributesFriendly);
                 loadImage.hide();
-                drawMessage(new Message("Timezone " + userAttributesFriendly.timezone, "was saved successfully", "success"));
+                (new Message("Timezone " + userAttributesFriendly.timezone, "was saved successfully", "success")).draw();
             });
         });
     });
@@ -58,14 +58,14 @@ $(document).ready(function() {
 
 function loadUserAttributes(user) {
     if (!user) {
-        drawMessage(new Message("User attributes", "can't be loaded because user isn't loaded.", "error"));
+        (new Message("User attributes", "can't be loaded because user isn't loaded.", "error")).draw();
         return;
     }
     var loadImage = new LoadImage($('#user-attributes [id^="user-"], #user-displayName'), "20px");
     
     callPerun("attributesManager", "getAttributes", {user: user.id}, function(userAttributes) {
         if (!userAttributes) {
-            drawMessage(new Message("User attributes", "can't be loaded.", "error"));
+            (new Message("User attributes", "can't be loaded.", "error")).draw();
             return;
         }
         var userAttributesFriendly = {};
@@ -74,13 +74,13 @@ function loadUserAttributes(user) {
         }
         fillUserAttributes(userAttributesFriendly);
         loadImage.hide();
-        //drawMessage(new Message("User data", "was loaded successfully.", "success"));
+        //(new Message("User data", "was loaded successfully.", "success")).draw();
     });
 }
 
 function fillUserAttributes(userAttributesFriendly) {
     if (!userAttributesFriendly) {
-        drawMessage(new Message("User attributes", "can't be fill.", "error"));
+        (new Message("User attributes", "can't be fill.", "error")).draw();
         return;
     }
     for (var attrId in userAttributesFriendly) {
@@ -90,7 +90,7 @@ function fillUserAttributes(userAttributesFriendly) {
 
 function parseTimezones(timezonesArray) {
     if (!timezonesArray) {
-        drawMessage(new Message("Timezones", "can't be parse", "error"));
+        (new Message("Timezones", "can't be parse", "error")).draw();
         return;
     }
 
@@ -115,11 +115,11 @@ function parseTimezones(timezonesArray) {
 
 function fillTimezones(timezones, where, dataValue) {
     if (!timezones) {
-        drawMessage(new Message("Timezones", "can't be fill", "error"));
+        (new Message("Timezones", "can't be fill", "error")).draw();
         return;
     }
     if (!where) {
-        drawMessage(new Message("Timezones", "can't be fill", "error"));
+        (new Message("Timezones", "can't be fill", "error")).draw();
         return;
     }
     if (!dataValue) {

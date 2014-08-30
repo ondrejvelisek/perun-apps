@@ -17,17 +17,17 @@ function callPerun(manager, method, args, callBack) {
         success: function(data, textStatus, jqXHR)
         {
             if (!data) {
-                drawMessage(new Message(manager + " " + method, "hasn't returned data", "warning"));
+                (new Message(manager + " " + method, "hasn't returned data", "warning")).draw();
                 callBack();
             } else if (typeof data.errorId !== "undefined") {
-                drawMessage(new Message(data.name, data.message, "error"));
+                (new Message(data.name, data.message, "error")).draw();
             } else {
                 callBack(data);
             }
         },
         error: function(jqXHR, textStatus, errorThrown)
         {
-            drawMessage(new Message(errorThrown, textStatus, "error"));
+            (new Message(errorThrown, textStatus, "error")).draw();
         }
     });
 }
@@ -47,14 +47,14 @@ function callPerunPost(manager, method, args, callBack) {
             if (!data) {
                 callBack();
             } else if (typeof data.errorId !== "undefined") {
-                drawMessage(new Message(data.name, data.message, "error"));
+                (new Message(data.name, data.message, "error")).draw();
             } else {
                 callBack(data);
             }
         },
         error: function(jqXHR, textStatus, errorThrown)
         {
-            drawMessage(new Message(errorThrown, textStatus, "error"));
+            (new Message(errorThrown, textStatus, "error")).draw();
         }
     });
 }
@@ -95,7 +95,7 @@ function getURLParameter(name) {
     return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
 }
 
-
+//care of tabs address in url.
 $(document).ready(function() {
     var url = document.location.toString();
     if (url.match('#')) {

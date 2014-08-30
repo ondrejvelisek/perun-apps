@@ -11,22 +11,22 @@ function Message(title, text, type) {
     this.title = title;
     this.text = text;
     this.type = type;
+
+    this.draw = function() {
+        $("#messager").append(
+                '<div class="alert alert-' + this.type + ' alert-dismissible" role="alert" id="message' + this.id + '" >' +
+                '<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>' +
+                '<strong>' + this.title + '</strong> ' + this.text +
+                '</div>'
+                );
+
+        $("#messager #message" + this.id).hide();
+        $("#messager #message" + this.id).show(200);
+        var messageId = this.id;
+        setTimeout(function() {
+            $("#messager #message" + messageId).hide(200);
+        }, 7000);
+    };
 }
 
-function drawMessage(message) {
-    if (!message) {
-        alert("Messager error: No message to show.");
-    }
-    
-    $("#messager").append(
-            '<div class="alert alert-'+message.type+' alert-dismissible" role="alert" id="message'+message.id+'" >' +
-                '<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>' +
-                '<strong>'+message.title+'</strong> '+message.text+
-            '</div>'
-            );
-    
-    $("#messager #message"+message.id).hide();
-    $("#messager #message"+message.id).show(200);
-    
-    setTimeout(function(){$("#messager #message"+message.id).hide(200);}, 8000);
-}
+

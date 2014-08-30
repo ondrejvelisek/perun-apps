@@ -9,7 +9,7 @@ $(document).ready(function() {
 function loadUser() {
     callPerun("authzResolver", "getPerunPrincipal", {}, function(perunPrincipal) {
         if (!perunPrincipal) {
-            drawMessage(new Message("User","can't be loaded.","error"));
+            (new Message("User","can't be loaded.","error")).draw();
             return;
         }
         user = perunPrincipal.user;
@@ -20,7 +20,7 @@ function loadUser() {
 
 function fillUserInfo(user) {
     if (!user) {
-        drawMessage(new Message("User info","can't be fill because user isn't loaded.","error"));
+        (new Message("User info","can't be fill because user isn't loaded.","error")).draw();
         return;
     }
     $("#user-id").text(user.id);
