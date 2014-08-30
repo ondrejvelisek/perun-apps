@@ -24,6 +24,7 @@ $(document).ready(function() {
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:preferredLanguage"}, function(preferredLanguage) {
             preferredLanguage.value = $(clicked).attr("data-value").trim();
             callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: preferredLanguage}, function() {
+                var userAttributesFriendly = {};
                 userAttributesFriendly.preferredLanguage = preferredLanguage.value;
                 fillUserAttributes(userAttributesFriendly);
                 drawMessage(new Message("Preffered language " + userAttributesFriendly.preferredLanguage, "was saved successfully", "success"));
@@ -36,6 +37,7 @@ $(document).ready(function() {
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:timezone"}, function(timezone) {
             timezone.value = $(clicked).attr("data-value").trim();
             callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: timezone}, function() {
+                var userAttributesFriendly = {};
                 userAttributesFriendly.timezone = timezone.value;
                 fillUserAttributes(userAttributesFriendly);
                 drawMessage(new Message("Timezone " + userAttributesFriendly.timezone, "was saved successfully", "success"));

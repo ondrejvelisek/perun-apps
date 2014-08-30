@@ -51,11 +51,6 @@ function PerunTable() {
         
         html += "</thead></tr>";
         html += "<tbody>";
-        if ($.isEmptyObject(this.values)) {
-            html += "<tr><td style='color: #999;'>no items</td></tr>\n\
-            </tbody></table>";
-            return html;
-        }
         
         if (this.type == "list") {
             for (var n in this.columnNames) {

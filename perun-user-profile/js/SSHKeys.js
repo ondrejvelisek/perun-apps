@@ -57,7 +57,7 @@ function fillSSHKeys(sshPublicKey) {
         return;
     }
     var sshKeysTable = new PerunTable();
-    sshKeysTable.addColumn("value", "SSH key");
+    sshKeysTable.addColumn("value", "SSH keys");
     sshKeysTable.setList(sshPublicKey);
     var tableHtml = sshKeysTable.draw();
     $("#sshkeys-table").html(tableHtml);

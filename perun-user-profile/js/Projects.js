@@ -31,7 +31,7 @@ function fillProjects(projects) {
         return;
     }
     var projectTable = new PerunTable();
-    projectTable.addColumn("name", "Project");
+    projectTable.addColumn("name", "Projects");
     projectTable.setValues(projects);
     var tableHtml = projectTable.draw();
     $("#projects-table").html(tableHtml);

@@ -54,7 +54,7 @@ function fillFederations(federations) {
     }
     
     var federationsTable = new PerunTable();
-    federationsTable.addColumn("name", "Federation");
+    federationsTable.addColumn("name", "Federated identities");
     federationsTable.setValues(federations);
     $("#federations-table").html(federationsTable.draw());
 }
@@ -66,7 +66,7 @@ function fillCertificates(certificates) {
     }
     
     var certificatesTable = new PerunTable();
-    certificatesTable.addColumn("name", "Certificate");
+    certificatesTable.addColumn("name", "Digital certificates");
     certificatesTable.setValues(certificates);
     $("#certificates-table").html(certificatesTable.draw());
 }
