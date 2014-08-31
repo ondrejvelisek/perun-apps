@@ -1,6 +1,24 @@
 body {
   background-color: #f5f5f5;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+.low-opacity {
+  opacity: 0.3;
+}
+noscript {
+  opacity: 0.8;
+}
+noscript .modal {
+  color: white;
+  background-color: #ce0000;
+}
 .header {
   background-color: #00529b;
   color: #fff;
@@ -31,10 +49,12 @@ body {
   overflow: visible;
   padding-top: 30px;
 }
+.content h1,
 .content h2,
 .content h3,
 .content h4,
-.content h5 {
+.content h5,
+.content h6 {
   margin-top: 20px;
 }
 .content .page-header {

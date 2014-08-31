@@ -105,4 +105,13 @@ $(document).ready(function() {
         window.location.hash = e.target.hash;
         window.scrollTo(0, 0);
     });
+    
+    
+    $('[data-toggle="tooltip"]').tooltip();
 });
+
+
+
+function debug(obj) {
+    alert(JSON.stringify(obj));
+}
