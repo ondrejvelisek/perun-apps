@@ -17,13 +17,13 @@ function LoadImage(where, size) {
     
     this.show = function() {
         //this.where.find(".load-image").show();
-        this.where.fadeTo( 200, 0.33 );
+        this.where.fadeTo( 0, 0.33 );
     };
     this.show(); 
     
     this.hide = function() {
         //this.where.find(".load-image").hide();
-        this.where.fadeTo( 100, 1 );
+        this.where.fadeTo( 0, 1 );
     };  
     
      
