@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27.8.2014, 21:32:51
+    Author     : Ondrej
+*/
+.content #profile {
+  position: relative;
+}
+.content #profile .dropdown-menu {
+  min-width: 0px;
+}
+.content #profile .dropdown-menu a[data-value] {
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  .content #profile .btn-group {
+    position: static;
+  }
+  .content #profile .btn-group .dropdown-menu.multi-level {
+    position: absolute;
+    left: 0px;
+  }
+}

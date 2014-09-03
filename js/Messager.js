@@ -16,7 +16,7 @@ function Message(title, text, type) {
         $("#messager").append(
                 '<div class="alert alert-' + this.type + ' alert-dismissible" role="alert" id="message' + this.id + '" >' +
                 '<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>' +
-                '<strong>' + this.title + '</strong> ' + this.text +
+                '<strong>' + this.title + '</strong> ' + this.text + ' &nbsp; '+
                 '</div>'
                 );
 

@@ -1,0 +1,220 @@
+<!DOCTYPE html>                                                                                                                                                                                
+<html>
+    <head>
+        <title>User profile in eInfrastructure</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="../css/layout.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <!-- <div id="cesnet_linker_placeholder"></div> -->
+
+
+        <div class="container-fluid">
+            <div id="header">
+                <div class="row-fluid">
+                    <div class="span2 logo">
+                        e-Infrastructure CESNET
+                    </div>
+                    <div class="span10 title">
+                        <h3>eInfrastructure User Profile</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid"> <!-- main container -->
+            <div class="row-fluid">
+
+
+                <div class="span2"> <!-- left menu -->
+                    <div class="tabbable navigation" id="menu">
+                        <ul class="nav nav-pills nav-stacked">  
+                            <li class="nav-header">
+                                Menu
+                            </li>  
+                            <li class="active">
+                                <a href="#profile" data-toggle="tab" id="profileLink">
+                                    <i class="icon-user"></i> My Profile
+                                </a>
+                            </li>  
+                            <li>
+                                <a href="#projects" data-toggle="tab" id="projectsLink">
+                                    <i class="icon-briefcase"></i> Projects
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#identities" data-toggle="tab" id="identitiesLink">
+                                    <i class="icon-eye-open"></i> Identities
+                                </a>
+                            </li>  
+                            <li>
+                                <a href="#sshkeys" data-toggle="tab" id="sshkeysLink">
+                                    <i class="icon-key"></i> SSH Keys
+                                </a>
+                            </li>  
+                            <li>
+                                <a href="https://perun.metacentrum.cz/perun-password-reset/?login-namespace=einfra" class="clearfix">
+                                    <i class="icon-repeat"></i> 
+                                    Password reset 
+                                    <i class="icon-share pull-right low-opacity" data-toggle="tooltip" title="external link"></i>
+                                </a>
+                            </li>                              
+                            <li class="divider"></li>  
+                            <li>
+                                <a href="#help" data-toggle="tab" id="helpLink">
+                                    <i class="icon-help"></i> Help
+                                </a>
+                            </li>  
+                        </ul>  
+                    </div>
+                </div> <!-- left menu -->
+
+
+                <div class="span10">
+                    <div class="tab-content content">  <!-- content -->
+
+                        <div class="tab-pane active" id="profile"> <!-- profile tab -->
+                            <div class="page-header">
+                                <h2>
+                                    <span id="user-displayName"> ... </span>
+                                </h2>
+                            </div>
+
+                            <dl class="dl-horizontal" id="user-attributes">
+                                <dt>Login</dt>
+                                <dd id="user-kerberosLogins"> ... </dd>
+                                <dt>Organization</dt>
+                                <dd id="user-organization"> ... </dd>
+                                <dt>E-mail</dt>
+                                <dd id="user-preferredMail"> ... </dd>
+                                <dt>Phone</dt>
+                                <dd id="user-phone"> ... </dd>
+                                <dt>Preffered language</dt>
+                                <dd>
+                                    <span id="user-preferredLanguage"> ... </span>
+                                    <div class="btn-group">
+                                        <button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
+                                            <i class="caret"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" id="preferredLanguage">
+                                            <li>
+                                                <a data-value="en">English</a>
+                                            </li>
+                                            <li>
+                                                <a data-value="cs">Česky</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </dd>
+                                <dt>Your timezone</dt>
+                                <dd>
+                                    <span id="user-timezone"> ... </span>
+                                    <div class="btn-group">
+                                        <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                                            <i class="icon caret"></i>
+                                        </a>
+                                        <ul class="dropdown-menu multi-level" id="timezone">
+                                            <!-- fill via javaScript -->
+                                        </ul>
+                                    </div>
+                                </dd>
+                            </dl>
+
+                        </div> <!-- profile tab -->
+
+
+                        <div class="tab-pane" id="projects"> <!-- projects tab -->
+                            <div class="page-header">
+                                <h2>List of projects you are associated with</h2>
+                            </div>
+                            <div id="projects-table"></div>
+                        </div> <!-- projects tab -->
+
+
+                        <div class="tab-pane" id="identities"> <!-- identities tab -->
+                            <div class="page-header">
+                                <h2>List of your registered digital identities</h2>
+                            </div>
+                            <div id="federations-table"><br></div>
+                            <p>
+                                <a href="/ic-fed/index-fed-en.html?target=https://einfra.cesnet.cz/user-profile/">
+                                    <button class="btn btn-success" id="new-identity">Add new federated identity</button>
+                                </a>
+                            </p>
+                            <div id="certificates-table"><br></div>
+                            <p>
+                                <a href="/ic-fed/index-cert-en.html?target=https://einfra.cesnet.cz/user-profile/">
+                                    <button class="btn btn-success" id="new-identity">Add new certificate</button>
+                                </a>
+                            </p>
+                        </div> <!-- identities tab -->
+
+
+                        <div class="tab-pane" id="sshkeys"> <!-- sshkeys tab -->
+                            <div class="page-header">
+                                <h2>List of your registered SSH keys</h2>
+                            </div>
+                            <div id="sshkeys-table"></div>
+                            <div class="input-append">
+                                <input class="input-xlarge" type="text" id="newSSHKey" placeholder="Paste SSH key here...">
+                                <button class="btn btn-success" id="addNewSSHKey">Add new SSH key</button>
+                            </div>
+                        </div> <!-- sshkeys tab -->
+
+
+                        <div class="tab-pane" id="help"> <!-- help tab -->
+                            <div class="page-header">
+                                <h2>Help</h2>
+                                <p>
+                                    <!-- add help here -->
+                                </p>
+                            </div>
+                        </div> <!-- help tab -->
+
+
+                    </div> <!-- content -->
+                </div> 
+
+
+            </div>
+        </div> <!-- main container -->
+
+        <div id="messager">
+            <!-- contend loaded by JavaScript -->
+        </div>
+
+
+        <noscript>
+        <div class="modal">
+            <div class="modal-body">
+                <h3>Javascript is disabled</h3>
+                <p>This site will not work correctly because your browser is blocking JavaScript. Please enable JavaScript and reload page.</p>
+            </div>
+        </div>
+        </noscript>
+
+        <script src="../js/jquery/jquery-1.11.1.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../js/Configuration.js"></script>
+        <script src="../js/PerunUtils.js"></script>
+        <script src="../js/PerunTable.js"></script>
+        <script src="../js/PerunUserLoader.js"></script>
+        <script src="../js/PreunConnectionTester.js"></script>
+        <script src="../js/Messager.js"></script>
+        <script src="../js/LoadImage.js"></script>
+
+        <script src="js/EntryPoint.js"></script>
+        <script src="js/Profile.js"></script>
+        <script src="js/Projects.js"></script>
+        <script src="js/Identities.js"></script>
+        <script src="js/SSHKeys.js"></script>
+        <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
+    </body>
+</html>
