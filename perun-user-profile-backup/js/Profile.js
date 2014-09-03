@@ -25,7 +25,6 @@ $(document).ready(function() {
         
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:preferredLanguage"}, function(preferredLanguage) {
             preferredLanguage.value = $(clicked).attr("data-value").trim();
-            
             callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: preferredLanguage}, function() {
                 var userAttributesFriendly = {};
                 userAttributesFriendly.preferredLanguage = preferredLanguage.value;
@@ -83,8 +82,9 @@ function fillUserAttributes(userAttributesFriendly) {
         (new Message("User attributes", "can't be fill.", "error")).draw();
         return;
     }
-    for (var attrId in userAttributesFriendly) {
-        $("#user-" + attrId).text(userAttributesFriendly[attrId]);
+    for (var attrName in userAttributesFriendly) {
+        var attrId = attrName.split(':').join('-');
+        $("#user-"+attrId).text(userAttributesFriendly[attrName]);
     }
 }
 

@@ -82,8 +82,9 @@ function fillUserAttributes(userAttributesFriendly) {
         (new Message("User attributes", "can't be fill.", "error")).draw();
         return;
     }
-    for (var attrId in userAttributesFriendly) {
-        $("#user-" + attrId).text(userAttributesFriendly[attrId]);
+    for (var attrName in userAttributesFriendly) {
+        var attrId = attrName.split(':').join('-');
+        $("#user-"+attrId).text(userAttributesFriendly[attrName]);
     }
 }
 

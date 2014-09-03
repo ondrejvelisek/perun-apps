@@ -66,10 +66,11 @@ function fillSSHKeys(sshPublicKey) {
     var sshKeysTable = new PerunTable();
     sshKeysTable.addColumn("", "#", "number");
     sshKeysTable.addColumn("value", "SSH keys");
-    sshKeysTable.addColumn("remove", "", "button");
+    sshKeysTable.addColumn("&times;", "remove", "button");
     sshKeysTable.setList(sshPublicKey.value);
     var tableHtml = sshKeysTable.draw();
     $("#sshkeys-table").html(tableHtml);
+    
     
     $('#sshkeys-table button[id^="tableBtn-"]').click(function() {
         var sshId = parseInt(this.id.split('-')[1]);
