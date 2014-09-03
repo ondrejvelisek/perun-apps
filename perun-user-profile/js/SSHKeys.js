@@ -84,11 +84,11 @@ function fillSSHKeys(sshPublicKey) {
                 (new Message("SSH keys", "is empty", "warning")).draw();
                 return;
             }
-            sshPublicKey.value.splice(sshId);
+            sshPublicKey.value.splice(sshId, 1);
             callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: sshPublicKey}, function() {
                 fillSSHKeys(sshPublicKey);
                 loadImage.hide();
-                (new Message("SSH key", "was added successfully", "success")).draw();
+                (new Message("SSH key", "was removed successfully", "success")).draw();
             });
         });
     });
