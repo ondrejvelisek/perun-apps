@@ -18,7 +18,7 @@ noscript {
     }
 }
 
-.header {
+#header {
     background-color: @base-color;
     color: #fff;
     margin: 0px -20px;
@@ -51,6 +51,12 @@ noscript {
     h1, h2, h3, h4, h5, h6 {
         margin-top: 20px;
     }
+    .dropdown-menu {
+        min-width: 100px;
+        a[data-value] {
+            cursor: pointer;
+        }            
+    }
     .page-header {
         border-bottom-color: #ddd;
     }
@@ -61,6 +67,11 @@ noscript {
         .btn-group {
             height: 18px;
             vertical-align: top;
+            .btn {
+                height: 22px;
+                padding-top: 0px;
+                padding-bottom: 0px;
+            }
         }
     }
     table {
@@ -83,6 +94,11 @@ noscript {
         clear: both;
         margin-bottom: 0px;
         opacity: 0.9;
+    }
+    .alert-error { //because of bootstrap 3
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
     }
     @media (max-width: 480px) { 
         width: 100%;
@@ -120,18 +136,26 @@ noscript {
 .dropdown-submenu:focus > a > [class^="icon-"],
 .dropdown-submenu:hover > a > [class*=" icon-"],
 .dropdown-submenu:focus > a > [class*=" icon-"] {
-    &.icon-key {
+    &.icon-key,
+    &.glyphicon-key {
         background-image: url('../img/icons/icon-key-white.png');
     }
-    &.icon-help {
+    &.icon-help, 
+    &.glyphicon-help {
         background-image: url('../img/icons/icon-help-white.png');
     }
 }
-.icon-key {
+.icon-key,
+.glyphicon-key {
     background-image: url('../img/icons/icon-key.png');
     background-position: center center;
+    height: 14px; 
+    width: 14px;
 }
-.icon-help {
+.icon-help,
+.glyphicon-help {
     background-image: url('../img/icons/icon-help.png');
     background-position: center center;
+    height: 14px; 
+    width: 14px;
 }

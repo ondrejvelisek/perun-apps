@@ -95,18 +95,19 @@ function getURLParameter(name) {
     return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
 }
 
-//care of tabs address in url.
+
 $(document).ready(function() {
+    //care of tabs address in url.
     var url = document.location.toString();
     if (url.match('#')) {
-        $('.nav-stacked a[href=#' + url.split('#')[1] + ']').tab('show');
+        $('#menu a[href=#' + url.split('#')[1] + ']').tab('show');
     }
-    $('.nav-stacked a').on('shown', function(e) {
+    $('#menu a').on('shown.bs.tab', function(e) {
         window.location.hash = e.target.hash;
         window.scrollTo(0, 0);
     });
     
-    
+    //tooltip activate
     $('[data-toggle="tooltip"]').tooltip();
 });
 

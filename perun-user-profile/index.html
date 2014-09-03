@@ -1,190 +1,267 @@
-<!DOCTYPE html>                                                                                                                                                                                
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <title>User profile in eInfrastructure</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8">
+        <!--[if IE]>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+        <title>O službě Eduroam.cz | MetaCentrum.cz</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link href="http://fonts.googleapis.com/css?family=Oswald&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <link rel="icon" type="image/ico" href="favicon.ico">
 
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link href="../css/multilevel-dropdown.css" rel="stylesheet">
         <link href="../css/layout.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
 
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
     </head>
     <body>
+        <div class="sr-only"><a href="#content">Přeskočit na obsah</a></div>
 
-        <!-- <div id="cesnet_linker_placeholder"></div> -->
-
-
-        <div class="container-fluid">
-            <div class="header">
-                <div class="row-fluid">
-                    <div class="span2 logo">
-                        e-Infrastructure CESNET
-                    </div>
-                    <div class="span10 title">
-                        <h3>eInfrastructure User Profile</h3>
-                    </div>
-                </div>
+        <div id="cesnet_linker_placeholder"
+             data-lang="cs"
+             data-lang-cs-href="?lang=cs"
+             data-lang-en-href="?lang=en"
+             data-dimensions-brand-width="283"
+             data-dimensions-brand-gap="9"
+             data-dimensions-max-width="1170"
+             data-login-href="?do=login">
+            <noscript>
+            <div class="cl_actions">
+                <a href="?lang=cs"><img alt="česká vlajka" src="data:image/gif;base64,R0lGODlhEgANALMAADV4zfLy8s3NzUiCz+cAAJ2dnexvbbfN6+3t7d4AAPj4+N/f3+hfXZIzXKK/5MFZbSH5BAAAAAAALAAAAAASAA0AAARNsMhJKx0H6b26X4I0YEpplkEahMU4OKeiBsgqujCqbqw7ALDZBtFzAQAPg9LAaDJvP0CDQE1Yr4nbcUolYK9abvVrvTXIaNEZTba4LREAOw=="></a>
+                <a href="?lang=en"><img alt="english flag" src="data:image/gif;base64,R0lGODlhEgANALMAAPv7+wAAPPsAAAUVh52dnfZgVXOQxU50qyhNp6Zxmb/I4qOx1/iPjVRuwXMQKdOi0CH5BAAAAAAALAAAAAASAA0AAARtkMhJKz3roK2cU0OIOIdkMIBiGEBRAE2zvIaELAzaAIIAM7SBzdB4vHi+FwgRkCgA0GgvGlVIHIWedrt1OKnQKdhKGDQGT59YkAg1yywXAgkYtASNd3yxoYcWPAgSBw4hAwEdHwGLAQZvFpAUEQA7"></a>
+                <a href="?do=login"><img alt="ikonka uživatele" src="data:image/gif;base64,R0lGODlhFgAaAKIAAJ6enktNSnFyccnJyVpbWWVmZMrKyomKiSH5BAAAAAAALAAAAAAWABoAAAOzGLpB9Y+wSaEtNN+bmTuCFWKdQhzDAAgCMByFVBJuWhuDUCrF+oCPlawDOCwAssJrh4oJXsHcLnAb4KzGaeGasg6GOwAXO2VUs2WCQA0AQMCUVkpXDKDauknLwP9SjVt9bgsoXSlGIDSGODoCY100MI84apMAVJdihikPkwcEKlSPX6CbBp+hmpsSqimnBJStVpcBjouSAz2PJHZ9s7Z7rlIMcnxFOCiCvBMFAgfPbc+JEwkAOw=="> Přihlášení</a>
             </div>
+            Nemáte povolený JavaScript. Přehled služeb e-infrastruktury CESNET získáte na stránce: <a href="http://cesnet.cz/sluzby">http://cesnet.cz/sluzby</a>.
+            </noscript>
         </div>
 
+        <div id="wrap">
+            <div class="container">
+                <!--[if lt IE 7]>
+                        <div class="row"><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p></div>
+                <![endif]-->
+                <div class="row">
 
-        <div class="container-fluid"> <!-- main container -->
-            <div class="row-fluid">
 
+                    <div id="sidebar" class="col-md-3 col-sm-4">
 
-                <div class="span2"> <!-- left menu -->
-                    <div class="tabbable navigation">
-                        <ul class="nav nav-pills nav-stacked">  
-                            <li class="nav-header">
+                        <div class="logo-wrapper">
+                            <a href="/">
+                                <img src="img/logo.png" id="logo" class="img-responsive" alt="logo">
+                            </a>
+                        </div>
+
+                        <p class="visible-xs">
+                            <button type="button" class="btn btn-default btn-block btn-lg btn-collapse" data-toggle="collapse" data-target="#sidebar-content">
+                                <span class="glyphicon glyphicon-chevron-down pull-right"></span>
                                 Menu
-                            </li>  
-                            <li class="active">
-                                <a href="#profile" data-toggle="tab" id="profileLink">
-                                    <i class="icon-user"></i> My Profile
-                                </a>
-                            </li>  
-                            <li>
-                                <a href="#projects" data-toggle="tab" id="projectsLink">
-                                    <i class="icon-briefcase"></i> Projects
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#identities" data-toggle="tab" id="identitiesLink">
-                                    <i class="icon-eye-open"></i> Identities
-                                </a>
-                            </li>  
-                            <li>
-                                <a href="#sshkeys" data-toggle="tab" id="sshkeysLink">
-                                    <i class="icon-key"></i> SSH Keys
-                                </a>
-                            </li>  
-                            <li>
-                                <a href="https://perun.metacentrum.cz/perun-password-reset/?login-namespace=einfra" class="clearfix">
-                                    <i class="icon-repeat"></i> 
-                                    Password reset 
-                                    <i class="icon-share pull-right low-opacity" data-toggle="tooltip" title="external link"></i>
-                                </a>
-                            </li>                              
-                            <li class="divider"></li>  
-                            <li>
-                                <a href="#help" data-toggle="tab" id="helpLink">
-                                    <i class="icon-help"></i> Help
-                                </a>
-                            </li>  
-                        </ul>  
+                            </button>
+                        </p>
+
+                        <div id="sidebar-content" class="collapse in" role="navigation">
+
+                            <ul id="menu" class="nav nav-pills nav-stacked">
+                                <li class="active">
+                                    <a href="#">Menu</a>
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li class="active">
+                                            <a href="#profile" data-toggle="tab" id="profileLink">
+                                                <i class="glyphicon glyphicon-user"></i> My Profile
+                                            </a>
+                                        </li>  
+                                        <li>
+                                            <a href="#projects" data-toggle="tab" id="projectsLink">
+                                                <i class="glyphicon glyphicon-briefcase"></i> Projects
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#identities" data-toggle="tab" id="identitiesLink">
+                                                <i class="glyphicon glyphicon-eye-open"></i> Identities
+                                            </a>
+                                        </li>  
+                                        <li>
+                                            <a href="#sshkeys" data-toggle="tab" id="sshkeysLink">
+                                                <i class="glyphicon glyphicon-key"></i> SSH Keys
+                                            </a>
+                                        </li>  
+                                        <li>
+                                            <a href="https://perun.metacentrum.cz/perun-password-reset/?login-namespace=einfra" class="clearfix">
+                                                <i class="glyphicon glyphicon-repeat"></i> 
+                                                Password reset 
+                                                <i class="glyphicon glyphicon-new-window low-opacity" data-toggle="tooltip" title="external link"></i>
+                                            </a>
+                                        </li>                      
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </div>
                     </div>
-                </div> <!-- left menu -->
 
 
-                <div class="span10"> <!-- content -->
-                    <div class="tab-content content"> 
 
-                        <div class="tab-pane active" id="profile"> <!-- profile tab -->
-                            <div class="page-header">
-                                <h2>
-                                    <span id="user-displayName"> ... </span>
-                                </h2>
-                            </div>
+                    <div id="content" class="col-md-9 col-sm-8">
+                        <div class="tab-content content">  <!-- content -->
 
-                            <dl class="dl-horizontal" id="user-attributes">
-                                <dt>Login</dt>
-                                <dd id="user-kerberosLogins"> ... </dd>
-                                <dt>Organization</dt>
-                                <dd id="user-organization"> ... </dd>
-                                <dt>E-mail</dt>
-                                <dd id="user-preferredMail"> ... </dd>
-                                <dt>Phone</dt>
-                                <dd id="user-phone"> ... </dd>
-                                <dt>Preffered language</dt>
-                                <dd>
-                                    <span id="user-preferredLanguage"> ... </span>
-                                    <div class="btn-group">
-                                        <button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
-                                            <i class="caret"></i>
-                                        </button>
-                                        <ul class="dropdown-menu" id="preferredLanguage">
-                                            <li>
-                                                <a data-value="en">English</a>
-                                            </li>
-                                            <li>
-                                                <a data-value="cs">Česky</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </dd>
-                                <dt>Your timezone</dt>
-                                <dd>
-                                    <span id="user-timezone"> ... </span>
-                                    <div class="btn-group">
-                                        <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
-                                            <i class="icon caret"></i>
-                                        </a>
-                                        <ul class="dropdown-menu multi-level" id="timezone">
-                                            <!-- fill via javaScript -->
-                                        </ul>
-                                    </div>
-                                </dd>
-                            </dl>
+                            <div class="tab-pane active" id="profile"> <!-- profile tab -->
+                                <div class="page-header">
+                                    <h1>
+                                        <span id="user-displayName"> ... </span>
+                                    </h1>
+                                </div>
 
-                        </div> <!-- profile tab -->
+                                <dl class="dl-horizontal" id="user-attributes">
+                                    <dt>Login</dt>
+                                    <dd id="user-kerberosLogins"> ... </dd>
+                                    <dt>Organization</dt>
+                                    <dd id="user-organization"> ... </dd>
+                                    <dt>E-mail</dt>
+                                    <dd id="user-preferredMail"> ... </dd>
+                                    <dt>Phone</dt>
+                                    <dd id="user-phone"> ... </dd>
+                                    <dt>Preffered language</dt>
+                                    <dd>
+                                        <span id="user-preferredLanguage"> ... </span>
+                                        <div class="btn-group">
+                                            <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                                                <i class="caret"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" id="preferredLanguage">
+                                                <li>
+                                                    <a data-value="en">English</a>
+                                                </li>
+                                                <li>
+                                                    <a data-value="cs">Česky</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </dd>
+                                    <dt>Your timezone</dt>
+                                    <dd>
+                                        <span id="user-timezone"> ... </span>
+                                        <div class="btn-group">
+                                            <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                                                <i class="icon caret"></i>
+                                            </button>
+                                            <ul class="dropdown-menu multi-level" id="timezone">
+                                                <!-- fill via javaScript -->
+                                            </ul>
+                                        </div>
+                                    </dd>
+                                </dl>
 
-
-                        <div class="tab-pane" id="projects"> <!-- projects tab -->
-                            <div class="page-header">
-                                <h2>List of projects you are associated with</h2>
-                            </div>
-                            <div id="projects-table"></div>
-                        </div> <!-- projects tab -->
+                            </div> <!-- profile tab -->
 
 
-                        <div class="tab-pane" id="identities"> <!-- identities tab -->
-                            <div class="page-header">
-                                <h2>List of your registered digital identities</h2>
-                            </div>
-                            <div id="federations-table"><br></div>
-                            <p>
-                                <a href="/ic-fed/index-fed-en.html?target=https://einfra.cesnet.cz/user-profile/">
-                                    <button class="btn btn-success" id="new-identity">Add new federated identity</button>
-                                </a>
-                            </p>
-                            <div id="certificates-table"><br></div>
-                            <p>
-                                <a href="/ic-fed/index-cert-en.html?target=https://einfra.cesnet.cz/user-profile/">
-                                    <button class="btn btn-success" id="new-identity">Add new certificate</button>
-                                </a>
-                            </p>
-                        </div> <!-- identities tab -->
+                            <div class="tab-pane" id="projects"> <!-- projects tab -->
+                                <div class="page-header">
+                                    <h2>List of projects you are associated with</h2>
+                                </div>
+                                <div id="projects-table"></div>
+                            </div> <!-- projects tab -->
 
 
-                        <div class="tab-pane" id="sshkeys"> <!-- sshkeys tab -->
-                            <div class="page-header">
-                                <h2>List of your registered SSH keys</h2>
-                            </div>
-                            <div id="sshkeys-table"></div>
-                            <div class="input-append">
-                                <input class="input-xlarge" type="text" id="newSSHKey" placeholder="Paste SSH key here...">
-                                <button class="btn btn-success" id="addNewSSHKey">Add new SSH key</button>
-                            </div>
-                        </div> <!-- sshkeys tab -->
-
-
-                        <div class="tab-pane" id="help"> <!-- help tab -->
-                            <div class="page-header">
-                                <h2>Help</h2>
+                            <div class="tab-pane" id="identities"> <!-- identities tab -->
+                                <div class="page-header">
+                                    <h2>List of your registered digital identities</h2>
+                                </div>
+                                <div id="federations-table"><br></div>
                                 <p>
-                                    <!-- add help here -->
+                                    <a href="/ic-fed/index-fed-en.html?target=https://einfra.cesnet.cz/user-profile/">
+                                        <button class="btn btn-success" id="new-identity">Add new federated identity</button>
+                                    </a>
                                 </p>
+                                <div id="certificates-table"><br></div>
+                                <p>
+                                    <a href="/ic-fed/index-cert-en.html?target=https://einfra.cesnet.cz/user-profile/">
+                                        <button class="btn btn-success" id="new-identity">Add new certificate</button>
+                                    </a>
+                                </p>
+                            </div> <!-- identities tab -->
+
+
+                            <div class="tab-pane" id="sshkeys"> <!-- sshkeys tab -->
+                                <div class="page-header">
+                                    <h2>List of your registered SSH keys</h2>
+                                </div>
+                                <div id="sshkeys-table"></div>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" id="newSSHKey" placeholder="Paste SSH key here...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" id="addNewSSHKey">Add new SSH key</button>
+                                    </span>
+                                </div>
+                            </div> <!-- sshkeys tab -->
+
+
+
+                        </div> <!-- content -->
+
+                    </div> <!-- /#content -->
+
+                </div> <!-- /.row -->
+            </div> <!-- /.container -->
+            <div id="push"></div>
+        </div> <!-- /#wrap -->
+
+        <div id="footer">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-md-3">
+                            <div class="logo-wrapper">
+                                <img src="img/logo-cesnet.png" class="img-responsive" alt="cesnet logo">
                             </div>
-                        </div> <!-- help tab -->
+                        </div>
+                        <div class="col-lg-7 col-lg-push-2 col-md-push-1 col-md-8">
+                            <div class="row">
+                                <div class="col col-sm-4">
+                                    <h2>Rychlé odkazy</h2>
+                                    <ul>
+                                        <li><a href="#">CESNET PKI</a></li>
+                                        <li><a href="#">eduID.cz</a></li>
+                                        <li><a href="#">eduroam</a></li>
+                                        <li><a href="#">MetaCentrum</a></li>
+                                        <li><a href="#">PERUN</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-sm-4">
+                                    <h2>Kontakt</h2>
+                                    CESNET, z. s. p. o<br/>
+                                    ZIKOVA 4, 16000 PRAHA <br/>
+                                    TEL : +420 224 352 994<br/>
+                                    FAX : +420 224 320 269<br/>
+                                    <a href="mailto:info@cesnet.cz">info@cesnet.cz</a>
+                                </div>
+                                <div class="col col-sm-4">
+                                    <h2>Stálá služba</h2>
+                                    TEL: +420 224 352 994<br/>
+                                    GSM: +420 602 252 531<br/>
+                                    FAX: +420 224 313 211<br/>
+                                    <a href="mailto:support@cesnet.cz">support@cesnet.cz</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-12 copyright">
+                            © 1991–2014 CESNET, z. s. p. o
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
 
-
-                    </div> 
-                </div> <!-- content -->
-
-
-            </div>
-        </div> <!-- main container -->
 
         <div id="messager">
             <!-- contend loaded by JavaScript -->
@@ -200,8 +277,13 @@
         </div>
         </noscript>
 
-        <script src="../js/jquery/jquery-1.11.1.min.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+        <script src="//code.jquery.com/jquery-latest.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+        <script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>
+
         <script src="../js/Configuration.js"></script>
         <script src="../js/PerunUtils.js"></script>
         <script src="../js/PerunTable.js"></script>
@@ -210,11 +292,10 @@
         <script src="../js/Messager.js"></script>
         <script src="../js/LoadImage.js"></script>
 
-        <script src="js/EntryPoint.js"></script>
         <script src="js/Profile.js"></script>
         <script src="js/Projects.js"></script>
         <script src="js/Identities.js"></script>
         <script src="js/SSHKeys.js"></script>
-        <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
+
     </body>
 </html>

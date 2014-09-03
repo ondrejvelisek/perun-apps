@@ -25,6 +25,7 @@ $(document).ready(function() {
         
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:preferredLanguage"}, function(preferredLanguage) {
             preferredLanguage.value = $(clicked).attr("data-value").trim();
+            
             callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: preferredLanguage}, function() {
                 var userAttributesFriendly = {};
                 userAttributesFriendly.preferredLanguage = preferredLanguage.value;

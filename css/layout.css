@@ -19,13 +19,13 @@ noscript .modal {
   color: white;
   background-color: #ce0000;
 }
-.header {
+#header {
   background-color: #00529b;
   color: #fff;
   margin: 0px -20px;
   padding: 0px 20px;
 }
-.header .logo {
+#header .logo {
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -57,6 +57,12 @@ noscript .modal {
 .content h6 {
   margin-top: 20px;
 }
+.content .dropdown-menu {
+  min-width: 100px;
+}
+.content .dropdown-menu a[data-value] {
+  cursor: pointer;
+}
 .content .page-header {
   border-bottom-color: #ddd;
 }
@@ -67,6 +73,11 @@ noscript .modal {
 .content dl .btn-group {
   height: 18px;
   vertical-align: top;
+}
+.content dl .btn-group .btn {
+  height: 22px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .content table {
   max-width: 920px;
@@ -87,6 +98,11 @@ noscript .modal {
   clear: both;
   margin-bottom: 0px;
   opacity: 0.9;
+}
+#messager .alert-error {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }
 @media (max-width: 480px) {
   #messager {
@@ -122,7 +138,24 @@ noscript .modal {
 .dropdown-submenu:hover > a > [class^="icon-"].icon-key,
 .dropdown-submenu:focus > a > [class^="icon-"].icon-key,
 .dropdown-submenu:hover > a > [class*=" icon-"].icon-key,
-.dropdown-submenu:focus > a > [class*=" icon-"].icon-key {
+.dropdown-submenu:focus > a > [class*=" icon-"].icon-key,
+.icon-white.glyphicon-key,
+.nav-pills > .active > a > [class^="icon-"].glyphicon-key,
+.nav-pills > .active > a > [class*=" icon-"].glyphicon-key,
+.nav-list > .active > a > [class^="icon-"].glyphicon-key,
+.nav-list > .active > a > [class*=" icon-"].glyphicon-key,
+.navbar-inverse .nav > .active > a > [class^="icon-"].glyphicon-key,
+.navbar-inverse .nav > .active > a > [class*=" icon-"].glyphicon-key,
+.dropdown-menu > li > a:hover > [class^="icon-"].glyphicon-key,
+.dropdown-menu > li > a:focus > [class^="icon-"].glyphicon-key,
+.dropdown-menu > li > a:hover > [class*=" icon-"].glyphicon-key,
+.dropdown-menu > li > a:focus > [class*=" icon-"].glyphicon-key,
+.dropdown-menu > .active > a > [class^="icon-"].glyphicon-key,
+.dropdown-menu > .active > a > [class*=" icon-"].glyphicon-key,
+.dropdown-submenu:hover > a > [class^="icon-"].glyphicon-key,
+.dropdown-submenu:focus > a > [class^="icon-"].glyphicon-key,
+.dropdown-submenu:hover > a > [class*=" icon-"].glyphicon-key,
+.dropdown-submenu:focus > a > [class*=" icon-"].glyphicon-key {
   background-image: url('../img/icons/icon-key-white.png');
 }
 .icon-white.icon-help,
@@ -141,14 +174,37 @@ noscript .modal {
 .dropdown-submenu:hover > a > [class^="icon-"].icon-help,
 .dropdown-submenu:focus > a > [class^="icon-"].icon-help,
 .dropdown-submenu:hover > a > [class*=" icon-"].icon-help,
-.dropdown-submenu:focus > a > [class*=" icon-"].icon-help {
+.dropdown-submenu:focus > a > [class*=" icon-"].icon-help,
+.icon-white.glyphicon-help,
+.nav-pills > .active > a > [class^="icon-"].glyphicon-help,
+.nav-pills > .active > a > [class*=" icon-"].glyphicon-help,
+.nav-list > .active > a > [class^="icon-"].glyphicon-help,
+.nav-list > .active > a > [class*=" icon-"].glyphicon-help,
+.navbar-inverse .nav > .active > a > [class^="icon-"].glyphicon-help,
+.navbar-inverse .nav > .active > a > [class*=" icon-"].glyphicon-help,
+.dropdown-menu > li > a:hover > [class^="icon-"].glyphicon-help,
+.dropdown-menu > li > a:focus > [class^="icon-"].glyphicon-help,
+.dropdown-menu > li > a:hover > [class*=" icon-"].glyphicon-help,
+.dropdown-menu > li > a:focus > [class*=" icon-"].glyphicon-help,
+.dropdown-menu > .active > a > [class^="icon-"].glyphicon-help,
+.dropdown-menu > .active > a > [class*=" icon-"].glyphicon-help,
+.dropdown-submenu:hover > a > [class^="icon-"].glyphicon-help,
+.dropdown-submenu:focus > a > [class^="icon-"].glyphicon-help,
+.dropdown-submenu:hover > a > [class*=" icon-"].glyphicon-help,
+.dropdown-submenu:focus > a > [class*=" icon-"].glyphicon-help {
   background-image: url('../img/icons/icon-help-white.png');
 }
-.icon-key {
+.icon-key,
+.glyphicon-key {
   background-image: url('../img/icons/icon-key.png');
   background-position: center center;
+  height: 14px;
+  width: 14px;
 }
-.icon-help {
+.icon-help,
+.glyphicon-help {
   background-image: url('../img/icons/icon-help.png');
   background-position: center center;
+  height: 14px;
+  width: 14px;
 }
