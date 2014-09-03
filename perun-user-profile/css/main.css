@@ -306,10 +306,9 @@ small {
 }
 #menu {
   margin-bottom: 30px;
-  /* border: 1px solid #bbb; */
-  /* -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 1); */
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
-  /* box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4); */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
   /* first level */
   /* second level */
   /* third level */
@@ -340,9 +339,9 @@ small {
   text-decoration: none;
   border-bottom: 1px solid #d8d9dd;
   font-weight: lighter;
-  /* -webkit-box-shadow: inset 0 1px 1px -1px rgba(255, 255, 255, 0.6), 0 1px 1px 0px rgba(0, 0, 0, 0.4); */
+  -webkit-box-shadow: inset 0 1px 1px -1px rgba(255, 255, 255, 0.6), 0 1px 1px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: inset 0 1px 1px -1px rgba(255, 255, 255, 0.6), 0 1px 1px 0px rgba(0, 0, 0, 0.4);
-  /* box-shadow: inset 0 1px 1px -1px rgba(255, 255, 255, 0.6), 0 1px 1px 0px rgba(0, 0, 0, 0.4); */
+  box-shadow: inset 0 1px 1px -1px rgba(255, 255, 255, 0.6), 0 1px 1px 0px rgba(0, 0, 0, 0.4);
   background: #ff5e00;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e05300), color-stop(1, #ff853d));
   background: -ms-linear-gradient(bottom, #e05300, #ff853d);
