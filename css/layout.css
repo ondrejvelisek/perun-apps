@@ -86,6 +86,9 @@ noscript .modal {
 .content table tbody {
   background-color: #fff;
 }
+.content table tbody .btn {
+  margin: -6px;
+}
 #messager {
   position: fixed;
   top: 0px;

@@ -4,6 +4,7 @@
 function PerunTable() {
     this.columnNames = [];
     this.columnTitles = [];
+    this.columnType = [];  // "text" (default), "button", "number"
     this.values = [];
     this.type = "";
     /**
@@ -12,46 +13,68 @@ function PerunTable() {
     /**
      * Adds a new column. Name is the name of JSON
      */
-    this.addColumn = function (name, title) {
+    this.addColumn = function(name, title, type) {
         this.columnNames.push(name);
         this.columnTitles.push(title);
+        this.columnType.push(type);
     }
     /**
      * Adds the array with values
      */
-    this.setValues = function (values) {
+    this.setValues = function(values) {
         this.values = values;
     }
     this.setList = function(values) {
-        this.values = values;
-        this.type = "list";
+        for (var id in values) {
+            this.values.push({ value : values[id] });
+        }
     }
-    this.setListOfObjects = function(values) {
-        this.values = values;
-        this.type = "listOfObjects";
-    }
-    this.setArray = function (values) {
-        this.values = values;
-        this.type = "array";
-    }
+
     /**
      * Draws the table and returns the HTML string
      */
-    this.draw = function () {
+    this.draw = function() {
 
         var html = "<table class=\"table table-bordered\">";
 
         // draw headers
-
         html += "<thead><tr>";
         for (var i in this.columnTitles) {
             var value = this.columnTitles[i];
             html += "    <th>" + value + "</th>";
         }
-        
         html += "</thead></tr>";
         html += "<tbody>";
-        
+
+
+        for (var row in this.values) {
+            html += "<tr>";
+            for (var column in this.columnNames) {
+                html += "<td>";
+                switch (this.columnType[column]) {
+                    case "button":
+                        html += (new TableButton(row, "tableBtn", this.columnNames[column])).html();
+                        break;
+                    case "number":
+                        html += (1+parseInt(row));
+                        break;
+                    default :
+                        if (this.values.length == 0) {
+                            break;
+                        }
+                        html += this.values[row][this.columnNames[column]];
+                        break;
+                }
+                html += "</td>";
+            }
+            html += "</tr>";
+        }
+        html += "</tbody></table>";
+        return html;
+
+
+
+        /*
         if (this.type == "list") {
             for (var n in this.columnNames) {
                 var colName = this.columnNames[n];
@@ -68,8 +91,10 @@ function PerunTable() {
                 var colNameParts = colName.split(".");
                 for (var i in this.values[colNameParts[0]]) {
                     var rowHtml = "<tr>";
+
                     rowHtml += "    <td>" + i + "</td>";
                     rowHtml += "    <td>" + this.values[colNameParts[0]][i] + "</td>";
+
                     rowHtml += "</tr>";
                     html += rowHtml;
                 }
@@ -120,7 +145,22 @@ function PerunTable() {
 
 
         return html;
+        */
     }
 
 
-};
+}
+;
+
+
+
+function TableButton(id, name, title) {
+    this.id = id;
+    this.name = name;
+    this.title = title;
+
+    this.html = function() {
+        var html = '<button id="' + this.name+"-"+this.id + '" class="btn btn-danger pull-right">' + this.title + '</button>';
+        return html;
+    };
+}
