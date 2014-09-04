@@ -5,15 +5,19 @@
  */
 currentMessageId = 0;
 
-function Message(title, text, type) {
+function Message(title, text, type, place) {
     currentMessageId++;
     this.id = currentMessageId;
     this.title = title;
     this.text = text;
     this.type = type;
+    this.place = place;
 
     this.draw = function() {
-        $("#messager").append(
+        if (!this.place) {
+            this.place = $("#messager");
+        }
+        this.place.append(
                 '<div class="alert alert-' + this.type + ' alert-dismissible" role="alert" id="message' + this.id + '" >' +
                 '<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>' +
                 '<strong>' + this.title + '</strong> ' + this.text + ' &nbsp; '+

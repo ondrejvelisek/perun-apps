@@ -98,9 +98,9 @@ function getURLParameter(name) {
 
 $(document).ready(function() {
     //care of tabs address in url.
-    var url = document.location.toString();
-    if (url.match('#')) {
-        $('#menu a[href=#' + url.split('#')[1] + ']').tab('show');
+    var hash = document.location.hash.substring(1);
+    if (hash.length > 0) {
+        $('#menu a[href=#' + hash + ']').tab('show');
     }
     $('#menu a').on('shown.bs.tab', function(e) {
         window.location.hash = e.target.hash;

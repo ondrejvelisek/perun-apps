@@ -36,6 +36,9 @@ dl dd .btn {
 #content table {
   margin-bottom: 6px;
 }
+#content table.table-bordered {
+  border-radius: 4px;
+}
 #content table tbody .btn {
   margin: 0px 0px;
   width: 100%;
