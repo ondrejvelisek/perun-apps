@@ -12,6 +12,10 @@ noscript {
     }
 }
 
+.tooltip {
+  white-space: nowrap;
+}
+
 dl {
     dt, dd {
         line-height: 24px;
@@ -37,14 +41,10 @@ dl {
         }            
     }
     table {
-        @media (min-width: 1200px) { 
-            max-width: 90%;
-        }
-
         margin-bottom: 6px;
         tbody {
             .btn {
-                margin: -7px 0px;
+                margin: 0px 0px;
                 width: 100%;
             }
         }
@@ -85,45 +85,4 @@ dl {
         margin: 0px auto;
         width: 100%;
     }
-}
-
-.icon-white,
-.nav-pills > .active > a > [class^="icon-"],
-.nav-pills > .active > a > [class*=" icon-"],
-.nav-list > .active > a > [class^="icon-"],
-.nav-list > .active > a > [class*=" icon-"],
-.navbar-inverse .nav > .active > a > [class^="icon-"],
-.navbar-inverse .nav > .active > a > [class*=" icon-"],
-.dropdown-menu > li > a:hover > [class^="icon-"],
-.dropdown-menu > li > a:focus > [class^="icon-"],
-.dropdown-menu > li > a:hover > [class*=" icon-"],
-.dropdown-menu > li > a:focus > [class*=" icon-"],
-.dropdown-menu > .active > a > [class^="icon-"],
-.dropdown-menu > .active > a > [class*=" icon-"],
-.dropdown-submenu:hover > a > [class^="icon-"],
-.dropdown-submenu:focus > a > [class^="icon-"],
-.dropdown-submenu:hover > a > [class*=" icon-"],
-.dropdown-submenu:focus > a > [class*=" icon-"] {
-    &.icon-key,
-    &.glyphicon-key {
-        background-image: url('../img/icons/icon-key-white.png');
-    }
-    &.icon-help, 
-    &.glyphicon-help {
-        background-image: url('../img/icons/icon-help-white.png');
-    }
-}
-.icon-key,
-.glyphicon-key {
-    background-image: url('../img/icons/icon-key.png');
-    background-position: center center;
-    height: 14px; 
-    width: 14px;
-}
-.icon-help,
-.glyphicon-help {
-    background-image: url('../img/icons/icon-help.png');
-    background-position: center center;
-    height: 14px; 
-    width: 14px;
 }

@@ -5,7 +5,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"> <!-- bootstrap 2 theme -->
+        <link href="../icomoon/icomoon.css" rel="stylesheet">
+        <link href="../css/multilevel-dropdown.css" rel="stylesheet">
         <link href="../css/layout.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
 
@@ -45,35 +47,35 @@
                             </li>  
                             <li class="active">
                                 <a href="#profile" data-toggle="tab" id="profileLink">
-                                    <i class="icon-user"></i> My Profile
+                                    <i class="glyphicon glyphicon-user"></i> My Profile
                                 </a>
                             </li>  
                             <li>
                                 <a href="#projects" data-toggle="tab" id="projectsLink">
-                                    <i class="icon-briefcase"></i> Projects
+                                    <i class="glyphicon glyphicon-briefcase"></i> Projects
                                 </a>
                             </li>
                             <li>
                                 <a href="#identities" data-toggle="tab" id="identitiesLink">
-                                    <i class="icon-eye-open"></i> Identities
+                                    <i class="glyphicon glyphicon-eye-open"></i> Identities
                                 </a>
                             </li>  
                             <li>
                                 <a href="#sshkeys" data-toggle="tab" id="sshkeysLink">
-                                    <i class="icon-key"></i> SSH Keys
+                                    <i class="glyphicon icon-key2"></i> SSH Keys
                                 </a>
                             </li>  
                             <li>
                                 <a href="https://perun.metacentrum.cz/perun-password-reset/?login-namespace=einfra" class="clearfix">
-                                    <i class="icon-repeat"></i> 
+                                    <i class="glyphicon glyphicon-repeat"></i> 
                                     Password reset 
-                                    <i class="icon-share pull-right low-opacity" data-toggle="tooltip" title="external link"></i>
+                                    <i class="glyphicon glyphicon-new-window pull-right low-opacity" data-toggle="tooltip" title="external link"></i>
                                 </a>
                             </li>                              
                             <li class="divider"></li>  
                             <li>
                                 <a href="#help" data-toggle="tab" id="helpLink">
-                                    <i class="icon-help"></i> Help
+                                    <i class="glyphicon icon-support"></i> Help
                                 </a>
                             </li>  
                         </ul>  
@@ -81,7 +83,7 @@
                 </div> <!-- left menu -->
 
 
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <div class="tab-content" id="content">  <!-- content -->
 
                         <div class="tab-pane active" id="profile"> <!-- profile tab -->
@@ -166,9 +168,11 @@
                                 <h2>List of your registered SSH keys</h2>
                             </div>
                             <div id="sshkeys-table"></div>
-                            <div class="input-append">
-                                <input class="input-xlarge" type="text" id="newSSHKey" placeholder="Paste SSH key here...">
-                                <button class="btn btn-success" id="addNewSSHKey">Add new SSH key</button>
+                            <div class="input-group">
+                                <input class="form-control" type="text" id="newSSHKey" placeholder="Paste SSH key here...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" id="addNewSSHKey">Add new SSH key</button>
+                                </span>
                             </div>
                         </div> <!-- sshkeys tab -->
 

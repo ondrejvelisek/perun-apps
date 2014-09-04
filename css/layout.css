@@ -8,6 +8,9 @@ noscript .modal {
   color: white;
   background-color: #ce0000;
 }
+.tooltip {
+  white-space: nowrap;
+}
 dl dt,
 dl dd {
   line-height: 24px;
@@ -33,13 +36,8 @@ dl dd .btn {
 #content table {
   margin-bottom: 6px;
 }
-@media (min-width: 1200px) {
-  #content table {
-    max-width: 90%;
-  }
-}
 #content table tbody .btn {
-  margin: -7px 0px;
+  margin: 0px 0px;
   width: 100%;
 }
 #messager {
@@ -77,90 +75,4 @@ dl dd .btn {
 .load-image img {
   margin: 0px auto;
   width: 100%;
-}
-.icon-white.icon-key,
-.nav-pills > .active > a > [class^="icon-"].icon-key,
-.nav-pills > .active > a > [class*=" icon-"].icon-key,
-.nav-list > .active > a > [class^="icon-"].icon-key,
-.nav-list > .active > a > [class*=" icon-"].icon-key,
-.navbar-inverse .nav > .active > a > [class^="icon-"].icon-key,
-.navbar-inverse .nav > .active > a > [class*=" icon-"].icon-key,
-.dropdown-menu > li > a:hover > [class^="icon-"].icon-key,
-.dropdown-menu > li > a:focus > [class^="icon-"].icon-key,
-.dropdown-menu > li > a:hover > [class*=" icon-"].icon-key,
-.dropdown-menu > li > a:focus > [class*=" icon-"].icon-key,
-.dropdown-menu > .active > a > [class^="icon-"].icon-key,
-.dropdown-menu > .active > a > [class*=" icon-"].icon-key,
-.dropdown-submenu:hover > a > [class^="icon-"].icon-key,
-.dropdown-submenu:focus > a > [class^="icon-"].icon-key,
-.dropdown-submenu:hover > a > [class*=" icon-"].icon-key,
-.dropdown-submenu:focus > a > [class*=" icon-"].icon-key,
-.icon-white.glyphicon-key,
-.nav-pills > .active > a > [class^="icon-"].glyphicon-key,
-.nav-pills > .active > a > [class*=" icon-"].glyphicon-key,
-.nav-list > .active > a > [class^="icon-"].glyphicon-key,
-.nav-list > .active > a > [class*=" icon-"].glyphicon-key,
-.navbar-inverse .nav > .active > a > [class^="icon-"].glyphicon-key,
-.navbar-inverse .nav > .active > a > [class*=" icon-"].glyphicon-key,
-.dropdown-menu > li > a:hover > [class^="icon-"].glyphicon-key,
-.dropdown-menu > li > a:focus > [class^="icon-"].glyphicon-key,
-.dropdown-menu > li > a:hover > [class*=" icon-"].glyphicon-key,
-.dropdown-menu > li > a:focus > [class*=" icon-"].glyphicon-key,
-.dropdown-menu > .active > a > [class^="icon-"].glyphicon-key,
-.dropdown-menu > .active > a > [class*=" icon-"].glyphicon-key,
-.dropdown-submenu:hover > a > [class^="icon-"].glyphicon-key,
-.dropdown-submenu:focus > a > [class^="icon-"].glyphicon-key,
-.dropdown-submenu:hover > a > [class*=" icon-"].glyphicon-key,
-.dropdown-submenu:focus > a > [class*=" icon-"].glyphicon-key {
-  background-image: url('../img/icons/icon-key-white.png');
-}
-.icon-white.icon-help,
-.nav-pills > .active > a > [class^="icon-"].icon-help,
-.nav-pills > .active > a > [class*=" icon-"].icon-help,
-.nav-list > .active > a > [class^="icon-"].icon-help,
-.nav-list > .active > a > [class*=" icon-"].icon-help,
-.navbar-inverse .nav > .active > a > [class^="icon-"].icon-help,
-.navbar-inverse .nav > .active > a > [class*=" icon-"].icon-help,
-.dropdown-menu > li > a:hover > [class^="icon-"].icon-help,
-.dropdown-menu > li > a:focus > [class^="icon-"].icon-help,
-.dropdown-menu > li > a:hover > [class*=" icon-"].icon-help,
-.dropdown-menu > li > a:focus > [class*=" icon-"].icon-help,
-.dropdown-menu > .active > a > [class^="icon-"].icon-help,
-.dropdown-menu > .active > a > [class*=" icon-"].icon-help,
-.dropdown-submenu:hover > a > [class^="icon-"].icon-help,
-.dropdown-submenu:focus > a > [class^="icon-"].icon-help,
-.dropdown-submenu:hover > a > [class*=" icon-"].icon-help,
-.dropdown-submenu:focus > a > [class*=" icon-"].icon-help,
-.icon-white.glyphicon-help,
-.nav-pills > .active > a > [class^="icon-"].glyphicon-help,
-.nav-pills > .active > a > [class*=" icon-"].glyphicon-help,
-.nav-list > .active > a > [class^="icon-"].glyphicon-help,
-.nav-list > .active > a > [class*=" icon-"].glyphicon-help,
-.navbar-inverse .nav > .active > a > [class^="icon-"].glyphicon-help,
-.navbar-inverse .nav > .active > a > [class*=" icon-"].glyphicon-help,
-.dropdown-menu > li > a:hover > [class^="icon-"].glyphicon-help,
-.dropdown-menu > li > a:focus > [class^="icon-"].glyphicon-help,
-.dropdown-menu > li > a:hover > [class*=" icon-"].glyphicon-help,
-.dropdown-menu > li > a:focus > [class*=" icon-"].glyphicon-help,
-.dropdown-menu > .active > a > [class^="icon-"].glyphicon-help,
-.dropdown-menu > .active > a > [class*=" icon-"].glyphicon-help,
-.dropdown-submenu:hover > a > [class^="icon-"].glyphicon-help,
-.dropdown-submenu:focus > a > [class^="icon-"].glyphicon-help,
-.dropdown-submenu:hover > a > [class*=" icon-"].glyphicon-help,
-.dropdown-submenu:focus > a > [class*=" icon-"].glyphicon-help {
-  background-image: url('../img/icons/icon-help-white.png');
-}
-.icon-key,
-.glyphicon-key {
-  background-image: url('../img/icons/icon-key.png');
-  background-position: center center;
-  height: 14px;
-  width: 14px;
-}
-.icon-help,
-.glyphicon-help {
-  background-image: url('../img/icons/icon-help.png');
-  background-position: center center;
-  height: 14px;
-  width: 14px;
 }

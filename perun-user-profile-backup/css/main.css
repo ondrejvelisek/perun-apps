@@ -34,6 +34,11 @@ h6 {
 #menu .nav-pills > .active > a:focus {
   background-color: #00529b;
 }
+#menu .nav-pills > .active > a i,
+#menu .nav-pills > .active > a:hover i,
+#menu .nav-pills > .active > a:focus i {
+  color: #fff;
+}
 #menu .nav-pills > li > a:hover,
 #menu .nav-pills > li > a:focus {
   background-color: #e6e6e6;
@@ -41,6 +46,9 @@ h6 {
 #menu .nav-stacked > li.divider {
   margin: 6px 0px;
   border-bottom: 1px solid #ddd;
+}
+#menu i {
+  color: #333;
 }
 #content h1,
 #content h2,

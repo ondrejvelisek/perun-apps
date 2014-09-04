@@ -32,7 +32,7 @@
 }
 
 .dropdown-submenu:hover>a:after {
-    border-left-color: #fff;
+    border-left-color: #333;
 }
 
 .dropdown-submenu.pull-left {
