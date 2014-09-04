@@ -38,10 +38,10 @@ function fillExtSources(extSources) {
     for(var extSourcesId in extSources) {
         switch (extSources[extSourcesId].extSource.type) {
             case "cz.metacentrum.perun.core.impl.ExtSourceIdp":
-                federations.push(extSources[extSourcesId].extSource);
+                federations.push(extSources[extSourcesId]);
                 break;
             case "cz.metacentrum.perun.core.impl.ExtSourceX509":
-                certificates.push(extSources[extSourcesId].extSource);
+                certificates.push(extSources[extSourcesId]);
                 break;
         }
     }
@@ -55,10 +55,18 @@ function fillFederations(federations) {
         return;
     }
     
+    var federationsFriendly = [];
+    for (var id in federations) {
+        federationsFriendly[id] = {};
+        federationsFriendly[id]["name"] = federations[id].extSource.name;
+        federationsFriendly[id]["login"] = federations[id].login;
+    }
+    
     var federationsTable = new PerunTable();
     federationsTable.addColumn("", "#", "number");
     federationsTable.addColumn("name", "Federated identities");
-    federationsTable.setValues(federations);
+    federationsTable.addColumn("login", "Login");
+    federationsTable.setValues(federationsFriendly);
     $("#federations-table").html(federationsTable.draw());
 }
 
@@ -68,9 +76,17 @@ function fillCertificates(certificates) {
         return;
     }
     
+    var certificatesFriendly = [];
+    for (var id in certificates) {
+        certificatesFriendly[id] = {};
+        certificatesFriendly[id]["name"] = certificates[id].extSource.name;
+        certificatesFriendly[id]["login"] = certificates[id].login;
+    }
+    
     var certificatesTable = new PerunTable();
     certificatesTable.addColumn("", "#", "number");
     certificatesTable.addColumn("name", "Digital certificates");
-    certificatesTable.setValues(certificates);
+    certificatesTable.addColumn("login", "Login");
+    certificatesTable.setValues(certificatesFriendly);
     $("#certificates-table").html(certificatesTable.draw());
 }
