@@ -128,7 +128,7 @@ body {
 }
 
 #wrap {
-    border-top: 12px solid @base;
+    //border-top: 12px solid @base;
     background: #ffffff data-uri("../img/page-gradient.png") top left repeat-x;    
 }
 
@@ -307,6 +307,16 @@ small {
     font-size: .8em;
 }
 
+#header {
+    .gradient(@base, darken(@base, 6%), lighten(@base, 12%));
+    margin: 0px;
+    color: #fff;
+    padding: 6px 0px;
+    h1, h2, h3, h4, h5, h6 {
+        margin: 8px 0px;
+        color: #fff;
+    }
+}
 
 #content {
 
