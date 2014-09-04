@@ -37,7 +37,10 @@ dl {
         }            
     }
     table {
-        max-width: 920px;
+        @media (min-width: 1200px) { 
+            max-width: 90%;
+        }
+
         margin-bottom: 6px;
         tbody {
             .btn {
@@ -60,7 +63,7 @@ dl {
         margin-bottom: 0px;
         opacity: 0.9;
     }
-    .alert-error { //because of bootstrap 3
+    .alert-error {
         color: #a94442;
         background-color: #f2dede;
         border-color: #ebccd1;

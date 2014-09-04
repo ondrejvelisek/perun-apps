@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
         <link href="../css/layout.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
 
@@ -17,12 +17,16 @@
 
         <div class="container-fluid">
             <div id="header">
-                <div class="row-fluid">
-                    <div class="span2 logo">
-                        e-Infrastructure CESNET
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="logo">
+                            e-Infrastructure CESNET
+                        </div>
                     </div>
-                    <div class="span10 title">
-                        <h3>eInfrastructure User Profile</h3>
+                    <div class="col-sm-10">
+                        <div class="title">
+                            <h3>eInfrastructure User Profile</h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,13 +34,13 @@
 
 
         <div class="container-fluid"> <!-- main container -->
-            <div class="row-fluid">
+            <div class="row">
 
 
-                <div class="span2"> <!-- left menu -->
+                <div class="col-sm-2"> <!-- left menu -->
                     <div class="tabbable" id="menu">
                         <ul class="nav nav-pills nav-stacked">  
-                            <li class="nav-header">
+                            <li class="dropdown-header">
                                 Menu
                             </li>  
                             <li class="active">
@@ -77,7 +81,7 @@
                 </div> <!-- left menu -->
 
 
-                <div class="span10">
+                <div class="col-sm-10">
                     <div class="tab-content" id="content">  <!-- content -->
 
                         <div class="tab-pane active" id="profile"> <!-- profile tab -->
@@ -100,7 +104,7 @@
                                 <dd>
                                     <span id="user-preferredLanguage"> ... </span>
                                     <div class="btn-group">
-                                        <button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
+                                        <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
                                             <i class="caret"></i>
                                         </button>
                                         <ul class="dropdown-menu" id="preferredLanguage">
@@ -117,9 +121,9 @@
                                 <dd>
                                     <span id="user-timezone"> ... </span>
                                     <div class="btn-group">
-                                        <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                                        <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
                                             <i class="icon caret"></i>
-                                        </a>
+                                        </button>
                                         <ul class="dropdown-menu multi-level" id="timezone">
                                             <!-- fill via javaScript -->
                                         </ul>
@@ -210,7 +214,6 @@
         <script src="../js/Messager.js"></script>
         <script src="../js/LoadImage.js"></script>
 
-        <script src="js/EntryPoint.js"></script>
         <script src="js/Profile.js"></script>
         <script src="js/Projects.js"></script>
         <script src="js/Identities.js"></script>
