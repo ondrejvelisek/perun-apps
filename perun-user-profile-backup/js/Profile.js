@@ -57,14 +57,14 @@ $(document).ready(function() {
 
 function loadUserAttributes(user) {
     if (!user) {
-        (new Message("User attributes", "can't be loaded because user isn't loaded.", "error")).draw();
+        (new Message("User attributes", "can't be loaded because user isn't loaded.", "danger")).draw();
         return;
     }
     var loadImage = new LoadImage($('#user-attributes [id^="user-"], #user-displayName'), "20px");
     
     callPerun("attributesManager", "getAttributes", {user: user.id}, function(userAttributes) {
         if (!userAttributes) {
-            (new Message("User attributes", "can't be loaded.", "error")).draw();
+            (new Message("User attributes", "can't be loaded.", "danger")).draw();
             return;
         }
         var userAttributesFriendly = {};
@@ -79,7 +79,7 @@ function loadUserAttributes(user) {
 
 function fillUserAttributes(userAttributesFriendly) {
     if (!userAttributesFriendly) {
-        (new Message("User attributes", "can't be fill.", "error")).draw();
+        (new Message("User attributes", "can't be fill.", "danger")).draw();
         return;
     }
     for (var attrName in userAttributesFriendly) {
@@ -90,7 +90,7 @@ function fillUserAttributes(userAttributesFriendly) {
 
 function parseTimezones(timezonesArray) {
     if (!timezonesArray) {
-        (new Message("Timezones", "can't be parse", "error")).draw();
+        (new Message("Timezones", "can't be parse", "danger")).draw();
         return;
     }
 
@@ -115,11 +115,11 @@ function parseTimezones(timezonesArray) {
 
 function fillTimezones(timezones, where, dataValue) {
     if (!timezones) {
-        (new Message("Timezones", "can't be fill", "error")).draw();
+        (new Message("Timezones", "can't be fill", "danger")).draw();
         return;
     }
     if (!where) {
-        (new Message("Timezones", "can't be fill", "error")).draw();
+        (new Message("Timezones", "can't be fill", "danger")).draw();
         return;
     }
     if (!dataValue) {

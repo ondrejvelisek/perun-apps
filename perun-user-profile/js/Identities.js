@@ -11,14 +11,14 @@ $(document).ready(function() {
 
 function loadIdentities(user) {
     if (!user) {
-        (new Message("Identities","can't be loaded because user isn't loaded","error")).draw();
+        (new Message("Identities","can't be loaded because user isn't loaded","danger")).draw();
         return;
     }
     var loadImage = new LoadImage($("#federations-table, #certificates-table"), "auto");
     
     callPerun("usersManager", "getUserExtSources", {user: user.id}, function(extSources) {
         if (!extSources) {
-            (new Message("Identities","can't be loaded","error")).draw();
+            (new Message("Identities","can't be loaded","danger")).draw();
             return;
         }
         fillExtSources(extSources);
@@ -29,7 +29,7 @@ function loadIdentities(user) {
 
 function fillExtSources(extSources) {
     if (!extSources) {
-        (new Message("Identities","can't be fill","error")).draw();
+        (new Message("Identities","can't be fill","danger")).draw();
         return;
     }
     
@@ -51,7 +51,7 @@ function fillExtSources(extSources) {
 
 function fillFederations(federations) {
     if (!federations) {
-        (new Message("Federations","can't be fill","error")).draw();
+        (new Message("Federations","can't be fill","danger")).draw();
         return;
     }
     
@@ -64,7 +64,7 @@ function fillFederations(federations) {
 
 function fillCertificates(certificates) {
     if (!certificates) {
-        (new Message("Certificates","can't be fill","error")).draw();
+        (new Message("Certificates","can't be fill","danger")).draw();
         return;
     }
     

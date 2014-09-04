@@ -22,7 +22,7 @@ $(document).ready(function() {
         
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
             if (!sshPublicKey) {
-                (new Message("SSH keys", "can't be loaded", "error")).draw();
+                (new Message("SSH keys", "can't be loaded", "danger")).draw();
                 return;
             }
             // if it's first SSH key.
@@ -42,14 +42,14 @@ $(document).ready(function() {
 
 function loadSSHKeys(user) {
     if (!user) {
-        (new Message("SSH keys", "can't be loaded becouse user isn't loaded.", "error")).draw();
+        (new Message("SSH keys", "can't be loaded becouse user isn't loaded.", "danger")).draw();
         return;
     }
     var loadImage = new LoadImage($("#sshkeys-table"), "auto");
     
     callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
         if (!sshPublicKey) {
-            (new Message("SSH keys", "can't be loaded", "error")).draw();
+            (new Message("SSH keys", "can't be loaded", "danger")).draw();
             return;
         }
         fillSSHKeys(sshPublicKey);
@@ -60,7 +60,7 @@ function loadSSHKeys(user) {
 
 function fillSSHKeys(sshPublicKey) {
     if (!sshPublicKey) {
-        (new Message("SSH keys", "can't be fill", "error")).draw();
+        (new Message("SSH keys", "can't be fill", "danger")).draw();
         return;
     }
     var sshKeysTable = new PerunTable();
@@ -78,7 +78,7 @@ function fillSSHKeys(sshPublicKey) {
         
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
             if (!sshPublicKey) {
-                (new Message("SSH keys", "can't be loaded", "error")).draw();
+                (new Message("SSH keys", "can't be loaded", "danger")).draw();
                 return;
             }
             if (!sshPublicKey.value) {

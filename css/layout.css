@@ -53,11 +53,6 @@ dl dd .btn {
   margin-bottom: 0px;
   opacity: 0.9;
 }
-#messager .alert-error {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
-}
 @media (max-width: 480px) {
   #messager {
     width: 100%;

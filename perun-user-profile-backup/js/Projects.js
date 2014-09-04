@@ -12,14 +12,14 @@ $(document).ready(function() {
     
 function loadProjects(user) {
     if (!user) {
-        (new Message("Projects","can't be loaded because user isn't loaded.","error")).draw();
+        (new Message("Projects","can't be loaded because user isn't loaded.","danger")).draw();
         return;
     }
     var loadImage = new LoadImage($("#projects-table"), "auto");
     
     callPerun("usersManager", "getVosWhereUserIsMember", {user: user.id}, function(projects) {
         if (!projects) {
-            (new Message("Projects","can't be loaded.","error")).draw();
+            (new Message("Projects","can't be loaded.","danger")).draw();
             return;
         }
         fillProjects(projects);
@@ -30,7 +30,7 @@ function loadProjects(user) {
 
 function fillProjects(projects) {
     if (!projects) {
-        (new Message("Projects","can't be fill.","error")).draw();
+        (new Message("Projects","can't be fill.","danger")).draw();
         return;
     }
     var projectTable = new PerunTable();
