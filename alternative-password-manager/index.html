@@ -1,0 +1,133 @@
+<!DOCTYPE html>                                                                                                                                                                                
+<html>
+    <head>
+        <title>User profile in eInfrastructure</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../icomoon/icomoon.css" rel="stylesheet">
+        <link href="../css/multilevel-dropdown.css" rel="stylesheet">
+        <link href="../css/layout.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <!-- <div id="cesnet_linker_placeholder"></div> -->
+
+
+        <div class="container-fluid">
+            <div id="header">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="logo">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="title">
+                            <h3>Alternative password manager</h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="user">
+                            logged in as
+                            <span id="user-titleBefore"></span>
+                            <span id="user-firstName"></span>
+                            <span id="user-middleName">...</span>
+                            <span id="user-lastName"></span>
+                            <span id="user-titleAfter"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container"> <!-- main container -->
+            <div class="row">
+
+
+                <div class="tabbable hidden" id="menu"> <!-- left menu -->
+                    <ul class="nav nav-pills nav-stacked">  
+                        <li class="dropdown-header">
+                            Menu
+                        </li>  
+                        <li class="active">
+                            <a href="#alternativePassword" data-toggle="tab" id="profileLink">
+                                <i class="glyphicon icon-lock"></i> Alternative Passwords
+                            </a>
+                        </li>
+                    </ul>  
+                </div> <!-- left menu -->
+
+
+                <div class="col-sm-12">
+                    <div class="tab-content" id="content">  <!-- content -->
+
+                        <div class="tab-pane active" id="alternativePassword"> <!-- alternative passwords tab -->
+
+                            
+                            <h3>Table of your alternative passwords</h3>
+                            
+                            <div id="alternativePasswordTable">
+                                <!-- content loaded by JS -->
+                            </div>
+
+                            <div class="page-header">
+                                <h3>Create new</h3>
+                            </div>
+                            <form class="form-horizontal" role="form" id="createAlternativePassword">
+                                
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-success">create Alternative Password</button>
+                                    </div>
+                                </div>
+                                
+                            </form>
+
+                        </div> <!-- alternative passwords tab -->
+
+                    </div> <!-- content -->
+                </div> 
+
+
+            </div>
+        </div> <!-- main container -->
+
+        <div id="messager">
+            <!-- contend loaded by JavaScript -->
+        </div>
+
+
+        <noscript>
+        <div class="modal">
+            <div class="modal-body">
+                <h3>Javascript is disabled</h3>
+                <p>This site will not work correctly because your browser is blocking JavaScript. Please enable JavaScript and reload page.</p>
+            </div>
+        </div>
+        </noscript>
+
+        <script src="../js/jquery/jquery-1.11.1.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../js/Configuration.js"></script>
+        <script src="../js/PerunUtils.js"></script>
+        <script src="../js/PerunTable.js"></script>
+        <script src="../js/PerunUserLoader.js"></script>
+        <script src="../js/PreunConnectionTester.js"></script>
+        <script src="../js/Messager.js"></script>
+        <script src="../js/LoadImage.js"></script>
+
+        <script src="js/AlternativePassword.js"></script>
+        <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
+    </body>
+</html>
