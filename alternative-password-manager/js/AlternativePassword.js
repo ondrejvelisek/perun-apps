@@ -14,11 +14,9 @@ $(document).ready(function() {
     $("#createAlternativePassword").submit(function(event) {
         event.preventDefault();
         
-        var loadImage = new LoadImage($('#user-preferredLanguage'), "20px");
+        var loadImage = new LoadImage($('#alternativePasswordTable'), "40px");
         
-        callPerunPost("usersManager", "createAlternativePassword", {user: user.id, description: "test", loginNamespace: "einfra", password: "12345"}, function() {
-            
-            
+        callPerunPost("usersManager", "createAlternativePassword", {user: user.id, description: "test", loginNamespace: "einfra", password: randomPassword(8)}, function() {
             
             loadImage.hide();
             (new Message("Preffered language", "was saved successfully", "success")).draw();
@@ -64,4 +62,15 @@ function fillAlternativePasswords(alternativePasswords) {
     var tableHtml = alternativePasswordsTable.draw();
     $("#alternativePasswordTable").html(tableHtml);
     
+}
+
+function randomPassword(length) {
+  chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+  pass = "";
+  for(x=0;x<length;x++)
+  {
+    i = Math.floor(Math.random() * chars.length);
+    pass += chars.charAt(i);
+  }
+  return pass;
 }
