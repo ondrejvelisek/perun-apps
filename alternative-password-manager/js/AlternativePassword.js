@@ -11,14 +11,14 @@ function entryPoint(user) {
 
 $(document).ready(function() {
 
-    $("#createAlternativePassword").submit(function(event) {
+    $("#createAltPassword").submit(function(event) {
         event.preventDefault();
         
-        
-        
-        var loadImage = new LoadImage($('#alternativePasswordTable'), "40px");
+        var loadImage = new LoadImage($('#altPasswordsTable'), "40px");
         var password = randomPassword(8);
-        callPerunPost("usersManager", "createAlternativePassword", {user: user.id, description: "test", loginNamespace: "einfra", password: password}, function() {
+        var description = $("#altPasswordDescription").val();
+        
+        callPerunPost("usersManager", "createAlternativePassword", {user: user.id, description: description, loginNamespace: "einfra", password: password}, function() {
             
             loadAlternativePasswords(user);
             loadImage.hide();
@@ -35,32 +35,36 @@ function loadAlternativePasswords(user) {
         (new Message("Alternative Passwords", "can't be loaded because user isn't loaded.", "danger")).draw();
         return;
     }
-    var loadImage = new LoadImage($('#alternative-password-table'), "64px");
+    var loadImage = new LoadImage($('#altPasswordsTable'), "64px");
     
-    callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:altPasswords:einfra"}, function(alternativePasswords) {
-        if (!alternativePasswords) {
+    callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:altPasswords:einfra"}, function(altPasswords) {
+        if (!altPasswords) {
             (new Message("Alternative passwords", "can't be loaded.", "danger")).draw();
             return;
         }
-        fillAlternativePasswords(alternativePasswords);
+        fillAlternativePasswords(altPasswords);
         loadImage.hide();
         //(new Message("User data", "was loaded successfully.", "success")).draw();
     });
 }
 
-function fillAlternativePasswords(alternativePasswords) {
-    if (!alternativePasswords) {
+function fillAlternativePasswords(altPasswords) {
+    if (!altPasswords) {
         (new Message("Alternative Passwords", "can't be fill.", "danger")).draw();
         return;
     }
     
-    var alternativePasswordsTable = new PerunTable();
-    alternativePasswordsTable.addColumn({type:"number", title:"#"});
-    alternativePasswordsTable.addColumn({type:"text", title:"Description", name:"key"});
-    alternativePasswordsTable.addColumn({type:"button", title:"", btnText:"delete", btnType:"danger", btnId:"value"});
-    alternativePasswordsTable.setList(alternativePasswords.value);
-    var tableHtml = alternativePasswordsTable.draw();
-    $("#alternativePasswordTable").html(tableHtml);
+    var altPasswordsTable = new PerunTable();
+    altPasswordsTable.addColumn({type:"number", title:"#"});
+    altPasswordsTable.addColumn({type:"text", title:"Description", name:"key"});
+    altPasswordsTable.addColumn({type:"button", title:"", btnText:"delete", btnType:"danger", btnId:"value"});
+    altPasswordsTable.setList(altPasswords.value);
+    var tableHtml = altPasswordsTable.draw();
+    $("#altPasswordsTable").html(tableHtml);
+    
+    $("#altPasswordsTable button[id^='tableBtn-']").click(function() {
+        debug("del: "+$(this).attr("id"));
+    });
     
 }
 

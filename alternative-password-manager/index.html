@@ -53,7 +53,7 @@
                             Menu
                         </li>  
                         <li class="active">
-                            <a href="#alternativePassword" data-toggle="tab" id="profileLink">
+                            <a href="#altPasswords" data-toggle="tab" id="profileLink">
                                 <i class="glyphicon icon-lock"></i> Alternative Passwords
                             </a>
                         </li>
@@ -64,33 +64,32 @@
                 <div class="col-sm-12">
                     <div class="tab-content" id="content">  <!-- content -->
 
-                        <div class="tab-pane active" id="alternativePassword"> <!-- alternative passwords tab -->
+                        <div class="tab-pane active" id="altPasswords"> <!-- alternative passwords tab -->
 
-                            
+
                             <h3>Table of your alternative passwords</h3>
-                            
-                            <div id="alternativePasswordTable">
+
+                            <div id="altPasswordsTable">
                                 <!-- content loaded by JS -->
                             </div>
 
-                            <div class="page-header">
-                                <h3>Create new</h3>
-                            </div>
-                            <form class="form-horizontal" role="form" id="createAlternativePassword">
-                                
+                            <form class="form-horizontal" role="form" id="createAltPassword">
+
                                 <div class="form-group">
-                                    <label for="description" class="col-sm-2 control-label">Description</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="description" placeholder="Description">
+                                    <div class="col-lg-12">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="altPasswordDescription" placeholder="Description" required>
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-success">create new Alternative Password</button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-success">create Alternative Password</button>
-                                    </div>
+
                                 </div>
-                                
+
                             </form>
 
                         </div> <!-- alternative passwords tab -->
