@@ -22,7 +22,7 @@ $(document).ready(function() {
 
             loadAlternativePasswords(user);
             showPassword(description, password);
-            (new Message("Alternative password", "was created successfully", "success", $)).draw();
+            (new Message("Alternative password", "was created successfully", "success")).draw();
         });
 
     });
