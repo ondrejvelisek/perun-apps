@@ -16,6 +16,7 @@ $(document).ready(function() {
 
         var password = randomPassword(8);
         var description = $("#altPasswordDescription").val();
+        showPassword(description, password);
         $("#altPasswordDescription").val("");
         callPerunPost("usersManager", "createAlternativePassword", {user: user.id, description: description, loginNamespace: "einfra", password: password}, function() {
 
@@ -90,3 +91,6 @@ function showPassword(description, password) {
     
     $("#showPassword").modal();
 }
+$('#showPassword').on('hidden.bs.modal', function (e) {
+    $("#showPassword .password").text("...");
+});
