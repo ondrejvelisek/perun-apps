@@ -63,7 +63,13 @@ function fillAlternativePasswords(altPasswords) {
     $("#altPasswordsTable").html(tableHtml);
     
     $("#altPasswordsTable button[id^='tableBtn-']").click(function() {
-        debug("del: "+$(this).attr("id"));
+        var loadImage = new LoadImage($('#altPasswordsTable'), "40px");
+        var passwordId = $(this).attr("id").split('-')[1];
+        callPerunPost("usersManager", "deleteAlternativePassword", {user: user.id, loginNamespace: "einfra", passwordId: passwordId}, function() {
+            loadAlternativePasswords(user);
+            loadImage.hide();
+            (new Message("Alternative password", "was deleted successfully:", "success")).draw();
+        });
     });
     
 }
