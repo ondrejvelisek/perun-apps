@@ -68,7 +68,7 @@ function fillAlternativePasswords(altPasswords) {
         callPerunPost("usersManager", "deleteAlternativePassword", {user: user.id, loginNamespace: "einfra", passwordId: passwordId}, function() {
             loadAlternativePasswords(user);
             loadImage.hide();
-            (new Message("Alternative password", "was deleted successfully:", "success")).draw();
+            (new Message("Alternative password", "was deleted successfully", "success")).draw();
         });
     });
 

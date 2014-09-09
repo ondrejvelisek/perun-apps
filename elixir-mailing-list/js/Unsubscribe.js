@@ -12,15 +12,16 @@ function entryPoint(user) {
 $(document).ready(function() {
     preFill();
     
-    $("#unsubscribe #unsubscribeForm").submit(function(event) {
+    $("#unsubscribeForm").submit(function(event) {
         event.preventDefault();
         
         var form = $("#unsubscribe #unsubscribeForm");
-        var mailingListName = form.find("#mailingList").val();
         var email = form.find("#email").val();
         
-        debug("callExternalScript("+mailingListName+", "+email+");");
-        (new Message("a confirmation email", "has been sent to "+email, "success")).draw();
+        callExternalScript("http://perun.metacentrum.cz/cgi-perun/sendVerificationEmail.cgi", {email: email}, function(data) {
+            (new Message("a confirmation email", "has been sent to "+email, "success")).draw();
+        });
+        
     });
 
     var hash = document.location.hash.substring(1);
@@ -42,37 +43,27 @@ function preFill() {
     }
 }
 
+function callExternalScript(url, args, callBack) {
 
-function loadUserAttributes(user) {
-    if (!user) {
-        (new Message("User attributes", "can't be loaded because user isn't loaded.", "danger")).draw();
-        return;
-    }
-    var loadImage = new LoadImage($('#user-attributes [id^="user-"], #user-displayName'), "20px");
-
-    callPerun("attributesManager", "getAttributes", {user: user.id}, function(userAttributes) {
-        if (!userAttributes) {
-            (new Message("User attributes", "can't be loaded.", "danger")).draw();
-            return;
+    $.ajax({
+        url: url,
+        data: args,
+        dataType: "json",
+        type: "get",
+        success: function(data, textStatus, jqXHR)
+        {
+            if (!data) {
+                callBack();
+            } else if (typeof data.errorId !== "undefined") {
+                (new Message(data.name, data.message, "danger")).draw();
+            } else {
+                callBack(data);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            (new Message(errorThrown, textStatus, "danger")).draw();
         }
-        var userAttributesFriendly = {};
-        for (var attrId in userAttributes) {
-            userAttributesFriendly[userAttributes[attrId].friendlyName] = userAttributes[attrId].value;
-        }
-        fillUserAttributes(userAttributesFriendly);
-        loadImage.hide();
-        //(new Message("User data", "was loaded successfully.", "success")).draw();
     });
 }
-
-
-function fillUserAttributes(userAttributesFriendly) {
-    if (!userAttributesFriendly) {
-        (new Message("User attributes", "can't be fill.", "danger")).draw();
-        return;
-    }
-    for (var attrName in userAttributesFriendly) {
-        var attrId = attrName.split(':').join('-');
-        $("#user-" + attrId).text(userAttributesFriendly[attrName]);
-    }
-}
+;

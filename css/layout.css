@@ -24,6 +24,26 @@ dl dd .btn {
 #header {
   margin-bottom: 30px;
 }
+#header .logo {
+  line-height: 20px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+#header .title h1,
+#header .title h2,
+#header .title h3,
+#header .title h4,
+#header .title h5,
+#header .title h6 {
+  margin-top: 11px;
+  margin-bottom: 11px;
+  line-height: 30px;
+}
+#header .user {
+  line-height: 20px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
 #content {
   overflow: visible;
 }
