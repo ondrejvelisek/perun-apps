@@ -13,18 +13,17 @@ $(document).ready(function() {
 
     $("#createAltPassword").submit(function(event) {
         event.preventDefault();
-        
-        var loadImage = new LoadImage($('#altPasswordsTable'), "40px");
+
         var password = randomPassword(8);
         var description = $("#altPasswordDescription").val();
-        
+        $("#altPasswordDescription").val("");
         callPerunPost("usersManager", "createAlternativePassword", {user: user.id, description: description, loginNamespace: "einfra", password: password}, function() {
-            
+
             loadAlternativePasswords(user);
-            loadImage.hide();
-            (new Message("Alternative password", "was created successfully: "+password, "success")).draw();
+            showPassword(description, password);
+            (new Message("Alternative password", "was created successfully", "success", $)).draw();
         });
-        
+
     });
 
 });
@@ -36,7 +35,7 @@ function loadAlternativePasswords(user) {
         return;
     }
     var loadImage = new LoadImage($('#altPasswordsTable'), "64px");
-    
+
     callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:altPasswords:einfra"}, function(altPasswords) {
         if (!altPasswords) {
             (new Message("Alternative passwords", "can't be loaded.", "danger")).draw();
@@ -53,15 +52,15 @@ function fillAlternativePasswords(altPasswords) {
         (new Message("Alternative Passwords", "can't be fill.", "danger")).draw();
         return;
     }
-    
+
     var altPasswordsTable = new PerunTable();
-    altPasswordsTable.addColumn({type:"number", title:"#"});
-    altPasswordsTable.addColumn({type:"text", title:"Description", name:"key"});
-    altPasswordsTable.addColumn({type:"button", title:"", btnText:"delete", btnType:"danger", btnId:"value"});
+    altPasswordsTable.addColumn({type: "number", title: "#"});
+    altPasswordsTable.addColumn({type: "text", title: "Description", name: "key"});
+    altPasswordsTable.addColumn({type: "button", title: "", btnText: "delete", btnType: "danger", btnId: "value"});
     altPasswordsTable.setList(altPasswords.value);
     var tableHtml = altPasswordsTable.draw();
     $("#altPasswordsTable").html(tableHtml);
-    
+
     $("#altPasswordsTable button[id^='tableBtn-']").click(function() {
         var loadImage = new LoadImage($('#altPasswordsTable'), "40px");
         var passwordId = $(this).attr("id").split('-')[1];
@@ -71,16 +70,23 @@ function fillAlternativePasswords(altPasswords) {
             (new Message("Alternative password", "was deleted successfully:", "success")).draw();
         });
     });
-    
+
 }
 
 function randomPassword(length) {
-  chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-  pass = "";
-  for(x=0;x<length;x++)
-  {
-    i = Math.floor(Math.random() * chars.length);
-    pass += chars.charAt(i);
-  }
-  return pass;
+    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    pass = "";
+    for (x = 0; x < length; x++)
+    {
+        i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
+    }
+    return pass;
+}
+
+function showPassword(description, password) {
+    $("#showPassword .description").text(description);
+    $("#showPassword .password").text(password);
+    
+    $("#showPassword").modal();
 }
