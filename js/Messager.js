@@ -29,7 +29,7 @@ function Message(title, text, type, place) {
         var messageId = this.id;
         setTimeout(function() {
             $("#messager #message" + messageId).hide(200);
-        }, 7000);
+        }, 9000);
     };
 }
 

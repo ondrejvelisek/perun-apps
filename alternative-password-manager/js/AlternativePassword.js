@@ -14,12 +14,15 @@ $(document).ready(function() {
     $("#createAlternativePassword").submit(function(event) {
         event.preventDefault();
         
-        var loadImage = new LoadImage($('#alternativePasswordTable'), "40px");
         
-        callPerunPost("usersManager", "createAlternativePassword", {user: user.id, description: "test", loginNamespace: "einfra", password: randomPassword(8)}, function() {
+        
+        var loadImage = new LoadImage($('#alternativePasswordTable'), "40px");
+        var password = randomPassword(8);
+        callPerunPost("usersManager", "createAlternativePassword", {user: user.id, description: "test", loginNamespace: "einfra", password: password}, function() {
             
+            loadAlternativePasswords(user);
             loadImage.hide();
-            (new Message("Preffered language", "was saved successfully", "success")).draw();
+            (new Message("Alternative password", "was created successfully: "+password, "success")).draw();
         });
         
     });
@@ -34,15 +37,12 @@ function loadAlternativePasswords(user) {
     }
     var loadImage = new LoadImage($('#alternative-password-table'), "64px");
     
-    callPerun("attributesManager", "getAttributes", {user: user.id}, function(userAttributes) {
-        if (!userAttributes) {
-            (new Message("User attributes", "can't be loaded.", "danger")).draw();
+    callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:altPasswords:einfra"}, function(alternativePasswords) {
+        if (!alternativePasswords) {
+            (new Message("Alternative passwords", "can't be loaded.", "danger")).draw();
             return;
         }
-        if (!userAttributes.alternativePasswords) {
-            userAttributes.alternativePasswords = [];
-        }
-        fillAlternativePasswords(userAttributes.alternativePasswords);
+        fillAlternativePasswords(alternativePasswords);
         loadImage.hide();
         //(new Message("User data", "was loaded successfully.", "success")).draw();
     });
