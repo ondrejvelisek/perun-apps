@@ -49,6 +49,7 @@ dl dd .btn {
   right: 0px;
   z-index: 10;
   width: 40%;
+  pointer-events: none;
 }
 #messager .alert {
   float: right;
