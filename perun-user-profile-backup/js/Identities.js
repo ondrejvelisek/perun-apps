@@ -56,8 +56,8 @@ function fillFederations(federations) {
     }
     
     var federationsTable = new PerunTable();
-    federationsTable.addColumn("", "#", "number");
-    federationsTable.addColumn("name", "Federated identities");
+    federationsTable.addColumn({type:"number", title:"#"});
+    federationsTable.addColumn({type:"text", title:"Federated identities", name:"name"});
     federationsTable.setValues(federations);
     $("#federations-table").html(federationsTable.draw());
 }
@@ -69,8 +69,8 @@ function fillCertificates(certificates) {
     }
     
     var certificatesTable = new PerunTable();
-    certificatesTable.addColumn("", "#", "number");
-    certificatesTable.addColumn("name", "Digital certificates");
+    certificatesTable.addColumn({type:"number", title:"#"});
+    certificatesTable.addColumn({type:"text", title:"Digital certificates", name:"name"});
     certificatesTable.setValues(certificates);
     $("#certificates-table").html(certificatesTable.draw());
 }

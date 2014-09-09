@@ -55,10 +55,10 @@ function fillAlternativePasswords(alternativePasswords) {
     }
     
     var alternativePasswordsTable = new PerunTable();
-    alternativePasswordsTable.addColumn("", "#", "number");
-    alternativePasswordsTable.addColumn("value", "Description");
-    alternativePasswordsTable.addColumn("delete", "", "button");
-    alternativePasswordsTable.setValues(alternativePasswords);
+    alternativePasswordsTable.addColumn({type:"number", title:"#"});
+    alternativePasswordsTable.addColumn({type:"text", title:"Description", name:"key"});
+    alternativePasswordsTable.addColumn({type:"button", title:"", btnText:"delete", btnType:"danger", btnId:"value"});
+    alternativePasswordsTable.setList(alternativePasswords.value);
     var tableHtml = alternativePasswordsTable.draw();
     $("#alternativePasswordTable").html(tableHtml);
     
