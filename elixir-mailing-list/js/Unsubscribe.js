@@ -15,8 +15,7 @@ $(document).ready(function() {
     $("#unsubscribeForm").submit(function(event) {
         event.preventDefault();
         
-        var form = $("#unsubscribe #unsubscribeForm");
-        var email = form.find("#email").val();
+        var email = $("#unsubscribeForm input#email").val();
         
         callExternalScript("http://perun.metacentrum.cz/cgi-perun/sendVerificationEmail.cgi", {email: email}, function(data) {
             (new Message("a confirmation email", "has been sent to "+email, "success")).draw();
@@ -44,11 +43,10 @@ function preFill() {
 }
 
 function callExternalScript(url, args, callBack) {
-
     $.ajax({
         url: url,
         data: args,
-        dataType: "json",
+        dataType: "jsonp",
         type: "get",
         success: function(data, textStatus, jqXHR)
         {
