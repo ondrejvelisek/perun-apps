@@ -13,7 +13,7 @@ $(document).ready(function() {
         var email = $("#unsubscribeForm input#email").val();
         $("#unsubscribeForm input#email").val("");
         callExternalScript("https://perun.metacentrum.cz/cgi-perun/sendVerificationEmail.cgi", {email: email}, function(data) {
-            if (data.errorId !== "undefined") {
+            if (data.errorId === "undefined") {
                 switch (data.name) {
                     case "EmailNotSendException":
                         (new Message("nepovedlo se odeslat email", "zkuste to znovu později pokud problém přetrvává kontaktujte info-supprot@elixir", "danger", $("#messager"), false)).draw();
