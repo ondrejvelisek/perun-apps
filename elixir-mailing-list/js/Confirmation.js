@@ -16,14 +16,19 @@ $(document).ready(function() {
     callExternalScript("https://perun.metacentrum.cz/cgi-perun/removeUserFromMailingList.cgi", {secret: urlParams.secret}, function(data) {
         if (data.errorId !== "undefined") {
             switch (data.name) {
-                case "exception":
-                    (new Message("error", "message", "danger", $("#messager"), false)).draw();
+                case "MemberNotExistsException":
+                    (new Message("nejste členem mailing listu info@elixir-czech.cz", "tak vás nejde odhlásit", "danger", $("#messager"), false)).draw();
+                    break;
+                case "UserNotFoundByEmailException":
+                    (new Message("nejste členem mailing listu info@elixir-czech.cz", "tak vás nejde odhlásit", "danger", $("#messager"), false)).draw();
+                    break;
+                case "TimestampExceetedMaxAgeException":
+                    (new Message("platnost odkazu vypršela, zažádejte znovu na adrese", "...", "danger", $("#messager"), false)).draw();
                     break;
                 default :
-                    (new Message(data.name, data.message, "danger", $("#messager"), false)).draw();
+                    (new Message("interní", "support@elixir-czech.cz", "danger", $("#messager"), false)).draw();
                     break;
             }
-            
         } else {
             (new Message(data.name, data.message, "success", $("#messager"), false)).draw();
         }

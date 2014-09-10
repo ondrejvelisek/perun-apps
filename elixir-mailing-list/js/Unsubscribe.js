@@ -6,21 +6,28 @@
 
 $(document).ready(function() {
     preFill();
-    
+
     $("#unsubscribeForm").submit(function(event) {
         event.preventDefault();
-        
+
         var email = $("#unsubscribeForm input#email").val();
         $("#unsubscribeForm input#email").val("");
         callExternalScript("https://perun.metacentrum.cz/cgi-perun/sendVerificationEmail.cgi", {email: email}, function(data) {
             if (data.errorId !== "undefined") {
-                (new Message(data.name, data.message, "danger")).draw();
+                switch (data.name) {
+                    case "EmailNotSendException":
+                        (new Message("nepovedlo se odeslat email", "zkuste to znovu později pokud problém přetrvává kontaktujte info-supprot@elixir", "danger", $("#messager"), false)).draw();
+                        break;
+                    default :
+                        (new Message("", "support@elixir-czech.cz", "danger", $("#messager"), false)).draw();
+                        break;
+                }
             } else {
-                (new Message("a confirmation email", "has been sent to "+email, "success")).draw();
+                (new Message("a confirmation email", "has been sent to " + email, "success")).draw();
             }
-            
+
         });
-        
+
     });
 
 });
@@ -32,7 +39,7 @@ function preFill() {
         if (param[0]) {
             $("#unsubscribeForm input#" + param[0]).val(decodeURIComponent(param[1]));
         }
-        
+
     }
 }
 
