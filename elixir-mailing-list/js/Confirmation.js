@@ -14,7 +14,7 @@ $(document).ready(function() {
     }
 
     callExternalScript("https://perun.metacentrum.cz/cgi-perun/removeUserFromMailingList.cgi", {secret: urlParams.secret}, function(data) {
-        if (data.errorId !== "undefined") {
+        if (data.errorId) {
             switch (data.name) {
                 case "MemberNotExistsException":
                     (new Message("nejste členem mailing listu info@elixir-czech.cz", "tak vás nejde odhlásit", "danger", $("#messager"), false)).draw();
@@ -26,7 +26,7 @@ $(document).ready(function() {
                     (new Message("platnost odkazu vypršela, zažádejte znovu na adrese", "...", "danger", $("#messager"), false)).draw();
                     break;
                 default :
-                    (new Message("interní", "support@elixir-czech.cz", "danger", $("#messager"), false)).draw();
+                    (new Message("interní chyba", "support@elixir-czech.cz "+data.errorId, "danger", $("#messager"), false)).draw();
                     break;
             }
         } else {
