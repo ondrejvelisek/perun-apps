@@ -16,10 +16,11 @@ $(document).ready(function() {
             if (data.errorId) {
                 switch (data.name) {
                     case "EmailNotSendException":
-                        (new Message("nepovedlo se odeslat email", "zkuste to znovu později pokud problém přetrvává kontaktujte info-supprot@elixir", "danger", $("#messager"), false)).draw();
+                        (new Message("Failed to send a email.", "Please, try it later. If problem still persists contact support@elixir-czech.cz", "danger", $("#messager"), false)).draw();
                         break;
                     default :
-                        (new Message(data.errorId, "support@elixir-czech.cz", "danger", $("#messager"), false)).draw();
+                        (new Message("Internal error", "Please, try it later. If problem still persists contact support@elixir-czech.cz"
+                                +" and attach this error number: "+data.errorId, "danger", $("#messager"), false)).draw();
                         break;
                 }
             } else {

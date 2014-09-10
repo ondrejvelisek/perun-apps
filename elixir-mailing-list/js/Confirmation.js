@@ -17,20 +17,24 @@ $(document).ready(function() {
         if (data.errorId) {
             switch (data.name) {
                 case "MemberNotExistsException":
-                    (new Message("nejste členem mailing listu info@elixir-czech.cz", "tak vás nejde odhlásit", "danger", $("#messager"), false)).draw();
+                    (new Message("You are not a member of mailing list info@elixir-czech.cz", "So", "danger", $("#messager"), false)).draw();
                     break;
                 case "UserNotFoundByEmailException":
-                    (new Message("nejste členem mailing listu info@elixir-czech.cz", "tak vás nejde odhlásit", "danger", $("#messager"), false)).draw();
+                    (new Message("You are not a member of mailing list info@elixir-czech.cz", "tak vás nejde odhlásit", "danger", $("#messager"), false)).draw();
                     break;
                 case "TimestampExceetedMaxAgeException":
                     (new Message("platnost odkazu vypršela, zažádejte znovu na adrese", "...", "danger", $("#messager"), false)).draw();
                     break;
+                case "AlreadyRemovedException":
+                    (new Message("already removed", "...", "danger", $("#messager"), false)).draw();
+                    break;
                 default :
-                    (new Message("interní chyba", "support@elixir-czech.cz "+data.errorId, "danger", $("#messager"), false)).draw();
+                    (new Message("Internal error", "Please, try it later. If problem still persists contact support@elixir-czech.cz"
+                            + " and attach this error number: " + data.errorId, "danger", $("#messager"), false)).draw();
                     break;
             }
         } else {
-            (new Message(data.name, data.message, "success", $("#messager"), false)).draw();
+            (new Message("Your email was successfully unsubscribed", "from mailing list info@elixir-czech.cz", "success", $("#messager"), false)).draw();
         }
     });
 
