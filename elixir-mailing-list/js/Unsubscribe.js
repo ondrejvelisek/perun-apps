@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 
-
-function entryPoint(user) {
-    //loadUserAttributes(user);
-}
-
 $(document).ready(function() {
     preFill();
     
@@ -16,18 +11,12 @@ $(document).ready(function() {
         event.preventDefault();
         
         var email = $("#unsubscribeForm input#email").val();
-        
+        $("#unsubscribeForm input#email").val("");
         callExternalScript("https://perun.metacentrum.cz/cgi-perun/sendVerificationEmail.cgi", {email: email}, function(data) {
             (new Message("a confirmation email", "has been sent to "+email, "success")).draw();
         });
         
     });
-
-    var hash = document.location.hash.substring(1);
-    if (hash === "confirm") {
-        (new Message("success", "lorem ipsum", "success", $("#confirm"))).draw();
-        (new Message("error", "lorem ipsum", "danger", $("#confirm"))).draw();
-    }
 
 });
 
@@ -36,32 +25,9 @@ function preFill() {
     for (var id in getParams) {
         var param = getParams[id].split('=');
         if (param[0]) {
-            $("#form input#" + param[0]).val(decodeURIComponent(param[1]));
+            $("#unsubscribeForm input#" + param[0]).val(decodeURIComponent(param[1]));
         }
         
     }
 }
 
-function callExternalScript(url, args, callBack) {
-    $.ajax({
-        url: url,
-        data: args,
-        dataType: "jsonp",
-        type: "get",
-        success: function(data, textStatus, jqXHR)
-        {
-            if (!data) {
-                callBack();
-            } else if (typeof data.errorId !== "undefined") {
-                (new Message(data.name, data.message, "danger")).draw();
-            } else {
-                callBack(data);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            (new Message(errorThrown, textStatus, "danger")).draw();
-        }
-    });
-}
-;

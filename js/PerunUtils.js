@@ -60,33 +60,32 @@ function callPerunPost(manager, method, args, callBack) {
 }
 ;
 
-/**
- * Method which calls Perun RPC interface
- * Arguments:
- * manager - name of the manager, e.g. vosManager
- * method - name of the method, e.g. getVos
- * elementId - name of the HTML element which will be filled with returned data
- * attribute - name of the attribute from which the data will be loaded in the HTML element, e.g. user.firstName
- * arguments which will be passed to the managers method
- */
-function callPerunAndFillText(manager, method, elementId, attribute, args) {
-    return $.ajax({
-        url: configuration.RPC_URL + manager + "/" + method,
+
+
+function callExternalScript(url, args, callBack) {
+    $.ajax({
+        url: url,
         data: args,
+        dataType: "jsonp",
+        type: "get",
         success: function(data, textStatus, jqXHR)
         {
-            if (typeof data.errorId !== "undefined")
-            {
-                alert(data.errorText);
+            if (!data) {
+                callBack();
+            } else if (typeof data.errorId !== "undefined") {
+                (new Message(data.name, data.message, "danger")).draw();
             } else {
-                eval('$("#' + elementId + '")').text(eval("data." + attribute));
+                callBack(data);
             }
         },
-        dataType: "jsonp",
-        type: "get"
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            (new Message(errorThrown, textStatus, "danger")).draw();
+        }
     });
 }
 ;
+
 
 /**
  * Get URL parameter

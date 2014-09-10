@@ -63,6 +63,13 @@ dl dd .btn {
   margin: 0px 0px;
   width: 100%;
 }
+#content #messager {
+  position: static;
+  width: auto;
+}
+#content #messager .alert {
+  float: none;
+}
 #messager {
   position: fixed;
   top: 0px;
