@@ -17,7 +17,7 @@ $(document).ready(function() {
         
         var email = $("#unsubscribeForm input#email").val();
         
-        callExternalScript("http://perun.metacentrum.cz/cgi-perun/sendVerificationEmail.cgi", {email: email}, function(data) {
+        callExternalScript("https://perun.metacentrum.cz/cgi-perun/sendVerificationEmail.cgi", {email: email}, function(data) {
             (new Message("a confirmation email", "has been sent to "+email, "success")).draw();
         });
         
