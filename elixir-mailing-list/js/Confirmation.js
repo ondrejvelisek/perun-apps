@@ -17,16 +17,16 @@ $(document).ready(function() {
         if (data.errorId) {
             switch (data.name) {
                 case "MemberNotExistsException":
-                    (new Message("You are not a member of mailing list info@elixir-czech.cz", "So", "danger", $("#messager"), false)).draw();
+                    (new Message("You are not a member of mailing list info@elixir-czech.cz", "So we can not unsubscribe you.", "danger", $("#messager"), false)).draw();
                     break;
                 case "UserNotFoundByEmailException":
-                    (new Message("You are not a member of mailing list info@elixir-czech.cz", "tak vás nejde odhlásit", "danger", $("#messager"), false)).draw();
+                    (new Message("You are not a member of mailing list info@elixir-czech.cz", "So we can not unsubscribe you.", "danger", $("#messager"), false)).draw();
                     break;
                 case "TimestampExceetedMaxAgeException":
-                    (new Message("platnost odkazu vypršela, zažádejte znovu na adrese", "...", "danger", $("#messager"), false)).draw();
+                    (new Message("Link has expired", "Please apply on <a href='index.html'>Elixir mailing list Manager</a>", "danger", $("#messager"), false)).draw();
                     break;
                 case "AlreadyRemovedException":
-                    (new Message("already removed", "...", "danger", $("#messager"), false)).draw();
+                    (new Message("User was already removed", "from mailing list info@elixir-czech.cz", "danger", $("#messager"), false)).draw();
                     break;
                 default :
                     (new Message("Internal error", "Please, try it later. If problem still persists contact support@elixir-czech.cz"

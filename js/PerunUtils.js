@@ -74,7 +74,7 @@ function callExternalScript(url, args, callBack) {
         },
         error: function(jqXHR, textStatus, errorThrown)
         {
-            (new Message(errorThrown, textStatus, "danger")).draw();
+            (new Message(errorThrown, textStatus, "danger", $("#messager"), false)).draw();
         }
     });
 }
