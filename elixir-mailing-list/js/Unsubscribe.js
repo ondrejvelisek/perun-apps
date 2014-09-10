@@ -13,7 +13,12 @@ $(document).ready(function() {
         var email = $("#unsubscribeForm input#email").val();
         $("#unsubscribeForm input#email").val("");
         callExternalScript("https://perun.metacentrum.cz/cgi-perun/sendVerificationEmail.cgi", {email: email}, function(data) {
-            (new Message("a confirmation email", "has been sent to "+email, "success")).draw();
+            if (data.errorId !== "undefined") {
+                (new Message(data.name, data.message, "danger")).draw();
+            } else {
+                (new Message("a confirmation email", "has been sent to "+email, "success")).draw();
+            }
+            
         });
         
     });

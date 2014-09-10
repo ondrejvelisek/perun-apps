@@ -70,13 +70,7 @@ function callExternalScript(url, args, callBack) {
         type: "get",
         success: function(data, textStatus, jqXHR)
         {
-            if (!data) {
-                callBack();
-            } else if (typeof data.errorId !== "undefined") {
-                (new Message(data.name, data.message, "danger")).draw();
-            } else {
-                callBack(data);
-            }
+            callBack(data);
         },
         error: function(jqXHR, textStatus, errorThrown)
         {
@@ -105,7 +99,7 @@ $(document).ready(function() {
         window.location.hash = e.target.hash;
         window.scrollTo(0, 0);
     });
-    
+
     //tooltip activate
     $('[data-toggle="tooltip"]').tooltip();
 });
