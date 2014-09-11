@@ -74,7 +74,7 @@ function callExternalScript(url, args, callBack) {
         },
         error: function(jqXHR, textStatus, errorThrown)
         {
-            (new Message(errorThrown, textStatus, "danger", $("#messager"), false)).draw();
+            (new Message("jQuery ajax error: ", errorThrown+" "+textStatus+". Please try it later.", "danger", $("#messager"), false)).draw();
         }
     });
 }

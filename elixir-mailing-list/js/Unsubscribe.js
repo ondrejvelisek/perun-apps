@@ -12,7 +12,7 @@ $(document).ready(function() {
 
         var email = $("#unsubscribeForm input#email").val();
         $("#unsubscribeForm input#email").val("");
-        callExternalScript("https://perun.metacentrum.cz/cgi-perun/sendVerificationEmail.cgi", {email: email}, function(data) {
+        callExternalScript("https://perun.metacentrum.cz/cgi-perun/sendUnsubscribeEmail.cgi", {email: email}, function(data) {
             if (data.errorId) {
                 switch (data.name) {
                     case "EmailNotSendException":
@@ -40,7 +40,6 @@ function preFill() {
         if (param[0]) {
             $("#unsubscribeForm input#" + param[0]).val(decodeURIComponent(param[1]));
         }
-
     }
 }
 

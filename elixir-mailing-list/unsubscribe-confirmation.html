@@ -1,7 +1,6 @@
 <!DOCTYPE html>                                                                                                                                                                                
 <html>
     <head>
-        <title>User profile in eInfrastructure</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -9,7 +8,8 @@
         <link href="../css/multilevel-dropdown.css" rel="stylesheet">
         <link href="../css/layout.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
-
+        
+        <title>ELIXIR mailing list manager</title>
     </head>
     <body>
 
@@ -39,28 +39,13 @@
             <div class="row">
 
                 <div class="col-sm-12">
-                    <div id="content">  <!-- content -->
-
-                        <div class="page-header">
-                            <h2>
-                                Unsubscribe email from info@elixir-czech.cz
-                            </h2>
+                    
+                    <div id="content">
+                        <div id="messager">  <!-- content -->
+                            <!-- JS loadable content -->
                         </div>
-
-                        <form class="form-horizontal" role="form" id="unsubscribeForm">
-                            <div class="form-group">
-                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="email" placeholder="Email" required autofocus>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">Unsubscribe</button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
+
                 </div> 
 
 
@@ -68,9 +53,6 @@
 
         </div> <!-- main container -->
 
-        <div id="messager">
-            <!-- contend loaded by JavaScript -->
-        </div>
 
 
         <noscript>
@@ -92,7 +74,7 @@
         <script src="../js/Messager.js"></script>
         <script src="../js/LoadImage.js"></script>
 
-        <script src="js/Unsubscribe.js"></script>
+        <script src="js/UnsubscribeConfirmation.js"></script>
         <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
     </body>
 </html>
