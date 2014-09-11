@@ -5,17 +5,19 @@
  */
 
 $(document).ready(function() {
-    var form = $("#unsubscribeForm");
+    var form = $("#subscribeForm");
     preFill(form);
 
     form.submit(function(event) {
         event.preventDefault();
 
+        var name = form.find("input#name");
+        var surname = form.find("input#surname");
         var email = form.find("input#email");
         var submit = form.find("[type=submit]");
         submit.prop( "disabled", true );
         
-        callExternalScript("https://perun.metacentrum.cz/cgi-perun/sendUnsubscribeEmail.cgi", {email: email.val()}, function(data) {
+        callExternalScript("https://perun.metacentrum.cz/cgi-perun/sendSubscribeEmail.cgi", {name: name.val(), surname: surname.val(), email: email.val()}, function(data) {
             submit.prop( "disabled", false );
             if (data.errorId) {
                 switch (data.name) {
@@ -28,6 +30,8 @@ $(document).ready(function() {
                         break;
                 }
             } else {
+                name.val("");
+                surname.val("");
                 email.val("");
                 (new Message("a confirmation email", "has been sent to " + email.val(), "success")).draw();
             }

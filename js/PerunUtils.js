@@ -62,24 +62,6 @@ function callPerunPost(manager, method, args, callBack) {
 
 
 
-function callExternalScript(url, args, callBack) {
-    $.ajax({
-        url: url,
-        data: args,
-        dataType: "jsonp",
-        type: "get",
-        success: function(data, textStatus, jqXHR)
-        {
-            callBack(data);
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            (new Message("jQuery ajax error: ", errorThrown+" "+textStatus+". Please try it later.", "danger", $("#messager"), false)).draw();
-        }
-    });
-}
-;
-
 
 /**
  * Get URL parameter

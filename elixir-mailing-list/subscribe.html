@@ -39,13 +39,40 @@
             <div class="row">
 
                 <div class="col-sm-12">
-                    
-                    <div id="content">
-                        <div id="messager">  <!-- content -->
-                            <!-- JS loadable content -->
-                        </div>
-                    </div>
+                    <div id="content">  <!-- content -->
 
+                        <div class="page-header">
+                            <h2>
+                                Subscribe email to info@elixir-czech.cz
+                            </h2>
+                        </div>
+
+                        <form class="form-horizontal" role="form" id="subscribeForm">
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="name" placeholder="Name" required autofocus>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="surname" class="col-sm-2 control-label">Surname</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="surname" placeholder="Surname" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-6">
+                                    <input type="email" class="form-control" id="email" placeholder="Email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success">Subscribe</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div> 
 
 
@@ -53,6 +80,9 @@
 
         </div> <!-- main container -->
 
+        <div id="messager">
+            <!-- contend loaded by JavaScript -->
+        </div>
 
 
         <noscript>
@@ -75,7 +105,7 @@
         <script src="../js/LoadImage.js"></script>
 
         <script src="js/Common.js"></script>
-        <script src="js/UnsubscribeConfirmation.js"></script>
+        <script src="js/Subscribe.js"></script>
         <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
     </body>
 </html>

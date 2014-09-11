@@ -13,11 +13,12 @@ function Message(title, text, type, place, timeout) {
     this.type = type;
     this.place = place;
     this.timeout = timeout;
-
-    this.draw = function() {
-        if (!this.place) {
+    
+    if (!this.place) {
             this.place = $("#messager");
-        }
+    }
+    
+    this.draw = function() {
         this.place.append(
                 '<div class="alert alert-' + this.type + ' alert-dismissible" role="alert" id="message' + this.id + '" >' +
                 '<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>' +
