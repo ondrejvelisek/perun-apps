@@ -11,13 +11,14 @@ function callExternalScript(url, args, callBack) {
         data: args,
         dataType: "jsonp",
         type: "get",
+        timeout: 8000,
         success: function(data, textStatus, jqXHR)
         {
             callBack(data);
         },
         error: function(jqXHR, textStatus, errorThrown)
         {
-            (new Message("jQuery ajax error: ", errorThrown+" "+textStatus+". Please try it later.", "danger", $("#messager"), false)).draw();
+            (new Message("jQuery ajax error: ", errorThrown + " - " + textStatus + ". Please try it later.", "danger", $("#messager"), false)).draw();
         }
     });
 }
