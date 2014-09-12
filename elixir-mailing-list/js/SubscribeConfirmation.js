@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     var secret = getURLParameter("secret");
 
-    callExternalScript("https://perun.metacentrum.cz/cgi-perun/subscribe.cgi", {secret: secret}, function(data) {
+    callExternalScript("subscribe.cgi", {secret: secret}, function(data) {
         if (data.errorId) {
             switch (data.name) {
                 case "MemberNotExistsException":
@@ -19,10 +19,10 @@ $(document).ready(function() {
                     (new Message("You are not a member of mailing list info@elixir-czech.cz", "So we can not unsubscribe you.", "danger", $("#messager"), false)).draw();
                     break;
                 case "TimestampExceetedMaxAgeException":
-                    (new Message("Link has expired", "Please apply on <a href='subscribe.html'>Elixir mailing list Manager</a>", "danger", $("#messager"), false)).draw();
+                    (new Message("Link has expired", "Please continue to <a href='subscribe.html'>Elixir mailing list Manager</a> and send a new subscription request", "danger", $("#messager"), false)).draw();
                     break;
-                case "AlreadyRemovedException":
-                    (new Message("User was already removed", "from mailing list info@elixir-czech.cz", "danger", $("#messager"), false)).draw();
+                case "AlreadyMemberException":
+                    (new Message("User is already subscribed", "to mailing list info@elixir-czech.cz", "success", $("#messager"), false)).draw();
                     break;
                 default :
                     (new Message("Internal error", "Please, try it later. If problem still persists contact support@elixir-czech.cz"
@@ -30,7 +30,7 @@ $(document).ready(function() {
                     break;
             }
         } else {
-            (new Message("Your email was successfully unsubscribed", "from mailing list info@elixir-czech.cz", "success", $("#messager"), false)).draw();
+            (new Message("Your email was successfully subscribed", "to mailing list info@elixir-czech.cz", "success", $("#messager"), false)).draw();
         }
     });
 
