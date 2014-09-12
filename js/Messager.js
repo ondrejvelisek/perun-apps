@@ -3,8 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-currentMessageId = 0;
+flowMessager = new Messager($("#flowMessager"), 9000);
+staticMessager = new Messager($("#staticMessager"), undefined);
+function Messager(place, timeout) {
+    this.place = place;
+    this.timeout = timeout;
+    
+    this.newMessage = function (title, text, type) {
+        return (new Message(title, text, type, this.place, this.timeout));
+    };
+}
 
+
+currentMessageId = 0;
 function Message(title, text, type, place, timeout) {
     currentMessageId++;
     this.id = currentMessageId;
@@ -15,7 +26,7 @@ function Message(title, text, type, place, timeout) {
     this.timeout = timeout;
     
     if (!this.place) {
-            this.place = $("#messager");
+        this.place = $("#messager");
     }
     
     this.draw = function() {
@@ -26,13 +37,13 @@ function Message(title, text, type, place, timeout) {
                 '</div>'
                 );
 
-        $("#messager #message" + this.id).hide();
-        $("#messager #message" + this.id).show(200);
-        var messageId = this.id;
-        if (this.timeout !== false) {
+        this.place.find("#message" + this.id).hide();
+        this.place.find("#message" + this.id).show(200);
+        
+        if (this.timeout) {
             setTimeout(function() {
-                $("#messager #message" + messageId).hide(200);
-            }, 9000);
+                this.place.find("#message" + this.id).hide(200);
+            }.bind(this), this.timeout);
         }
 
     };

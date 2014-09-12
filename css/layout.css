@@ -63,14 +63,7 @@ dl dd .btn {
   margin: 0px 0px;
   width: 100%;
 }
-#content #messager {
-  position: static;
-  width: auto;
-}
-#content #messager .alert {
-  float: none;
-}
-#messager {
+#flowMessager {
   position: fixed;
   top: 0px;
   right: 0px;
@@ -78,7 +71,7 @@ dl dd .btn {
   width: 40%;
   pointer-events: none;
 }
-#messager .alert {
+#flowMessager .alert {
   float: right;
   clear: both;
   margin-bottom: 0px;
@@ -86,10 +79,10 @@ dl dd .btn {
   pointer-events: auto;
 }
 @media (max-width: 480px) {
-  #messager {
+  #flowMessager {
     width: 100%;
   }
-  #messager .alert {
+  #flowMessager .alert {
     float: none;
   }
 }

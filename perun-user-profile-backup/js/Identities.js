@@ -11,25 +11,25 @@ $(document).ready(function() {
 
 function loadIdentities(user) {
     if (!user) {
-        (new Message("Identities","can't be loaded because user isn't loaded","danger")).draw();
+        (flowMessager.newMessage("Identities","can't be loaded because user isn't loaded","danger")).draw();
         return;
     }
     var loadImage = new LoadImage($("#federations-table, #certificates-table"), "auto");
     
     callPerun("usersManager", "getUserExtSources", {user: user.id}, function(extSources) {
         if (!extSources) {
-            (new Message("Identities","can't be loaded","danger")).draw();
+            (flowMessager.newMessage("Identities","can't be loaded","danger")).draw();
             return;
         }
         fillExtSources(extSources);
         loadImage.hide();
-        //(new Message("Identities","was loaded successfully.","success")).draw();
+        //(flowMessager.newMessage("Identities","was loaded successfully.","success")).draw();
     });
 }
 
 function fillExtSources(extSources) {
     if (!extSources) {
-        (new Message("Identities","can't be fill","danger")).draw();
+        (flowMessager.newMessage("Identities","can't be fill","danger")).draw();
         return;
     }
     
@@ -51,7 +51,7 @@ function fillExtSources(extSources) {
 
 function fillFederations(federations) {
     if (!federations) {
-        (new Message("Federations","can't be fill","danger")).draw();
+        (flowMessager.newMessage("Federations","can't be fill","danger")).draw();
         return;
     }
     
@@ -64,7 +64,7 @@ function fillFederations(federations) {
 
 function fillCertificates(certificates) {
     if (!certificates) {
-        (new Message("Certificates","can't be fill","danger")).draw();
+        (flowMessager.newMessage("Certificates","can't be fill","danger")).draw();
         return;
     }
     

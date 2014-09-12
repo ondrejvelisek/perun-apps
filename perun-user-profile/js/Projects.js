@@ -12,25 +12,25 @@ $(document).ready(function() {
     
 function loadProjects(user) {
     if (!user) {
-        (new Message("Projects","can't be loaded because user isn't loaded.","danger")).draw();
+        (flowMessager.newMessage("Projects","can't be loaded because user isn't loaded.","danger")).draw();
         return;
     }
     var loadImage = new LoadImage($("#projects-table"), "auto");
     
     callPerun("usersManager", "getVosWhereUserIsMember", {user: user.id}, function(projects) {
         if (!projects) {
-            (new Message("Projects","can't be loaded.","danger")).draw();
+            (flowMessager.newMessage("Projects","can't be loaded.","danger")).draw();
             return;
         }
         fillProjects(projects);
         loadImage.hide();
-        //(new Message("Projects","was loaded successfully.","success"));
+        //(flowMessager.newMessage("Projects","was loaded successfully.","success"));
     });
 }
 
 function fillProjects(projects) {
     if (!projects) {
-        (new Message("Projects","can't be fill.","danger")).draw();
+        (flowMessager.newMessage("Projects","can't be fill.","danger")).draw();
         return;
     }
     var projectTable = new PerunTable();

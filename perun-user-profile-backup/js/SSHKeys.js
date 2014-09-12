@@ -13,7 +13,7 @@ $(document).ready(function() {
 
     $("#addNewSSHKey").click(function() {
         if (!$("#newSSHKey").val().trim()) {
-            (new Message("SSH key", "field can't be empty", "warning")).draw();
+            (flowMessager.newMessage("SSH key", "field can't be empty", "warning")).draw();
             return;
         }
         var newSSHKey = $("#newSSHKey").val().trim();
@@ -22,7 +22,7 @@ $(document).ready(function() {
         
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
             if (!sshPublicKey) {
-                (new Message("SSH keys", "can't be loaded", "danger")).draw();
+                (flowMessager.newMessage("SSH keys", "can't be loaded", "danger")).draw();
                 return;
             }
             // if it's first SSH key.
@@ -33,7 +33,7 @@ $(document).ready(function() {
             callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: sshPublicKey}, function() {
                 fillSSHKeys(sshPublicKey);
                 loadImage.hide();
-                (new Message("SSH key", "was added successfully", "success")).draw();
+                (flowMessager.newMessage("SSH key", "was added successfully", "success")).draw();
             });
         });
     });
@@ -42,25 +42,25 @@ $(document).ready(function() {
 
 function loadSSHKeys(user) {
     if (!user) {
-        (new Message("SSH keys", "can't be loaded becouse user isn't loaded.", "danger")).draw();
+        (flowMessager.newMessage("SSH keys", "can't be loaded becouse user isn't loaded.", "danger")).draw();
         return;
     }
     var loadImage = new LoadImage($("#sshkeys-table"), "auto");
     
     callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
         if (!sshPublicKey) {
-            (new Message("SSH keys", "can't be loaded", "danger")).draw();
+            (flowMessager.newMessage("SSH keys", "can't be loaded", "danger")).draw();
             return;
         }
         fillSSHKeys(sshPublicKey);
         loadImage.hide();
-        //(new Message("SSH keys", "was loaded successfully.", "success")).draw();
+        //(flowMessager.newMessage("SSH keys", "was loaded successfully.", "success")).draw();
     });
 }
 
 function fillSSHKeys(sshPublicKey) {
     if (!sshPublicKey) {
-        (new Message("SSH keys", "can't be fill", "danger")).draw();
+        (flowMessager.newMessage("SSH keys", "can't be fill", "danger")).draw();
         return;
     }
     var sshKeysTable = new PerunTable();
@@ -78,18 +78,18 @@ function fillSSHKeys(sshPublicKey) {
         
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:sshPublicKey"}, function(sshPublicKey) {
             if (!sshPublicKey) {
-                (new Message("SSH keys", "can't be loaded", "danger")).draw();
+                (flowMessager.newMessage("SSH keys", "can't be loaded", "danger")).draw();
                 return;
             }
             if (!sshPublicKey.value) {
-                (new Message("SSH keys", "is empty", "warning")).draw();
+                (flowMessager.newMessage("SSH keys", "is empty", "warning")).draw();
                 return;
             }
             sshPublicKey.value.splice(sshId, 1);
             callPerunPost("attributesManager", "setAttribute", {user: user.id, attribute: sshPublicKey}, function() {
                 fillSSHKeys(sshPublicKey);
                 loadImage.hide();
-                (new Message("SSH key", "was removed successfully", "success")).draw();
+                (flowMessager.newMessage("SSH key", "was removed successfully", "success")).draw();
             });
         });
     });

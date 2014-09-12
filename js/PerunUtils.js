@@ -17,17 +17,17 @@ function callPerun(manager, method, args, callBack) {
         success: function(data, textStatus, jqXHR)
         {
             if (!data) {
-                (new Message(manager + " " + method, "hasn't returned data", "warning")).draw();
+                (flowMessager.newMessage(manager + " " + method, "hasn't returned data", "warning")).draw();
                 callBack();
             } else if (typeof data.errorId !== "undefined") {
-                (new Message(data.name, data.message, "danger")).draw();
+                (flowMessager.newMessage(data.name, data.message, "danger")).draw();
             } else {
                 callBack(data);
             }
         },
         error: function(jqXHR, textStatus, errorThrown)
         {
-            (new Message(errorThrown, textStatus, "danger")).draw();
+            (flowMessager.newMessage(errorThrown, textStatus, "danger")).draw();
         }
     });
 }
@@ -47,14 +47,14 @@ function callPerunPost(manager, method, args, callBack) {
             if (!data) {
                 callBack();
             } else if (typeof data.errorId !== "undefined") {
-                (new Message(data.name, data.message, "danger")).draw();
+                (flowMessager.newMessage(data.name, data.message, "danger")).draw();
             } else {
                 callBack(data);
             }
         },
         error: function(jqXHR, textStatus, errorThrown)
         {
-            (new Message(errorThrown, textStatus, "danger")).draw();
+            (flowMessager.newMessage(errorThrown, textStatus, "danger")).draw();
         }
     });
 }

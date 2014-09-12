@@ -22,7 +22,7 @@ $(document).ready(function() {
 
             loadAlternativePasswords(user);
             showPassword(description, password);
-            (new Message("Alternative password", "was created successfully", "success")).draw();
+            (flowMessager.newMessage("Alternative password", "was created successfully", "success")).draw();
         });
 
     });
@@ -32,25 +32,25 @@ $(document).ready(function() {
 
 function loadAlternativePasswords(user) {
     if (!user) {
-        (new Message("Alternative Passwords", "can't be loaded because user isn't loaded.", "danger")).draw();
+        (flowMessager.newMessage("Alternative Passwords", "can't be loaded because user isn't loaded.", "danger")).draw();
         return;
     }
     var loadImage = new LoadImage($('#altPasswordsTable'), "64px");
 
     callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:altPasswords:einfra"}, function(altPasswords) {
         if (!altPasswords) {
-            (new Message("Alternative passwords", "can't be loaded.", "danger")).draw();
+            (flowMessager.newMessage("Alternative passwords", "can't be loaded.", "danger")).draw();
             return;
         }
         fillAlternativePasswords(altPasswords);
         loadImage.hide();
-        //(new Message("User data", "was loaded successfully.", "success")).draw();
+        //(flowMessager.newMessage("User data", "was loaded successfully.", "success")).draw();
     });
 }
 
 function fillAlternativePasswords(altPasswords) {
     if (!altPasswords) {
-        (new Message("Alternative Passwords", "can't be fill.", "danger")).draw();
+        (flowMessager.newMessage("Alternative Passwords", "can't be fill.", "danger")).draw();
         return;
     }
 
@@ -68,7 +68,7 @@ function fillAlternativePasswords(altPasswords) {
         callPerunPost("usersManager", "deleteAlternativePassword", {user: user.id, loginNamespace: "einfra", passwordId: passwordId}, function() {
             loadAlternativePasswords(user);
             loadImage.hide();
-            (new Message("Alternative password", "was deleted successfully", "success")).draw();
+            (flowMessager.newMessage("Alternative password", "was deleted successfully", "success")).draw();
         });
     });
 

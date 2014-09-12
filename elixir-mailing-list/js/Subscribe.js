@@ -19,10 +19,10 @@ $(document).ready(function() {
             if (data.errorId) {
                 switch (data.name) {
                     case "EmailNotSendException":
-                        (new Message("Failed to send a email.", "Please, try it later. If problem still persists contact support@elixir-czech.cz", "danger", $("#messager"), false)).draw();
+                        (staticMessager.newMessage("Failed to send a email.", "Please, try it later. If problem still persists contact support@elixir-czech.cz", "danger", $("#messager"), false)).draw();
                         break;
                     default :
-                        (new Message("Internal error", "Please, try it later. If problem still persists contact support@elixir-czech.cz"
+                        (staticMessager.newMessage("Internal error", "Please, try it later. If problem still persists contact support@elixir-czech.cz"
                                 +" and attach this error number: "+data.errorId, "danger", $("#messager"), false)).draw();
                         break;
                 }
@@ -31,7 +31,7 @@ $(document).ready(function() {
                 surname.val("");
                 email.val("");
                 form.hide();
-                (new Message("Confirmation email", "has been sent to "+email.val()+". To finish the subscription process, please click on the link from the e-mail.", "success", $("#messager"), false)).draw();
+                (staticMessager.newMessage("Confirmation email", "has been sent to "+email.val()+". To finish the subscription process, please click on the link from the e-mail.", "success", $("#messager"), false)).draw();
             }
 
         });
