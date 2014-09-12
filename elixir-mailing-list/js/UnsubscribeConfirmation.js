@@ -9,20 +9,20 @@ $(document).ready(function() {
 
     var secret = getURLParameter("secret");
 
-    callExternalScript("https://perun.metacentrum.cz/cgi-perun/unsubscribe.cgi", {secret: secret}, function(data) {
+    callExternalScript("unsubscribe.cgi", {secret: secret}, function(data) {
         if (data.errorId) {
             switch (data.name) {
                 case "MemberNotExistsException":
-                    (new Message("You are not a member of mailing list info@elixir-czech.cz", "So we can not unsubscribe you.", "danger", $("#messager"), false)).draw();
+                    (new Message("You are not a member of mailing list info@elixir-czech.cz.", "So we can not unsubscribe you.", "danger", $("#messager"), false)).draw();
                     break;
                 case "UserNotFoundByEmailException":
-                    (new Message("You are not a member of mailing list info@elixir-czech.cz", "So we can not unsubscribe you.", "danger", $("#messager"), false)).draw();
+                    (new Message("You are not a member of mailing list info@elixir-czech.cz.", "So we can not unsubscribe you.", "danger", $("#messager"), false)).draw();
                     break;
                 case "TimestampExceetedMaxAgeException":
-                    (new Message("Link has expired", "Please apply on <a href='unsubscribe.html'>Elixir mailing list Manager</a>", "danger", $("#messager"), false)).draw();
+                    (new Message("Link has expired", "Please continue to <a href='unsubscribe.html'>Elixir mailing list Manager</a> and send a new unsubscribe request", "danger", $("#messager"), false)).draw();
                     break;
-                case "AlreadyRemovedException":
-                    (new Message("User was already removed", "from mailing list info@elixir-czech.cz", "danger", $("#messager"), false)).draw();
+                case "NotGroupMemberException":
+                    (new Message("User is not subscribed", "or was already removed from mailing list info@elixir-czech.cz", "danger", $("#messager"), false)).draw();
                     break;
                 default :
                     (new Message("Internal error", "Please, try it later. If problem still persists contact support@elixir-czech.cz"

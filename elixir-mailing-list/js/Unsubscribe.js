@@ -15,7 +15,7 @@ $(document).ready(function() {
         var submit = form.find("[type=submit]");
         submit.prop( "disabled", true );
         
-        callExternalScript("https://perun.metacentrum.cz/cgi-perun/sendUnsubscribeEmail.cgi", {email: email.val()}, function(data) {
+        callExternalScript("sendUnsubscribeEmail.cgi", {email: email.val()}, function(data) {
             submit.prop( "disabled", false );
             if (data.errorId) {
                 switch (data.name) {
