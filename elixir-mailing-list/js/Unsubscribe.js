@@ -12,11 +12,8 @@ $(document).ready(function() {
         event.preventDefault();
 
         var email = form.find("input#email");
-        var submit = form.find("[type=submit]");
-        submit.prop( "disabled", true );
         
         callExternalScript("sendUnsubscribeEmail.cgi", {email: email.val()}, function(data) {
-            submit.prop( "disabled", false );
             if (data.errorId) {
                 switch (data.name) {
                     case "EmailNotSendException":
@@ -29,7 +26,8 @@ $(document).ready(function() {
                 }
             } else {
                 email.val("");
-                (new Message("a confirmation email", "has been sent to " + email.val(), "success")).draw();
+                form.hide();
+                (new Message("Confirmation email", "has been sent to "+email.val()+". To finish the unsubscription process, please click on the link from the e-mail.", "success", $("#messager"), false)).draw();
             }
 
         });

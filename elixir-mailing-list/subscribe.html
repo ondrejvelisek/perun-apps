@@ -8,7 +8,7 @@
         <link href="../css/multilevel-dropdown.css" rel="stylesheet">
         <link href="../css/layout.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
-        
+
         <title>ELIXIR mailing list manager</title>
     </head>
     <body>
@@ -41,13 +41,16 @@
                 <div class="col-sm-12">
                     <div id="content">  <!-- content -->
 
+                        <div id="messager">
+                            <!-- contend loaded by JavaScript -->
+                        </div>
+
+                        <form class="form-horizontal" role="form" id="subscribeForm">
                         <div class="page-header">
                             <h2>
                                 Subscribe email to info@elixir-czech.cz
                             </h2>
-                        </div>
-
-                        <form class="form-horizontal" role="form" id="subscribeForm">
+                        </div>    
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">Name</label>
                                 <div class="col-sm-6">
@@ -72,6 +75,7 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div> 
 
@@ -80,9 +84,7 @@
 
         </div> <!-- main container -->
 
-        <div id="messager">
-            <!-- contend loaded by JavaScript -->
-        </div>
+
 
 
         <noscript>
