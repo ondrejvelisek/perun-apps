@@ -1,3 +1,9 @@
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
 .low-opacity {
   opacity: 0.3;
 }
@@ -56,13 +62,14 @@ dl dd .btn {
 #content table {
   margin-bottom: 6px;
 }
-#content table.table-bordered {
-  border-radius: 4px;
+#content table thead th.col-button,
+#content table thead th.col-number {
+  width: 1%;
 }
-#content table tbody td.button-cell {
+#content table tbody td.col-button {
   padding: 1px;
 }
-#content table tbody td.button-cell .btn {
+#content table tbody td.col-button .btn {
   margin: 0px 0px;
   width: 100%;
 }

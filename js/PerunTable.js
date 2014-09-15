@@ -39,7 +39,7 @@ function PerunTable() {
         html += "<thead><tr>";
         for (var i in this.columns) {
             var value = this.columns[i].title;
-            html += "    <th>" + value + "</th>";
+            html += "<th class='col-"+this.columns[i].type+"'>" + value + "</th>";
         }
         html += "</thead></tr>";
         html += "<tbody>";
@@ -49,18 +49,15 @@ function PerunTable() {
             html += "<tr>";
             for (var id in this.columns) {
                 var column = this.columns[id];
-                
+                html += "<td class='col-"+column.type+"'>";
                 switch (column.type) {
                     case "button":
-                        html += "<td class='button-cell'>";
                         html += (new TableButton(this.values[row][column.btnId], "tableBtn", column.btnText, column.btnType)).html();
                         break;
                     case "number":
-                        html += "<td>";
                         html += (1+parseInt(row));
                         break;
                     default :
-                        html += "<td>";
                         if (this.values.length == 0) {
                             break;
                         }
@@ -163,7 +160,7 @@ function TableButton(id, name, title, type) {
     this.type = type;
 
     this.html = function() {
-        var html = '<button id="' + this.name+"-"+this.id + '" class="btn btn-'+this.type+' pull-right">' + this.title + '</button>';
+        var html = '<button id="' + this.name+"-"+this.id + '" class="btn btn-'+this.type+'">' + this.title + '</button>';
         return html;
     };
 }

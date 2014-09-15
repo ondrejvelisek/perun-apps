@@ -1,5 +1,5 @@
 
-
+@import "elements.less";
 
 .low-opacity {
     opacity: 0.3;
@@ -58,19 +58,21 @@ dl {
         }            
     }
     table {
-        &.table-bordered {
-            border-radius: 4px;
-        }
         margin-bottom: 6px;
+        thead {
+            th.col-button,
+            th.col-number {
+                width: 1%;
+            }
+        }
         tbody {
-            td.button-cell {
+            td.col-button {
                 padding: 1px;
                 .btn {
                     margin: 0px 0px;
                     width: 100%;
                 }
             }
-
         }
     }
 }
