@@ -67,8 +67,13 @@ dl dd .btn {
   width: 1%;
 }
 #content table tbody td.col-button {
-  padding: 1px;
+  padding: 1px 0px;
   text-align: center;
+}
+#content table tbody td.col-button .btn {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
 }
 #flowMessager {
   position: fixed;
