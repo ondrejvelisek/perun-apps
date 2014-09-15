@@ -62,6 +62,9 @@ dl dd .btn {
 #content table {
   margin-bottom: 6px;
 }
+#content table thead th {
+  width: 100%;
+}
 #content table thead th.col-button,
 #content table thead th.col-number {
   width: 1%;
