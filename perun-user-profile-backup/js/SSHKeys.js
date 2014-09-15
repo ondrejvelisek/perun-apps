@@ -66,7 +66,7 @@ function fillSSHKeys(sshPublicKey) {
     var sshKeysTable = new PerunTable();
     sshKeysTable.addColumn({type:"number", title:"#"});
     sshKeysTable.addColumn({type:"text", title:"SSH keys", name:"value"});
-    sshKeysTable.addColumn({type:"button", title:"remove", btnText:"&times;", btnType:"danger", btnId:"key"});
+    sshKeysTable.addColumn({type:"button", title:"", btnText:"remove", btnType:"danger", btnId:"key"});
     sshKeysTable.setList(sshPublicKey.value);
     var tableHtml = sshKeysTable.draw();
     $("#sshkeys-table").html(tableHtml);
