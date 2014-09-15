@@ -59,7 +59,10 @@ dl dd .btn {
 #content table.table-bordered {
   border-radius: 4px;
 }
-#content table tbody .btn {
+#content table tbody td.button-cell {
+  padding: 1px;
+}
+#content table tbody td.button-cell .btn {
   margin: 0px 0px;
   width: 100%;
 }

@@ -73,8 +73,8 @@
                                 <!-- content loaded by JS -->
                             </div>
 
-                            <h3>Create new alternative password</h3>
-                            
+                            <h3>Generate new alternative password</h3>
+
                             <form class="form-horizontal" role="form" id="createAltPassword">
 
                                 <div class="form-group">
@@ -82,15 +82,19 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="altPasswordDescription" placeholder="Description" required>
                                             <span class="input-group-btn">
-                                                <button type="submit" class="btn btn-success">create password</button>
+                                                <button type="submit" class="btn btn-success">generate password</button>
                                             </span>
                                         </div>
+                                        <p class="help-block">
+                                            Description of device/application where the password will be used. Like “email on mobile phone” or “teleconferences on tablet”.
+                                        </p>
                                     </div>
                                 </div>
 
+
                             </form>
 
-                            <div class="modal fade" id="showPassword" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+                            <div class="modal fade" id="showPassword" tabindex="-1" role="dialog" data-backdrop="static">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-body text-center">

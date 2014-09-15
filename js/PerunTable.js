@@ -49,15 +49,18 @@ function PerunTable() {
             html += "<tr>";
             for (var id in this.columns) {
                 var column = this.columns[id];
-                html += "<td>";
+                
                 switch (column.type) {
                     case "button":
+                        html += "<td class='button-cell'>";
                         html += (new TableButton(this.values[row][column.btnId], "tableBtn", column.btnText, column.btnType)).html();
                         break;
                     case "number":
+                        html += "<td>";
                         html += (1+parseInt(row));
                         break;
                     default :
+                        html += "<td>";
                         if (this.values.length == 0) {
                             break;
                         }

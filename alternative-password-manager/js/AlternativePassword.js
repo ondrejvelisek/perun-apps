@@ -14,9 +14,8 @@ $(document).ready(function() {
     $("#createAltPassword").submit(function(event) {
         event.preventDefault();
 
-        var password = randomPassword(8);
+        var password = randomPassword(16);
         var description = $("#altPasswordDescription").val();
-        showPassword(description, password);
         $("#altPasswordDescription").val("");
         callPerunPost("usersManager", "createAlternativePassword", {user: user.id, description: description, loginNamespace: "einfra", password: password}, function() {
 
@@ -87,10 +86,25 @@ function randomPassword(length) {
 
 function showPassword(description, password) {
     $("#showPassword .description").text(description);
-    $("#showPassword .password").text(password);
+    $("#showPassword .password").html(splitStringToHtml(password, 4));
     
     $("#showPassword").modal();
 }
+
 $('#showPassword').on('hidden.bs.modal', function (e) {
     $("#showPassword .password").text("...");
 });
+
+function splitStringToHtml(string, number) {
+    
+    var splitHtml = "<span>";
+    for(var id in string) {
+        if ((id % number === 0)
+                && (id !== "0")) {
+            splitHtml += "</span><span>";
+        }
+        splitHtml += string[id];
+    }
+    splitHtml += "</span>";
+    return splitHtml;
+}

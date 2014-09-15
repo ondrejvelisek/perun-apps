@@ -103,3 +103,6 @@ h6 {
     left: 0px;
   }
 }
+#showPassword .password span {
+  margin: 0px 4px;
+}
