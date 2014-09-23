@@ -1,0 +1,167 @@
+<!DOCTYPE html>                                                                                                                                                                                
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/ico" href="../img/favicon.ico">
+
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../icomoon/icomoon.css" rel="stylesheet">
+        <link href="../css/multilevel-dropdown.css" rel="stylesheet">
+        <link href="../css/layout.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+
+        <title>Establish VO form in Perun</title>
+    </head>
+    <body>
+
+        <!-- <div id="cesnet_linker_placeholder"></div> -->
+
+
+        <div class="container-fluid">
+            <div id="header">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="logo">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="title">
+                            <h3>Establish Virtual Organization form in Perun System</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container"> <!-- main container -->
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div id="staticMessager">
+                        <!-- contend loaded by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="tab-content" id="content"> <!-- content -->
+
+                        <div class="tab-pane active" id="profile"> <!-- profile tab -->
+
+                            <form class="form-horizontal" role="form" id="establishForm">
+                                <div class="form-group">
+                                    <label for="fullName" class="col-sm-2 control-label">Full VO name</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="fullName" placeholder="Full VO name" autofocus>
+                                        <p class="help-block">Should describe purpose of project.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shortName" class="col-sm-2 control-label">Short VO name</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="shortName" placeholder="Short VO name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="managers" class="col-sm-2 control-label">Managers of VO</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="managers" placeholder="Managers of VO">
+                                        <p class="help-block">People or groups of people. Default manager is person who has applied.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactMails" class="col-sm-2 control-label">Contact E-mails</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="contactMails" placeholder="Contact E-mails">
+                                        <p class="help-block">Emails for user support.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="notificationsMails" class="col-sm-2 control-label">Notification E-mails</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="notificationsMails" placeholder="Notification E-mails">
+                                        <p class="help-block">Emails for outgoing notifications.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="voWeb" class="col-sm-2 control-label">Web about VO</label>
+                                    <div class="col-md-8">
+                                        <input type="url" class="form-control" id="voWeb" placeholder="Web about VO">
+                                        <p class="help-block">URL of web about VO.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="logo" class="col-sm-2 control-label">Logo</label>
+                                    <div class="col-md-8">
+                                        <input type="url" class="form-control" id="logo" placeholder="Logo">
+                                        <p class="help-block">URL of picture of VO logo.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="language" class="col-sm-2 control-label">Preferred language</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="language" placeholder="Preferred language">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="membershipDuration" class="col-sm-2 control-label">Rules for membership duration</label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control" rows="3" id="membershipDuration" placeholder="Rules for membership duration"></textarea>
+                                        <p class="help-block">Description how to extend membership.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="application" class="col-sm-2 control-label">Application</label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control" rows="3" id="application" placeholder="Application"></textarea>
+                                        <p class="help-block">Description with requirements for new members. e.g. "We need name, email, organization and preffered language."</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-success">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div> <!-- content -->
+                </div> 
+
+
+            </div>
+        </div> <!-- main container -->
+
+        <div id="flowMessager">
+            <!-- contend loaded by JavaScript -->
+        </div>
+
+
+        <noscript>
+        <div class="modal">
+            <div class="modal-body">
+                <h3>Javascript is disabled</h3>
+                <p>This site will not work correctly because your browser is blocking JavaScript. Please enable JavaScript and reload page.</p>
+            </div>
+        </div>
+        </noscript>
+
+        <script src="../js/jquery/jquery-1.11.1.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../js/Configuration.js"></script>
+        <script src="../js/PerunUtils.js"></script>
+        <script src="../js/PerunTable.js"></script>
+        <!--<script src="../js/PerunUserLoader.js"></script>-->
+        <script src="../js/PreunConnectionTester.js"></script>
+        <script src="../js/Messager.js"></script>
+        <script src="../js/LoadImage.js"></script>
+
+        <script src="js/EstablishForm.js"></script>
+        <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
+    </body>
+</html>
