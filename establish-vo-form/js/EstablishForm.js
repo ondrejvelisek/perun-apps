@@ -15,10 +15,11 @@ $(document).ready(function() {
         var queue = null;
         var subject = "establishForm-subject-test";
         var text = getTextFromForm($("form#establishForm"));
-        debug("queue"+queue);
+        (staticMessager.newMessage(subject, text, "")).draw();
+        /*
         callPerunPost("rtMessagesManager", "sentMessageToRT", {queue: queue, subject: subject, text: text}, function() {
             (flowMessager.newMessage("Application ", "was send successfully", "success")).draw();
-        });
+        });*/
         
         function getTextFromForm(form) {
             var inputs = form.find("input");
