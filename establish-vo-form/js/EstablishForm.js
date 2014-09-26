@@ -12,7 +12,7 @@ $(document).ready(function() {
     $("form#establishForm").submit(function(e) {
         e.preventDefault();
         
-        var queue = "task";
+        var queue = null;
         var subject = "establishForm-subject-test";
         var text = getTextFromForm($("form#establishForm"));
         debug("queue"+queue);
