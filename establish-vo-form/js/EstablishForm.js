@@ -11,19 +11,23 @@ function entryPoint(user) {
 $(document).ready(function() {
     $("form#establishForm").submit(function(e) {
         e.preventDefault();
-        
+        var form = $("form#establishForm");
         var queue = null;
-        var subject = "establishForm-subject-test";
+        var subject = "Application for establish new VO";
         var text = getTextFromForm($("form#establishForm"));
-        (staticMessager.newMessage(subject, text, "")).draw();
+        (staticMessager.newMessage(subject+"<br><br>", text, "default")).draw();
         /*
         callPerunPost("rtMessagesManager", "sentMessageToRT", {queue: queue, subject: subject, text: text}, function() {
             (flowMessager.newMessage("Application ", "was send successfully", "success")).draw();
         });*/
         
         function getTextFromForm(form) {
-            var inputs = form.find("input");
-            return "establishForm-text-test";
+            var text = "";
+            form.find("input, textarea").each(function() {
+                text += form.find("label[for="+$(this).attr("id")+"]").text()+": ";
+                text += "<strong>"+$(this).val()+"</strong><br>"
+            });
+            return text;
         }
     });
 });
