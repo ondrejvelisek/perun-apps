@@ -16,7 +16,7 @@ $(document).ready(function() {
         var subject = "establishForm-subject-test";
         var text = getTextFromForm($("form#establishForm"));
         
-        callPerunPost("rtMessagesManager", "sendMessageToRT", {queue: queue, subject: subject, text: text}, function() {
+        callPerunPost("rtMessagesManager", "sentMessageToRT", {queue: queue, subject: subject, text: text}, function() {
             (flowMessager.newMessage("Application ", "was send successfully", "success")).draw();
         });
         
