@@ -14,7 +14,8 @@ $(document).ready(function() {
         var form = $("form#establishForm");
         var queue = null;
         var subject = "Application for establish new VO";
-        var text = getTextFromForm($("form#establishForm"));
+        var text = getTextFromForm(form);
+        form[0].reset();
         (staticMessager.newMessage(subject+"<br><br>", text, "default")).draw();
         /*
         callPerunPost("rtMessagesManager", "sentMessageToRT", {queue: queue, subject: subject, text: text}, function() {
