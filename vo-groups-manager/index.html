@@ -1,0 +1,135 @@
+<!DOCTYPE html>                                                                                                                                                                                
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="icon" type="image/ico" href="../img/favicon.ico">
+        
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../icomoon/icomoon.css" rel="stylesheet">
+        <link href="../css/multilevel-dropdown.css" rel="stylesheet">
+        <link href="../css/layout.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        
+        <title>VO Groups Manager</title>
+    </head>
+    <body>
+
+        <!-- <div id="cesnet_linker_placeholder"></div> -->
+
+
+        <div class="container-fluid">
+            <div id="header">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="logo">
+                            
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="title">
+                            <h3>VO Groups Manager</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid"> <!-- main container -->
+            <div class="row">
+                
+                <div class="col-sm-12">
+                    <div id="staticMessager">
+                        <!-- contend loaded by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="col-sm-2"> <!-- left menu -->
+                    <div class="tabbable" id="menu">
+                        <ul class="nav nav-pills nav-stacked">  
+                            <li class="dropdown-header">
+                                Menu
+                            </li>  
+                            <li class="active">
+                                <a href="#vo" data-toggle="tab" id="voLink">
+                                    <i class="glyphicon icon-users"></i> Groups manager
+                                </a>
+                            </li>              
+                            <li class="divider"></li>  
+                            <li>
+                                <a href="#help" data-toggle="tab" id="helpLink">
+                                    <i class="glyphicon icon-support"></i> Help
+                                </a>
+                            </li>  
+                        </ul>  
+                    </div>
+                </div> <!-- left menu -->
+
+
+                <div class="col-sm-9">
+                    <div class="tab-content" id="content">  <!-- content -->
+
+                        <div class="tab-pane active" id="vo"> <!-- profile tab -->
+                            <div class="page-header">
+                                <h2>
+                                    <span id="vo-name"> ... </span>
+                                </h2>
+                            </div>
+                            
+                            <h3>Groups in VO</h3>
+                            <div id="groupsTable">
+                                <!-- loaded by JS -->
+                            </div>
+
+                        </div> <!-- profile tab -->
+
+
+                        <div class="tab-pane" id="help"> <!-- help tab -->
+                            <div class="page-header">
+                                <h2>Help</h2>
+                                <p>
+                                    <!-- add help here -->
+                                </p>
+                            </div>
+                        </div> <!-- help tab -->
+
+
+                    </div> <!-- content -->
+                </div> 
+
+
+            </div>
+        </div> <!-- main container -->
+
+        <div id="flowMessager">
+            <!-- contend loaded by JavaScript -->
+        </div>
+
+
+        <noscript>
+        <div class="modal">
+            <div class="modal-body">
+                <h3>Javascript is disabled</h3>
+                <p>This site will not work correctly because your browser is blocking JavaScript. Please enable JavaScript and reload page.</p>
+            </div>
+        </div>
+        </noscript>
+
+        <script src="../js/jquery/jquery-1.11.1.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../js/Configuration.js"></script>
+        <script src="../js/PerunUtils.js"></script>
+        <script src="../js/PerunTable.js"></script>
+        <script src="../js/PerunUserLoader.js"></script>
+        <script src="../js/PreunConnectionTester.js"></script>
+        <script src="../js/Messager.js"></script>
+        <script src="../js/LoadImage.js"></script>
+
+        <script src="js/VoConfiguration.js"></script>
+        <script src="js/LoadVo.js"></script>
+        <script src="js/LoadGroups.js"></script>
+        <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
+    </body>
+</html>
