@@ -12,7 +12,7 @@ function loadUser() {
             (flowMessager.newMessage("User","can't be loaded.","danger")).draw();
             return;
         }
-        console.log(perunPrincipal);
+        //console.log(perunPrincipal);
         user = perunPrincipal.user;
         fillUserInfo(user);
         entryPoint(user);
