@@ -2,7 +2,7 @@
  * Creates a table which can easily visualize JSON data
  */
 function PerunTable() {
-    this.columns = [];  // required attr: type("button", "number"), title
+    this.columns = [];  // required attr: type("button", "number", "icon", ...), title
     this.values = [];
     this.clicableRows = {isClicable : false, id:"", prefix:"row-"};
     /**
@@ -80,7 +80,7 @@ function PerunTable() {
                         break;
                     case "icon":
                         if (!this.values[row][column.name]) {
-                            html += " ";
+                            html += "";
                         } else {
                             html += "<i class='glyphicon "+this.values[row][column.name]+"' title='"+column.description+"' data-toggle='tooltip'></i>";
                         }

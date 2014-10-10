@@ -64,24 +64,39 @@ h1, h2, h3, h4, h5, h6 {
     table {
         tbody {
             background-color: #fff;
-            }
         }
-    #profile {
-        position: relative;
-        .dropdown-menu {
-            min-width: 100px;
-            a[data-value] {
-                cursor: pointer;
-            }            
-        }
-        @media (max-width: 480px) {
-            .btn-group {
-                position: static;
-                .dropdown-menu.multi-level {
-                    position: absolute;
-                    left: 0px;
-                }
+        td .space {
+            margin-left: 24px;
+            &:last-child:after {
+                content: "\25CB";
+                color: #bbb;
+                margin-right: 4px;
             }
         }
     }
+    #innerTabs {
+        .nav {
+            li a {
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+            }
+            li.active a {
+                background: #eee;
+                color: #666;
+            }
+            li+li {
+                margin-left: 9px;
+                &:before {
+                    margin: 5px 0 0 -10px;
+                    font-size: 20px;
+                    content: ">";
+                    color: #ddd;
+                    float:left;
+                }
+            }
+
+        }
+
+    }
 }
+

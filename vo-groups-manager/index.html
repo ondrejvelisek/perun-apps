@@ -3,15 +3,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <link rel="icon" type="image/ico" href="../img/favicon.ico">
-        
+
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="../icomoon/icomoon.css" rel="stylesheet">
         <link href="../css/multilevel-dropdown.css" rel="stylesheet">
         <link href="../css/layout.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
-        
+
         <title>VO Groups Manager</title>
     </head>
     <body>
@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <div class="logo">
-                            
+
                         </div>
                     </div>
                     <div class="col-sm-10">
@@ -39,13 +39,13 @@
 
         <div class="container-fluid"> <!-- main container -->
             <div class="row">
-                
+
                 <div class="col-sm-12">
                     <div id="staticMessager">
                         <!-- contend loaded by JavaScript -->
                     </div>
                 </div>
-                
+
                 <div class="col-sm-2"> <!-- left menu -->
                     <div class="tabbable" id="menu">
                         <ul class="nav nav-pills nav-stacked">  
@@ -53,10 +53,10 @@
                                 Menu
                             </li>  
                             <li class="active">
-                                <a href="#vo" data-toggle="tab" id="voLink">
-                                    <i class="glyphicon icon-users"></i> Groups manager
+                                <a href="#groupsManager" data-toggle="tab" id="groupsManagerLink">
+                                    <i class="glyphicon icon-users"></i> <span>Groups Manager</span>
                                 </a>
-                            </li>              
+                            </li>  
                             <li class="divider"></li>  
                             <li>
                                 <a href="#help" data-toggle="tab" id="helpLink">
@@ -71,20 +71,21 @@
                 <div class="col-sm-9">
                     <div class="tab-content" id="content">  <!-- content -->
 
-                        <div class="tab-pane active" id="vo"> <!-- profile tab -->
-                            <div class="page-header">
-                                <h2>
-                                    <span id="vo-name"> ... </span>
-                                </h2>
+                        <div class="tab-pane active" id="groupsManager">
+                            <div class="breadcrumbs">
+                                <!-- content load by JS -->
                             </div>
                             
-                            <h3>Groups in VO</h3>
-                            <div id="groupsTable">
-                                <!-- loaded by JS -->
+                            <div id="innerTabs">
+                                <ul class="nav nav-pills">  
+                                    <!-- content load by JS -->
+                                </ul>  
+                                <div class="tab-content">
+                                    <!-- content load by JS -->
+                                </div>
                             </div>
 
-                        </div> <!-- profile tab -->
-
+                        </div>
 
                         <div class="tab-pane" id="help"> <!-- help tab -->
                             <div class="page-header">
@@ -126,10 +127,14 @@
         <script src="../js/PreunConnectionTester.js"></script>
         <script src="../js/Messager.js"></script>
         <script src="../js/LoadImage.js"></script>
+        <script src="../js/Tabs.js"></script>
+
 
         <script src="js/VoConfiguration.js"></script>
+        <script src="js/Breadcrumbs.js"></script>
         <script src="js/LoadVo.js"></script>
         <script src="js/LoadGroups.js"></script>
+        <script src="js/LoadMembers.js"></script>
         <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
     </body>
 </html>

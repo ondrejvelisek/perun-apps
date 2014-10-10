@@ -105,11 +105,11 @@ dl dd .btn {
 }
 .load-image {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  width: 100%;
+  top: 8px;
   z-index: 2;
 }
 .load-image img {
+  display: block;
   margin: 0px auto;
-  width: 100%;
 }

@@ -68,21 +68,29 @@ h6 {
 #content table tbody {
   background-color: #fff;
 }
-#content #profile {
-  position: relative;
+#content table td .space {
+  margin-left: 24px;
 }
-#content #profile .dropdown-menu {
-  min-width: 100px;
+#content table td .space:last-child:after {
+  content: "\25CB";
+  color: #bbb;
+  margin-right: 4px;
 }
-#content #profile .dropdown-menu a[data-value] {
-  cursor: pointer;
+#content #innerTabs .nav li a {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
 }
-@media (max-width: 480px) {
-  #content #profile .btn-group {
-    position: static;
-  }
-  #content #profile .btn-group .dropdown-menu.multi-level {
-    position: absolute;
-    left: 0px;
-  }
+#content #innerTabs .nav li.active a {
+  background: #eee;
+  color: #666;
+}
+#content #innerTabs .nav li + li {
+  margin-left: 9px;
+}
+#content #innerTabs .nav li + li:before {
+  margin: 5px 0 0 -10px;
+  font-size: 20px;
+  content: ">";
+  color: #ddd;
+  float: left;
 }
