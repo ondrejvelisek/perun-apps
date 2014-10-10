@@ -90,7 +90,7 @@ h6 {
 #content #innerTabs .nav li + li:before {
   margin: 5px 0 0 -10px;
   font-size: 20px;
-  content: ">";
+  content: "<";
   color: #ddd;
   float: left;
 }
