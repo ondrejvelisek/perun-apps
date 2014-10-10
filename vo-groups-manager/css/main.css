@@ -76,6 +76,9 @@ h6 {
   color: #bbb;
   margin-right: 4px;
 }
+#content .btn-toolbar {
+  margin-bottom: 8px;
+}
 #content #innerTabs .nav li a {
   padding: 8px 12px;
   border: 1px solid #ddd;

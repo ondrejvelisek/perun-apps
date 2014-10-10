@@ -9,6 +9,7 @@ function showGroup(group) {
     if (!group) {
         return;
     }
+    debug(group);
     if (!innerTabs.containsTab(group.id)) {
         if (innerTabs.containsTab(group.parentGroupId)) {
             innerTabs.removeSuccessors(group.parentGroupId);
@@ -19,7 +20,7 @@ function showGroup(group) {
                 innerTabs.removeSuccessors("vo");
             }
         }
-        addGroupTab(group);
+        innerTabs.addTab(createGroupTab(group));
     }
     innerTabs.show(group.id);
     $('#group-name').text(group.name);
@@ -27,11 +28,16 @@ function showGroup(group) {
     loadMembers(group);
 }
 
-function addGroupTab(group) {
+function createGroupTab(group) {
     var content = '<div class="page-header"><h2>' + group.name + '</h2></div>';
+    content += '<div class="btn-toolbar">';
+        content += '<div class="btn-group">';
+            content += '<button class="btn btn-success">Create Subgroup</button>';
+        content += '</div>';
+    content += '</div>';
     content += '<div class="membersTable"></div>';
     content += '<div class="subgroupsTable"></div>';
-    innerTabs.addTab(new Tab(group.shortName, group.id, content));
+    return new Tab(group.shortName, group.id, content);
 }
 
 function loadGroups(vo) {
@@ -113,6 +119,39 @@ function getGroupById(groups, id) {
     return null;
 }
 
+function getCreateGroupModalHtml(what) {
+    var html;
+    html = '<div id="create' + what + '" class="modal fade">';
+    html += '  <div class="modal-dialog">';
+    html += '    <div class="modal-content">';
+    /*html += '      <div class="modal-header">';
+    html += '        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
+    html += '        <h4 class="modal-title">Create ' + what + '</h4>';
+    html += '      </div>';
+    */html += '      <div class="modal-body">';
+    html += '        <p>';
+    html += '          <form id="create' + what + 'Form" role="form">';
+    html += '            <div class="form-group">';
+    html += '              <label for="name">Group name</label>';
+    html += '              <input type="text" class="form-control" id="name" placeholder="Group name" autofocus>';
+    html += '            </div>';
+    html += '            <div class="form-group">';
+    html += '              <label for="shortName">Short name</label>';
+    html += '              <input type="text" class="form-control" id="shortName" placeholder="Short name">';
+    html += '            </div>';
+    html += '            <div class="form-group">';
+    html += '              <label for="description">Description</label>';
+    html += '              <input type="text" class="form-control" id="description" placeholder="Description">';
+    html += '            </div>'; 
+    html += '            <button type="submit" id="create' + what + '" type="button" class="btn btn-success">Create ' + what + '</button>';    
+    html += '          </form>';
+    html += '        </p>';
+    html += '      </div>';
+    html += '    </div><!-- /.modal-content -->';
+    html += '  </div><!-- /.modal-dialog -->';
+    html += '</div><!-- /.modal -->';
+    return html;
+}
 
 
 

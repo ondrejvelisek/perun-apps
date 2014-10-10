@@ -8,7 +8,6 @@ function entryPoint(user) {
 }
 
 $(document).ready(function() {
-    breadcrumbs = new Breadcrumbs($("#breadcrumbs"));
     innerTabs = new Tabs($("#innerTabs"));
     loadVo();
 });
@@ -28,21 +27,39 @@ function showVo(vo) {
         return;
     }
     if (!innerTabs.containsTab("vo")) {
-        var content = '<div class="page-header"><h2>' + vo.name + '</h2></div>';
-        content += '<div id="groupsTable"></div>';
-        innerTabs.addTab(new Tab(vo.shortName, "vo", content));
+        addVoTab(vo);
     }
     innerTabs.show("vo");
     
     $("#groupsManagerLink").click(function() { 
         showVo(vo);
     });
-    breadcrumbs.pushItem(vo);
     fillVoInfo(vo);
     loadGroups(vo);
 }
     
-
+function addVoTab(vo) {
+    var content;
+    content  = '<div class="page-header"><h2>' + vo.name + '</h2></div>';
+    content += '<div class="btn-toolbar">';
+        content += '<div class="btn-group">';
+            content += '<button class="btn btn-success" data-toggle="modal" data-target="#createGroup">Create Group</button>';
+        content += '</div>';
+    content += '</div>';
+    content += '<div id="groupsTable"></div>';
+    content += getCreateGroupModalHtml("Group");
+    innerTabs.addTab(new Tab(vo.shortName, "vo", content));
+    var form = innerTabs.place.find("#vo form");
+    form.submit(function() {
+        var name = form.find("#name");
+        var shortName = form.find("#shortName");
+        var description = form.find("#description");
+        var group = {name:name,shortName:shortName,description:description};
+        callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: group}, function() {
+            debug("succesfully created");
+        });
+    });
+}
 
 function fillVoInfo(vo) {
     if (!vo) {
