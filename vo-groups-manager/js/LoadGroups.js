@@ -44,7 +44,7 @@ function addGroupTab(group) {
         var name = form.find("#name");
         var shortName = form.find("#shortName");
         var description = form.find("#description");
-        var group = {name:name,shortName:shortName,description:description};
+        var group = {name:name.val(),shortName:shortName.val(),description:description.val()};
         callPerunPost("groupsManager", "createGroup", {parentGroup: group.parentGroupId, group: group}, function(createdGroup) {
             (flowMessager.newMessage(createdGroup.name,"subgroup was created succesfuly","success")).draw();
             showGroup(createdGroup);

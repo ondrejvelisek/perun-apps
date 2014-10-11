@@ -56,7 +56,7 @@ function addVoTab(vo) {
         var name = form.find("#name");
         var shortName = form.find("#shortName");
         var description = form.find("#description");
-        var group = {name:name,shortName:shortName,description:description};
+        var group = {name:name.val(),shortName:shortName.val(),description:description.val()};
         callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: group}, function(createdGroup) {
             (flowMessager.newMessage(createdGroup.name,"group was created succesfuly","success")).draw();
             showGroup(createdGroup);
