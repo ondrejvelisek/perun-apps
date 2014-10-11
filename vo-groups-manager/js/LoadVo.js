@@ -50,11 +50,12 @@ function addVoTab(vo) {
     content += getCreateGroupModalHtml("Group");
     innerTabs.addTab(new Tab(vo.shortName, "vo", content));
     var form = innerTabs.place.find("#vo form");
-    form.submit(function() {
+    form.submit(function(e) {
+        e.preventDefault();
         var name = form.find("#name");
         var shortName = form.find("#shortName");
         var description = form.find("#description");
-        var group = {name:name,shortName:shortName,description:description};
+        var group = {name:"name",shortName:"shortNameTest",description:"description"};
         callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: group}, function() {
             debug("succesfully created");
         });
