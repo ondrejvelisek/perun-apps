@@ -7,6 +7,7 @@ var allVoGroups;
 
 function showGroup(group) {
     if (!group) {
+        (flowMessager.newMessage("group","can not be shown","warning")).draw();
         return;
     }
     if (!innerTabs.containsTab(group.id)) {
@@ -44,18 +45,21 @@ function addGroupTab(group) {
     form.submit(function(event) {
         event.preventDefault();
         var name = form.find("#name");
-        var shortName = form.find("#shortName");
         var description = form.find("#description");
-        var newGroup = {name:name.val(),shortName:shortName.val(),description:description.val()};
+        var newGroup = {name:name.val(),description:description.val()};
         callPerunPost("groupsManager", "createGroup", {parentGroup: group.id, group: newGroup}, function(createdGroup) {
             innerTabs.place.find("#" + group.id + " .modal").modal('hide');
             (flowMessager.newMessage(createdGroup.name,"subgroup was created succesfuly","success")).draw();
+            loadGroups(vo);
             showGroup(createdGroup);
         });
     });
 }
 
 function loadGroups(vo) {
+    if (!vo) {
+        (flowMessager.newMessage("Groups", "can't be loaded because vo is not set.", "danger")).draw();
+    }
     var loadImage = new LoadImage($('#groupsTable'), "20px");
     callPerun("groupsManager", "getGroups", {vo: vo.id}, function(groups) {
         if (!groups) {
@@ -146,10 +150,6 @@ function getCreateGroupModalHtml(where) {
     html += '            <div class="form-group">';
     html += '              <label for="name">Group name</label>';
     html += '              <input type="text" class="form-control" id="name" placeholder="Group name" autofocus>';
-    html += '            </div>';
-    html += '            <div class="form-group">';
-    html += '              <label for="shortName">Short name</label>';
-    html += '              <input type="text" class="form-control" id="shortName" placeholder="Short name">';
     html += '            </div>';
     html += '            <div class="form-group">';
     html += '              <label for="description">Description</label>';

@@ -12,13 +12,15 @@ $(document).ready(function() {
     loadVo();
 });
 
+var vo;
 function loadVo() { //called only once
-    callPerun("vosManager", "getVoByShortName", {shortName: voConfiguration.SHORT_NAME }, function(vo) {
-        if (!vo) {
+    callPerun("vosManager", "getVoByShortName", {shortName: voConfiguration.SHORT_NAME }, function(voResult) {
+        if (!voResult) {
             (flowMessager.newMessage("VO","can't be loaded.","danger")).draw();
             return;
         }
-        showVo(vo);
+        vo = voResult;
+        showVo(voResult);
     });
 }
 
@@ -54,12 +56,12 @@ function addVoTab(vo) {
     form.submit(function(event) {
         event.preventDefault();
         var name = form.find("#name");
-        var shortName = form.find("#shortName");
         var description = form.find("#description");
-        var group = {name:name.val(),shortName:shortName.val(),description:description.val()};
+        var group = {name:name.val(),description:description.val()};
         callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: group}, function(createdGroup) {
             innerTabs.place.find("#vo .modal").modal('hide');
             (flowMessager.newMessage(createdGroup.name,"group was created succesfuly","success")).draw();
+            loadGroups(vo);
             showGroup(createdGroup);
         });
     });
