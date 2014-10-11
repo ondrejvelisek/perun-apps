@@ -31,11 +31,13 @@ function addGroupTab(group) {
     var content = '<div class="page-header"><h2>' + group.name + '</h2></div>';
     content += '<div class="btn-toolbar">';
         content += '<div class="btn-group">';
-            content += '<button class="btn btn-success">Create Subgroup</button>';
+            content += '<button class="btn btn-success" data-toggle="modal" data-target="#createGroupIn' + 
+                    group.id + '">Create Subgroup</button>';
         content += '</div>';
     content += '</div>';
     content += '<div class="membersTable"></div>';
     content += '<div class="subgroupsTable"></div>';
+    content += getCreateGroupModalHtml(group.id);
     innerTabs.addTab(new Tab(group.shortName, group.id, content));
     
     var form = innerTabs.place.find("#" + group.id + " form");
@@ -44,8 +46,9 @@ function addGroupTab(group) {
         var name = form.find("#name");
         var shortName = form.find("#shortName");
         var description = form.find("#description");
-        var group = {name:name.val(),shortName:shortName.val(),description:description.val()};
-        callPerunPost("groupsManager", "createGroup", {parentGroup: group.parentGroupId, group: group}, function(createdGroup) {
+        var newGroup = {name:name.val(),shortName:shortName.val(),description:description.val()};
+        callPerunPost("groupsManager", "createGroup", {parentGroup: group.id, group: newGroup}, function(createdGroup) {
+            innerTabs.place.find("#" + group.id + " .modal").modal('hide');
             (flowMessager.newMessage(createdGroup.name,"subgroup was created succesfuly","success")).draw();
             showGroup(createdGroup);
         });
@@ -65,6 +68,7 @@ function loadGroups(vo) {
         loadImage.hide();
     });
 }
+
 
 
 
@@ -131,9 +135,9 @@ function getGroupById(groups, id) {
     return null;
 }
 
-function getCreateGroupModalHtml() {
+function getCreateGroupModalHtml(where) {
     var html;
-    html = '<div id="createGroup" class="modal fade">';
+    html = '<div id="createGroupIn' + where + '" class="modal fade">';
     html += '  <div class="modal-dialog">';
     html += '    <div class="modal-content">';
     html += '      <div class="modal-body">';
