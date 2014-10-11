@@ -9,7 +9,6 @@ function showGroup(group) {
     if (!group) {
         return;
     }
-    debug(group);
     if (!innerTabs.containsTab(group.id)) {
         if (innerTabs.containsTab(group.parentGroupId)) {
             innerTabs.removeSuccessors(group.parentGroupId);
@@ -20,7 +19,7 @@ function showGroup(group) {
                 innerTabs.removeSuccessors("vo");
             }
         }
-        innerTabs.addTab(createGroupTab(group));
+        addGroupTab(group);
     }
     innerTabs.show(group.id);
     $('#group-name').text(group.name);
@@ -28,7 +27,7 @@ function showGroup(group) {
     loadMembers(group);
 }
 
-function createGroupTab(group) {
+function addGroupTab(group) {
     var content = '<div class="page-header"><h2>' + group.name + '</h2></div>';
     content += '<div class="btn-toolbar">';
         content += '<div class="btn-group">';
@@ -37,7 +36,20 @@ function createGroupTab(group) {
     content += '</div>';
     content += '<div class="membersTable"></div>';
     content += '<div class="subgroupsTable"></div>';
-    return new Tab(group.shortName, group.id, content);
+    innerTabs.addTab(new Tab(group.shortName, group.id, content));
+    
+    var form = innerTabs.place.find("#" + group.id + " form");
+    form.submit(function(event) {
+        event.preventDefault();
+        var name = form.find("#name");
+        var shortName = form.find("#shortName");
+        var description = form.find("#description");
+        var group = {name:name,shortName:shortName,description:description};
+        callPerunPost("groupsManager", "createGroup", {parentGroup: group.parentGroupId, group: group}, function(createdGroup) {
+            (flowMessager.newMessage(createdGroup.name,"subgroup was created succesfuly","success")).draw();
+            showGroup(createdGroup);
+        });
+    });
 }
 
 function loadGroups(vo) {
@@ -119,18 +131,14 @@ function getGroupById(groups, id) {
     return null;
 }
 
-function getCreateGroupModalHtml(what) {
+function getCreateGroupModalHtml() {
     var html;
-    html = '<div id="create' + what + '" class="modal fade">';
+    html = '<div id="createGroup" class="modal fade">';
     html += '  <div class="modal-dialog">';
     html += '    <div class="modal-content">';
-    /*html += '      <div class="modal-header">';
-    html += '        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
-    html += '        <h4 class="modal-title">Create ' + what + '</h4>';
-    html += '      </div>';
-    */html += '      <div class="modal-body">';
+    html += '      <div class="modal-body">';
     html += '        <p>';
-    html += '          <form id="create' + what + 'Form" role="form">';
+    html += '          <form role="form">';
     html += '            <div class="form-group">';
     html += '              <label for="name">Group name</label>';
     html += '              <input type="text" class="form-control" id="name" placeholder="Group name" autofocus>';
@@ -143,7 +151,7 @@ function getCreateGroupModalHtml(what) {
     html += '              <label for="description">Description</label>';
     html += '              <input type="text" class="form-control" id="description" placeholder="Description">';
     html += '            </div>'; 
-    html += '            <button type="submit" id="create' + what + '" type="button" class="btn btn-success">Create ' + what + '</button>';    
+    html += '            <button type="submit" id="createGroup" type="button" class="btn btn-success">Create Group</button>';    
     html += '          </form>';
     html += '        </p>';
     html += '      </div>';

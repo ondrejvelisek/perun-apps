@@ -49,15 +49,17 @@ function addVoTab(vo) {
     content += '<div id="groupsTable"></div>';
     content += getCreateGroupModalHtml("Group");
     innerTabs.addTab(new Tab(vo.shortName, "vo", content));
+    
     var form = innerTabs.place.find("#vo form");
-    form.submit(function(e) {
-        e.preventDefault();
+    form.submit(function(event) {
+        event.preventDefault();
         var name = form.find("#name");
         var shortName = form.find("#shortName");
         var description = form.find("#description");
-        var group = {name:"name",shortName:"shortNameTest",description:"description"};
-        callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: group}, function() {
-            debug("succesfully created");
+        var group = {name:name,shortName:shortName,description:description};
+        callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: group}, function(createdGroup) {
+            (flowMessager.newMessage(createdGroup.name,"group was created succesfuly","success")).draw();
+            showGroup(createdGroup);
         });
     });
 }
