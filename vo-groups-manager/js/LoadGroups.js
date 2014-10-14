@@ -37,10 +37,16 @@ function addGroupTab(group) {
                     group.id + '">Create Subgroup</button>';
         content += '</div>';
         content += '<div class="btn-group">';
-            content += '<button class="btn btn-success" data-toggle="modal" data-target="#addMembers' + group.id + '">Add users</button>';
+            content += '<button class="btn btn-success" data-toggle="modal" data-target="#addMembers' + group.id + '">Add Users</button>';
         content += '</div>';
         content += '<div class="btn-group">';
-            content += '<button class="btn btn-success" data-toggle="modal" data-target="#addManagers' + group.id + '">Add group managers</button>';
+            content += '<button class="btn btn-success" data-toggle="modal" data-target="#addManagers' + group.id + '">Add Group Managers</button>';
+        content += '</div>';
+        content += '<div class="btn-group">';
+            content += '<button class="btn btn-danger" data-toggle="modal" data-target="#removeMembers' + group.id + '">Remove Users</button>';
+        content += '</div>';
+        content += '<div class="btn-group">';
+            content += '<button class="btn btn-danger" data-toggle="modal" data-target="#removeManagers' + group.id + '">Remove Group Managers</button>';
         content += '</div>';
     content += '</div>';
     content += '<div class="membersTable"></div>';
@@ -52,6 +58,8 @@ function addGroupTab(group) {
     groupTab.addContent(getCreateGroupModalHtml(group.id));
     groupTab.addContent(getSelectMembersModalHtml("addMembers", group.id, "add Users to Group"));
     groupTab.addContent(getSelectMembersModalHtml("addManagers", group.id, "add Group Managers"));
+    groupTab.addContent(getSelectMembersModalHtml("removeMembers", group.id, "remove Users from Group"));
+    groupTab.addContent(getSelectMembersModalHtml("removeManagers", group.id, "remove Group Managers"));
     
     var createGroupForm = groupTab.place.find("[id^=createGroupIn] form");
     createGroupForm.submit(function(event) {
@@ -71,7 +79,23 @@ function addGroupTab(group) {
         addManagers(addManagersForm, group);
     });
     
-    fillSelectMembersModal(groupTab.place.find("#addMembers" + group.id + ", #addManagers" + group.id));
+    var removeMembersForm = groupTab.place.find("[id^=removeMembers] form");
+    removeMembersForm.submit(function(event) {
+        event.preventDefault();
+        removeMembers(removeMembersForm, group);
+    });
+    
+    var removeManagersForm = groupTab.place.find("[id^=removeManagers] form");
+    removeManagersForm.submit(function(event) {
+        event.preventDefault();
+        removeManagers(removeManagersForm, group);
+    });
+    
+    fillSelectMembersModal(groupTab.place.find(
+            "#addMembers" + group.id + 
+            ", #addManagers" + group.id));
+    fillSelectManagersModal(groupTab.place.find("#removeManagers" + group.id), group);
+    fillSelectGroupMembersModal(groupTab.place.find("#removeMembers" + group.id), group)
 }
 
 function loadGroups(vo) {
@@ -207,6 +231,43 @@ function addManagers(form, group) {
     }
 }
 
+function removeMembers(form, group) {
+    var membersValues = form.find("#members").val();
+    var members = [];
+    for(var j in membersValues) {
+        members[j] = {};
+        members[j].id = membersValues[j].split("-")[0];
+        members[j].userId = membersValues[j].split("-")[1];
+        members[j].name = membersValues[j].split("-")[2];
+    }
+    debug(members);
+    for(var j in members) {
+        callPerunPost("groupsManager", "removeMember", {group: group.id, member: members[j].id}, function() {
+            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+            (flowMessager.newMessage(members[j].name, "was removed sucesfuly from " + group.shortName + " group" , "success")).draw();
+            showGroup(group);
+        });
+    }
+}
+
+function removeManagers(form, group) {
+    var membersValues = form.find("#members").val();
+    var members = [];
+    for(var j in membersValues) {
+        members[j] = {};
+        members[j].id = membersValues[j].split("-")[0];
+        members[j].userId = membersValues[j].split("-")[1];
+        members[j].name = membersValues[j].split("-")[2];
+    }
+    debug(members[0]);
+    for(var id in members) {
+        callPerunPost("groupsManager", "removeAdmin", {group: group.id, user: members[id].userId}, function() {
+            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+            (flowMessager.newMessage(members[id].name, "is not manager in " + group.shortName + " group now." , "success")).draw();
+            showGroup(group);
+        });
+    }
+}
 
 function getCreateGroupModalHtml(where) {
     var html;
@@ -248,7 +309,7 @@ function getSelectMembersModalHtml(name, groupId, btnTitle) {
     // loaded by fillSelectMembersModal method
     html += '              </select>';
     html += '            </div>';
-    html += '            <button type="submit" type="button" class="btn btn-success">' + btnTitle + '</button>';    
+    html += '            <button type="submit" type="button" class="btn btn-primary btn-block">' + btnTitle + '</button>';    
     html += '          </form>';
     html += '        </p>';
     html += '      </div>';
@@ -278,7 +339,51 @@ function fillSelectMembersModal(modal) {
     });
 }
 
+function fillSelectManagersModal(modal, group) {
+   callPerun("groupsManager", "getAdmins", {group: group.id}, function(managers) {
+        if (!managers) {
+            (flowMessager.newMessage("Managers", "can't be loaded.", "danger")).draw();
+            return;
+        }
+        if (managers.length === 0) {
+            var option = "<option>No managers found</option>";
+            modal.find("select#members").html(option);
+            modal.find("select#members").prop( "disabled", true );
+        }
+        for(var id in managers) {
+            var option;
+            option  = '<option value="' + managers[id].id + '-' + 
+                    managers[id].id + '-' + 
+                    managers[id].firstName + ' ' + managers[id].lastName + '">';
+            option += managers[id].lastName + " " + managers[id].firstName;
+            option += '</option>';
+            modal.find("select#members").append(option);
+        }
+    });
+}
 
+function fillSelectGroupMembersModal(modal, group) {
+   callPerun("groupsManager", "getGroupRichMembers", {group: group.id}, function(members) {
+        if (!members) {
+            (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
+            return;
+        }
+        if (members.length === 0) {
+            var option = "<option>No users found</option>";
+            modal.find("select#members").html(option);
+            modal.find("select#members").prop( "disabled", true );
+        }
+        for(var id in members) {
+            var option;
+            option  = '<option value="' + members[id].id + '-' + 
+                    members[id].user.id + '-' + 
+                    members[id].user.firstName + ' ' + members[id].user.lastName + '">';
+            option += members[id].user.lastName + " " + members[id].user.firstName;
+            option += '</option>';
+            modal.find("select#members").append(option);
+        }
+    });
+}
 
 
 
