@@ -177,7 +177,7 @@ function addMembers(form, group) {
     }
     for(var j in membersIds) {
         callPerunPost("groupsManager", "addMember", {group: group.id, member: membersIds[j]}, function() {
-            innerTabs.getTabByName(group.id).place.find("#" + group.id + " .modal").modal('hide');
+            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage("Member", "with id " + membersIds[j] + 
                     " was added sucesfuly into " + group.shortName + " group" , "success")).draw();
             showGroup(group);
@@ -194,7 +194,7 @@ function addManagers(form, group) {
     debug(usersIds);
     for(var id in usersIds) {
         callPerunPost("groupsManager", "addAdmin", {group: group.id, user: usersIds[id]}, function() {
-            innerTabs.getTabByName(group.id).place.find("#" + group.id + " .modal").modal('hide');
+            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage("User", "with id " + usersIds[id] + 
                     " is manager in " + group.shortName + " group now." , "success")).draw();
             showGroup(group);
