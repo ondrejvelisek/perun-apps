@@ -119,7 +119,7 @@ function getTableOfGroups(groups) {
     
     var groupsTable = new PerunTable();
     groupsTable.setClicableRows({isClicable : true, id:"id", prefix:"row-"});
-    groupsTable.addColumn({type: "number", title: "#"});
+    //groupsTable.addColumn({type: "number", title: "#"});
     //groupsTable.addColumn({type: "button", title: "", btnText: "⌄", btnType: "default", btnId: "id"});
     groupsTable.addColumn({type: "text", title: "Name", name: "tableName"});
     groupsTable.addColumn({type: "text", title: "Description", name: "description"});

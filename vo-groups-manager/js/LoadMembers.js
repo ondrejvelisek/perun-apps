@@ -8,7 +8,9 @@
 
 function loadMembers(group) {
     var loadImage = new LoadImage($('.membersTable'), "64px");
-    callPerun("membersManager", "getCompleteRichMembers", {group: group.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"], lookingInParentGroup: 0}, 
+    callPerun("membersManager", "getCompleteRichMembers", {group: group.id, 
+        attrsNames: ["urn:perun:user:attribute-def:core:displayName","urn:perun:user:attribute-def:def:preferredMail"], 
+        lookingInParentGroup: 0}, 
         function(members) {
         if (!members) {
             (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
@@ -47,15 +49,19 @@ function fillMembers(members, group) {
     }
     
     var users = [];
-    for(var id in members) {
-        users.push(members[id].user);
+    for(var i in members) {
+        users[i] = members[i].user;
+        var attrs = members[i].userAttributes;
+        for(var j in attrs) {
+            users[i][attrs[j].friendlyName] = attrs[j].value;
+        }
     }
     
     var membersTable = new PerunTable();
     //membersTable.setClicableRows({isClicable : true, id:"id", prefix:"row-"});
-    membersTable.addColumn({type: "number", title: "#"});
-    membersTable.addColumn({type: "text", title: "Name", name: "firstName"});
-    membersTable.addColumn({type: "text", title: "Last", name: "lastName"});
+    //membersTable.addColumn({type: "number", title: "#"});
+    membersTable.addColumn({type: "text", title: "Name", name: "displayName"});
+    membersTable.addColumn({type: "text", title: "Preferred Mail", name: "preferredMail"});
     membersTable.setValues(users);
     table.html(membersTable.draw());
 }
