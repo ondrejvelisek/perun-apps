@@ -11,8 +11,8 @@ function Tabs(place) {
     
     this.addTab = function(tab) {
         this.tabs.push(tab);
-        this.tabs[this.tabs.length-1].setPlace(place);
         this.render();
+        tab.setPlace(place);
     };
     
     this.removeTab = function(name) {
@@ -47,7 +47,6 @@ function Tabs(place) {
             }
         }
         place.find(".nav").html(html);
-        
     };
     
     this.containsTab = function (name) {
@@ -58,6 +57,15 @@ function Tabs(place) {
         }
         return false;
     };
+    
+    this.getTabByName = function (name) {
+        for (var id in this.tabs) {
+            if (this.tabs[id].name === name) {
+                return this.tabs[id];
+            }
+        }
+        return null;
+    };
 }
 
 function Tab(title, name, content) {
@@ -67,7 +75,7 @@ function Tab(title, name, content) {
     this.place;
     
     this.setPlace = function(place) {
-        this.place = place;
+        this.place = place.find("#" + this.name);
     };
     
     this.getHtml = function () {
@@ -77,4 +85,13 @@ function Tab(title, name, content) {
     this.getContentHtml = function () {
         return '<div id="' + this.name + '" class="tab-pane">' + this.content + '</div>';
     };
+    
+    this.addContent = function (contentToAdd) {
+        this.content += contentToAdd;
+        this.render();
+    };
+    
+    this.render = function () {
+        this.place.html(this.content);
+    }
 }

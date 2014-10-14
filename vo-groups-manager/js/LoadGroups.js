@@ -10,6 +10,7 @@ function showGroup(group) {
         (flowMessager.newMessage("group","can not be shown","warning")).draw();
         return;
     }
+    
     if (!innerTabs.containsTab(group.id)) {
         if (innerTabs.containsTab(group.parentGroupId)) {
             innerTabs.removeSuccessors(group.parentGroupId);
@@ -35,25 +36,42 @@ function addGroupTab(group) {
             content += '<button class="btn btn-success" data-toggle="modal" data-target="#createGroupIn' + 
                     group.id + '">Create Subgroup</button>';
         content += '</div>';
+        content += '<div class="btn-group">';
+            content += '<button class="btn btn-success" data-toggle="modal" data-target="#addMembers' + group.id + '">Add users</button>';
+        content += '</div>';
+        content += '<div class="btn-group">';
+            content += '<button class="btn btn-success" data-toggle="modal" data-target="#addManagers' + group.id + '">Add group managers</button>';
+        content += '</div>';
     content += '</div>';
     content += '<div class="membersTable"></div>';
     content += '<div class="subgroupsTable"></div>';
-    content += getCreateGroupModalHtml(group.id);
-    innerTabs.addTab(new Tab(group.shortName, group.id, content));
     
-    var form = innerTabs.place.find("#" + group.id + " form");
-    form.submit(function(event) {
+    var groupTab = new Tab(group.shortName, group.id, content)
+    innerTabs.addTab(groupTab);
+    
+    groupTab.addContent(getCreateGroupModalHtml(group.id));
+    groupTab.addContent(getSelectMembersModalHtml("addMembers", group.id));
+    groupTab.addContent(getSelectMembersModalHtml("addManagers", group.id));
+    
+    var createGroupForm = groupTab.place.find("[id^=createGroupIn] form");
+    createGroupForm.submit(function(event) {
         event.preventDefault();
-        var name = form.find("#name");
-        var description = form.find("#description");
-        var newGroup = {name:name.val(),description:description.val()};
-        callPerunPost("groupsManager", "createGroup", {parentGroup: group.id, group: newGroup}, function(createdGroup) {
-            innerTabs.place.find("#" + group.id + " .modal").modal('hide');
-            (flowMessager.newMessage(createdGroup.name,"subgroup was created succesfuly","success")).draw();
-            loadGroups(vo);
-            showGroup(createdGroup);
-        });
+        createGroup(createGroupForm, group);
     });
+    
+    var addMembersForm = groupTab.place.find("[id^=addMembers] form");
+    addMembersForm.submit(function(event) {
+        event.preventDefault();
+        addMembers(addMembersForm, group);
+    });
+    
+    var addManagersForm = groupTab.place.find("[id^=addManagers] form");
+    addManagersForm.submit(function(event) {
+        event.preventDefault();
+        addManagers(addManagersForm, group);
+    });
+    
+    fillSelectMembersModal(groupTab.place.find("#addMembers" + group.id + ", #addManagers" + group.id));
 }
 
 function loadGroups(vo) {
@@ -72,7 +90,6 @@ function loadGroups(vo) {
         loadImage.hide();
     });
 }
-
 
 
 
@@ -139,6 +156,52 @@ function getGroupById(groups, id) {
     return null;
 }
 
+function createGroup(form, group) {
+    event.preventDefault();
+    var name = form.find("#name");
+    var description = form.find("#description");
+    var newGroup = {name: name.val(), description: description.val()};
+    callPerunPost("groupsManager", "createGroup", {parentGroup: group.id, group: newGroup}, function(createdGroup) {
+        innerTabs.place.find("#" + group.id + " .modal").modal('hide');
+        (flowMessager.newMessage(createdGroup.name, "subgroup was created succesfuly", "success")).draw();
+        loadGroups(vo);
+        showGroup(createdGroup);
+    });
+}
+
+function addMembers(form, group) {
+    var membersValues = form.find("#members").val();
+    var membersIds = [];
+    for(var j in membersValues) {
+        membersIds.push(membersValues[j].split("-")[0]);
+    }
+    for(var j in membersIds) {
+        callPerunPost("groupsManager", "addMember", {group: group.id, member: membersIds[j]}, function() {
+            innerTabs.getTabByName(group.id).place.find("#" + group.id + " .modal").modal('hide');
+            (flowMessager.newMessage("Member", "with id " + membersIds[j] + 
+                    "was added sucesfuly into " + group.shortName + " group" , "success")).draw();
+            showGroup(group);
+        });
+    }
+}
+
+function addManagers(form, group) {
+    var membersValues = form.find("#members").val();
+    var usersIds = [];
+    for(var j in membersValues) {
+        usersIds.push(membersValues[j].split("-")[1]);
+    }
+    for(var id in usersIds) {
+        callPerunPost("groupsManager", "addMember", {group: group.id, member: usersIds[id]}, function() {
+            innerTabs.getTabByName(group.id).place.find("#" + group.id + " .modal").modal('hide');
+            (flowMessager.newMessage("User", "with id " + usersIds[id] + 
+                    "was added sucesfuly into " + group.shortName + " group" , "success")).draw();
+            showGroup(group);
+        });
+    }
+}
+
+
 function getCreateGroupModalHtml(where) {
     var html;
     html = '<div id="createGroupIn' + where + '" class="modal fade">';
@@ -146,7 +209,7 @@ function getCreateGroupModalHtml(where) {
     html += '    <div class="modal-content">';
     html += '      <div class="modal-body">';
     html += '        <p>';
-    html += '          <form role="form">';
+    html += '          <form role="form" id="createGroup' + where + 'Form">';
     html += '            <div class="form-group">';
     html += '              <label for="name">Group name</label>';
     html += '              <input type="text" class="form-control" id="name" placeholder="Group name" autofocus>';
@@ -155,7 +218,7 @@ function getCreateGroupModalHtml(where) {
     html += '              <label for="description">Description</label>';
     html += '              <input type="text" class="form-control" id="description" placeholder="Description">';
     html += '            </div>'; 
-    html += '            <button type="submit" id="createGroup" type="button" class="btn btn-success">Create Group</button>';    
+    html += '            <button type="submit" type="button" class="btn btn-success">Create Group</button>';    
     html += '          </form>';
     html += '        </p>';
     html += '      </div>';
@@ -165,6 +228,47 @@ function getCreateGroupModalHtml(where) {
     return html;
 }
 
+function getSelectMembersModalHtml(name, groupId) {
+    var html;
+    html = '<div id="' + name + groupId + '" class="modal fade">';
+    html += '  <div class="modal-dialog">';
+    html += '    <div class="modal-content">';
+    html += '      <div class="modal-body">';
+    html += '        <p>';
+    html += '          <form role="form">';
+    html += '            <div class="form-group">';
+    html += '              <label for="members">Select users</label>';
+    html += '              <select id="members" multiple class="form-control">';
+    // loaded by fillSelectMembersModal method
+    html += '              </select>';
+    html += '            </div>';
+    html += '            <button type="submit" type="button" class="btn btn-success">Add Group Admins</button>';    
+    html += '          </form>';
+    html += '        </p>';
+    html += '      </div>';
+    html += '    </div><!-- /.modal-content -->';
+    html += '  </div><!-- /.modal-dialog -->';
+    html += '</div><!-- /.modal -->';
+    return html;
+}
+
+function fillSelectMembersModal(modal) {
+   callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function(members) {
+        if (!members) {
+            (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
+            return;
+        }
+        
+        //debug(members[0].user);
+        for(var id in members) {
+            var option;
+            option  = '<option value="' + members[id].id + '-' + members[id].user.id + '">';
+            option += members[id].user.lastName + " " + members[id].user.firstName;
+            option += '</option>';
+            modal.find("select#members").append(option);
+        }
+    });
+}
 
 
 

@@ -8,15 +8,30 @@
 
 function loadMembers(group) {
     var loadImage = new LoadImage($('.membersTable'), "64px");
-    callPerun("membersManager", "getCompleteRichMembers", {group: group.id, lookingInParentGroup: 0}, function(members) {
+    callPerun("membersManager", "getCompleteRichMembers", {group: group.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"], lookingInParentGroup: 0}, 
+        function(members) {
         if (!members) {
-            (flowMessager.newMessage("Subgroups", "can't be loaded.", "danger")).draw();
+            (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
             return;
         }
         fillMembers(members, group);
         loadImage.hide();
     });
 }
+
+/*var users;
+function loadAllUsers(vo) {
+    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function(members) {
+        if (!members) {
+            (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
+            return;
+        }
+        users = [];
+        for(var id in members) {
+            users.push(members[id].user);
+        }
+    });
+}*/
 
 function fillMembers(members, group) {
     if (!members) {
@@ -43,11 +58,4 @@ function fillMembers(members, group) {
     membersTable.addColumn({type: "text", title: "Last", name: "lastName"});
     membersTable.setValues(users);
     table.html(membersTable.draw());
-    
-    table.find('[data-toggle="tooltip"]').tooltip();
-    
-    table.find("table tr").click(function () {
-        var group = getGroupById(subgroups, $(this).attr("id").split("-")[1]);
-        showGroup(group);
-    });
 }

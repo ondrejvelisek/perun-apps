@@ -79,6 +79,10 @@ h6 {
 #content .btn-toolbar {
   margin-bottom: 8px;
 }
+#content .modal[id^=addMembers] select#members,
+#content .modal[id^=addManagers] select#members {
+  height: 300px;
+}
 #content #innerTabs .nav li a {
   padding: 8px 12px;
   border: 1px solid #ddd;

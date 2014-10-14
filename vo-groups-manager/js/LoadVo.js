@@ -13,7 +13,7 @@ $(document).ready(function() {
 });
 
 var vo;
-function loadVo() { //called only once
+function loadVo() {
     callPerun("vosManager", "getVoByShortName", {shortName: voConfiguration.SHORT_NAME }, function(voResult) {
         if (!voResult) {
             (flowMessager.newMessage("VO","can't be loaded.","danger")).draw();
@@ -21,6 +21,7 @@ function loadVo() { //called only once
         }
         vo = voResult;
         showVo(voResult);
+        //loadAllUsers(voResult);
     });
 }
 
