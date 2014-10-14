@@ -50,8 +50,8 @@ function addGroupTab(group) {
     innerTabs.addTab(groupTab);
     
     groupTab.addContent(getCreateGroupModalHtml(group.id));
-    groupTab.addContent(getSelectMembersModalHtml("addMembers", group.id));
-    groupTab.addContent(getSelectMembersModalHtml("addManagers", group.id));
+    groupTab.addContent(getSelectMembersModalHtml("addMembers", group.id, "add Users to Group"));
+    groupTab.addContent(getSelectMembersModalHtml("addManagers", group.id, "add Group Managers"));
     
     var createGroupForm = groupTab.place.find("[id^=createGroupIn] form");
     createGroupForm.submit(function(event) {
@@ -171,15 +171,18 @@ function createGroup(form, group) {
 
 function addMembers(form, group) {
     var membersValues = form.find("#members").val();
-    var membersIds = [];
+    var members = [];
     for(var j in membersValues) {
-        membersIds.push(membersValues[j].split("-")[0]);
+        members[j] = {};
+        members[j].id = membersValues[j].split("-")[0];
+        members[j].userId = membersValues[j].split("-")[1];
+        members[j].name = membersValues[j].split("-")[2];
     }
-    for(var j in membersIds) {
-        callPerunPost("groupsManager", "addMember", {group: group.id, member: membersIds[j]}, function() {
+    debug(members);
+    for(var j in members) {
+        callPerunPost("groupsManager", "addMember", {group: group.id, member: members[j].id}, function() {
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-            (flowMessager.newMessage("Member", "with id " + membersIds[j] + 
-                    " was added sucesfuly into " + group.shortName + " group" , "success")).draw();
+            (flowMessager.newMessage(members[j].name, "was added sucesfuly into " + group.shortName + " group" , "success")).draw();
             showGroup(group);
         });
     }
@@ -187,16 +190,18 @@ function addMembers(form, group) {
 
 function addManagers(form, group) {
     var membersValues = form.find("#members").val();
-    var usersIds = [];
+    var members = [];
     for(var j in membersValues) {
-        usersIds.push(membersValues[j].split("-")[1]);
+        members[j] = {};
+        members[j].id = membersValues[j].split("-")[0];
+        members[j].userId = membersValues[j].split("-")[1];
+        members[j].name = membersValues[j].split("-")[2];
     }
-    debug(usersIds);
-    for(var id in usersIds) {
-        callPerunPost("groupsManager", "addAdmin", {group: group.id, user: usersIds[id]}, function() {
+    debug(members);
+    for(var id in members) {
+        callPerunPost("groupsManager", "addAdmin", {group: group.id, user: members[id].userId}, function() {
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-            (flowMessager.newMessage("User", "with id " + usersIds[id] + 
-                    " is manager in " + group.shortName + " group now." , "success")).draw();
+            (flowMessager.newMessage(members[id].name, "is manager in " + group.shortName + " group now." , "success")).draw();
             showGroup(group);
         });
     }
@@ -229,7 +234,7 @@ function getCreateGroupModalHtml(where) {
     return html;
 }
 
-function getSelectMembersModalHtml(name, groupId) {
+function getSelectMembersModalHtml(name, groupId, btnTitle) {
     var html;
     html = '<div id="' + name + groupId + '" class="modal fade">';
     html += '  <div class="modal-dialog">';
@@ -243,7 +248,7 @@ function getSelectMembersModalHtml(name, groupId) {
     // loaded by fillSelectMembersModal method
     html += '              </select>';
     html += '            </div>';
-    html += '            <button type="submit" type="button" class="btn btn-success">Add Group Admins</button>';    
+    html += '            <button type="submit" type="button" class="btn btn-success">' + btnTitle + '</button>';    
     html += '          </form>';
     html += '        </p>';
     html += '      </div>';
@@ -263,7 +268,9 @@ function fillSelectMembersModal(modal) {
         //debug(members[0].user);
         for(var id in members) {
             var option;
-            option  = '<option value="' + members[id].id + '-' + members[id].user.id + '">';
+            option  = '<option value="' + members[id].id + '-' + 
+                    members[id].user.id + '-' + 
+                    members[id].user.firstName + ' ' + members[id].user.lastName + '">';
             option += members[id].user.lastName + " " + members[id].user.firstName;
             option += '</option>';
             modal.find("select#members").append(option);
