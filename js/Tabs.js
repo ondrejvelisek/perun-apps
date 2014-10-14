@@ -88,7 +88,8 @@ function Tab(title, name, content) {
     
     this.addContent = function (contentToAdd) {
         this.content += contentToAdd;
-        this.render();
+        this.place.append(contentToAdd);
+        //this.render();
     };
     
     this.render = function () {

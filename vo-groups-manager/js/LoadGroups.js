@@ -179,7 +179,7 @@ function addMembers(form, group) {
         callPerunPost("groupsManager", "addMember", {group: group.id, member: membersIds[j]}, function() {
             innerTabs.getTabByName(group.id).place.find("#" + group.id + " .modal").modal('hide');
             (flowMessager.newMessage("Member", "with id " + membersIds[j] + 
-                    "was added sucesfuly into " + group.shortName + " group" , "success")).draw();
+                    " was added sucesfuly into " + group.shortName + " group" , "success")).draw();
             showGroup(group);
         });
     }
@@ -191,11 +191,12 @@ function addManagers(form, group) {
     for(var j in membersValues) {
         usersIds.push(membersValues[j].split("-")[1]);
     }
+    debug(usersIds);
     for(var id in usersIds) {
-        callPerunPost("groupsManager", "addMember", {group: group.id, member: usersIds[id]}, function() {
+        callPerunPost("groupsManager", "addAdmin", {group: group.id, user: usersIds[id]}, function() {
             innerTabs.getTabByName(group.id).place.find("#" + group.id + " .modal").modal('hide');
             (flowMessager.newMessage("User", "with id " + usersIds[id] + 
-                    "was added sucesfuly into " + group.shortName + " group" , "success")).draw();
+                    " is manager in " + group.shortName + " group now." , "success")).draw();
             showGroup(group);
         });
     }
