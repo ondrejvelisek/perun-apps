@@ -112,5 +112,6 @@ function callBackLoadAllMembersList() {
             callMeList[i].args[2], 
             callMeList[i].args[3], 
             callMeList[i].args[4]);
+        callMeList.splice(i, 1);
     }
 }

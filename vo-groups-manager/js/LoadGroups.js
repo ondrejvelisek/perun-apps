@@ -339,7 +339,7 @@ function fillModalAddManagers(modal, vo, group) {
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
 
     if (!allMembers) {
-        callMeAfterLoadAllMembers(fillModalAddUsers, [modal, vo, group]);
+        callMeAfterLoadAllMembers(fillModalAddManagers, [modal, vo, group]);
         return;
     }
     loadImage.hide();
