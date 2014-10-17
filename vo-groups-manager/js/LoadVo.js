@@ -31,40 +31,47 @@ function showVo(vo) {
     }
     if (!innerTabs.containsTab("vo")) {
         addVoTab(vo);
+        $("#groupsManagerLink").click(function() { 
+            showVo(vo);
+        });
     }
     innerTabs.show("vo");
     
-    $("#groupsManagerLink").click(function() { 
-        showVo(vo);
-    });
     fillVoInfo(vo);
     loadGroups(vo);
 }
     
 function addVoTab(vo) {
+    var voTab = new Tab(vo.shortName, "vo");
+    innerTabs.addTab(voTab);
+    
     var content;
     content  = '<div class="page-header"><h2>' + vo.name + '</h2></div>';
     content += '<div class="btn-toolbar">';
-        content += '<div class="btn-group">';
-            content += '<button class="btn btn-success" data-toggle="modal" data-target="#createGroupInVo">Create Group</button>';
-        content += '</div>';
+    content += '  <div class="btn-group">';
+    content += '    <button class="btn btn-success" data-toggle="modal" data-target="#createGroupInVo">Create Group</button>';
+    content += '  </div>';
+    content += '  <div class="btn-group">';
+    content += '    <button class="btn btn-success" data-toggle="modal" data-target="#inviteUser" disabled>Invite User</button>';
+    content += '  </div>';
     content += '</div>';
     content += '<div id="groupsTable"></div>';
-    content += getCreateGroupModalHtml("Vo");
-    innerTabs.addTab(new Tab(vo.shortName, "vo", content));
+    voTab.addContent(content);
     
-    var form = innerTabs.place.find("#vo form");
-    form.submit(function(event) {
-        event.preventDefault();
-        var name = form.find("#name");
-        var description = form.find("#description");
-        var group = {name:name.val(),description:description.val()};
-        callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: group}, function(createdGroup) {
-            innerTabs.place.find("#vo .modal").modal('hide');
-            (flowMessager.newMessage(createdGroup.name,"group was created succesfuly","success")).draw();
-            loadGroups(vo);
-            showGroup(createdGroup);
-        });
+    var createGroupModal = new Modal("Create group in " + vo.shortName, "createGroupInVo", voTab.place);
+    createGroupModal.init();
+    fillModalCreateGroup(createGroupModal, vo);
+}
+
+function createGroupInVo(form, vo) {
+    var name = form.find("#name");
+    var description = form.find("#description");
+    var newGroup = {name: name.val(), description: description.val()};
+    callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: newGroup}, function(createdGroup) {
+        innerTabs.place.find("#vo .modal").modal('hide');
+        (flowMessager.newMessage(createdGroup.name, "group was created succesfuly", "success")).draw();
+        loadGroups(vo);
+        showGroup(createdGroup);
     });
 }
 

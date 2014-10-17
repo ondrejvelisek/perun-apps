@@ -68,10 +68,10 @@ function Tabs(place) {
     };
 }
 
-function Tab(title, name, content) {
+function Tab(title, name) {
     this.title = title;
     this.name = name;
-    this.content = content;
+    this.content = "";
     this.place;
     
     this.setPlace = function(place) {

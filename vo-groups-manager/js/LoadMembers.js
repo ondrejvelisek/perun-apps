@@ -7,7 +7,7 @@
 
 
 function loadMembers(group) {
-    var loadImage = new LoadImage($('.membersTable'), "64px");
+    var loadImage = new LoadImage($("#" + group.id + " .membersTable"), "64px");
     callPerun("membersManager", "getCompleteRichMembers", {group: group.id, 
         attrsNames: ["urn:perun:user:attribute-def:core:displayName","urn:perun:user:attribute-def:def:preferredMail"], 
         lookingInParentGroup: 0}, 

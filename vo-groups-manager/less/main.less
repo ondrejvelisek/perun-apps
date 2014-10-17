@@ -51,7 +51,9 @@ h1, h2, h3, h4, h5, h6 {
 
 #content {
     h1, h2, h3, h4, h5, h6 {
-        margin-top: 20px;
+        :not(.modal) {
+            margin-top: 20px;
+        }
     }    
     .page-header {
         border-bottom-color: #ddd;
@@ -78,7 +80,9 @@ h1, h2, h3, h4, h5, h6 {
         margin-bottom: 8px;
     }
     .modal[id^=addMembers], 
-    .modal[id^=addManagers] {
+    .modal[id^=addManagers], 
+    .modal[id^=removeMembers], 
+    .modal[id^=removeManagers]{
         select#members {
             height: 300px;
         }
