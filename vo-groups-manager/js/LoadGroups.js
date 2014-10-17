@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var allVoGroups;
 
 function showGroup(group) {
     if (!group) {
@@ -51,6 +50,9 @@ function addGroupTab(group) {
     content += '  <div class="btn-group">';
     content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#removeManagers' + group.id + '">Remove Group Managers</button>';
     content += '  </div>';
+    content += '  <div class="btn-group pull-right">';
+    content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteGroup' + group.id + '">Delete group</button>';
+    content += '  </div>';
     content += '</div>';
     content += '<div class="membersTable"></div>';
     content += '<div class="subgroupsTable"></div>';
@@ -75,8 +77,14 @@ function addGroupTab(group) {
     var removeManagersModal = new Modal("Remove managers for group " + group.shortName, "removeManagers" + group.id, groupTab.place);
     removeManagersModal.init();
     fillModalRemoveManagers(removeManagersModal, group);
+    
+    var deleteGroupModal = new Modal("Delete group " + group.shortName, "deleteGroup" + group.id, groupTab.place);
+    deleteGroupModal.setType("danger");
+    deleteGroupModal.init();
+    fillModalDeleteGroup(deleteGroupModal, group);
 }
 
+var allVoGroups;
 function loadGroups(vo) {
     if (!vo) {
         (flowMessager.newMessage("Groups", "can't be loaded because vo is not set.", "danger")).draw();
@@ -241,6 +249,19 @@ function removeManagers(form, group) {
     }
 }
 
+function deleteGroup(group) {
+    debug(group);
+    callPerunPost("groupsManager", "deleteGroup", {group: group.id}, function() {
+        innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+        (flowMessager.newMessage(group.name , "was deleted successfully" , "success")).draw();
+        if (group.parentGroupId) {
+            showGroup(getGroupById(group.parentGroupId));
+        } else {
+            showVo();
+        }        
+    });
+}
+
 
 function fillModalCreateGroup(modal, vo, group) {
     var html;
@@ -272,91 +293,89 @@ function fillModalCreateGroup(modal, vo, group) {
 
 function fillModalAddUsers(modal, vo, group) {
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
-    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function(members) {
-        if (!members) {
-            (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
-            return;
-        }
-        loadImage.hide();
-        if (members.length === 0) {
-            (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
-            return;
-        }
-        
-        var html;
-        html  = '        <p>';
-        html += '          <form role="form">';
-        html += '            <div class="form-group">';
-        html += '              <label for="members">Select users</label>';
-        html += '              <select id="members" multiple class="form-control">';
-        html += '              </select>';
-        html += '            </div>';
-        html += '            <button type="submit" class="btn btn-primary">Add Members</button>';
-        html += '          </form>';
-        html += '        </p>';
-        modal.addBody(html);
-        
-        var select = modal.self.find("select#members");
-        for(var id in members) {
-            var option;
-            option  = '<option value="' + members[id].id + '-' + 
-                    members[id].user.id + '-' + 
-                    members[id].user.firstName + ' ' + members[id].user.lastName + '">';
-            option += members[id].user.lastName + " " + members[id].user.firstName;
-            option += '</option>';
-            select.append(option);
-        }
-        
-        var addMembersForm = modal.self.find("form");
-        addMembersForm.submit(function(event) {
-            event.preventDefault();
-            addMembers(addMembersForm, group);
-        });
+    if (!allMembers) {
+        //(flowMessager.newMessage("Members", "can't be loaded.", "warning")).draw();
+        callMeAfterLoadAllMembers(fillModalAddUsers, [modal, vo, group]);
+        return;
+    }
+    loadImage.hide();
+    if (allMembers.length === 0) {
+        (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
+        return;
+    }
+
+    var html;
+    html  = '        <p>';
+    html += '          <form role="form">';
+    html += '            <div class="form-group">';
+    html += '              <label for="members">Select users</label>';
+    html += '              <select id="members" multiple class="form-control">';
+    html += '              </select>';
+    html += '            </div>';
+    html += '            <button type="submit" class="btn btn-primary">Add Members</button>';
+    html += '          </form>';
+    html += '        </p>';
+    modal.addBody(html);
+
+    var select = modal.self.find("select#members");
+    for(var id in allMembers) {
+        var option;
+        option  = '<option value="' + allMembers[id].id + '-' + 
+                allMembers[id].user.id + '-' + 
+                allMembers[id].user.firstName + ' ' + allMembers[id].user.lastName + '">';
+        option += allMembers[id].user.lastName + " " + allMembers[id].user.firstName;
+        option += '</option>';
+        select.append(option);
+    }
+
+    var addMembersForm = modal.self.find("form");
+    addMembersForm.submit(function(event) {
+        event.preventDefault();
+        addMembers(addMembersForm, group);
     });
 }
 
 function fillModalAddManagers(modal, vo, group) {
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
-    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function(members) {
-        if (!members) {
-            (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
-            return;
-        }
-        loadImage.hide();
-        if (members.length === 0) {
-            (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
-            return;
-        }
-        
-        var html;
-        html  = '        <p>';
-        html += '          <form role="form">';
-        html += '            <div class="form-group">';
-        html += '              <label for="members">Select users</label>';
-        html += '              <select id="members" multiple class="form-control">';
-        html += '              </select>';
-        html += '            </div>';  
-        html += '            <button type="submit" class="btn btn-primary">Add Managers</button>';
-        html += '          </form>';
-        html += '        </p>';
-        modal.addBody(html);
-        
-        var select = modal.self.find("select#members");
-        for(var id in members) {
-            var option;
-            option  = '<option value="' + members[id].id + '-' + 
-                    members[id].user.id + '-' + 
-                    members[id].user.firstName + ' ' + members[id].user.lastName + '">';
-            option += members[id].user.lastName + " " + members[id].user.firstName;
-            option += '</option>';
-            select.append(option);
-        }
-        
-        var addManagersForm = modal.self.find("form");
-        addManagersForm.submit(function(event) {
-            event.preventDefault();
-            addManagers(addManagersForm, group);
-        });
+
+    if (!allMembers) {
+        callMeAfterLoadAllMembers(fillModalAddUsers, [modal, vo, group]);
+        return;
+    }
+    loadImage.hide();
+    if (allMembers.length === 0) {
+        (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
+        return;
+    }
+
+    var html;
+    html  = '        <p>';
+    html += '          <form role="form">';
+    html += '            <div class="form-group">';
+    html += '              <label for="members">Select users</label>';
+    html += '              <select id="members" multiple class="form-control">';
+    html += '              </select>';
+    html += '            </div>';  
+    html += '            <button type="submit" class="btn btn-primary">Add Managers</button>';
+    html += '          </form>';
+    html += '        </p>';
+    modal.addBody(html);
+
+    var select = modal.self.find("select#members");
+    for(var id in allMembers) {
+        var option;
+        option  = '<option value="' + allMembers[id].id + '-' + 
+                allMembers[id].user.id + '-' + 
+                allMembers[id].user.firstName + ' ' + allMembers[id].user.lastName + '">';
+        option += allMembers[id].user.lastName + " " + allMembers[id].user.firstName;
+        option += '</option>';
+        select.append(option);
+    }
+
+    var addManagersForm = modal.self.find("form");
+    addManagersForm.submit(function(event) {
+        event.preventDefault();
+        addManagers(addManagersForm, group);
     });
 }
 
@@ -443,5 +462,25 @@ function fillModalRemoveManagers(modal, group) {
             event.preventDefault();
             removeManagers(removeManagersForm, group);
         });
+    });
+}
+
+function fillModalDeleteGroup(modal, group) {
+    var html;
+    html  = "<p>";
+    html += "Do you really want delete whole group?";
+    html += "</p>";
+    html += '<div class="btn-toolbar">';
+    html += '  <div class="btn-group pull-right">';
+    html += '    <button id="deleteGroup" class="btn btn-danger">Delete Group</button>';
+    html += '  </div>';
+    html += '  <div class="btn-group pull-right">';
+    html += '    <button class="btn btn-default" data-dismiss="modal">Close</button>';
+    html += '  </div>';
+    html += '</div>';
+    modal.addBody(html);
+    
+    modal.self.find("button#deleteGroup").click(function() {
+        deleteGroup(group);
     });
 }

@@ -20,25 +20,27 @@ function loadVo() {
             return;
         }
         vo = voResult;
-        showVo(voResult);
-        //loadAllUsers(voResult);
+        showVo();
     });
 }
 
-function showVo(vo) {
+//require loaded global vo variable
+function showVo() {
     if (!vo) {
+        (flowMessager.newMessage("Can not show VO", "because vo has not loaded" , "error")).draw();
         return;
     }
     if (!innerTabs.containsTab("vo")) {
         addVoTab(vo);
         $("#groupsManagerLink").click(function() { 
-            showVo(vo);
+            showVo();
         });
     }
     innerTabs.show("vo");
     
     fillVoInfo(vo);
     loadGroups(vo);
+    loadAllMembers(vo);
 }
     
 function addVoTab(vo) {
@@ -82,4 +84,33 @@ function fillVoInfo(vo) {
     }
     $("#vo-name").text(vo.name);
     //$('#groupsManagerLink > span').text(vo.shortName);
+}
+
+var allMembers;
+function loadAllMembers(vo) {
+    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function(members) {
+        if (!members) {
+            return;
+        }
+        allMembers = members;
+        callBackLoadAllMembersList();
+    });
+}
+
+var callMeList = [];
+function callMeAfterLoadAllMembers(method, args) {
+    var methodWithArgs = {method: method, args: args};
+    callMeList.push(methodWithArgs);
+}
+function callBackLoadAllMembersList() {
+    for (var i in callMeList) {
+        if (callMeList[i].args > 5) {
+            debug("fatal error: cant call back method with more than 5 attrs");
+        }
+        callMeList[i].method(callMeList[i].args[0], 
+            callMeList[i].args[1], 
+            callMeList[i].args[2], 
+            callMeList[i].args[3], 
+            callMeList[i].args[4]);
+    }
 }

@@ -11,6 +11,11 @@ function Modal(title, name, place) {
     this.title = title;
     this.body = "";
     this.footer = "";
+    this.type = "default";
+    
+    this.setType = function (type) {
+        this.type = type;
+    }
     
     this.addBody = function (body) {
         this.body += body;
@@ -36,7 +41,7 @@ function Modal(title, name, place) {
     this.init = function () {
         var html;
         html = '<div id="' + this.name + '" class="modal">';
-        html += '  <div class="modal-dialog">';
+        html += '  <div class="modal-dialog modal-' + this.type + '">';
         html += '    <div class="modal-content">';
         if (this.title && this.title.length > 0) {
             html += '    <div class="modal-header">';

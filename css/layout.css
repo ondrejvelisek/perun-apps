@@ -113,3 +113,11 @@ dl dd .btn {
   display: block;
   margin: 0px auto;
 }
+.modal .modal-danger .modal-content {
+  background-color: #f2dede;
+  color: #a94442;
+  border-color: #ebccd1;
+}
+.modal .modal-danger .modal-content .modal-header {
+  border-bottom-color: #ebccd1;
+}
