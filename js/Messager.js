@@ -31,8 +31,7 @@ function Message(title, text, type, place, timeout) {
     
     this.draw = function() {
         this.place.append(
-                '<div class="alert alert-' + this.type + ' alert-dismissible" role="alert" id="message' + this.id + '" >' +
-                '<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>' +
+                '<div class="alert alert-' + this.type + ' alert-dismissible fade in" data-dismiss="alert" role="alert" id="message' + this.id + '" >' +
                 '<strong>' + this.title + '</strong> ' + this.text + ' &nbsp; ' +
                 '</div>'
                 );
@@ -40,9 +39,13 @@ function Message(title, text, type, place, timeout) {
         this.place.find("#message" + this.id).hide();
         this.place.find("#message" + this.id).show(200);
         
+        this.place.find("#message" + this.id).on('close.bs.alert', function () {
+            $(this).hide(200);
+        });
+        
         if (this.timeout) {
             setTimeout(function() {
-                this.place.find("#message" + this.id).hide(200);
+                this.place.find("#message" + this.id).alert('close');
             }.bind(this), this.timeout);
         }
 

@@ -37,22 +37,16 @@ function addGroupTab(group) {
     content  = '<div class="page-header"><h2>' + group.name + '</h2></div>';
     content += '<div class="btn-toolbar">';
     content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#createGroup' + group.id + '">Create Subgroup</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addMembers' + group.id + '">Add Members</button>';
+    content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#removeMembers' + group.id + '">Remove Members</button>';
     content += '  </div>';
     content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addMembers' + group.id + '">Add Users</button>';
-    content += '  </div>';
-    content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addManagers' + group.id + '">Add Group Managers</button>';
-    content += '  </div>';
-    content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#removeMembers' + group.id + '">Remove Users</button>';
-    content += '  </div>';
-    content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#removeManagers' + group.id + '">Remove Group Managers</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addManagers' + group.id + '">Add Managers</button>';
+    content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#removeManagers' + group.id + '">Remove Managers</button>';
     content += '  </div>';
     content += '  <div class="btn-group pull-right">';
-    content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteGroup' + group.id + '">Delete group</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#createGroup' + group.id + '">Create Subgroup</button>';
+    content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteGroup' + group.id + '">Delete Group</button>';
     content += '  </div>';
     content += '</div>';
     content += '<div class="membersTable"></div>';
@@ -69,23 +63,23 @@ function addGroupTab(group) {
     groupAuthz.addObject(groupTab.place.find('.membersTable'), ["PERUNADMIN", "VOOBSERVER", "VOADMIN", "GROUPADMIN", "TOPGROUPCREATOR"]);
     groupAuthz.check();
     
-    var createGroupModal = new Modal("Create group in " + group.shortName, "createGroup" + group.id, groupTab.place);
+    var createGroupModal = new Modal("Create Subgroup in " + group.shortName, "createGroup" + group.id, groupTab.place);
     createGroupModal.init();
     fillModalCreateGroup(createGroupModal, vo, group);
     
-    var addMembersModal = new Modal("Add users to group " + group.shortName, "addMembers" + group.id, groupTab.place);
+    var addMembersModal = new Modal("Add Members to group " + group.shortName, "addMembers" + group.id, groupTab.place);
     addMembersModal.init();
     fillModalAddUsers(addMembersModal, vo, group);
     
-    var addManagersModal = new Modal("Add managers for group " + group.shortName, "addManagers" + group.id, groupTab.place);
+    var addManagersModal = new Modal("Add Managers for group " + group.shortName, "addManagers" + group.id, groupTab.place);
     addManagersModal.init();
     fillModalAddManagers(addManagersModal, vo, group);
     
-    var removeMembersModal = new Modal("Remove users from group " + group.shortName, "removeMembers" + group.id, groupTab.place);
+    var removeMembersModal = new Modal("Remove Members from group " + group.shortName, "removeMembers" + group.id, groupTab.place);
     removeMembersModal.init();
     fillModalRemoveUsers(removeMembersModal, group);
     
-    var removeManagersModal = new Modal("Remove managers for group " + group.shortName, "removeManagers" + group.id, groupTab.place);
+    var removeManagersModal = new Modal("Remove Managers for group " + group.shortName, "removeManagers" + group.id, groupTab.place);
     removeManagersModal.init();
     fillModalRemoveManagers(removeManagersModal, group);
     
@@ -414,7 +408,7 @@ function fillModalRemoveUsers(modal, group) {
         html += '              <select id="members" multiple class="form-control">';
         html += '              </select>';
         html += '            </div>';  
-        html += '            <button type="submit" class="btn btn-primary">Remove Members</button>';
+        html += '            <button type="submit" class="btn btn-danger">Remove Members</button>';
         html += '          </form>';
         modal.addBody(html);
         for(var id in members) {
@@ -457,7 +451,7 @@ function fillModalRemoveManagers(modal, group) {
         html += '              <select id="members" multiple class="form-control">';
         html += '              </select>';
         html += '            </div>'; 
-        html += '            <button type="submit" class="btn btn-primary">Remove Managers</button>';
+        html += '            <button type="submit" class="btn btn-danger">Remove Managers</button>';
         html += '          </form>';
         modal.addBody(html);
         for(var id in managers) {
@@ -483,7 +477,7 @@ function fillModalDeleteGroup(modal, group) {
     
     var html;
     html  = "<p>";
-    html += "Do you really want delete whole group?";
+    html += "Do you really want to delete whole group?";
     html += "</p>";
     html += '<div class="btn-toolbar">';
     html += '  <div class="btn-group pull-right">';
