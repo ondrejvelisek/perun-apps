@@ -10,7 +10,7 @@ function showGroup(group) {
         return;
     }
     
-    if (!innerTabs.containsTab(group.id)) {
+    //if (!innerTabs.containsTab(group.id)) {
         if (innerTabs.containsTab(group.parentGroupId)) {
             innerTabs.removeSuccessors(group.parentGroupId);
         } else {
@@ -21,10 +21,10 @@ function showGroup(group) {
             }
         }
         addGroupTab(group);
-    }
+    //}
     innerTabs.show(group.id);
     $('#group-name').text(group.name);
-    $('#groupLink > span').text(group.shortName);
+    //$('#groupLink > span').text(group.shortName);
     loadMembers(group);
 }
 
@@ -264,6 +264,8 @@ function deleteGroup(group) {
 
 
 function fillModalCreateGroup(modal, vo, group) {
+    modal.clear();
+    
     var html;
     html  = '        <p>';
     html += '          <form role="form">';
@@ -292,6 +294,8 @@ function fillModalCreateGroup(modal, vo, group) {
 }
 
 function fillModalAddUsers(modal, vo, group) {
+    modal.clear();
+    
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
     if (!allMembers) {
         //(flowMessager.newMessage("Members", "can't be loaded.", "warning")).draw();
@@ -299,22 +303,23 @@ function fillModalAddUsers(modal, vo, group) {
         return;
     }
     loadImage.hide();
+    
     if (allMembers.length === 0) {
         (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
         return;
     }
 
     var html;
-    html  = '        <p>';
-    html += '          <form role="form">';
-    html += '            <div class="form-group">';
-    html += '              <label for="members">Select users</label>';
-    html += '              <select id="members" multiple class="form-control">';
-    html += '              </select>';
-    html += '            </div>';
-    html += '            <button type="submit" class="btn btn-primary">Add Members</button>';
-    html += '          </form>';
-    html += '        </p>';
+    html  = '<p>';
+    html += '   <form role="form">';
+    html += '      <div class="form-group">';
+    html += '         <label for="members">Select users</label>';
+    html += '         <select id="members" multiple class="form-control">';
+    html += '         </select>';
+    html += '      </div>';
+    html += '      <button type="submit" class="btn btn-primary">Add Members</button>';
+    html += '   </form>';
+    html += '</p>';
     modal.addBody(html);
 
     var select = modal.self.find("select#members");
@@ -336,13 +341,15 @@ function fillModalAddUsers(modal, vo, group) {
 }
 
 function fillModalAddManagers(modal, vo, group) {
+    modal.clear();
+    
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
-
     if (!allMembers) {
         callMeAfterLoadAllMembers(fillModalAddManagers, [modal, vo, group]);
         return;
     }
     loadImage.hide();
+    
     if (allMembers.length === 0) {
         (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
         return;
@@ -380,6 +387,8 @@ function fillModalAddManagers(modal, vo, group) {
 }
 
 function fillModalRemoveUsers(modal, group) {
+    modal.clear();
+    
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
     callPerun("groupsManager", "getGroupRichMembers", {group: group.id}, function(members) {
         if (!members) {
@@ -387,6 +396,7 @@ function fillModalRemoveUsers(modal, group) {
             return;
         }
         loadImage.hide();
+        
         if (members.length === 0) {
             (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
             return;
@@ -423,6 +433,8 @@ function fillModalRemoveUsers(modal, group) {
 }
 
 function fillModalRemoveManagers(modal, group) {
+    modal.clear();
+    
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
     callPerun("groupsManager", "getAdmins", {group: group.id}, function(managers) {
         if (!managers) {
@@ -466,6 +478,8 @@ function fillModalRemoveManagers(modal, group) {
 }
 
 function fillModalDeleteGroup(modal, group) {
+    modal.clear();
+    
     var html;
     html  = "<p>";
     html += "Do you really want delete whole group?";

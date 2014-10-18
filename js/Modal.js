@@ -37,6 +37,11 @@ function Modal(title, name, place) {
         return this.self;
     };
     
+    this.clear = function() {
+        this.body = "";
+        this.footer = "";
+        this.self.find(".modal-body, .modal-footer").html("");
+    };
     
     this.init = function () {
         var html;
@@ -61,6 +66,7 @@ function Modal(title, name, place) {
         html += '    </div><!-- /.modal-content -->';
         html += '  </div><!-- /.modal-dialog -->';
         html += '</div><!-- /.modal -->';
+        this.place.find(".modal#" + this.name).remove();
         this.place.append(html);
         this.self = this.place.find(".modal#" + this.name);
     };
