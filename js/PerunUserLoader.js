@@ -1,10 +1,10 @@
 // Empty initial perunSession object
 var user;
+var roles;
 
 $(document).ready(function() {
     loadUser();
 });
-
 
 function loadUser() {
     callPerun("authzResolver", "getPerunPrincipal", {}, function(perunPrincipal) {
@@ -12,8 +12,8 @@ function loadUser() {
             (flowMessager.newMessage("User","can't be loaded.","danger")).draw();
             return;
         }
-        //console.log(perunPrincipal);
         user = perunPrincipal.user;
+        roles = perunPrincipal.roles;
         fillUserInfo(user);
         entryPoint(user);
     });
@@ -30,4 +30,10 @@ function fillUserInfo(user) {
     $("#user-middleName").text((user.middleName !== null) ? user.middleName : "");
     $("#user-lastName").text((user.lastName !== null) ? user.lastName : "");
     $("#user-titleAfter").text((user.titleAfter !== null) ? user.titleAfter : "");
+}
+
+function logout() {
+    callPerun("utils", "logout", {}, function(logout) {
+        (flowMessager.newMessage("User","was logged out successfully","success")).draw();
+    });
 }

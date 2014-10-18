@@ -14,8 +14,9 @@ function showGroup(group) {
     if (innerTabs.containsTab(group.parentGroupId)) {
         innerTabs.removeSuccessors(group.parentGroupId);
     } else {
-        if (group.parentGroupId) {
-            showGroup(getGroupById(allVoGroups, group.parentGroupId));
+        var parentGroup = getGroupById(allVoGroups, group.parentGroupId);
+        if (parentGroup) {
+            showGroup(parentGroup);
         } else {
             innerTabs.removeSuccessors("vo");
         }
@@ -55,8 +56,18 @@ function addGroupTab(group) {
     content += '  </div>';
     content += '</div>';
     content += '<div class="membersTable"></div>';
-    content += '<div class="subgroupsTable"></div>';
     groupTab.addContent(content);
+    
+    var groupAuthz = new Authorization(roles, vo, group);
+    var buttons = groupTab.place.find('.btn-toolbar');
+    groupAuthz.addObject(buttons.find('button[data-target^=#createGroup]'), ["PERUNADMIN", "VOADMIN", "GROUPADMIN"]);
+    groupAuthz.addObject(buttons.find('button[data-target^=#addMembers]'), ["PERUNADMIN", "VOADMIN", "GROUPADMIN"]);
+    groupAuthz.addObject(buttons.find('button[data-target^=#addManagers]'), ["PERUNADMIN", "VOADMIN", "GROUPADMIN"]);
+    groupAuthz.addObject(buttons.find('button[data-target^=#removeMembers]'), ["PERUNADMIN", "VOADMIN", "GROUPADMIN"]);
+    groupAuthz.addObject(buttons.find('button[data-target^=#removeManagers]'), ["PERUNADMIN", "VOADMIN", "GROUPADMIN"]);
+    groupAuthz.addObject(buttons.find('button[data-target^=#deleteGroup]'), ["PERUNADMIN", "VOADMIN", "GROUPADMIN"]);
+    groupAuthz.addObject(groupTab.place.find('.membersTable'), ["PERUNADMIN", "VOOBSERVER", "VOADMIN", "GROUPADMIN", "TOPGROUPCREATOR"]);
+    groupAuthz.check();
     
     var createGroupModal = new Modal("Create group in " + group.shortName, "createGroup" + group.id, groupTab.place);
     createGroupModal.init();

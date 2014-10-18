@@ -60,6 +60,13 @@ function addVoTab(vo) {
     content += '<div id="groupsTable"></div>';
     voTab.addContent(content);
     
+    var voAuthz = new Authorization(roles, vo, null);
+    var buttons = voTab.place.find('.btn-toolbar');
+    voAuthz.addObject(buttons.find('button[data-target^=#createGroupInVo]'), ["PERUNADMIN", "VOADMIN", "TOPGROUPCREATOR"]);
+    voAuthz.addObject(buttons.find('button[data-target^=#inviteUser]'), ["PERUNADMIN", "VOADMIN"]);
+    voAuthz.addObject(voTab.place.find('.groupsTable'), ["PERUNADMIN", "VOOBSERVER", "VOADMIN", "GROUPADMIN", "TOPGROUPCREATOR"]);
+    voAuthz.check();
+    
     var createGroupModal = new Modal("Create group in " + vo.shortName, "createGroupInVo", voTab.place);
     createGroupModal.init();
     fillModalCreateGroup(createGroupModal, vo);
