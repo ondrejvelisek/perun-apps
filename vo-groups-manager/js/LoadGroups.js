@@ -250,11 +250,12 @@ function removeManagers(form, group) {
 }
 
 function deleteGroup(group) {
-    debug(group);
     callPerunPost("groupsManager", "deleteGroup", {group: group.id}, function() {
         innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
         (flowMessager.newMessage(group.name , "was deleted successfully" , "success")).draw();
         if (group.parentGroupId) {
+            debug(group.parentGroupId);
+            debug(getGroupById(group.parentGroupId));
             showGroup(getGroupById(group.parentGroupId));
         } else {
             showVo();
