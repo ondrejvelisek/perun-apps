@@ -73,7 +73,7 @@ function getURLParameter(name) {
 
 $(document).ready(function() {
     //care of tabs address in url.
-    var hash = document.location.hash.substring(1);
+    var hash = document.location.hash.substring(1).split("#")[0];
     if (hash.length > 0) {
         $('#menu a[href=#' + hash + ']').tab('show');
     }

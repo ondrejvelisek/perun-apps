@@ -36,7 +36,13 @@ function showVo() {
             showVo();
         });
     }
-    innerTabs.show("vo");
+    var hash = document.location.hash.substring(1).split("#")[1];
+    if (hash != undefined && hash != "vo") {
+        showGroup(hash);
+    } else {
+        innerTabs.show("vo");
+    }
+    
 
     fillVoInfo(vo);
     loadGroups(vo);
@@ -84,7 +90,7 @@ function createGroupInVo(form, vo) {
         innerTabs.place.find("#vo .modal").modal('hide');
         (flowMessager.newMessage(createdGroup.name, "group was created succesfuly", "success")).draw();
         loadGroups(vo);
-        showGroup(createdGroup);
+        showGroup(createdGroup.id);
     });
 }
 
@@ -104,27 +110,30 @@ function loadAllMembers(vo) {
             return;
         }
         allMembers = members;
-        callBackLoadAllMembersList();
+        callBackAfter(loadAllMembers);
     });
 }
 
-var callMeList = [];
-function callMeAfterLoadAllMembers(method, args) {
-    var methodWithArgs = {method: method, args: args};
-    callMeList.push(methodWithArgs);
+var callMeAfterList = [];
+function callMeAfter(method, args, after) {
+    callMeAfterList.push({method: method, args: args, after: after});
 }
-function callBackLoadAllMembersList() {
-    for (var i in callMeList) {
-        if (callMeList[i].args > 5) {
-            debug("fatal error: cant call back method with more than 5 attrs");
+function callBackAfter(after) {
+    for (var i = callMeAfterList.length -1; i >= 0 ; i--) {
+        var callMeAfter = callMeAfterList[i];
+        if (callMeAfter.after == after) {
+            if (callMeAfter.args.length > 5) {
+                debug("fatal error: cant call back method with more than 5 attrs");
+            }
+            callMeAfter.method(callMeAfter.args[0],
+                    callMeAfter.args[1],
+                    callMeAfter.args[2],
+                    callMeAfter.args[3],
+                    callMeAfter.args[4]);
+            callMeAfterList.splice(callMeAfterList.indexOf(callMeAfter), 1);
+            //debug(callMeAfterList.length);
         }
-        callMeList[i].method(callMeList[i].args[0],
-                callMeList[i].args[1],
-                callMeList[i].args[2],
-                callMeList[i].args[3],
-                callMeList[i].args[4]);
     }
-    callMeList = [];
 }
 
 function fillModalInviteUser(modal, vo) {

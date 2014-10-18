@@ -13,7 +13,7 @@ function Tabs(place) {
         this.place.find("#" + tab.name).remove();
         this.tabs.push(tab);
         this.render();
-        tab.setPlace(place);
+        tab.setPlace(this.place);
     };
     
     this.removeTab = function(name) {
@@ -36,6 +36,14 @@ function Tabs(place) {
     
     this.show = function(name) {
         this.render();
+        this.place.find(".nav a").on('shown.bs.tab', function(e) {
+            if (window.location.hash.length > 0) {
+                window.location.hash = "#" + window.location.hash.split("#")[1] + e.target.hash;
+            } else {
+                window.location.hash = "#" + e.target.hash;
+            }
+            window.scrollTo(0, 0);
+        });
         place.find(".nav a[href=#"+name+"]").tab("show");
     };
     
@@ -47,7 +55,7 @@ function Tabs(place) {
                 place.find(".tab-content").append(this.tabs[id].getContentHtml());
             }
         }
-        place.find(".nav").html(html);
+        this.place.find(".nav").html(html);
     };
     
     this.containsTab = function (name) {

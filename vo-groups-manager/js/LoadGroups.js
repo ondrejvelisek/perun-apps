@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 
-function showGroup(group) {
-    if (!group) {
-        (flowMessager.newMessage("group","can not be shown","warning")).draw();
+function showGroup(groupId) {
+    if (!allVoGroups) {
+        callMeAfter(showGroup, [groupId], loadGroups);
+        //(flowMessager.newMessage("Group","can not be shown","warning")).draw();
         return;
     }
+    var group = getGroupById(allVoGroups, groupId);
     
     //if (!innerTabs.containsTab(group.id)) {
     if (innerTabs.containsTab(group.parentGroupId)) {
@@ -16,7 +18,7 @@ function showGroup(group) {
     } else {
         var parentGroup = getGroupById(allVoGroups, group.parentGroupId);
         if (parentGroup) {
-            showGroup(parentGroup);
+            showGroup(parentGroup.id);
         } else {
             innerTabs.removeSuccessors("vo");
         }
@@ -100,8 +102,8 @@ function loadGroups(vo) {
             (flowMessager.newMessage("Groups", "can't be loaded.", "danger")).draw();
             return;
         }
-        //var topLevelGroups = filterTopLevelGroups(groups);
         allVoGroups = groups;
+        callBackAfter(loadGroups);
         fillGroups(groups);
         loadImage.hide();
     });
@@ -121,7 +123,7 @@ function fillGroups(groups) {
     
     table.find("table tr").click(function () {
         var group = getGroupById(groups, $(this).attr("id").split("-")[1]);
-        showGroup(group);
+        showGroup(group.id);
     });
     
     
@@ -178,7 +180,7 @@ function createGroup(form, group) {
         innerTabs.place.find("#" + group.id + " .modal").modal('hide');
         (flowMessager.newMessage(createdGroup.name, "subgroup was created succesfuly", "success")).draw();
         loadGroups(vo);
-        showGroup(createdGroup);
+        showGroup(createdGroup.id);
     });
 }
 
@@ -195,7 +197,7 @@ function addMembers(form, group) {
         callPerunPost("groupsManager", "addMember", {group: group.id, member: members[j].id}, function() {
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage(members[j].name, "was added sucesfuly into " + group.shortName + " group" , "success")).draw();
-            showGroup(group);
+            showGroup(group.id);
         });
     }
 }
@@ -213,7 +215,7 @@ function addManagers(form, group) {
         callPerunPost("groupsManager", "addAdmin", {group: group.id, user: members[id].userId}, function() {
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage(members[id].name, "is manager in " + group.shortName + " group now." , "success")).draw();
-            showGroup(group);
+            showGroup(group.id);
         });
     }
 }
@@ -231,7 +233,7 @@ function removeMembers(form, group) {
         callPerunPost("groupsManager", "removeMember", {group: group.id, member: members[j].id}, function() {
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage(members[j].name, "was removed sucesfuly from " + group.shortName + " group" , "success")).draw();
-            showGroup(group);
+            showGroup(group.id);
         });
     }
 }
@@ -249,7 +251,7 @@ function removeManagers(form, group) {
         callPerunPost("groupsManager", "removeAdmin", {group: group.id, user: members[id].userId}, function() {
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage(members[id].name, "is not manager in " + group.shortName + " group now." , "success")).draw();
-            showGroup(group);
+            showGroup(group.id);
         });
     }
 }
@@ -260,7 +262,7 @@ function deleteGroup(group) {
         (flowMessager.newMessage(group.name , "was deleted successfully" , "success")).draw();
         loadGroups(vo);
         if (group.parentGroupId) {
-            showGroup(getGroupById(allVoGroups, group.parentGroupId));
+            showGroup(group.parentGroupId);
         } else {
             showVo();
         }        
@@ -302,7 +304,7 @@ function fillModalAddUsers(modal, vo, group) {
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
     if (!allMembers) {
         //(flowMessager.newMessage("Members", "can't be loaded.", "warning")).draw();
-        callMeAfterLoadAllMembers(fillModalAddUsers, [modal, vo, group]);
+        callMeAfter(fillModalAddUsers, [modal, vo, group], loadAllMembers);
         return;
     }
     loadImage.hide();
@@ -346,7 +348,7 @@ function fillModalAddManagers(modal, vo, group) {
     
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
     if (!allMembers) {
-        callMeAfterLoadAllMembers(fillModalAddManagers, [modal, vo, group]);
+        callMeAfter(fillModalAddManagers, [modal, vo, group], loadAllMembers);
         return;
     }
     loadImage.hide();
