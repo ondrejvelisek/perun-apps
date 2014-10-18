@@ -51,10 +51,10 @@ function addVoTab(vo) {
     content  = '<div class="page-header"><h2>' + vo.name + '</h2></div>';
     content += '<div class="btn-toolbar">';
     content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-success" data-toggle="modal" data-target="#createGroupInVo">Create Group</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#createGroupInVo">Create Group</button>';
     content += '  </div>';
     content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-success" data-toggle="modal" data-target="#inviteUser" disabled>Invite User</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#inviteUser" disabled>Invite User</button>';
     content += '  </div>';
     content += '</div>';
     content += '<div id="groupsTable"></div>';

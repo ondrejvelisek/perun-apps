@@ -76,18 +76,24 @@ h6 {
   color: #bbb;
   margin-right: 4px;
 }
-#content .btn-toolbar {
+#content .tab-pane > .btn-toolbar {
   margin-bottom: 8px;
 }
-#content .modal[id^=addMembers] select#members,
-#content .modal[id^=addManagers] select#members,
-#content .modal[id^=removeMembers] select#members,
-#content .modal[id^=removeManagers] select#members {
+#content .tab-pane > .btn-toolbar .btn-group {
+  margin-bottom: 5px;
+}
+#content .modal .alert {
+  margin-bottom: 0px;
+}
+#content .modal [id^=addMembers] select#members,
+#content .modal [id^=addManagers] select#members,
+#content .modal [id^=removeMembers] select#members,
+#content .modal [id^=removeManagers] select#members {
   height: 300px;
 }
 #content #innerTabs .nav li a {
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
 }
 #content #innerTabs .nav li.active a {
   background: #eee;
@@ -100,6 +106,6 @@ h6 {
   margin: 5px 0 0 -10px;
   font-size: 20px;
   content: "<";
-  color: #ddd;
+  color: #ccc;
   float: left;
 }

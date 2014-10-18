@@ -36,19 +36,19 @@ function addGroupTab(group) {
     content  = '<div class="page-header"><h2>' + group.name + '</h2></div>';
     content += '<div class="btn-toolbar">';
     content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-success" data-toggle="modal" data-target="#createGroup' + group.id + '">Create Subgroup</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#createGroup' + group.id + '">Create Subgroup</button>';
     content += '  </div>';
     content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-success" data-toggle="modal" data-target="#addMembers' + group.id + '">Add Users</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addMembers' + group.id + '">Add Users</button>';
     content += '  </div>';
     content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-success" data-toggle="modal" data-target="#addManagers' + group.id + '">Add Group Managers</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addManagers' + group.id + '">Add Group Managers</button>';
     content += '  </div>';
     content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#removeMembers' + group.id + '">Remove Users</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#removeMembers' + group.id + '">Remove Users</button>';
     content += '  </div>';
     content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#removeManagers' + group.id + '">Remove Group Managers</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#removeManagers' + group.id + '">Remove Group Managers</button>';
     content += '  </div>';
     content += '  <div class="btn-group pull-right">';
     content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteGroup' + group.id + '">Delete group</button>';
@@ -267,8 +267,7 @@ function fillModalCreateGroup(modal, vo, group) {
     modal.clear();
     
     var html;
-    html  = '        <p>';
-    html += '          <form role="form">';
+    html  = '          <form role="form">';
     html += '            <div class="form-group">';
     html += '              <label for="name">Group name</label>';
     html += '              <input type="text" class="form-control" id="name" placeholder="Group name" autofocus>';
@@ -279,7 +278,6 @@ function fillModalCreateGroup(modal, vo, group) {
     html += '            </div>';
     html += '            <button type="submit" class="btn btn-primary">Create Group</button>';  
     html += '          </form>';
-    html += '        </p>';
     modal.addBody(html);
     
     var createGroupForm = modal.self.find("form");
@@ -310,8 +308,7 @@ function fillModalAddUsers(modal, vo, group) {
     }
 
     var html;
-    html  = '<p>';
-    html += '   <form role="form">';
+    html  = '   <form role="form">';
     html += '      <div class="form-group">';
     html += '         <label for="members">Select users</label>';
     html += '         <select id="members" multiple class="form-control">';
@@ -319,7 +316,6 @@ function fillModalAddUsers(modal, vo, group) {
     html += '      </div>';
     html += '      <button type="submit" class="btn btn-primary">Add Members</button>';
     html += '   </form>';
-    html += '</p>';
     modal.addBody(html);
 
     var select = modal.self.find("select#members");
@@ -356,8 +352,7 @@ function fillModalAddManagers(modal, vo, group) {
     }
 
     var html;
-    html  = '        <p>';
-    html += '          <form role="form">';
+    html  = '          <form role="form">';
     html += '            <div class="form-group">';
     html += '              <label for="members">Select users</label>';
     html += '              <select id="members" multiple class="form-control">';
@@ -365,7 +360,6 @@ function fillModalAddManagers(modal, vo, group) {
     html += '            </div>';  
     html += '            <button type="submit" class="btn btn-primary">Add Managers</button>';
     html += '          </form>';
-    html += '        </p>';
     modal.addBody(html);
 
     var select = modal.self.find("select#members");
@@ -398,13 +392,12 @@ function fillModalRemoveUsers(modal, group) {
         loadImage.hide();
         
         if (members.length === 0) {
-            (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
+            (new Message("", "No users found", "info", modal.self.find(".modal-body"))).draw();
             return;
         }
         
         var html;
-        html  = '        <p>';
-        html += '          <form role="form">';
+        html  = '          <form role="form">';
         html += '            <div class="form-group">';
         html += '              <label for="members">Select users</label>';
         html += '              <select id="members" multiple class="form-control">';
@@ -412,7 +405,6 @@ function fillModalRemoveUsers(modal, group) {
         html += '            </div>';  
         html += '            <button type="submit" class="btn btn-primary">Remove Members</button>';
         html += '          </form>';
-        html += '        </p>';
         modal.addBody(html);
         for(var id in members) {
             var option;
@@ -443,13 +435,12 @@ function fillModalRemoveManagers(modal, group) {
         }
         loadImage.hide();
         if (managers.length === 0) {
-            (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
+            (new Message("", "No users found", "info", modal.self.find(".modal-body"))).draw();
             return;
         }
         
         var html;
-        html  = '        <p>';
-        html += '          <form role="form">';
+        html  = '          <form role="form">';
         html += '            <div class="form-group">';
         html += '              <label for="members">Select users</label>';
         html += '              <select id="members" multiple class="form-control">';
@@ -457,7 +448,6 @@ function fillModalRemoveManagers(modal, group) {
         html += '            </div>'; 
         html += '            <button type="submit" class="btn btn-primary">Remove Managers</button>';
         html += '          </form>';
-        html += '        </p>';
         modal.addBody(html);
         for(var id in managers) {
             var option;

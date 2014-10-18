@@ -76,22 +76,33 @@ h1, h2, h3, h4, h5, h6 {
             }
         }
     }
-    .btn-toolbar {
+
+    .tab-pane > .btn-toolbar {
         margin-bottom: 8px;
-    }
-    .modal[id^=addMembers], 
-    .modal[id^=addManagers], 
-    .modal[id^=removeMembers], 
-    .modal[id^=removeManagers]{
-        select#members {
-            height: 300px;
+        .btn-group {
+            margin-bottom: 5px;
         }
     }
+
+    .modal {
+        .alert {
+            margin-bottom: 0px;
+        }
+        [id^=addMembers], 
+        [id^=addManagers], 
+        [id^=removeMembers], 
+        [id^=removeManagers]{
+            select#members {
+                height: 300px;
+            }
+        }
+    }
+
     #innerTabs {
         .nav {
             li a {
                 padding: 8px 12px;
-                border: 1px solid #ddd;
+                border: 1px solid #ccc;
             }
             li.active a {
                 background: #eee;
@@ -103,7 +114,7 @@ h1, h2, h3, h4, h5, h6 {
                     margin: 5px 0 0 -10px;
                     font-size: 20px;
                     content: "<";
-                    color: #ddd;
+                    color: #ccc;
                     float:left;
                 }
             }

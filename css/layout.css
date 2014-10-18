@@ -27,6 +27,15 @@ dl dd .btn {
   padding-top: 0px;
   padding-bottom: 0px;
 }
+.btn-primary {
+  border-color: #003c72;
+  background-color: #00529b;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #003c72;
+}
 #header {
   margin-bottom: 30px;
 }
