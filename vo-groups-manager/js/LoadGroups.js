@@ -254,9 +254,7 @@ function deleteGroup(group) {
         innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
         (flowMessager.newMessage(group.name , "was deleted successfully" , "success")).draw();
         if (group.parentGroupId) {
-            debug(group.parentGroupId);
-            debug(getGroupById(group.parentGroupId));
-            showGroup(getGroupById(group.parentGroupId));
+            showGroup(getGroupById(allVoGroups, group.parentGroupId));
         } else {
             showVo();
         }        
