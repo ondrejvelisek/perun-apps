@@ -11,16 +11,16 @@ function showGroup(group) {
     }
     
     //if (!innerTabs.containsTab(group.id)) {
-        if (innerTabs.containsTab(group.parentGroupId)) {
-            innerTabs.removeSuccessors(group.parentGroupId);
+    if (innerTabs.containsTab(group.parentGroupId)) {
+        innerTabs.removeSuccessors(group.parentGroupId);
+    } else {
+        if (group.parentGroupId) {
+            showGroup(getGroupById(allVoGroups, group.parentGroupId));
         } else {
-            if (group.parentGroupId) {
-                showGroup(getGroupById(allVoGroups, group.parentGroupId));
-            } else {
-                innerTabs.removeSuccessors("vo");
-            }
+            innerTabs.removeSuccessors("vo");
         }
-        addGroupTab(group);
+    }
+    addGroupTab(group);
     //}
     innerTabs.show(group.id);
     $('#group-name').text(group.name);

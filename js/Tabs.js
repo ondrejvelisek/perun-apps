@@ -10,10 +10,7 @@ function Tabs(place) {
     this.place = place;
     
     this.addTab = function(tab) {
-        if (this.containsTab(tab.name)) {
-            this.removeTab(tab.name);
-            tab.place.remove();
-        }
+        this.place.find("#" + tab.name).remove();
         this.tabs.push(tab);
         this.render();
         tab.setPlace(place);
