@@ -10,6 +10,9 @@ function Tabs(place) {
     this.place = place;
     
     this.addTab = function(tab) {
+        if (this.containsTab(tab.name)) {
+            this.removeTab(tab.name);
+        }
         this.tabs.push(tab);
         this.render();
         tab.setPlace(place);
@@ -91,6 +94,11 @@ function Tab(title, name) {
         this.place.append(contentToAdd);
         //this.render();
     };
+    
+    this.clear = function() {
+        this.content = "";
+        this.render();
+    }
     
     this.render = function () {
         this.place.html(this.content);
