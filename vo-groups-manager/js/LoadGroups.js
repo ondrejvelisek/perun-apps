@@ -253,6 +253,7 @@ function deleteGroup(group) {
     callPerunPost("groupsManager", "deleteGroup", {group: group.id}, function() {
         innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
         (flowMessager.newMessage(group.name , "was deleted successfully" , "success")).draw();
+        loadGroups(vo);
         if (group.parentGroupId) {
             showGroup(getGroupById(allVoGroups, group.parentGroupId));
         } else {
