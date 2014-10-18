@@ -12,6 +12,7 @@ function Tabs(place) {
     this.addTab = function(tab) {
         if (this.containsTab(tab.name)) {
             this.removeTab(tab.name);
+            tab.place.remove();
         }
         this.tabs.push(tab);
         this.render();
