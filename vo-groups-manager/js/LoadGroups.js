@@ -44,7 +44,7 @@ function addGroupTab(group) {
         
         if (group.name[i] == ":") {
             console.log(group.name[i]);
-            displayName += "<wbr>";     //because of line break for long names
+            displayName += "&#8203;";     //because of line break for long names
         }
         displayName += group.name[i];
     }
