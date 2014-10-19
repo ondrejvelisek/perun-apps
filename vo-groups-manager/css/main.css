@@ -26,14 +26,18 @@ h6 {
   padding: 0px 20px;
 }
 #header .logo {
-  margin: 14px 0px;
+  margin: 10px 0px;
 }
 #header .logo img {
-  height: 24px;
+  height: 32px;
   margin-right: 8px;
 }
 #header .logo img:last-child {
   margin-right: 0px;
+}
+#header .title img {
+  height: 30px;
+  margin-top: -6px;
 }
 #menu .nav-pills > .active > a,
 #menu .nav-pills > .active > a:hover,
