@@ -37,10 +37,10 @@ function Tabs(place) {
     this.show = function(name) {
         this.render();
         this.place.find(".nav a").on('shown.bs.tab', function(e) {
-            if (window.location.hash.length > 0) {
-                window.location.hash = "#" + window.location.hash.split("#")[1] + e.target.hash;
+            if (window.location.hash.length > 1) {
+                window.location.hash = window.location.hash.split("&")[0] + "&" + e.target.hash.substring(1);
             } else {
-                window.location.hash = "#" + e.target.hash;
+                window.location.hash = "#&" + e.target.hash.substring(1);
             }
             window.scrollTo(0, 0);
         });
@@ -75,6 +75,12 @@ function Tabs(place) {
         }
         return null;
     };
+    
+    this.clear = function() {
+        this.tabs = [];
+        this.render();
+        this.place.find(".tab-content").html("");
+    }
 }
 
 function Tab(title, name) {

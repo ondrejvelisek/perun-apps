@@ -7,10 +7,14 @@
 function showGroup(groupId) {
     if (!allVoGroups) {
         callMeAfter(showGroup, [groupId], loadGroups);
-        //(flowMessager.newMessage("Group","can not be shown","warning")).draw();
         return;
     }
     var group = getGroupById(allVoGroups, groupId);
+    if (!group) {
+        (flowMessager.newMessage("Group","with ID " + groupId + " doesn't exist","warning")).draw();
+        showVo();
+        return;
+    }
     
     //if (!innerTabs.containsTab(group.id)) {
     if (innerTabs.containsTab(group.parentGroupId)) {
@@ -43,8 +47,8 @@ function addGroupTab(group) {
     content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#removeMembers' + group.id + '">Remove Members</button>';
     content += '  </div>';
     content += '  <div class="btn-group">';
-    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addManagers' + group.id + '">Add Managers</button>';
-    content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#removeManagers' + group.id + '">Remove Managers</button>';
+    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addManagers' + group.id + '" disabled>Add Managers</button>';
+    content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#removeManagers' + group.id + '" disabled>Remove Managers</button>';
     content += '  </div>';
     content += '  <div class="btn-group pull-right">';
     content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#createGroup' + group.id + '">Create Subgroup</button>';

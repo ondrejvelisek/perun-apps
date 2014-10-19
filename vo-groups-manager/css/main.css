@@ -91,6 +91,12 @@ h6 {
 #content .modal[id^=removeManagers] select#members {
   height: 200px;
 }
+#content .modal .modal-header button.close {
+  margin: -16px -16px 0px 0px;
+  padding: 8px;
+  font-size: 32px;
+  line-height: 24px;
+}
 #content #innerTabs .nav li a {
   padding: 8px 12px;
   border: 1px solid #ccc;

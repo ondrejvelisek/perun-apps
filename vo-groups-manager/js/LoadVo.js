@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var innerTabs;
 function entryPoint(user) {
     innerTabs = new Tabs($("#innerTabs"));
+    callMeAfter(afterLogout, [], "logout");
     loadVo();
 }
 
@@ -20,7 +22,12 @@ function loadVo() {
             return;
         }
         vo = voResult;
+        
+        var hash = document.location.hash.substring(1).split("&")[1];
         showVo();
+        if (hash != undefined && hash != "vo") {
+            showGroup(hash);
+        }
     });
 }
 
@@ -33,17 +40,10 @@ function showVo() {
     if (!innerTabs.containsTab("vo")) {
         addVoTab(vo);
         $("#groupsManagerLink").click(function() {
-            showVo();
+            //showVo();
         });
     }
-    var hash = document.location.hash.substring(1).split("#")[1];
-    if (hash != undefined && hash != "vo") {
-        showGroup(hash);
-    } else {
-        innerTabs.show("vo");
-    }
-    
-
+    innerTabs.show("vo");
     fillVoInfo(vo);
     loadGroups(vo);
     loadAllMembers(vo);
@@ -114,28 +114,6 @@ function loadAllMembers(vo) {
     });
 }
 
-var callMeAfterList = [];
-function callMeAfter(method, args, after) {
-    callMeAfterList.push({method: method, args: args, after: after});
-}
-function callBackAfter(after) {
-    for (var i = callMeAfterList.length -1; i >= 0 ; i--) {
-        var callMeAfter = callMeAfterList[i];
-        if (callMeAfter.after == after) {
-            if (callMeAfter.args.length > 5) {
-                debug("fatal error: cant call back method with more than 5 attrs");
-            }
-            callMeAfter.method(callMeAfter.args[0],
-                    callMeAfter.args[1],
-                    callMeAfter.args[2],
-                    callMeAfter.args[3],
-                    callMeAfter.args[4]);
-            callMeAfterList.splice(callMeAfterList.indexOf(callMeAfter), 1);
-            //debug(callMeAfterList.length);
-        }
-    }
-}
-
 function fillModalInviteUser(modal, vo) {
     modal.clear();
 
@@ -154,4 +132,8 @@ function fillModalInviteUser(modal, vo) {
         event.preventDefault();
         debug("Not support yet.");
     });
+}
+
+function afterLogout() {
+    innerTabs.clear();
 }

@@ -73,7 +73,7 @@ function getURLParameter(name) {
 
 $(document).ready(function() {
     //care of tabs address in url.
-    var hash = document.location.hash.substring(1).split("#")[0];
+    var hash = document.location.hash.substring(1).split("&")[0];
     if (hash.length > 0) {
         $('#menu a[href=#' + hash + ']').tab('show');
     }
@@ -90,4 +90,27 @@ $(document).ready(function() {
 
 function debug(obj) {
     alert(JSON.stringify(obj));
+}
+
+
+var callMeAfterList = [];
+function callMeAfter(method, args, after) {
+    callMeAfterList.push({method: method, args: args, after: after});
+}
+function callBackAfter(after) {
+    for (var i = callMeAfterList.length -1; i >= 0 ; i--) {
+        var callMeAfter = callMeAfterList[i];
+        if (callMeAfter.after == after) {
+            if (callMeAfter.args.length > 5) {
+                debug("fatal error: cant call back method with more than 5 attrs");
+            }
+            callMeAfter.method(callMeAfter.args[0],
+                    callMeAfter.args[1],
+                    callMeAfter.args[2],
+                    callMeAfter.args[3],
+                    callMeAfter.args[4]);
+            callMeAfterList.splice(callMeAfterList.indexOf(callMeAfter), 1);
+            //debug(callMeAfterList.length);
+        }
+    }
 }

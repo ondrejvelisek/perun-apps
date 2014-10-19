@@ -51,9 +51,34 @@ dl {
         }
     }
     .user {
-        line-height: 20px;
-        margin-top: 16px;
-        margin-bottom: 16px;
+        a {
+            color: #fff;
+            &:hover, 
+                &:active, 
+                &:focus  {
+                text-decoration: none;
+            }
+        }
+        .dropdown-menu {
+            left: auto;
+            right: 0;
+            padding: 12px;
+            width: 280px;
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 2px;
+                margin-bottom: 8px;
+                border-bottom: 1px solid #ddd;
+            }
+            ul {
+                li {
+                    margin-bottom: 4px;
+                }
+            }
+        }
+        height: 34px;
+        margin-top: 9px;
+        margin-bottom: 9px;
+        color: #333;
     }
 }
 #menu {
@@ -93,7 +118,7 @@ dl {
 
 #flowMessager{
     position: fixed;
-    top: 0px;
+    top: 52px;
     right: 0px;
     z-index: 1100;
     width: 40%;
@@ -102,7 +127,7 @@ dl {
         float: right;
         clear: both;
         margin-bottom: 0px;
-        opacity: 0.9;
+        opacity: 0.8;
         pointer-events: auto;
         &:hover {
             opacity: 1;
@@ -115,6 +140,16 @@ dl {
             float: none;
         }
     }    
+}
+#staticMessager{
+    .alert {
+        margin-bottom: 4px;
+        opacity: 0.8;
+        &:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
 }
 
 .load-image {
