@@ -39,8 +39,18 @@ function addGroupTab(group) {
     var groupTab = new Tab(group.shortName, group.id);
     innerTabs.addTab(groupTab);
     
+    var displayName = "";
+    for (var i in group.name) {
+        
+        if (group.name[i] == ":") {
+            console.log(group.name[i]);
+            displayName += "<wbr>";     //because of line break for long names
+        }
+        displayName += group.name[i];
+    }
+    
     var content;
-    content  = '<div class="page-header"><h2>' + group.name + '</h2></div>';
+    content  = '<div class="page-header"><h2>' + displayName + '</h2></div>';
     content += '<div class="btn-toolbar">';
     content += '  <div class="btn-group">';
     content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addMembers' + group.id + '">Add Members</button>';

@@ -16,6 +16,14 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
 }
+.btn-primary {
+    border-color: darken(#00529b, 8%);
+    background-color: #00529b;
+    &:hover, &:focus, &:active {
+        background-color: darken(#00529b, 8%);
+        border-color: darken(#00529b, 12%);
+    }
+}
 #header {
     background-color: @base-color;
     color: #fff;
@@ -94,51 +102,58 @@ h1, h2, h3, h4, h5, h6 {
         }
     }
 
-    .modal {
-        .alert {
-            margin-bottom: 0px;
-        }
-        &[id^=addMembers], 
-        &[id^=addManagers], 
-        &[id^=removeMembers], 
-        &[id^=removeManagers]{
-            select#members {
-                height: 200px;
-            }
-        }
-        .modal-header {
-            button.close {
-                margin: -16px -16px 0px 0px;
-                padding: 8px;
-                font-size: 32px;
-                line-height: 24px;
-            }
+
+}
+.modal {
+    .alert {
+        margin-bottom: 0px;
+    }
+    &[id^=addMembers], 
+    &[id^=addManagers], 
+    &[id^=removeMembers], 
+    &[id^=removeManagers]{
+        select#members {
+            height: 200px;
         }
     }
-
-    #innerTabs {
-        .nav {
-            li a {
+    .modal-header {
+        button.close {
+            margin: -16px -16px 0px 0px;
+            padding: 8px;
+            font-size: 32px;
+            line-height: 24px;
+        }
+    }
+}
+#innerTabs {
+    .nav {
+        li {
+            margin-bottom: 6px;
+            a {
                 padding: 8px 12px;
                 border: 1px solid #ccc;
             }
-            li.active a {
-                background: #eee;
-                color: #666;
-            }
-            li+li {
-                margin-left: 9px;
-                &:before {
-                    margin: 5px 0 0 -10px;
-                    font-size: 20px;
-                    content: "<";
-                    color: #ccc;
-                    float:left;
-                }
-            }
-
         }
 
+        li.active a {
+            background: #eee;
+            color: #666;
+        }
+        li+li {
+            margin-left: 9px;
+            &:before {
+                margin: 5px 0 0 -10px;
+                font-size: 20px;
+                content: "<";
+                color: #ccc;
+                float:left;
+            }
+        }
+        @media (max-width: 768px) { 
+            li {
+                float: none;
+            }
+        }   
     }
 }
 

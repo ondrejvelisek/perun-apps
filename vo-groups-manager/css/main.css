@@ -18,6 +18,16 @@ h5,
 h6 {
   font-weight: normal;
 }
+.btn-primary {
+  border-color: #003c72;
+  background-color: #00529b;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #003c72;
+  border-color: #00325e;
+}
 #header {
   background-color: #00529b;
   color: #fff;
@@ -92,38 +102,46 @@ h6 {
 #content .tab-pane > .btn-toolbar .btn-group {
   margin-bottom: 5px;
 }
-#content .modal .alert {
+.modal .alert {
   margin-bottom: 0px;
 }
-#content .modal[id^=addMembers] select#members,
-#content .modal[id^=addManagers] select#members,
-#content .modal[id^=removeMembers] select#members,
-#content .modal[id^=removeManagers] select#members {
+.modal[id^=addMembers] select#members,
+.modal[id^=addManagers] select#members,
+.modal[id^=removeMembers] select#members,
+.modal[id^=removeManagers] select#members {
   height: 200px;
 }
-#content .modal .modal-header button.close {
+.modal .modal-header button.close {
   margin: -16px -16px 0px 0px;
   padding: 8px;
   font-size: 32px;
   line-height: 24px;
 }
-#content #innerTabs .nav li a {
+#innerTabs .nav li {
+  margin-bottom: 6px;
+}
+#innerTabs .nav li a {
   padding: 8px 12px;
   border: 1px solid #ccc;
 }
-#content #innerTabs .nav li.active a {
+#innerTabs .nav li.active a {
   background: #eee;
   color: #666;
 }
-#content #innerTabs .nav li + li {
+#innerTabs .nav li + li {
   margin-left: 9px;
 }
-#content #innerTabs .nav li + li:before {
+#innerTabs .nav li + li:before {
   margin: 5px 0 0 -10px;
   font-size: 20px;
   content: "<";
   color: #ccc;
   float: left;
+}
+@media (max-width: 768px) {
+  #innerTabs .nav li {
+    float: none;
+  }
 }
 #footer {
   clear: both;
