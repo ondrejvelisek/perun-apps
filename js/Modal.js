@@ -50,6 +50,9 @@ function Modal(title, name, place) {
         html += '    <div class="modal-content">';
         if (this.title && this.title.length > 0) {
             html += '    <div class="modal-header">';
+            html += '       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">';
+            html += '          &times;</span><span class="sr-only">Close</span>';
+            html += '       </button>';
             html += '      <h4 class="modal-title">';
             html += this.title;
             html += '      </h4>';
