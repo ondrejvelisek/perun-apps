@@ -327,6 +327,8 @@ function fillModalAddUsers(modal, vo, group) {
         (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
         return;
     }
+    
+    console.log(allMembers[0]);
 
     var html;
     html = '   <form role="form">';
@@ -523,10 +525,12 @@ function findAndFillMember(query, select) {
         select.html("");
         var count = 0;
         for (var id in allMembers) {
+            var email = unAccent(getAttrByFriendlyName(allMembers[id].userAttributes, "preferredMail").value.toLowerCase().trim());
             var firstName = unAccent(allMembers[id].user.firstName.toLowerCase().trim());
             var lastName = unAccent(allMembers[id].user.lastName.toLowerCase().trim());
             if (((firstName + " " + lastName).indexOf(query) >= 0)
-                    || ((lastName + " " + firstName).indexOf(query) >= 0)) {
+                    || ((lastName + " " + firstName).indexOf(query) >= 0)
+                    || (email.indexOf(query) >= 0)) {
                 var option;
                 option = '<option value="' + allMembers[id].id + '-' + allMembers[id].user.id + '-' +
                         allMembers[id].user.firstName + ' ' + allMembers[id].user.lastName + '">';

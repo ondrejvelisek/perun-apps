@@ -23,7 +23,7 @@ function loadMembers(group) {
 
 var allMembers;
 function loadAllMembers(vo) {
-    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function (members) {
+    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:user:attribute-def:def:preferredMail"]}, function (members) {
         if (!members) {
             return;
         }
@@ -81,4 +81,14 @@ function fillMembers(members, group) {
 
 function compareMembers(a, b) {
     return a.user.lastName.localeCompare(b.user.lastName);
+}
+
+
+
+function getAttrByFriendlyName(attrs, friendlyName) {
+    for (var i in attrs) {
+        if (attrs[i].friendlyName == friendlyName) {
+            return attrs[i];
+        }
+    }
 }
