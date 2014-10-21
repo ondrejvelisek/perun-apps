@@ -211,10 +211,11 @@ function addMembers(form, group) {
         console.log("beforeCall: ");
         console.log(members[j]);
         callPerunPost("groupsManager", "addMember", {group: group.id, member: members[j].id}, function () {
-            console.log("callback: ");
+            console.log(j);
             console.log(members[j]);
+            var name = members[j].name;
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-            (flowMessager.newMessage(members[j].name, "wasss added sucesfuly into " + group.shortName + " group", "success")).draw();
+            (flowMessager.newMessage(name, "wasss added sucesfuly into " + group.shortName + " group", "success")).draw();
             showGroup(group.id);
         });
     }
