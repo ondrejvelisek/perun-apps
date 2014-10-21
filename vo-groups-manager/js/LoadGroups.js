@@ -207,9 +207,10 @@ function addMembers(form, group) {
         members[j].userId = membersValues[j].split("-")[1];
         members[j].name = membersValues[j].split("-")[2];
     }
-    for (var j in members) {
+    for (var i in members) {
         console.log("beforeCall: ");
         console.log(members[j]);
+        var j = i;
         callPerunPost("groupsManager", "addMember", {group: group.id, member: members[j].id}, function () {
             console.log(j);
             console.log(members[j]);
