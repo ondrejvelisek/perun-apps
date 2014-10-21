@@ -208,10 +208,13 @@ function addMembers(form, group) {
         members[j].name = membersValues[j].split("-")[2];
     }
     for (var j in members) {
-        var member = members[j];
+        console.log("beforeCall: ");
+        console.log(members[j]);
         callPerunPost("groupsManager", "addMember", {group: group.id, member: members[j].id}, function () {
+            console.log("callback: ");
+            console.log(members[j]);
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-            (flowMessager.newMessage(member.name, "was added sucesfuly into " + group.shortName + " group", "success")).draw();
+            (flowMessager.newMessage(members[j].name, "wasss added sucesfuly into " + group.shortName + " group", "success")).draw();
             showGroup(group.id);
         });
     }
