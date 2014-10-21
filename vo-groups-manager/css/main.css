@@ -49,6 +49,11 @@ h6 {
   height: 30px;
   margin-top: -6px;
 }
+#header .user {
+  color: #fff;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
 #menu .nav-pills > .active > a,
 #menu .nav-pills > .active > a:hover,
 #menu .nav-pills > .active > a:focus {

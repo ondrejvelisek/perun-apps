@@ -6,12 +6,16 @@
 var innerTabs;
 function entryPoint(user) {
     innerTabs = new Tabs($("#innerTabs"));
-    callMeAfter(afterLogout, [], "logout");
+    //callMeAfter(afterLogout, [], "logout");
     loadVo();
 }
 
 $(document).ready(function() {
-
+    $("#members03").submit(function(e) {
+       debug($("#members03 input#member").val());
+       debug($("#members03 input#member").attr("id"));
+       e.preventDefault();
+    });
 });
 
 var vo;
@@ -59,9 +63,9 @@ function addVoTab(vo) {
     content += '  <div class="btn-group">';
     content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#createGroupInVo">Create Group</button>';
     content += '  </div>';
-    content += '  <div class="btn-group">';
+    content += '  <!--<div class="btn-group">';
     content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#inviteUser">Invite User</button>';
-    content += '  </div>';
+    content += '  </div>-->';
     content += '</div>';
     content += '<div id="groupsTable"></div>';
     voTab.addContent(content);
@@ -101,17 +105,6 @@ function fillVoInfo(vo) {
     }
     $("#vo-name").text(vo.name);
     //$('#groupsManagerLink > span').text(vo.shortName);
-}
-
-var allMembers;
-function loadAllMembers(vo) {
-    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function(members) {
-        if (!members) {
-            return;
-        }
-        allMembers = members;
-        callBackAfter(loadAllMembers);
-    });
 }
 
 function fillModalInviteUser(modal, vo) {

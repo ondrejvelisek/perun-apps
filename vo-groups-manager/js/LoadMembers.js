@@ -8,10 +8,10 @@
 
 function loadMembers(group) {
     var loadImage = new LoadImage($("#" + group.id + " .membersTable"), "64px");
-    callPerun("membersManager", "getCompleteRichMembers", {group: group.id, 
-        attrsNames: ["urn:perun:user:attribute-def:core:displayName","urn:perun:user:attribute-def:def:preferredMail"], 
-        lookingInParentGroup: 0}, 
-        function(members) {
+    callPerun("membersManager", "getCompleteRichMembers", {group: group.id,
+        attrsNames: ["urn:perun:user:attribute-def:core:displayName", "urn:perun:user:attribute-def:def:preferredMail"],
+        lookingInParentGroup: 0},
+    function (members) {
         if (!members) {
             (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
             return;
@@ -21,42 +21,53 @@ function loadMembers(group) {
     });
 }
 
-/*var users;
-function loadAllUsers(vo) {
-    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function(members) {
+var allMembers;
+function loadAllMembers(vo) {
+    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function (members) {
         if (!members) {
-            (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
             return;
         }
-        users = [];
-        for(var id in members) {
-            users.push(members[id].user);
-        }
+        allMembers = members.sort(compareMembers);
+        callBackAfter(loadAllMembers);
     });
-}*/
+}
+
+/*var users;
+ function loadAllUsers(vo) {
+ callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function(members) {
+ if (!members) {
+ (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
+ return;
+ }
+ users = [];
+ for(var id in members) {
+ users.push(members[id].user);
+ }
+ });
+ }*/
 
 function fillMembers(members, group) {
     if (!members) {
         (flowMessager.newMessage("Members", "can't be fill.", "danger")).draw();
         return;
     }
-    
-    var table = $("#"+group.id+" .membersTable");
-    
+
+    var table = $("#" + group.id + " .membersTable");
+
     if (members.length == 0) {
         table.html("no members");
         return;
     }
-    
+
     var users = [];
-    for(var i in members) {
+    for (var i in members) {
         users[i] = members[i].user;
         var attrs = members[i].userAttributes;
-        for(var j in attrs) {
+        for (var j in attrs) {
             users[i][attrs[j].friendlyName] = attrs[j].value;
         }
     }
-    
+
     var membersTable = new PerunTable();
     //membersTable.setClicableRows({isClicable : true, id:"id", prefix:"row-"});
     //membersTable.addColumn({type: "number", title: "#"});
@@ -64,4 +75,10 @@ function fillMembers(members, group) {
     membersTable.addColumn({type: "text", title: "Preferred Mail", name: "preferredMail"});
     membersTable.setValues(users);
     table.html(membersTable.draw());
+}
+
+
+
+function compareMembers(a, b) {
+    return a.user.lastName.localeCompare(b.user.lastName);
 }
