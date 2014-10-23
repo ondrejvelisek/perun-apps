@@ -196,6 +196,7 @@ function createGroup(form, group) {
         //loadGroups(vo);
         //callMeAfter(showGroup, [createdGroup.id], loadGroups);
         allVoGroups.push(createdGroup);
+        fillGroups(allVoGroups);
         showGroup(createdGroup.id);
     });
 }
