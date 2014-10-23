@@ -132,12 +132,14 @@ function fillGroups(groups) {
 
 function getTableOfGroups(groups) {
 
+    debug("before sort");
 
     function sortGroups(groups) {
         for (var i in groups) {
             groups[i].state = "OPEN";
         }
         for (var i in groups) {
+            console.log("outer for: "+i);
             insertGroup(groups, i);
         }
     }
@@ -152,6 +154,7 @@ function getTableOfGroups(groups) {
         }
         var j = i - 1;
         while (j !== i) {
+            console.log("inner while: "+j);
             if (j < 0) {
                 j = groups.length - 1;
             }
@@ -172,7 +175,7 @@ function getTableOfGroups(groups) {
     }
 
     sortGroups(groups);
-
+    debug("ater sort");
     createAttrTableName(groups);
     var groupsTable = new PerunTable();
     groupsTable.setClicableRows({isClicable: true, id: "id", prefix: "row-"});
