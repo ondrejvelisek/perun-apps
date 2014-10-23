@@ -139,12 +139,12 @@ function getTableOfGroups(groups) {
             groups[i].state = "OPEN";
         }
         for (var i in groups) {
-            console.log("outer for: "+i);
+            //console.log("outer for: "+i);
             insertGroup(groups, i);
         }
     }
     function insertGroup(groups, i) {
-        debug("insert: "+i);
+        //debug("insert: "+i);
         var group = groups[i];
         if (group.state == "CLOSE") {
             return i;
@@ -155,7 +155,7 @@ function getTableOfGroups(groups) {
         }
         var j = i - 1;
         while (j != i) {
-            debug("while: i-"+j+", j-"+i+", i.parent-"+group.parentGroupId+", j.id-"+groups[j].id);
+            //debug("while: i-"+j+", j-"+i+", i.parent-"+group.parentGroupId+", j.id-"+groups[j].id);
             if (group.parentGroupId === groups[j].id) {
                 var index;
                 if (groups[j].state == "CLOSE") {
@@ -163,8 +163,8 @@ function getTableOfGroups(groups) {
                 } else {
                     index = insertGroup(groups, j);
                 }
-                groups.splice(index + 1, 0, group);
                 groups.splice(i, 1);
+                groups.splice(index + 1, 0, group);
                 group.state = "CLOSE";
                 return index;
             }
@@ -176,7 +176,7 @@ function getTableOfGroups(groups) {
 
     }
 
-    //sortGroups(groups);
+    sortGroups(groups);
     //debug("ater sort");
     createAttrTableName(groups);
     var groupsTable = new PerunTable();
