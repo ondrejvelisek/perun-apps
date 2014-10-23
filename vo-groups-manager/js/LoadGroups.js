@@ -333,8 +333,6 @@ function fillModalAddUsers(modal, vo, group) {
         (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
         return;
     }
-    
-    console.log(allMembers[0]);
 
     var html;
     html = '   <form role="form">';
@@ -353,23 +351,41 @@ function fillModalAddUsers(modal, vo, group) {
         event.preventDefault();
         addMembers(addMembersForm, group);
     });
-    
+
     var queryInput = addMembersForm.find("#member");
     var select = modal.self.find("select#members");
-    findAndFillMember("", select); //first fill
+    findMemberAndDo("", allMembers, function (member) { //first fill
+        addMemberInSelect(member, select);
+    });
     var searchStack = 0;
     queryInput.keyup(function (event) {
         searchStack++;
         setTimeout(
-            function () {
-                if (searchStack == 1) {
-                    findAndFillMember(queryInput.val(), select);
-                    searchStack = 0;
-                } else {
-                    searchStack--;
-                }
-            }, 100);
+                function () {
+                    if (searchStack == 1) {
+                        select.html("");
+                        var count = findMemberAndDo(queryInput.val(), allMembers, function (member) {
+                            addMemberInSelect(member, select);
+                        });
+                        if (count === 1) {
+                            select.find("option").attr("selected", "true");
+                        }
+                        searchStack = 0;
+                    } else {
+                        searchStack--;
+                    }
+                }, 100);
     });
+
+    function addMemberInSelect(member, select) {
+        var option;
+        option = '<option value="' + member.id + '-' +
+                member.user.id + '-' +
+                member.user.firstName + ' ' + member.user.lastName + '">';
+        option += member.user.lastName + " " + member.user.firstName;
+        option += '</option>';
+        select.append(option);
+    }
 }
 
 function fillModalAddManagers(modal, vo, group) {
@@ -437,27 +453,54 @@ function fillModalRemoveUsers(modal, group) {
         html = '          <form role="form">';
         html += '            <div class="form-group">';
         html += '              <label for="members">Select users</label>';
+        html += '              <input id="member" type="text" class="form-control" placeholder="Search member">';
         html += '              <select id="members" multiple class="form-control">';
         html += '              </select>';
         html += '            </div>';
         html += '            <button type="submit" class="btn btn-danger">Remove Members</button>';
         html += '          </form>';
         modal.addBody(html);
-        for (var id in members) {
-            var option;
-            option = '<option value="' + members[id].id + '-' +
-                    members[id].user.id + '-' +
-                    members[id].user.firstName + ' ' + members[id].user.lastName + '">';
-            option += members[id].user.lastName + " " + members[id].user.firstName;
-            option += '</option>';
-            modal.self.find("select#members").append(option);
-        }
 
         var removeMembersForm = modal.self.find("form");
         removeMembersForm.submit(function (event) {
             event.preventDefault();
             removeMembers(removeMembersForm, group);
         });
+
+        var queryInput = removeMembersForm.find("#member");
+        var select = modal.self.find("select#members");
+        findMemberAndDo("", members, function (member) { //first fill
+            addMemberInSelect(member, select);
+        });
+        var searchStack = 0;
+        queryInput.keyup(function (event) {
+            searchStack++;
+            setTimeout(
+                    function () {
+                        if (searchStack == 1) {
+                            select.html("");
+                            var count = findMemberAndDo(queryInput.val(), members, function (member) {
+                                addMemberInSelect(member, select);
+                            });
+                            if (count === 1) {
+                                select.find("option").attr("selected", "true");
+                            }
+                            searchStack = 0;
+                        } else {
+                            searchStack--;
+                        }
+                    }, 100);
+        });
+
+        function addMemberInSelect(member, select) {
+            var option;
+            option = '<option value="' + member.id + '-' +
+                    member.user.id + '-' +
+                    member.user.firstName + ' ' + member.user.lastName + '">';
+            option += member.user.lastName + " " + member.user.firstName;
+            option += '</option>';
+            select.append(option);
+        }
     });
 }
 
@@ -526,27 +569,25 @@ function fillModalDeleteGroup(modal, group) {
     });
 }
 
-function findAndFillMember(query, select) {
-        query = unAccent(query.toLowerCase().trim());
-        select.html("");
-        var count = 0;
-        for (var id in allMembers) {
-            var email = unAccent(getAttrByFriendlyName(allMembers[id].userAttributes, "preferredMail").value.toLowerCase().trim());
-            var firstName = unAccent(allMembers[id].user.firstName.toLowerCase().trim());
-            var lastName = unAccent(allMembers[id].user.lastName.toLowerCase().trim());
-            if (((firstName + " " + lastName).indexOf(query) >= 0)
-                    || ((lastName + " " + firstName).indexOf(query) >= 0)
-                    || (email.indexOf(query) >= 0)) {
-                var option;
-                option = '<option value="' + allMembers[id].id + '-' + allMembers[id].user.id + '-' +
-                        allMembers[id].user.firstName + ' ' + allMembers[id].user.lastName + '">';
-                option += allMembers[id].user.lastName + " " + allMembers[id].user.firstName;
-                option += '</option>';
-                select.append(option);
-                count ++;
-            }
+function findMemberAndDo(query, members, action) {
+    if (!members) {
+        var members = allMembers;
+    }
+    query = unAccent(query.toLowerCase().trim());
+    var count = 0;
+    for (var id in members) {
+        var email = "";
+        if (getAttrByFriendlyName(members[id].userAttributes, "preferredMail")) {
+            email = unAccent(getAttrByFriendlyName(members[id].userAttributes, "preferredMail").value.toLowerCase().trim());
         }
-        if (count === 1) {
-            select.find("option").attr('selected','selected');
+        var firstName = unAccent(members[id].user.firstName.toLowerCase().trim());
+        var lastName = unAccent(members[id].user.lastName.toLowerCase().trim());
+        if (((firstName + " " + lastName).indexOf(query) >= 0)
+                || ((lastName + " " + firstName).indexOf(query) >= 0)
+                || (email.indexOf(query) >= 0)) {
+            action(members[id]);
+            count++;
         }
     }
+    return count;
+}
