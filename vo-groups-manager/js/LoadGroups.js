@@ -16,7 +16,7 @@ function showGroup(groupId) {
         return;
     }
 
-    //if (!innerTabs.containsTab(group.id)) {
+//if (!innerTabs.containsTab(group.id)) {
     if (innerTabs.containsTab(group.parentGroupId)) {
         innerTabs.removeSuccessors(group.parentGroupId);
     } else {
@@ -38,13 +38,12 @@ function showGroup(groupId) {
 function addGroupTab(group) {
     var groupTab = new Tab(group.shortName, group.id);
     innerTabs.addTab(groupTab);
-
     var displayName = "";
     for (var i in group.name) {
 
         if (group.name[i] == ":") {
             console.log(group.name[i]);
-            displayName += "&#8203;";     //because of line break for long names
+            displayName += "&#8203;"; //because of line break for long names
         }
         displayName += group.name[i];
     }
@@ -67,7 +66,6 @@ function addGroupTab(group) {
     content += '</div>';
     content += '<div class="membersTable"></div>';
     groupTab.addContent(content);
-
     var groupAuthz = new Authorization(roles, vo, group);
     var buttons = groupTab.place.find('.btn-toolbar');
     groupAuthz.addObject(buttons.find('button[data-target^=#createGroup]'), ["PERUNADMIN", "VOADMIN", "GROUPADMIN"]);
@@ -78,27 +76,21 @@ function addGroupTab(group) {
     groupAuthz.addObject(buttons.find('button[data-target^=#deleteGroup]'), ["PERUNADMIN", "VOADMIN", "GROUPADMIN"]);
     groupAuthz.addObject(groupTab.place.find('.membersTable'), ["PERUNADMIN", "VOOBSERVER", "VOADMIN", "GROUPADMIN", "TOPGROUPCREATOR"]);
     groupAuthz.check();
-
     var createGroupModal = new Modal("Create Subgroup in " + group.shortName, "createGroup" + group.id, groupTab.place);
     createGroupModal.init();
     fillModalCreateGroup(createGroupModal, vo, group);
-
     var addMembersModal = new Modal("Add Members to group " + group.shortName, "addMembers" + group.id, groupTab.place);
     addMembersModal.init();
     fillModalAddMembers(addMembersModal, vo, group);
-
     var addManagersModal = new Modal("Add Managers for group " + group.shortName, "addManagers" + group.id, groupTab.place);
     addManagersModal.init();
     fillModalAddManagers(addManagersModal, vo, group);
-
     var removeMembersModal = new Modal("Remove Members from group " + group.shortName, "removeMembers" + group.id, groupTab.place);
     removeMembersModal.init();
     fillModalRemoveMembers(removeMembersModal, group);
-
     var removeManagersModal = new Modal("Remove Managers for group " + group.shortName, "removeManagers" + group.id, groupTab.place);
     removeManagersModal.init();
     fillModalRemoveManagers(removeManagersModal, group);
-
     var deleteGroupModal = new Modal("Delete group " + group.shortName, "deleteGroup" + group.id, groupTab.place);
     deleteGroupModal.setType("danger");
     deleteGroupModal.init();
@@ -130,23 +122,58 @@ function fillGroups(groups) {
     }
 
     var table = $("#groupsTable");
-
     table.html(getTableOfGroups(groups).draw());
-
     table.find('[data-toggle="tooltip"]').tooltip();
-
     table.find("table tr").click(function () {
         var group = getGroupById(groups, $(this).attr("id").split("-")[1]);
         showGroup(group.id);
     });
-
-
 }
 
 function getTableOfGroups(groups) {
 
-    createAttrTableName(groups);
 
+    function sortGroups(groups) {
+        for (var i in groups) {
+            groups[i].state = "OPEN";
+        }
+        for (var i in groups) {
+            insertGroup(groups, i);
+        }
+    }
+    function insertGroup(groups, i) {
+        var group = groups[i];
+        if (group.state == "CLOSE") {
+            return i;
+        }
+        if (!group.parentGroupId) {
+            group.state = "CLOSE";
+            return i;
+        }
+        var j = i - 1;
+        while (j !== i) {
+            if (j < 0) {
+                j = groups.length - 1;
+            }
+            if (group.parentGroupId === groups[j].id) {
+                var index;
+                if (groups[j].state == "CLOSE") {
+                    index = j;
+                } else {
+                    index = insertGroup(groups, j);
+                }
+                groups.splice(index + 1, 0, group);
+                groups.splice(i, 1);
+                group.state = "CLOSE";
+                return index;
+            }
+        }
+
+    }
+
+    sortGroups(groups);
+
+    createAttrTableName(groups);
     var groupsTable = new PerunTable();
     groupsTable.setClicableRows({isClicable: true, id: "id", prefix: "row-"});
     //groupsTable.addColumn({type: "number", title: "#"});
@@ -154,9 +181,10 @@ function getTableOfGroups(groups) {
     groupsTable.addColumn({type: "text", title: "Name", name: "tableName"});
     groupsTable.addColumn({type: "text", title: "Description", name: "description"});
     groupsTable.setValues(groups);
-
     return groupsTable;
 }
+
+
 
 
 function createAttrTableName(groups) {
@@ -295,7 +323,6 @@ function deleteGroup(group) {
 
 function fillModalCreateGroup(modal, vo, group) {
     modal.clear();
-
     var html;
     html = '          <form role="form">';
     html += '            <div class="form-group">';
@@ -309,7 +336,6 @@ function fillModalCreateGroup(modal, vo, group) {
     html += '            <button type="submit" class="btn btn-primary">Create Group</button>';
     html += '          </form>';
     modal.addBody(html);
-
     var createGroupForm = modal.self.find("form");
     createGroupForm.submit(function (event) {
         event.preventDefault();
@@ -323,15 +349,13 @@ function fillModalCreateGroup(modal, vo, group) {
 
 function fillModalAddMembers(modal, vo, group) {
     modal.clear();
-
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
     if (!allMembers) {
-        //(flowMessager.newMessage("Members", "can't be loaded.", "warning")).draw();
+//(flowMessager.newMessage("Members", "can't be loaded.", "warning")).draw();
         callMeAfter(fillModalAddMembers, [modal, vo, group], loadAllMembers);
         return;
     }
     loadImage.hide();
-
     if (allMembers.length === 0) {
         (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
         return;
@@ -348,13 +372,11 @@ function fillModalAddMembers(modal, vo, group) {
     html += '      <button type="submit" class="btn btn-primary">Add Members</button>';
     html += '   </form>';
     modal.addBody(html);
-
     var addMembersForm = modal.self.find("form");
     addMembersForm.submit(function (event) {
         event.preventDefault();
         addMembers(addMembersForm, group);
     });
-
     var queryInput = addMembersForm.find("#member");
     var select = modal.self.find("select#members");
     findMemberAndDo("", allMembers, function (member) { //first fill
@@ -379,7 +401,6 @@ function fillModalAddMembers(modal, vo, group) {
                     }
                 }, 100);
     });
-
     function addMemberInSelect(member, select) {
         var option;
         option = '<option value="' + member.id + '-' +
@@ -393,14 +414,12 @@ function fillModalAddMembers(modal, vo, group) {
 
 function fillModalAddManagers(modal, vo, group) {
     modal.clear();
-
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
     if (!allMembers) {
         callMeAfter(fillModalAddManagers, [modal, vo, group], loadAllMembers);
         return;
     }
     loadImage.hide();
-
     if (allMembers.length === 0) {
         (new Message("", "No users found", "warning", modal.self.find(".modal-body"))).draw();
         return;
@@ -416,7 +435,6 @@ function fillModalAddManagers(modal, vo, group) {
     html += '            <button type="submit" class="btn btn-primary">Add Managers</button>';
     html += '          </form>';
     modal.addBody(html);
-
     var select = modal.self.find("select#members");
     for (var id in allMembers) {
         var option;
@@ -437,7 +455,6 @@ function fillModalAddManagers(modal, vo, group) {
 
 function fillModalRemoveMembers(modal, group) {
     modal.clear();
-
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
     callPerun("groupsManager", "getGroupRichMembers", {group: group.id}, function (members) {
         if (!members) {
@@ -445,13 +462,11 @@ function fillModalRemoveMembers(modal, group) {
             return;
         }
         loadImage.hide();
-
         if (members.length === 0) {
             (new Message("", "No users found", "info", modal.self.find(".modal-body"))).draw();
             return;
         }
         members = members.sort(compareMembers);
-
         var html;
         html = '          <form role="form">';
         html += '            <div class="form-group">';
@@ -463,13 +478,11 @@ function fillModalRemoveMembers(modal, group) {
         html += '            <button type="submit" class="btn btn-danger">Remove Members</button>';
         html += '          </form>';
         modal.addBody(html);
-
         var removeMembersForm = modal.self.find("form");
         removeMembersForm.submit(function (event) {
             event.preventDefault();
             removeMembers(removeMembersForm, group);
         });
-
         var queryInput = removeMembersForm.find("#member");
         var select = modal.self.find("select#members");
         findMemberAndDo("", members, function (member) { //first fill
@@ -494,7 +507,6 @@ function fillModalRemoveMembers(modal, group) {
                         }
                     }, 100);
         });
-
         function addMemberInSelect(member, select) {
             var option;
             option = '<option value="' + member.id + '-' +
@@ -509,7 +521,6 @@ function fillModalRemoveMembers(modal, group) {
 
 function fillModalRemoveManagers(modal, group) {
     modal.clear();
-
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
     callPerun("groupsManager", "getAdmins", {group: group.id}, function (managers) {
         if (!managers) {
@@ -552,7 +563,6 @@ function fillModalRemoveManagers(modal, group) {
 
 function fillModalDeleteGroup(modal, group) {
     modal.clear();
-
     var html;
     html = "<p>";
     html += "Do you really want to delete whole group?";
@@ -566,11 +576,11 @@ function fillModalDeleteGroup(modal, group) {
     html += '  </div>';
     html += '</div>';
     modal.addBody(html);
-
     modal.self.find("button#deleteGroup").click(function () {
         deleteGroup(group);
     });
 }
+
 
 function findMemberAndDo(query, members, action) {
     if (!members) {
