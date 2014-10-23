@@ -132,7 +132,7 @@ function fillGroups(groups) {
 
 function getTableOfGroups(groups) {
 
-    debug("before sort");
+    //debug("before sort");
 
     function sortGroups(groups) {
         for (var i in groups) {
@@ -144,6 +144,7 @@ function getTableOfGroups(groups) {
         }
     }
     function insertGroup(groups, i) {
+        debug("insert: "+i);
         var group = groups[i];
         if (group.state == "CLOSE") {
             return i;
@@ -153,11 +154,8 @@ function getTableOfGroups(groups) {
             return i;
         }
         var j = i - 1;
-        while (j !== i) {
-            console.log("inner while: "+j);
-            if (j < 0) {
-                j = groups.length - 1;
-            }
+        while (j != i) {
+            debug("while: i-"+j+", j-"+i+", i.parent-"+group.parentGroupId+", j.id-"+groups[j].id);
             if (group.parentGroupId === groups[j].id) {
                 var index;
                 if (groups[j].state == "CLOSE") {
@@ -170,12 +168,16 @@ function getTableOfGroups(groups) {
                 group.state = "CLOSE";
                 return index;
             }
+            j--;
+            if (j < 0) {
+                j = groups.length - 1;
+            }
         }
 
     }
 
-    sortGroups(groups);
-    debug("ater sort");
+    //sortGroups(groups);
+    //debug("ater sort");
     createAttrTableName(groups);
     var groupsTable = new PerunTable();
     groupsTable.setClicableRows({isClicable: true, id: "id", prefix: "row-"});
