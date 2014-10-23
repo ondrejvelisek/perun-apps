@@ -1,3 +1,3 @@
 voConfiguration = {
-    SHORT_NAME: "cesnet"
+    SHORT_NAME: "edugain_group"
 };

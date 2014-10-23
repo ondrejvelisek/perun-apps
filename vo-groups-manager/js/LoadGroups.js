@@ -193,7 +193,9 @@ function createGroup(form, group) {
     callPerunPost("groupsManager", "createGroup", {parentGroup: group.id, group: newGroup}, function (createdGroup) {
         innerTabs.place.find("#" + group.id + " .modal").modal('hide');
         (flowMessager.newMessage(createdGroup.name, "subgroup was created succesfuly", "success")).draw();
-        loadGroups(vo);
+        //loadGroups(vo);
+        //callMeAfter(showGroup, [createdGroup.id], loadGroups);
+        allVoGroups.push(createdGroup);
         showGroup(createdGroup.id);
     });
 }
