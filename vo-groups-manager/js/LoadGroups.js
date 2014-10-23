@@ -85,7 +85,7 @@ function addGroupTab(group) {
 
     var addMembersModal = new Modal("Add Members to group " + group.shortName, "addMembers" + group.id, groupTab.place);
     addMembersModal.init();
-    fillModalAddUsers(addMembersModal, vo, group);
+    fillModalAddMembers(addMembersModal, vo, group);
 
     var addManagersModal = new Modal("Add Managers for group " + group.shortName, "addManagers" + group.id, groupTab.place);
     addManagersModal.init();
@@ -93,7 +93,7 @@ function addGroupTab(group) {
 
     var removeMembersModal = new Modal("Remove Members from group " + group.shortName, "removeMembers" + group.id, groupTab.place);
     removeMembersModal.init();
-    fillModalRemoveUsers(removeMembersModal, group);
+    fillModalRemoveMembers(removeMembersModal, group);
 
     var removeManagersModal = new Modal("Remove Managers for group " + group.shortName, "removeManagers" + group.id, groupTab.place);
     removeManagersModal.init();
@@ -318,13 +318,13 @@ function fillModalCreateGroup(modal, vo, group) {
     });
 }
 
-function fillModalAddUsers(modal, vo, group) {
+function fillModalAddMembers(modal, vo, group) {
     modal.clear();
 
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
     if (!allMembers) {
         //(flowMessager.newMessage("Members", "can't be loaded.", "warning")).draw();
-        callMeAfter(fillModalAddUsers, [modal, vo, group], loadAllMembers);
+        callMeAfter(fillModalAddMembers, [modal, vo, group], loadAllMembers);
         return;
     }
     loadImage.hide();
@@ -432,7 +432,7 @@ function fillModalAddManagers(modal, vo, group) {
     });
 }
 
-function fillModalRemoveUsers(modal, group) {
+function fillModalRemoveMembers(modal, group) {
     modal.clear();
 
     var loadImage = new LoadImage(modal.self.find(".modal-body"), "64px");
