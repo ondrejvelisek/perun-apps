@@ -93,7 +93,8 @@ function createGroupInVo(form, vo) {
     callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: newGroup}, function(createdGroup) {
         innerTabs.place.find("#vo .modal").modal('hide');
         (flowMessager.newMessage(createdGroup.name, "group was created succesfuly", "success")).draw();
-        loadGroups(vo);
+        //loadGroups(vo);
+        
         showGroup(createdGroup.id);
     });
 }

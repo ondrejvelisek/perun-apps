@@ -115,6 +115,20 @@ function loadGroups(vo) {
     });
 }
 
+function addGroup(group, groups) {
+    if (!group.parentGroupId) {
+        groups.push(group);
+        return;
+    }
+    for (var i = groups.length-1; i >= 0; i--) {
+        if (group.parentGroupId === groups[i].id) {
+            groups.splice(i+1,0,group)
+            return;
+        }
+    }
+    (flowMessager.newMessage("Group "+group.shorName,"can not be inserted because can not find parent group", "danger")).draw();
+}
+
 function fillGroups(groups) {
     if (!groups) {
         (flowMessager.newMessage("Groups", "can't be fill.", "danger")).draw();
@@ -135,9 +149,6 @@ function getTableOfGroups(groups) {
     //debug("before sort");
 
     function sortGroups(groups) {
-        for (var i in groups) {
-            groups[i].state = "OPEN";
-        }
         for (var i in groups) {
             //console.log("outer for: "+i);
             insertGroup(groups, i);
@@ -173,10 +184,9 @@ function getTableOfGroups(groups) {
                 j = groups.length - 1;
             }
         }
-
     }
 
-    sortGroups(groups);
+    //sortGroups(groups);
     //debug("ater sort");
     createAttrTableName(groups);
     var groupsTable = new PerunTable();
@@ -228,7 +238,7 @@ function createGroup(form, group) {
         (flowMessager.newMessage(createdGroup.name, "subgroup was created succesfuly", "success")).draw();
         //loadGroups(vo);
         //callMeAfter(showGroup, [createdGroup.id], loadGroups);
-        allVoGroups.push(createdGroup);
+        addGroup(createdGroup, allVoGroups);
         fillGroups(allVoGroups);
         showGroup(createdGroup.id);
     });
