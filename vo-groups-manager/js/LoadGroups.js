@@ -134,7 +134,7 @@ function addGroupAdminRole(groupId, voId) {
     if (!roles.GROUPADMIN) {
         roles.GROUPADMIN = {Group: [], Vo: []};
     }
-    roles.GROUPADMIN.Group.push(grouId);
+    roles.GROUPADMIN.Group.push(groupId);
     if (roles.GROUPADMIN.Vo.indexOf(voId) < 0) {
         roles.GROUPADMIN.Vo.push(voId);
     }
