@@ -309,7 +309,7 @@ function removeMembers(form, group) {
         return function (error) {
             switch (error.name) {
                 case "NotGroupMemberException":
-                    (flowMessager.newMessage(member.name, "is not in in group " + group.shortName, "warning")).draw();
+                    (flowMessager.newMessage(member.name, "is not in group " + group.shortName, "warning")).draw();
                     break;
                 default:
                     (flowMessager.newMessage("Internal error", "Can not remove member " + member.name + " from group " + group.shortName, "danger")).draw();

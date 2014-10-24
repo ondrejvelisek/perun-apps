@@ -61,9 +61,9 @@ function fillMembers(members, group) {
 
     table.find('[data-toggle="tooltip"]').tooltip();
     table.find('button[id^=removeMember]').click(function () {
-        var memberId = $(this).attr("id").split("-")[1];
+        var member = getMemberById(allMembers, $(this).attr("id").split("-")[1]);
 
-        callPerunPost("groupsManager", "removeMember", {group: group.id, member: members[j].id},
+        callPerunPost("groupsManager", "removeMember", {group: group.id, member: member.id},
         function () {
             (flowMessager.newMessage(member.name, "was removed sucesfuly from " + group.shortName + " group", "success")).draw();
             showGroup(group.id);
@@ -71,7 +71,7 @@ function fillMembers(members, group) {
         }, function (error) {
             switch (error.name) {
                 case "NotGroupMemberException":
-                    (flowMessager.newMessage(member.name, "is not in in group " + group.shortName, "warning")).draw();
+                    (flowMessager.newMessage(member.name, "is not in group " + group.shortName, "warning")).draw();
                     break;
                 default:
                     (flowMessager.newMessage("Internal error", "Can not remove member " + member.name + " from group " + group.shortName, "danger")).draw();
@@ -92,6 +92,15 @@ function loadAllMembers(vo) {
     });
 }
 
+function getMemberById(members, id) {
+    for (var i in members) {
+        if (members[i].id == id) {
+            return members[i];
+        }
+    }
+    return null;
+}
+
 function refreshAllParentsMembers(group) {
     if (!group.parentGroupId) {
         return;
@@ -103,6 +112,7 @@ function refreshAllParentsMembers(group) {
     loadMembers(parentGroup);
     refreshAllParentsMembers(parentGroup);
 }
+
 
 
 function compareMembers(a, b) {
