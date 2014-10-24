@@ -28,13 +28,15 @@ function callPerun(manager, method, args, callBack, perunError, perunComplete) {
             } else {
                 callBack(data);
             }
-            if (perunComplete) {
-                perunComplete(data);
-            }
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
             (flowMessager.newMessage(errorThrown, textStatus, "danger")).draw();
+        },
+        complete: function (jqXHR, textStatus) {
+            if (perunComplete) {
+                perunComplete(data);
+            }
         }
     });
 }
@@ -62,13 +64,15 @@ function callPerunPost(manager, method, args, callBack, perunError, perunComplet
             } else {
                 callBack(data);
             }
-            if (perunComplete) {
-                perunComplete(data);
-            }
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
             (flowMessager.newMessage(errorThrown, textStatus, "danger")).draw();
+        },
+        complete: function (jqXHR, textStatus) {
+            if (perunComplete) {
+                perunComplete(data);
+            }
         }
     });
 }
