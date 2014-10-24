@@ -119,13 +119,13 @@ function addGroupToAllVoGroups(group) {
         groups.push(group);
         return;
     }
-    for (var i = groups.length-1; i >= 0; i--) {
+    for (var i = groups.length - 1; i >= 0; i--) {
         if (group.parentGroupId === groups[i].id) {
-            groups.splice(i+1,0,group)
+            groups.splice(i + 1, 0, group)
             return;
         }
     }
-    (flowMessager.newMessage("Group "+group.shorName,"can not be inserted because can not find parent group", "danger")).draw();
+    (flowMessager.newMessage("Group " + group.shorName, "can not be inserted because can not find parent group", "danger")).draw();
 }
 
 function addGroupAdminRole(groupId, voId) {
@@ -265,8 +265,11 @@ function addMembers(form, group) {
     }
     var count = members.length;
     for (var i in members) {
-        callPerunPost("groupsManager", "addMember", {group: group.id, member: members[i].id}, function () {
-            var name = members[i].name;
+        callPerunPost("groupsManager", "addMember", {group: group.id, member: members[i].id},  addMemberSuccess(members[i]));
+    }
+    function addMemberSuccess(member) {
+        return function () {
+            var name = member.name;
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage(name, "was added sucesfuly into " + group.shortName + " group", "success")).draw();
             showGroup(group.id);
@@ -274,7 +277,7 @@ function addMembers(form, group) {
             if (count == 0) {
                 refreshAllParentsMembers(group);
             }
-        }.bind(this, i));
+        };
     }
 }
 
@@ -492,19 +495,19 @@ function fillModalRemoveMembers(modal, group) {
             return;
         }
         loadImage.hide();
-        
-        for (var i = members.length-1; i >= 0; i--) {
+
+        for (var i = members.length - 1; i >= 0; i--) {
             if (members[i].membershipType != "DIRECT") {
                 members.splice(i, 1);
             }
         }
-        
+
         if (members.length === 0) {
             (new Message("", "No users found", "info", modal.self.find(".modal-body"))).draw();
             return;
         }
         members = members.sort(compareMembers);
-        
+
         var html;
         html = '          <form role="form">';
         html += '            <div class="form-group">';
