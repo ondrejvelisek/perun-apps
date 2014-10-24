@@ -239,7 +239,7 @@ function addMembers(form, group) {
                     (flowMessager.newMessage(member.name, "is already in group " + group.shortName, "warning")).draw();
                     break;
                 default:
-                    (flowMessager.newMessage("Internal error", "Can not add member " + mamber.name + " to group " + group.shortName, "danger")).draw();
+                    (flowMessager.newMessage("Internal error", "Can not add member " + member.name + " to group " + group.shortName, "danger")).draw();
                     break;
             }
         };
@@ -303,7 +303,7 @@ function removeMembers(form, group) {
                     (flowMessager.newMessage(member.name, "is not in in group " + group.shortName, "warning")).draw();
                     break;
                 default:
-                    (flowMessager.newMessage("Internal error", "Can not remove member " + mamber.name + " from group " + group.shortName, "danger")).draw();
+                    (flowMessager.newMessage("Internal error", "Can not remove member " + member.name + " from group " + group.shortName, "danger")).draw();
                     break;
             }
         };
