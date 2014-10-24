@@ -40,9 +40,7 @@ function addGroupTab(group) {
     innerTabs.addTab(groupTab);
     var displayName = "";
     for (var i in group.name) {
-
         if (group.name[i] == ":") {
-            console.log(group.name[i]);
             displayName += "&#8203;"; //because of line break for long names
         }
         displayName += group.name[i];
@@ -308,11 +306,16 @@ function removeMembers(form, group) {
         members[j].userId = membersValues[j].split("-")[1];
         members[j].name = membersValues[j].split("-")[2];
     }
+    var count = members.length;
     for (var j in members) {
         callPerunPost("groupsManager", "removeMember", {group: group.id, member: members[j].id}, function () {
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage(members[j].name, "was removed sucesfuly from " + group.shortName + " group", "success")).draw();
             showGroup(group.id);
+            count--;
+            if (count == 0) {
+                refreshAllParentsMembers(group);
+            }
         });
     }
 }

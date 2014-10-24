@@ -8,7 +8,7 @@ function entryPoint(user) {
     innerTabs = new Tabs($("#innerTabs"));
     //callMeAfter(afterLogout, [], "logout");
     loadVo();
-    console.log(roles);
+    //console.log(roles);
 }
 
 $(document).ready(function() {
