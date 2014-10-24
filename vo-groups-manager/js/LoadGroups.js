@@ -267,28 +267,32 @@ function addMembers(form, group) {
     for (var i in members) {
         callPerunPost("groupsManager", "addMember", {group: group.id, member: members[i].id},
             addMemberSuccess(members[i]),
-            addMemberError(members[i]));
+            addMemberError(members[i]), 
+            function() {
+                count--;
+                if (count == 0) {
+                    showGroup(group.id);
+                    innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+                    refreshAllParentsMembers(group);
+                }
+            });
     }
     function addMemberSuccess(member) {
         return function () {
-            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage(member.name, "was added sucesfuly into " + group.shortName + " group", "success")).draw();
-            showGroup(group.id);
-            count--;
-            if (count == 0) {
-                refreshAllParentsMembers(group);
-            }
         };
     }
     function addMemberError(member) {
-        return function (data) {
-            debug(data);
-            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-            (flowMessager.newMessage(name, "was added sucesfuly into " + group.shortName + " group", "danger")).draw();
-            count--;
-            if (count == 0) {
-                refreshAllParentsMembers(group);
+        return function (error) {
+            switch (error.name) {
+                case "AlreadyMemberException":
+                    (flowMessager.newMessage(member.name, "is already in group "+group.shortName, "warning")).draw();
+                break;
+                default:
+                    (flowMessager.newMessage("Internal error", "Can not add member "+mamber.name+" to group "+group.shortName , "danger")).draw();
+                break;
             }
+            
         };
     }
 }

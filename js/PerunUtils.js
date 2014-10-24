@@ -38,7 +38,7 @@ function callPerun(manager, method, args, callBack, perunErrorHandler) {
 ;
 
 
-function callPerunPost(manager, method, args, callBack, perunErrorHandler) {
+function callPerunPost(manager, method, args, callBack, perunError, perunComplete) {
 
     $.ajax({
         url: configuration.RPC_URL + manager + "/" + method,
@@ -59,6 +59,7 @@ function callPerunPost(manager, method, args, callBack, perunErrorHandler) {
             } else {
                 callBack(data);
             }
+            perunComplete(data);
         },
         error: function (jqXHR, textStatus, errorThrown)
         {

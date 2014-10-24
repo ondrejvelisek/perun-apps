@@ -80,7 +80,6 @@ function refreshAllParentsMembers(group) {
     if (!parentGroup) {
         return;
     }
-    debug(group);
     loadMembers(parentGroup);
     refreshAllParentsMembers(parentGroup);
 }

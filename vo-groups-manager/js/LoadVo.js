@@ -12,11 +12,7 @@ function entryPoint(user) {
 }
 
 $(document).ready(function() {
-    $("#members03").submit(function(e) {
-       debug($("#members03 input#member").val());
-       debug($("#members03 input#member").attr("id"));
-       e.preventDefault();
-    });
+    
 });
 
 var vo;
