@@ -223,35 +223,34 @@ function addMembers(form, group) {
     var count = members.length;
     for (var i in members) {
         callPerunPost("groupsManager", "addMember", {group: group.id, member: members[i].id},
-            addMemberSuccess(members[i]),
-            addMemberError(members[i]), 
-            function() {
-                count--;
-                if (count == 0) {
-                    innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-                    debug(innerTabs.getTabByName(group.id).place.find(".modal").length);
-                    showGroup(group.id);
-                    refreshAllParentsMembers(group);
-                }
-            });
+        addMemberSuccess(members[i]),
+                addMemberError(members[i]),
+                complete());
     }
-    function addMemberSuccess(member) {
+    function success(member) {
         return function () {
             (flowMessager.newMessage(member.name, "was added sucesfuly into " + group.shortName + " group", "success")).draw();
         };
     }
-    function addMemberError(member) {
+    function error(member) {
         return function (error) {
             switch (error.name) {
                 case "AlreadyMemberException":
-                    (flowMessager.newMessage(member.name, "is already in group "+group.shortName, "warning")).draw();
-                break;
+                    (flowMessager.newMessage(member.name, "is already in group " + group.shortName, "warning")).draw();
+                    break;
                 default:
-                    (flowMessager.newMessage("Internal error", "Can not add member "+mamber.name+" to group "+group.shortName , "danger")).draw();
-                break;
+                    (flowMessager.newMessage("Internal error", "Can not add member " + mamber.name + " to group " + group.shortName, "danger")).draw();
+                    break;
             }
-            
         };
+    }
+    function complete() {
+        count--;
+        if (count == 0) {
+            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+            showGroup(group.id);
+            refreshAllParentsMembers(group);
+        }
     }
 }
 
@@ -285,18 +284,37 @@ function removeMembers(form, group) {
     var count = members.length;
     for (var j in members) {
         callPerunPost("groupsManager", "removeMember", {group: group.id, member: members[j].id},
-        removeMemberSuccess(members[j]));
+        success(members[j]),
+                error(members[j]),
+                complete());
     }
-    function removeMemberSuccess(member) {
+    function success(member) {
         return function () {
-            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage(member.name, "was removed sucesfuly from " + group.shortName + " group", "success")).draw();
-            showGroup(group.id);
-            count--;
-            if (count == 0) {
-                refreshAllParentsMembers(group);
+        };
+    }
+    function error(member) {
+        return function (error) {
+            switch (error.name) {
+                case "MemberNotExistsException":
+                    (flowMessager.newMessage(member.name, "is not in in group " + group.shortName, "warning")).draw();
+                    break;
+                case "MemberAlreadyRemovedException":
+                    (flowMessager.newMessage(member.name, "is not in in group " + group.shortName, "warning")).draw();
+                    break;
+                default:
+                    (flowMessager.newMessage("Internal error", "Can not remove member " + mamber.name + " from group " + group.shortName, "danger")).draw();
+                    break;
             }
         };
+    }
+    function complete() {
+        count--;
+        if (count == 0) {
+            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+            showGroup(group.id);
+            refreshAllParentsMembers(group);
+        }
     }
 }
 
