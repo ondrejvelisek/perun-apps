@@ -129,8 +129,15 @@ function addGroupToAllVoGroups(group) {
     }
     (flowMessager.newMessage("Group "+group.shorName,"can not be inserted because can not find parent group", "danger")).draw();
 }
-function addRole(name, attrs) {
-    roles[name] = attrs;
+
+function addGroupAdminRole(groupId, voId) {
+    if (!roles.GROUPADMIN) {
+        roles.GROUPADMIN = {Group: [], Vo: []};
+    }
+    roles.GROUPADMIN.Group.push(grouId);
+    if (roles.GROUPADMIN.Vo.indexOf(voId) < 0) {
+        roles.GROUPADMIN.Vo.push(voId);
+    }
 }
 
 function fillGroups(groups) {
@@ -243,7 +250,7 @@ function createGroup(form, group) {
         //loadGroups(vo);
         //callMeAfter(showGroup, [createdGroup.id], loadGroups);
         addGroupToAllVoGroups(createdGroup);
-        addRole("GROUPADMIN", {Group: createdGroup.id, Vo: vo.id});
+        addGroupAdminRole(createdGroup.id, vo.id);
         console.log(roles);
         fillGroups(allVoGroups);
         showGroup(createdGroup.id);

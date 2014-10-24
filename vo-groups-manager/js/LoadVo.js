@@ -96,7 +96,7 @@ function createGroupInVo(form, vo) {
         (flowMessager.newMessage(createdGroup.name, "group was created succesfuly", "success")).draw();
         //loadGroups(vo);
         addGroupToAllVoGroups(createdGroup);
-        addRole("GROUPADMIN", {Group: createdGroup.id, Vo: vo.id});
+        addGroupAdminRole(createdGroup.id, vo.id);
         fillGroups(allVoGroups);
         showGroup(createdGroup.id);
     });
