@@ -199,15 +199,24 @@ function createGroup(form, group) {
     var name = form.find("#name");
     var description = form.find("#description");
     var newGroup = {name: name.val(), description: description.val()};
-    callPerunPost("groupsManager", "createGroup", {parentGroup: group.id, group: newGroup}, function (createdGroup) {
-        innerTabs.place.find("#" + group.id + " .modal").modal('hide');
+    callPerunPost("groupsManager", "createGroup", {parentGroup: group.id, group: newGroup}, 
+    function (createdGroup) {
         (flowMessager.newMessage(createdGroup.name, "subgroup was created succesfuly", "success")).draw();
-        //loadGroups(vo);
-        //callMeAfter(showGroup, [createdGroup.id], loadGroups);
         addGroupToAllVoGroups(createdGroup);
         addGroupAdminRole(createdGroup.id, vo.id);
         fillGroups(allVoGroups);
         showGroup(createdGroup.id);
+    }, function(error) {
+            switch (error.name) {
+                case "GroupExistsException":
+                    (flowMessager.newMessage(group.name, "is already exists", "warning")).draw();
+                    break;
+                default:
+                    (flowMessager.newMessage("Internal error", "Can not create group " + group.name, "danger")).draw();
+                    break;
+            }
+    }, function() {
+        innerTabs.place.find("#" + group.id + " .modal").modal('hide');
     });
 }
 
@@ -339,8 +348,8 @@ function removeManagers(form, group) {
 }
 
 function deleteGroup(group) {
-    callPerunPost("groupsManager", "deleteGroup", {group: group.id}, function () {
-        innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+    callPerunPost("groupsManager", "deleteGroup", {group: group.id}, 
+    function () {
         (flowMessager.newMessage(group.name, "was deleted successfully", "success")).draw();
         loadGroups(vo);
         if (group.parentGroupId) {
@@ -348,6 +357,17 @@ function deleteGroup(group) {
         } else {
             showVo();
         }
+    }, function(error) {
+            switch (error.name) {
+                case "GroupNotExistsException":
+                    (flowMessager.newMessage(group.name, "not exists", "warning")).draw();
+                    break;
+                default:
+                    (flowMessager.newMessage("Internal error", "Can not delete group " + group.name, "danger")).draw();
+                    break;
+            }
+    }, function () {
+        innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
     });
 }
 
