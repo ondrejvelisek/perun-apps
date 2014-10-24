@@ -11,7 +11,7 @@ function showGroup(groupId) {
     }
     var group = getGroupById(allVoGroups, groupId);
     if (!group) {
-        (flowMessager.newMessage("Group", "with ID " + groupId + " doesn't exist", "warning")).draw();
+        (flowMessager.newMessage("Group", "with ID " + groupId + " can not be shown. It doesn't exist.", "warning")).draw();
         showVo();
         return;
     }
@@ -244,6 +244,7 @@ function createGroup(form, group) {
         //callMeAfter(showGroup, [createdGroup.id], loadGroups);
         addGroupToAllVoGroups(createdGroup);
         addRole("GROUPADMIN", {Group: createdGroup.id, Vo: vo.id});
+        console.log(roles);
         fillGroups(allVoGroups);
         showGroup(createdGroup.id);
     });
