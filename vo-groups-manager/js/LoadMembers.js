@@ -33,24 +33,32 @@ function fillMembers(members, group) {
         table.html("no members");
         return;
     }
-    debug(members[0]);
 
     var users = [];
     for (var i in members) {
         users[i] = members[i].user;
+        if (members[i].membershipType == "DIRECT") {
+            users[i].membershipTypeIcon = "glyphicon-ok";
+        } else {
+            users[i].membershipTypeIcon = "glyphicon-minus";
+        }
         var attrs = members[i].userAttributes;
         for (var j in attrs) {
             users[i][attrs[j].friendlyName] = attrs[j].value;
+            
         }
     }
 
     var membersTable = new PerunTable();
     //membersTable.setClicableRows({isClicable : true, id:"id", prefix:"row-"});
     //membersTable.addColumn({type: "number", title: "#"});
+    membersTable.addColumn({type: "icon", title: "", name: "membershipTypeIcon", description: "is direct member" });
     membersTable.addColumn({type: "text", title: "Name", name: "displayName"});
     membersTable.addColumn({type: "text", title: "Preferred Mail", name: "preferredMail"});
     membersTable.setValues(users);
     table.html(membersTable.draw());
+    
+    table.find('[data-toggle="tooltip"]').tooltip();
 }
 
 var allMembers;
@@ -72,6 +80,7 @@ function refreshAllParentsMembers(group) {
     if (!parentGroup) {
         return;
     }
+    debug(group);
     loadMembers(parentGroup);
     refreshAllParentsMembers(parentGroup);
 }

@@ -83,6 +83,7 @@ function PerunTable() {
                             html += "";
                         } else {
                             html += "<i class='glyphicon "+this.values[row][column.name]+"' title='"+column.description+"' data-toggle='tooltip'></i>";
+                            //need active tooltip after table will be draw -- table.find('[data-toggle="tooltip"]').tooltip();
                         }
                         break;
                     default :

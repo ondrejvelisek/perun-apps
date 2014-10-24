@@ -251,7 +251,6 @@ function createGroup(form, group) {
         //callMeAfter(showGroup, [createdGroup.id], loadGroups);
         addGroupToAllVoGroups(createdGroup);
         addGroupAdminRole(createdGroup.id, vo.id);
-        console.log(roles);
         fillGroups(allVoGroups);
         showGroup(createdGroup.id);
     });
@@ -491,11 +490,19 @@ function fillModalRemoveMembers(modal, group) {
             return;
         }
         loadImage.hide();
+        
+        for (var i = members.length-1; i >= 0; i--) {
+            if (members[i].membershipType != "DIRECT") {
+                members.splice(i, 1);
+            }
+        }
+        
         if (members.length === 0) {
             (new Message("", "No users found", "info", modal.self.find(".modal-body"))).draw();
             return;
         }
         members = members.sort(compareMembers);
+        
         var html;
         html = '          <form role="form">';
         html += '            <div class="form-group">';
