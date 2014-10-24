@@ -220,6 +220,7 @@ function addMembers(form, group) {
         members[j].userId = membersValues[j].split("-")[1];
         members[j].name = membersValues[j].split("-")[2];
     }
+
     var count = members.length;
     for (var i in members) {
         callPerunPost("groupsManager", "addMember", {group: group.id, member: members[i].id},
@@ -229,13 +230,11 @@ function addMembers(form, group) {
     }
     function success(member) {
         return function () {
-            debug("success");
             (flowMessager.newMessage(member.name, "was added sucesfuly into " + group.shortName + " group", "success")).draw();
         };
     }
     function error(member) {
         return function (error) {
-            debug("error");
             switch (error.name) {
                 case "AlreadyMemberException":
                     (flowMessager.newMessage(member.name, "is already in group " + group.shortName, "warning")).draw();
@@ -248,7 +247,6 @@ function addMembers(form, group) {
     }
     function complete() {
         return function () {
-            debug("complete");
             count--;
             if (count == 0) {
                 innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
@@ -314,11 +312,13 @@ function removeMembers(form, group) {
         };
     }
     function complete() {
-        count--;
-        if (count == 0) {
-            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-            showGroup(group.id);
-            refreshAllParentsMembers(group);
+        return function () {
+            count--;
+            if (count == 0) {
+                innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+                showGroup(group.id);
+                refreshAllParentsMembers(group);
+            }
         }
     }
 }
