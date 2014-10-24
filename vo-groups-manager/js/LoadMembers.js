@@ -37,6 +37,7 @@ function fillMembers(members, group) {
     var users = [];
     for (var i in members) {
         users[i] = members[i].user;
+        users[i].memberId = members[i].id;
         if (members[i].membershipType == "DIRECT") {
             users[i].membershipTypeIcon = "glyphicon-ok";
         } else {
@@ -55,14 +56,14 @@ function fillMembers(members, group) {
     membersTable.addColumn({type: "icon", title: "", name: "membershipTypeIcon", description: "is direct member"});
     membersTable.addColumn({type: "text", title: "Name", name: "displayName"});
     membersTable.addColumn({type: "text", title: "Preferred Mail", name: "preferredMail"});
-    membersTable.addColumn({type: "button", title: "", btnText: "&times;", btnId: "id", btnName: "removeMember", btnType: "danger"});
+    membersTable.addColumn({type: "button", title: "", btnText: "&times;", btnId: "memberId", btnName: "removeMember", btnType: "danger"});
     membersTable.setValues(users);
     table.html(membersTable.draw());
 
     table.find('[data-toggle="tooltip"]').tooltip();
     table.find('button[id^=removeMember]').click(function () {
-        var member = getMemberById(allMembers, $(this).attr("id").split("-")[1]);
-
+        var member = getMemberById(members, $(this).attr("id").split("-")[1]);
+        
         callPerunPost("groupsManager", "removeMember", {group: group.id, member: member.id},
         function () {
             (flowMessager.newMessage(member.name, "was removed sucesfuly from " + group.shortName + " group", "success")).draw();
