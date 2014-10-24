@@ -299,10 +299,7 @@ function removeMembers(form, group) {
     function error(member) {
         return function (error) {
             switch (error.name) {
-                case "MemberNotExistsException":
-                    (flowMessager.newMessage(member.name, "is not in in group " + group.shortName, "warning")).draw();
-                    break;
-                case "MemberAlreadyRemovedException":
+                case "NotGroupMemberException":
                     (flowMessager.newMessage(member.name, "is not in in group " + group.shortName, "warning")).draw();
                     break;
                 default:
