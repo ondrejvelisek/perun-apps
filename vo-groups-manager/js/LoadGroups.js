@@ -268,12 +268,8 @@ function addMembers(form, group) {
     }
     var count = members.length;
     for (var i in members) {
-        console.log("beforeCall: ");
-        console.log(members[j]);
         var j = i;
         callPerunPost("groupsManager", "addMember", {group: group.id, member: members[j].id}, function () {
-            console.log(j);
-            console.log(members[j]);
             var name = members[j].name;
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage(name, "wasss added sucesfuly into " + group.shortName + " group", "success")).draw();

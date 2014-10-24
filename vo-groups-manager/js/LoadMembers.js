@@ -33,6 +33,7 @@ function fillMembers(members, group) {
         table.html("no members");
         return;
     }
+    debug(members[0]);
 
     var users = [];
     for (var i in members) {
