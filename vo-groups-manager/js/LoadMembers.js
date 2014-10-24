@@ -21,31 +21,6 @@ function loadMembers(group) {
     });
 }
 
-var allMembers;
-function loadAllMembers(vo) {
-    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:user:attribute-def:def:preferredMail"]}, function (members) {
-        if (!members) {
-            return;
-        }
-        allMembers = members.sort(compareMembers);
-        callBackAfter(loadAllMembers);
-    });
-}
-
-/*var users;
- function loadAllUsers(vo) {
- callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:member:attribute-def:def:mail"]}, function(members) {
- if (!members) {
- (flowMessager.newMessage("Members", "can't be loaded.", "danger")).draw();
- return;
- }
- users = [];
- for(var id in members) {
- users.push(members[id].user);
- }
- });
- }*/
-
 function fillMembers(members, group) {
     if (!members) {
         (flowMessager.newMessage("Members", "can't be fill.", "danger")).draw();
@@ -77,6 +52,28 @@ function fillMembers(members, group) {
     table.html(membersTable.draw());
 }
 
+var allMembers;
+function loadAllMembers(vo) {
+    callPerun("membersManager", "getCompleteRichMembers", {vo: vo.id, attrsNames: ["urn:perun:user:attribute-def:def:preferredMail"]}, function (members) {
+        if (!members) {
+            return;
+        }
+        allMembers = members.sort(compareMembers);
+        callBackAfter(loadAllMembers);
+    });
+}
+
+function refreshAllParentsMembers(group) {
+    if (!group.parentGroupId) {
+        return;
+    }
+    var parentGroup = getGroupById(allVoGroups, group.parentGroupId);
+    if (!parentGroup) {
+        return;
+    }
+    loadMembers(parentGroup);
+    refreshAllParentsMembers(parentGroup);
+}
 
 
 function compareMembers(a, b) {

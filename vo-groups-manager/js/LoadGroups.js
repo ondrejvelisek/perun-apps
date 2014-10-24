@@ -266,6 +266,7 @@ function addMembers(form, group) {
         members[j].userId = membersValues[j].split("-")[1];
         members[j].name = membersValues[j].split("-")[2];
     }
+    var count = members.length;
     for (var i in members) {
         console.log("beforeCall: ");
         console.log(members[j]);
@@ -277,6 +278,10 @@ function addMembers(form, group) {
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
             (flowMessager.newMessage(name, "wasss added sucesfuly into " + group.shortName + " group", "success")).draw();
             showGroup(group.id);
+            count--;
+            if (count == 0) {
+                refreshAllParentsMembers(group);
+            }
         });
     }
 }
