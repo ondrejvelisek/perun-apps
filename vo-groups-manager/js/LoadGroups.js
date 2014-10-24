@@ -265,17 +265,16 @@ function addMembers(form, group) {
     }
     var count = members.length;
     for (var i in members) {
-        var j = i;
-        callPerunPost("groupsManager", "addMember", {group: group.id, member: members[j].id}, function () {
-            var name = members[j].name;
+        callPerunPost("groupsManager", "addMember", {group: group.id, member: members[i].id}, function () {
+            var name = members[i].name;
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-            (flowMessager.newMessage(name, "wasss added sucesfuly into " + group.shortName + " group", "success")).draw();
+            (flowMessager.newMessage(name, "was added sucesfuly into " + group.shortName + " group", "success")).draw();
             showGroup(group.id);
             count--;
             if (count == 0) {
                 refreshAllParentsMembers(group);
             }
-        });
+        }.bind(this, i));
     }
 }
 
