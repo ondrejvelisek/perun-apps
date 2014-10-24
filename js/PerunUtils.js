@@ -35,7 +35,7 @@ function callPerun(manager, method, args, callBack, perunError, perunComplete) {
         },
         complete: function (jqXHR, textStatus) {
             if (perunComplete) {
-                perunComplete(data);
+                perunComplete();
             }
         }
     });
@@ -71,7 +71,7 @@ function callPerunPost(manager, method, args, callBack, perunError, perunComplet
         },
         complete: function (jqXHR, textStatus) {
             if (perunComplete) {
-                perunComplete(data);
+                perunComplete();
             }
         }
     });
