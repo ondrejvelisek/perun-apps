@@ -63,16 +63,16 @@ function fillMembers(members, group) {
     table.find('[data-toggle="tooltip"]').tooltip();
     table.find('button[id^=removeMember]').click(function () {
         var member = getMemberById(members, $(this).attr("id").split("-")[1]);
-        
+        var name = member.user.firstName + " " + member.user.lastName;
         callPerunPost("groupsManager", "removeMember", {group: group.id, member: member.id},
         function () {
-            (flowMessager.newMessage(member.name, "was removed sucesfuly from " + group.shortName + " group", "success")).draw();
+            (flowMessager.newMessage(name, "was removed sucesfuly from " + group.shortName + " group", "success")).draw();
             showGroup(group.id);
             refreshAllParentsMembers(group);
         }, function (error) {
             switch (error.name) {
                 case "NotGroupMemberException":
-                    (flowMessager.newMessage(member.name, "is not in group " + group.shortName, "warning")).draw();
+                    (flowMessager.newMessage(name, "is not in group " + group.shortName, "warning")).draw();
                     break;
                 default:
                     (flowMessager.newMessage("Internal error", "Can not remove member " + member.name + " from group " + group.shortName, "danger")).draw();
