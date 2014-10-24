@@ -350,6 +350,7 @@ function removeManagers(form, group) {
 function deleteGroup(group) {
     callPerunPost("groupsManager", "deleteGroup", {group: group.id}, 
     function () {
+        innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
         (flowMessager.newMessage(group.name, "was deleted successfully", "success")).draw();
         loadGroups(vo);
         if (group.parentGroupId) {
@@ -367,7 +368,7 @@ function deleteGroup(group) {
                     break;
             }
     }, function () {
-        innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+        //nothing to do
     });
 }
 
