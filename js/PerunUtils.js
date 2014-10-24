@@ -7,7 +7,7 @@
  * arguments which will be passed to the managers method
  * done - method which is started
  */
-function callPerun(manager, method, args, callBack, perunErrorHandler) {
+function callPerun(manager, method, args, callBack, perunError, perunComplete) {
 
     $.ajax({
         url: configuration.RPC_URL + manager + "/" + method,
@@ -20,13 +20,16 @@ function callPerun(manager, method, args, callBack, perunErrorHandler) {
                 (flowMessager.newMessage(manager + " " + method, "hasn't returned data", "warning")).draw();
                 callBack();
             } else if (typeof data.errorId !== "undefined") {
-                if (perunErrorHandler) {
-                    perunErrorHandler(data);
+                if (perunError) {
+                    perunError(data);
                 } else {
                     (flowMessager.newMessage(data.name, data.message, "danger")).draw();
                 }
             } else {
                 callBack(data);
+            }
+            if (perunComplete) {
+                perunComplete(data);
             }
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -51,15 +54,17 @@ function callPerunPost(manager, method, args, callBack, perunError, perunComplet
             if (!data) {
                 callBack();
             } else if (typeof data.errorId !== "undefined") {
-                if (perunErrorHandler) {
-                    perunErrorHandler(data);
+                if (perunError) {
+                    perunError(data);
                 } else {
                     (flowMessager.newMessage(data.name, data.message, "danger")).draw();
                 }
             } else {
                 callBack(data);
             }
-            perunComplete(data);
+            if (perunComplete) {
+                perunComplete(data);
+            }
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
