@@ -115,7 +115,8 @@ function loadGroups(vo) {
     });
 }
 
-function addGroup(group, groups) {
+function addGroupToAllVoGroups(group) {
+    var groups = allVoGroups;
     if (!group.parentGroupId) {
         groups.push(group);
         return;
@@ -127,6 +128,9 @@ function addGroup(group, groups) {
         }
     }
     (flowMessager.newMessage("Group "+group.shorName,"can not be inserted because can not find parent group", "danger")).draw();
+}
+function addRole(name, attrs) {
+    roles[name] = attrs;
 }
 
 function fillGroups(groups) {
@@ -238,7 +242,8 @@ function createGroup(form, group) {
         (flowMessager.newMessage(createdGroup.name, "subgroup was created succesfuly", "success")).draw();
         //loadGroups(vo);
         //callMeAfter(showGroup, [createdGroup.id], loadGroups);
-        addGroup(createdGroup, allVoGroups);
+        addGroupToAllVoGroups(createdGroup);
+        addRole("GROUPADMIN", {Group: createdGroup.id, Vo: vo.id});
         fillGroups(allVoGroups);
         showGroup(createdGroup.id);
     });

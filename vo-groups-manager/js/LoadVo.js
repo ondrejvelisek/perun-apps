@@ -8,6 +8,7 @@ function entryPoint(user) {
     innerTabs = new Tabs($("#innerTabs"));
     //callMeAfter(afterLogout, [], "logout");
     loadVo();
+    console.log(roles);
 }
 
 $(document).ready(function() {
@@ -94,7 +95,8 @@ function createGroupInVo(form, vo) {
         innerTabs.place.find("#vo .modal").modal('hide');
         (flowMessager.newMessage(createdGroup.name, "group was created succesfuly", "success")).draw();
         //loadGroups(vo);
-        addGroup(createdGroup, allVoGroups);
+        addGroupToAllVoGroups(createdGroup);
+        addRole("GROUPADMIN", {Group: createdGroup.id, Vo: vo.id});
         fillGroups(allVoGroups);
         showGroup(createdGroup.id);
     });
