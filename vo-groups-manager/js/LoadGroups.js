@@ -154,49 +154,6 @@ function fillGroups(groups) {
 }
 
 function getTableOfGroups(groups) {
-
-    //debug("before sort");
-
-    function sortGroups(groups) {
-        for (var i in groups) {
-            //console.log("outer for: "+i);
-            insertGroup(groups, i);
-        }
-    }
-    function insertGroup(groups, i) {
-        //debug("insert: "+i);
-        var group = groups[i];
-        if (group.state == "CLOSE") {
-            return i;
-        }
-        if (!group.parentGroupId) {
-            group.state = "CLOSE";
-            return i;
-        }
-        var j = i - 1;
-        while (j != i) {
-            //debug("while: i-"+j+", j-"+i+", i.parent-"+group.parentGroupId+", j.id-"+groups[j].id);
-            if (group.parentGroupId === groups[j].id) {
-                var index;
-                if (groups[j].state == "CLOSE") {
-                    index = j;
-                } else {
-                    index = insertGroup(groups, j);
-                }
-                groups.splice(i, 1);
-                groups.splice(index + 1, 0, group);
-                group.state = "CLOSE";
-                return index;
-            }
-            j--;
-            if (j < 0) {
-                j = groups.length - 1;
-            }
-        }
-    }
-
-    //sortGroups(groups);
-    //debug("ater sort");
     createAttrTableName(groups);
     var groupsTable = new PerunTable();
     groupsTable.setClicableRows({isClicable: true, id: "id", prefix: "row-"});
@@ -270,6 +227,7 @@ function addMembers(form, group) {
             addMemberError(members[i]), 
             function() {
                 count--;
+                debug(count);
                 if (count == 0) {
                     showGroup(group.id);
                     innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
