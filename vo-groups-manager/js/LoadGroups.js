@@ -247,12 +247,14 @@ function addMembers(form, group) {
         };
     }
     function complete() {
-        debug("complete");
-        count--;
-        if (count == 0) {
-            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-            showGroup(group.id);
-            refreshAllParentsMembers(group);
+        return function () {
+            debug("complete");
+            count--;
+            if (count == 0) {
+                innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+                showGroup(group.id);
+                refreshAllParentsMembers(group);
+            }
         }
     }
 }
