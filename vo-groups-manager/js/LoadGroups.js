@@ -265,14 +265,26 @@ function addMembers(form, group) {
     }
     var count = members.length;
     for (var i in members) {
-        callPerunPost("groupsManager", "addMember", {group: group.id, member: members[i].id},  addMemberSuccess(members[i]));
+        callPerunPost("groupsManager", "addMember", {group: group.id, member: members[i].id},
+            addMemberSuccess(members[i]),
+            addMemberError(members[i]));
     }
     function addMemberSuccess(member) {
         return function () {
-            var name = member.name;
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-            (flowMessager.newMessage(name, "was added sucesfuly into " + group.shortName + " group", "success")).draw();
+            (flowMessager.newMessage(member.name, "was added sucesfuly into " + group.shortName + " group", "success")).draw();
             showGroup(group.id);
+            count--;
+            if (count == 0) {
+                refreshAllParentsMembers(group);
+            }
+        };
+    }
+    function addMemberError(member) {
+        return function (data) {
+            debug(data);
+            innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+            (flowMessager.newMessage(name, "was added sucesfuly into " + group.shortName + " group", "danger")).draw();
             count--;
             if (count == 0) {
                 refreshAllParentsMembers(group);
@@ -310,7 +322,8 @@ function removeMembers(form, group) {
     }
     var count = members.length;
     for (var j in members) {
-        callPerunPost("groupsManager", "removeMember", {group: group.id, member: members[j].id}, removeMemberSuccess(members[j]));
+        callPerunPost("groupsManager", "removeMember", {group: group.id, member: members[j].id},
+        removeMemberSuccess(members[j]));
     }
     function removeMemberSuccess(member) {
         return function () {
