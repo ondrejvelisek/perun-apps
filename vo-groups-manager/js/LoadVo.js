@@ -94,7 +94,8 @@ function createGroupInVo(form, vo) {
         innerTabs.place.find("#vo .modal").modal('hide');
         (flowMessager.newMessage(createdGroup.name, "group was created succesfuly", "success")).draw();
         //loadGroups(vo);
-        
+        addGroup(createdGroup, allVoGroups);
+        fillGroups(allVoGroups);
         showGroup(createdGroup.id);
     });
 }
