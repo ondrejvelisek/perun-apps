@@ -223,8 +223,8 @@ function addMembers(form, group) {
     var count = members.length;
     for (var i in members) {
         callPerunPost("groupsManager", "addMember", {group: group.id, member: members[i].id},
-        addMemberSuccess(members[i]),
-                addMemberError(members[i]),
+        success(members[i]),
+                error(members[i]),
                 complete());
     }
     function success(member) {
