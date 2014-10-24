@@ -209,7 +209,7 @@ function createGroup(form, group) {
     }, function(error) {
             switch (error.name) {
                 case "GroupExistsException":
-                    (flowMessager.newMessage(group.name, "is already exists", "warning")).draw();
+                    (flowMessager.newMessage(group.shortName, "is already exists", "warning")).draw();
                     break;
                 default:
                     (flowMessager.newMessage("Internal error", "Can not create group " + group.name, "danger")).draw();
@@ -361,7 +361,7 @@ function deleteGroup(group) {
     }, function(error) {
             switch (error.name) {
                 case "GroupNotExistsException":
-                    (flowMessager.newMessage(group.name, "not exists", "warning")).draw();
+                    (flowMessager.newMessage(group.shortName, "not exists", "warning")).draw();
                     break;
                 default:
                     (flowMessager.newMessage("Internal error", "Can not delete group " + group.name, "danger")).draw();

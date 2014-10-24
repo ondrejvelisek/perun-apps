@@ -55,10 +55,15 @@ function fillMembers(members, group) {
     membersTable.addColumn({type: "icon", title: "", name: "membershipTypeIcon", description: "is direct member" });
     membersTable.addColumn({type: "text", title: "Name", name: "displayName"});
     membersTable.addColumn({type: "text", title: "Preferred Mail", name: "preferredMail"});
+    membersTable.addColumn({type: "button", title: "", btnText: "&times;", btnId: "id", btnName: "removeMember", btnType: "danger"});
     membersTable.setValues(users);
     table.html(membersTable.draw());
     
     table.find('[data-toggle="tooltip"]').tooltip();
+    table.find('button[id^=removeMember]').click(function() {
+        var memberId = $(this).attr("id");;
+        debug(memberId);
+    });
 }
 
 var allMembers;

@@ -66,13 +66,13 @@ function fillSSHKeys(sshPublicKey) {
     var sshKeysTable = new PerunTable();
     sshKeysTable.addColumn({type:"number", title:"#"});
     sshKeysTable.addColumn({type:"text", title:"SSH keys", name:"value"});
-    sshKeysTable.addColumn({type:"button", title:"", btnText:"remove", btnType:"danger", btnId:"key"});
+    sshKeysTable.addColumn({type:"button", title:"", btnText:"remove", btnType:"danger", btnId:"key", btnName: "removeSSHKey"});
     sshKeysTable.setList(sshPublicKey.value);
     var tableHtml = sshKeysTable.draw();
     $("#sshkeys-table").html(tableHtml);
     
     
-    $('#sshkeys-table button[id^="tableBtn-"]').click(function() {
+    $('#sshkeys-table button[id^="removeSSHKey-"]').click(function() {
         var sshId = parseInt(this.id.split('-')[1]);
         var loadImage = new LoadImage($("#sshkeys-table"), "auto");
         

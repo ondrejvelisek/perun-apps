@@ -56,12 +56,12 @@ function fillAlternativePasswords(altPasswords) {
     var altPasswordsTable = new PerunTable();
     altPasswordsTable.addColumn({type: "number", title: "#"});
     altPasswordsTable.addColumn({type: "text", title: "Description", name: "key"});
-    altPasswordsTable.addColumn({type: "button", title: "", btnText: "delete", btnType: "danger", btnId: "value"});
+    altPasswordsTable.addColumn({type: "button", title: "", btnText: "delete", btnType: "danger", btnName: "deleteAltPassword", btnId: "value"});
     altPasswordsTable.setList(altPasswords.value);
     var tableHtml = altPasswordsTable.draw();
     $("#altPasswordsTable").html(tableHtml);
 
-    $("#altPasswordsTable button[id^='tableBtn-']").click(function() {
+    $("#altPasswordsTable button[id^='deleteAltPassword-']").click(function() {
         var loadImage = new LoadImage($('#altPasswordsTable'), "40px");
         var passwordId = $(this).attr("id").split('-')[1];
         callPerunPost("usersManager", "deleteAlternativePassword", {user: user.id, loginNamespace: "einfra", passwordId: passwordId}, function() {
