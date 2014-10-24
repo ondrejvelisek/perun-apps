@@ -310,15 +310,18 @@ function removeMembers(form, group) {
     }
     var count = members.length;
     for (var j in members) {
-        callPerunPost("groupsManager", "removeMember", {group: group.id, member: members[j].id}, function () {
+        callPerunPost("groupsManager", "removeMember", {group: group.id, member: members[j].id}, removeMemberSuccess(members[j]));
+    }
+    function removeMemberSuccess(member) {
+        return function () {
             innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
-            (flowMessager.newMessage(members[j].name, "was removed sucesfuly from " + group.shortName + " group", "success")).draw();
+            (flowMessager.newMessage(member.name, "was removed sucesfuly from " + group.shortName + " group", "success")).draw();
             showGroup(group.id);
             count--;
             if (count == 0) {
                 refreshAllParentsMembers(group);
             }
-        });
+        };
     }
 }
 
