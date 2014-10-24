@@ -95,7 +95,7 @@ function createGroupInVo(form, vo) {
         addGroupAdminRole(createdGroup.id, vo.id);
         fillGroups(allVoGroups);
         showGroup(createdGroup.id);
-    }, function () {
+    }, function (error) {
         switch (error.name) {
             case "GroupExistsException":
                 (flowMessager.newMessage(newGroup.name, "is already exists", "warning")).draw();
