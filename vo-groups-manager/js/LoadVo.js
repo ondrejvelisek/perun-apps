@@ -11,19 +11,19 @@ function entryPoint(user) {
     //console.log(roles);
 }
 
-$(document).ready(function() {
-    
+$(document).ready(function () {
+
 });
 
 var vo;
 function loadVo() {
-    callPerun("vosManager", "getVoByShortName", {shortName: voConfiguration.SHORT_NAME}, function(voResult) {
+    callPerun("vosManager", "getVoByShortName", {shortName: voConfiguration.SHORT_NAME}, function (voResult) {
         if (!voResult) {
             (flowMessager.newMessage("VO", "can't be loaded.", "danger")).draw();
             return;
         }
         vo = voResult;
-        
+
         var hash = document.location.hash.substring(1).split("&")[1];
         showVo();
         if (hash != undefined && hash != "vo") {
@@ -40,7 +40,7 @@ function showVo() {
     }
     if (!innerTabs.containsTab("vo")) {
         addVoTab(vo);
-        $("#groupsManagerLink").click(function() {
+        $("#groupsManagerLink").click(function () {
             //showVo();
         });
     }
@@ -87,14 +87,23 @@ function createGroupInVo(form, vo) {
     var name = form.find("#name");
     var description = form.find("#description");
     var newGroup = {name: name.val(), description: description.val()};
-    callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: newGroup}, function(createdGroup) {
+    callPerunPost("groupsManager", "createGroup", {vo: vo.id, group: newGroup},
+    function (createdGroup) {
         innerTabs.place.find("#vo .modal").modal('hide');
-        (flowMessager.newMessage(createdGroup.name, "group was created succesfuly", "success")).draw();
-        //loadGroups(vo);
+        (flowMessager.newMessage(createdGroup.shortName, "group was created succesfuly", "success")).draw();
         addGroupToAllVoGroups(createdGroup);
         addGroupAdminRole(createdGroup.id, vo.id);
         fillGroups(allVoGroups);
         showGroup(createdGroup.id);
+    }, function () {
+        switch (error.name) {
+            case "GroupExistsException":
+                (flowMessager.newMessage(newGroup.name, "is already exists", "warning")).draw();
+                break;
+            default:
+                (flowMessager.newMessage("Internal error", "Can not create group " + newGroup.name, "danger")).draw();
+                break;
+        }
     });
 }
 
@@ -121,7 +130,7 @@ function fillModalInviteUser(modal, vo) {
     modal.addBody(html);
 
     var inviteUserForm = modal.self.find("form");
-    inviteUserForm.submit(function(event) {
+    inviteUserForm.submit(function (event) {
         event.preventDefault();
         debug("Not support yet.");
     });
