@@ -227,10 +227,10 @@ function addMembers(form, group) {
             addMemberError(members[i]), 
             function() {
                 count--;
-                debug(count);
                 if (count == 0) {
-                    showGroup(group.id);
                     innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+                    debug(innerTabs.getTabByName(group.id).place.find(".modal").length);
+                    showGroup(group.id);
                     refreshAllParentsMembers(group);
                 }
             });
