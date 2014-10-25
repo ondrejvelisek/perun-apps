@@ -53,7 +53,7 @@ function fillMembers(members, group) {
     var membersTable = new PerunTable();
     //membersTable.setClicableRows({isClicable : true, id:"id", prefix:"row-"});
     //membersTable.addColumn({type: "number", title: "#"});
-    membersTable.addColumn({type: "icon", title: "", name: "membershipTypeIcon", description: "is direct member"});
+    //membersTable.addColumn({type: "icon", title: "", name: "membershipTypeIcon", description: "is direct member"});
     membersTable.addColumn({type: "text", title: "Name", name: "displayName"});
     membersTable.addColumn({type: "text", title: "Preferred Mail", name: "preferredMail"});
     membersTable.addColumn({type: "button", title: "", btnText: "&times;", btnId: "memberId", btnName: "removeMember", btnType: "danger"});
