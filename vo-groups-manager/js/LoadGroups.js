@@ -51,14 +51,14 @@ function addGroupTab(group) {
     content += '<div class="btn-toolbar">';
     content += '  <div class="btn-group">';
     content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addMembers' + group.id + '">Add Members</button>';
-    content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#removeMembers' + group.id + '">Remove Members</button>';
+    content += '    <!--<button class="btn btn-danger" data-toggle="modal" data-target="#removeMembers' + group.id + '">Remove Members</button>-->';
     content += '  </div>';
     content += '  <!--<div class="btn-group">';
     content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#addManagers' + group.id + '">Add Managers</button>';
     content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#removeManagers' + group.id + '">Remove Managers</button>';
     content += '  </div>-->';
     content += '  <div class="btn-group pull-right">';
-    content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#createGroup' + group.id + '">Create Subgroup</button>';
+    content += '    <!--<button class="btn btn-primary" data-toggle="modal" data-target="#createGroup' + group.id + '">Create Subgroup</button>-->';
     content += '    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteGroup' + group.id + '">Delete Group</button>';
     content += '  </div>';
     content += '</div>';

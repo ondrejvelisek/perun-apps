@@ -53,7 +53,7 @@ function fillMembers(members, group) {
     var membersTable = new PerunTable();
     //membersTable.setClicableRows({isClicable : true, id:"id", prefix:"row-"});
     //membersTable.addColumn({type: "number", title: "#"});
-    membersTable.addColumn({type: "icon", title: "", name: "membershipTypeIcon", description: "is direct member"});
+    //membersTable.addColumn({type: "icon", title: "", name: "membershipTypeIcon", description: "is direct member"});
     membersTable.addColumn({type: "text", title: "Name", name: "displayName"});
     membersTable.addColumn({type: "text", title: "Preferred Mail", name: "preferredMail"});
     membersTable.addColumn({type: "button", title: "", btnText: "&times;", btnId: "memberId", btnName: "removeMember", btnType: "danger"});
@@ -61,24 +61,18 @@ function fillMembers(members, group) {
     table.html(membersTable.draw());
 
     table.find('[data-toggle="tooltip"]').tooltip();
+
+    var groupTab = innerTabs.getTabByName(group.id);
     table.find('button[id^=removeMember]').click(function () {
         var member = getMemberById(members, $(this).attr("id").split("-")[1]);
-        var name = member.user.firstName + " " + member.user.lastName;
-        callPerunPost("groupsManager", "removeMember", {group: group.id, member: member.id},
-        function () {
-            (flowMessager.newMessage(name, "was removed sucesfuly from " + group.shortName + " group", "success")).draw();
-            showGroup(group.id);
-            refreshAllParentsMembers(group);
-        }, function (error) {
-            switch (error.name) {
-                case "NotGroupMemberException":
-                    (flowMessager.newMessage(name, "is not in group " + group.shortName, "warning")).draw();
-                    break;
-                default:
-                    (flowMessager.newMessage("Internal error", "Can not remove member " + member.name + " from group " + group.shortName, "danger")).draw();
-                    break;
-            }
-        });
+        var removeMemberModal = new Modal("Remove " + member.user.firstName + " " + member.user.lastName + 
+                " from group " + group.shortName,
+                "removeMember" + member.id + "-" + group.id,
+                groupTab.place);
+        removeMemberModal.setType("danger");
+        removeMemberModal.init();
+        fillModalRemoveMember(removeMemberModal, member, group);
+        removeMemberModal.self.modal('show');
     });
 }
 
@@ -115,6 +109,45 @@ function refreshAllParentsMembers(group) {
 }
 
 
+function fillModalRemoveMember(modal, member, group) {
+    modal.clear();
+    var html;
+    html = "<p>";
+    html += "Do you really want to remove member " + member.user.firstName + " " + member.user.lastName + "?";
+    html += "</p>";
+    html += '<div class="btn-toolbar">';
+    html += '  <div class="btn-group pull-right">';
+    html += '    <button id="removeMember" class="btn btn-danger">Remove Member</button>';
+    html += '  </div>';
+    html += '  <div class="btn-group pull-right">';
+    html += '    <button class="btn btn-default" data-dismiss="modal">Close</button>';
+    html += '  </div>';
+    html += '</div>';
+    modal.addBody(html);
+    modal.self.find("button#removeMember").click(function () {
+        removeMember(member, group);
+    });
+}
+
+function removeMember(member, group) {
+    callPerunPost("groupsManager", "removeMember", {group: group.id, member: member.id},
+    function () {
+        (flowMessager.newMessage(member.name, "was removed sucesfuly from " + group.shortName + " group", "success")).draw();
+    }, function (error) {
+        switch (error.name) {
+            case "NotGroupMemberException":
+                (flowMessager.newMessage(member.name, "is not in group " + group.shortName, "warning")).draw();
+                break;
+            default:
+                (flowMessager.newMessage("Internal error", "Can not remove member " + member.name + " from group " + group.shortName, "danger")).draw();
+                break;
+        }
+    }, function () {
+        innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
+        showGroup(group.id);
+        refreshAllParentsMembers(group);
+    });
+}
 
 function compareMembers(a, b) {
     return a.user.lastName.localeCompare(b.user.lastName);
