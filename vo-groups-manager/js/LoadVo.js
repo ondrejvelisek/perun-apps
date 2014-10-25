@@ -129,8 +129,8 @@ function fillModalInviteUser(modal, vo) {
     var html;
     html = '          <form role="form">';
     html += '            <div class="form-group">';
-    html += '              <label for="name">Users e-Mail</label>';
-    html += '              <input type="email" class="form-control" id="name" placeholder="Users e-Mail" autofocus>';
+    html += '              <label for="email">Users e-Mail</label>';
+    html += '              <input type="email" class="form-control" id="email" placeholder="Users e-Mail" autofocus>';
     html += '            </div>';
     html += '            <button type="submit" class="btn btn-primary">Invite User</button>';
     html += '          </form>';
