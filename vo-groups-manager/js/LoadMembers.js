@@ -67,7 +67,8 @@ function fillMembers(members, group) {
         var member = getMemberById(members, $(this).attr("id").split("-")[1]);
         if (member.membershipType != "DIRECT") {
             $(this).prop("disabled", true);
-            $(this).parent().tooltip({title: "is not direct member", placement: "left"});
+            $(this).parent().attr("title", "is not direct member");
+            //$(this).parent().tooltip({title: "is not direct member", placement: "left"});
         }
     });
     
