@@ -453,10 +453,11 @@ function fillModalAddMembers(modal, vo, group) {
     });
     function addMemberInSelect(member, select) {
         var option;
+        var email = getAttrByFriendlyName(member.userAttributes, "preferredMail").value;
         option = '<option value="' + member.id + '-' +
                 member.user.id + '-' +
                 member.user.firstName + ' ' + member.user.lastName + '">';
-        option += member.user.lastName + " " + member.user.firstName;
+        option += member.user.lastName + " " + member.user.firstName + " &nbsp; - &nbsp; " + email;
         option += '</option>';
         select.append(option);
     }
