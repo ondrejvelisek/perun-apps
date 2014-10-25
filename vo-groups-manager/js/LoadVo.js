@@ -60,9 +60,9 @@ function addVoTab(vo) {
     content += '  <div class="btn-group">';
     content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#createGroupInVo">Create Group</button>';
     content += '  </div>';
-    content += '  <!--<div class="btn-group">';
+    content += '  <div class="btn-group">';
     content += '    <button class="btn btn-primary" data-toggle="modal" data-target="#inviteUser">Invite User</button>';
-    content += '  </div>-->';
+    content += '  </div>';
     content += '</div>';
     content += '<div id="groupsTable"></div>';
     voTab.addContent(content);
@@ -107,6 +107,13 @@ function createGroupInVo(form, vo) {
     });
 }
 
+function inviteUser(form, vo) {
+    var email = form.find("input#email");
+    callPerunPost("registrarManager", "sendInvitation", {voId: vo.id, email: email.val, language: "en"}, function() {
+        email.val("");
+    });
+}
+
 function fillVoInfo(vo) {
     if (!vo) {
         (flowMessager.newMessage("Vo", "can't be fill.", "danger")).draw();
@@ -132,7 +139,7 @@ function fillModalInviteUser(modal, vo) {
     var inviteUserForm = modal.self.find("form");
     inviteUserForm.submit(function (event) {
         event.preventDefault();
-        debug("Not support yet.");
+        inviteUser(inviteUserForm, vo);
     });
 }
 
