@@ -109,7 +109,7 @@ function createGroupInVo(form, vo) {
 
 function inviteUser(form, vo) {
     var email = form.find("input#email");
-    callPerunPost("registrarManager", "sendInvitation", {voId: vo.id, email: email.val, language: "en"}, function() {
+    callPerunPost("registrarManager", "sendInvitation", {voId: vo.id, email: email.val(), language: "en"}, function() {
         email.val("");
     });
 }
