@@ -6,6 +6,7 @@
 
 
 function entryPoint(user) {
+    loadUserLogin(user);
     loadAlternativePasswords(user);
 }
 
@@ -27,6 +28,7 @@ $(document).ready(function() {
     });
 
 });
+
 
 
 function loadAlternativePasswords(user) {
@@ -71,6 +73,28 @@ function fillAlternativePasswords(altPasswords) {
         });
     });
 
+}
+
+function loadUserLogin(user) {
+    if (!user) {
+        (flowMessager.newMessage("User login", "can't be loaded because user isn't loaded.", "danger")).draw();
+        return;
+    }
+    
+    callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:login-namespace:einfra"}, function(login) {
+        if (!login) {
+            (staticMessager.newMessage("Can't set alternative passwords", "You don't have eInfra login", "warning")).draw();
+            return;
+        }
+        if (!login.value) {
+            (staticMessager.newMessage("Can't set alternative passwords", "You don't have eInfra login", "warning")).draw();
+            return;
+        }
+        if (login.value == null) {
+            (staticMessager.newMessage("Can't set alternative passwords", "You don't have eInfra login", "warning")).draw();
+            return;
+        }
+    });
 }
 
 function randomPassword(length) {
