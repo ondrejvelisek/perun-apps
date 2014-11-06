@@ -16,9 +16,9 @@ $(document).ready(function() {
         var subject = "Application for establish new VO";
         var text = getTextFromForm(form);
         form[0].reset();
-        /*callPerunPost("rtMessagesManager", "sentMessageToRT", {queue: queue, subject: subject, text: text}, function() {
+        callPerunPost("rtMessagesManager", "sentMessageToRT", {queue: queue, subject: subject, text: text}, function() {
             (flowMessager.newMessage("Application", "was send successfully", "success")).draw();
-        });*/
+        });
         
         function getTextFromForm(form) {
             var text = "";
