@@ -80,13 +80,14 @@ function fillCertificates(certificates) {
     for (var id in certificates) {
         certificatesFriendly[id] = {};
         certificatesFriendly[id]["name"] = certificates[id].extSource.name;
-        certificatesFriendly[id]["login"] = certificates[id].login;
+        var login = decodeURIComponent((certificates[id].login).replace(/\\x/g, '%'));
+        certificatesFriendly[id]["login"] = login;
     }
     
     var certificatesTable = new PerunTable();
     certificatesTable.addColumn({type:"number", title:"#"});
-    certificatesTable.addColumn({type:"text", title:"Digital certificates", name:"name"});
-    certificatesTable.addColumn({type:"text", title:"Login", name:"login"});
+    certificatesTable.addColumn({type:"text", title:"Issuer", name:"name"});
+    certificatesTable.addColumn({type:"text", title:"Identity", name:"login"});
     certificatesTable.setValues(certificatesFriendly);
     $("#certificates-table").html(certificatesTable.draw());
 }
