@@ -24,7 +24,11 @@ $(document).ready(function() {
             var text = "";
             form.find("input, textarea").each(function() {
                 text += form.find("label[for="+$(this).attr("id")+"]").text()+": ";
-                text += $(this).val()+"  \r\n";
+                var value = $(this).val();
+                if (!value) {
+                    value = "";
+                }
+                text += value + "  \r\n";
             });
             return text;
         }
