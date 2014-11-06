@@ -24,11 +24,7 @@ $(document).ready(function() {
             var text = "";
             form.find("input, textarea").each(function() {
                 text += form.find("label[for="+$(this).attr("id")+"]").text()+": ";
-                var value = $(this).val();
-                if (!value) {
-                    value = "";
-                }
-                text += value + "  \r\n";
+                text += $(this).val() + "   \n";
             });
             return text;
         }
