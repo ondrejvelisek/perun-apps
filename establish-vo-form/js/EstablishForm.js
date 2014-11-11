@@ -21,7 +21,7 @@ $(document).ready(function() {
         });
         
         function getTextFromForm(form) {
-            var text = '';
+            var text = 'Request has been created, detailed information follow: \n ';
             form.find('input, textarea').each(function() {
                 text += form.find("label[for="+$(this).attr("id")+"]").text()+": ";
                 text += $(this).val() + '   \n ';
