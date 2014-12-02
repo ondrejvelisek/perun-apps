@@ -17,7 +17,7 @@ function executeQuery() {
         $.ajax({
             url: configuration.TEST_RPC_URL,
             success: function(data) {
-                if (!data.startsWith("OK!")) {
+                if (!(data.myString.indexOf("OK!") == 0)) {
                     reloadMsg();
                 }
                 setTimeout(executeQuery, 5000);
