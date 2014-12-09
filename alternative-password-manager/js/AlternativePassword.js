@@ -6,7 +6,7 @@
 
 
 function entryPoint(user) {
-    loadUserLogin(user);
+    checkUserEinfraLogin(user);
     loadAlternativePasswords(user);
 }
 
@@ -75,7 +75,7 @@ function fillAlternativePasswords(altPasswords) {
 
 }
 
-function loadUserLogin(user) {
+function checkUserEinfraLogin(user) {
     if (!user) {
         (flowMessager.newMessage("User login", "can't be loaded because user isn't loaded.", "danger")).draw();
         return;

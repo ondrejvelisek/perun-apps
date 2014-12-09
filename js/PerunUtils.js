@@ -29,6 +29,11 @@ function callPerun(manager, method, args, callBack, perunError, perunComplete) {
                 callBack(data);
             }
         },
+        statusCode: {
+            302: function() {
+                window.location.reload();
+            }
+        },
         error: function (jqXHR, textStatus, errorThrown)
         {
             (flowMessager.newMessage(errorThrown, textStatus, "danger")).draw();
