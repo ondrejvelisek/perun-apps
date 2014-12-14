@@ -6,7 +6,7 @@
 
 
 function entryPoint(user) {
-    checkUserEinfraLogin(user);
+    //checkUserEinfraLogin(user);
     loadUserAttributes(user);
     loadProjects(user);
     loadIdentities(user);
@@ -62,16 +62,16 @@ function checkUserEinfraLogin(user) {
     }
     
     callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:login-namespace:einfra"}, function(login) {
-        if (!login) {
-            (staticMessager.newMessage("Can't set alternative passwords", "You don't have eInfra login", "warning")).draw();
+	if (!login) {
+            (flowMessager.newMessage("You can't use User profile app", "You don't have eInfra login", "warning")).draw();
             return;
         }
         if (!login.value) {
-            (staticMessager.newMessage("Can't set alternative passwords", "You don't have eInfra login", "warning")).draw();
+            (flowMessager.newMessage("You can't use User profile app", "You don't have eInfra login", "warning")).draw();
             return;
         }
         if (login.value == null) {
-            (staticMessager.newMessage("Can't set alternative passwords", "You don't have eInfra login", "warning")).draw();
+            (flowMessager.newMessage("You can't use User profile app", "You don't have eInfra login", "warning")).draw();
             return;
         }
     });
@@ -95,9 +95,9 @@ function loadUserAttributes(user) {
         }
         fillUserAttributes(userAttributesFriendly);
         if (!userAttributesFriendly["login-namespace:einfra"]) {
-            $(".hide-without-login").hide(0);
-        }
-        loadImage.hide();
+	    $(".hide-without-login").hide(0);
+	}
+	loadImage.hide();
         //(flowMessager.newMessage("User data", "was loaded successfully.", "success")).draw();
     });
 }
