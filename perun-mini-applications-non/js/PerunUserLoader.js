@@ -17,18 +17,6 @@ function loadUser() {
         fillUserInfo(user);
         fillRolesInfo(roles);
         entryPoint(user);
-        
-        (flowMessager.newMessage("User","was logged in successfully","success")).draw();
-        $(".user [data-toggle=dropdown]").show();
-        $(".user #login").hide();
-        $(".user #logout").unbind( "click" );
-        $(".user #logout").click(function(e) {
-            logout();
-        });
-        $(".user #login").unbind( "click" );
-        $(".user #login").click(function(e) {
-            loadUser();
-        });
     });
 }
 

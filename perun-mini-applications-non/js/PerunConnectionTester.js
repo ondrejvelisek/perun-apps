@@ -2,7 +2,8 @@
 $(document).ready(function() {
     if (configuration.TESTING_CONNECTION) {
         // Methods which check if the Perun connection is OK
-        setTimeout(executeQuery, 5000);
+        executeQuery();
+	//setTimeout(executeQuery, 5000);
     }
 });
 
@@ -29,15 +30,21 @@ function executeQuery() {
                 401: function() {
                     reloadMsg();
                 },
-                403: function() {
-                    reloadMsg();
-                },
-                302: function() {
-                    window.location.reload();
-                }
+		302: function() {
+		    window.location.reload();
+		},
+		0: function() {
+		    window.location.reload();
+		}
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                reloadMsg();
+                if (jqXHR.status == 0) {
+		  window.location.reload();
+		} else if (jqXHR.status == 302) {
+		  window.location.reload();
+		} else {
+		  reloadMsg();
+		}
             }
         });
 }

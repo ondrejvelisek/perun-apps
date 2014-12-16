@@ -30,7 +30,10 @@ function callPerun(manager, method, args, callBack, perunError, perunComplete) {
             }
         },
         statusCode: {
-            302: function() {
+            302: function () {
+                window.location.reload();
+            },
+            0: function () {
                 window.location.reload();
             }
         },
@@ -45,7 +48,6 @@ function callPerun(manager, method, args, callBack, perunError, perunComplete) {
         }
     });
 }
-;
 
 
 function callPerunPost(manager, method, args, callBack, perunError, perunComplete) {
@@ -77,7 +79,7 @@ function callPerunPost(manager, method, args, callBack, perunError, perunComplet
         complete: function (jqXHR, textStatus) {
             if (perunComplete) {
                 perunComplete();
-            }
+        }
         }
     });
 }
