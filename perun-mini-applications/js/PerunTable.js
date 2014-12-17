@@ -2,9 +2,9 @@
  * Creates a table which can easily visualize JSON data
  */
 function PerunTable() {
-    this.columns = [];  // required attr: type("button", "number"), title
+    this.columns = [];  // required attr: type("button", "number", "icon", ...), title
     this.values = [];
-    this.type = "";
+    this.clicableRows = {isClicable: false, id: "", prefix: "row-"};
     /**
      * Returns a new instance of the table
      */
@@ -13,6 +13,9 @@ function PerunTable() {
      */
     this.addColumn = function (column) {
         this.columns.push(column);
+    }
+    this.setClicableRows = function (clicableRows) {
+        this.clicableRows = clicableRows;
     }
 
     /**
@@ -32,8 +35,11 @@ function PerunTable() {
      * Draws the table and returns the HTML string
      */
     this.draw = function () {
-
-        var html = "<table class=\"table table-bordered\">";
+        if (this.clicableRows.isClicable) {
+            var html = "<table class=\"table table-bordered table-hover\">";
+        } else {
+            var html = "<table class=\"table table-bordered\">";
+        }
 
         // draw headers
         html += "<thead><tr>";
@@ -46,7 +52,11 @@ function PerunTable() {
 
 
         for (var row in this.values) {
-            html += "<tr>";
+            if (this.clicableRows.isClicable) {
+                html += "<tr class='clicable' id='" + this.clicableRows.prefix + this.values[row][this.clicableRows.id] + "'>";
+            } else {
+                html += "<tr>";
+            }
             for (var id in this.columns) {
                 var column = this.columns[id];
                 html += "<td class='col-" + column.type + "'>";
