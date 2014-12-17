@@ -1,0 +1,63 @@
+<!DOCTYPE html>                                                                                                                                                                                
+<html>
+  <head>
+    <title>User profile in eInfrastructure</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/layout.css" rel="stylesheet">
+
+    <script src="/utils/jquery-1.8.2.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/Configuration.js"></script>
+    <script src="/js/PerunUtils.js"></script>
+    <script src="/js/PerunTable.js"></script>
+    <script src="/js/PerunLoader.js"></script>
+    <script src="js/CPKLoader.js"></script>
+
+  </head>
+  <body>
+
+    <div class="container-fluid header"> <!-- main container -->
+      <div class="row-fluid">
+        <div class="span2 logo">Centrální portál knihoven</div>
+        <div class="span10 title"><h3>Správa externích identit</h3></div>
+      </div>
+    </div>
+ 
+    <div class="container-fluid"> <!-- main container -->
+     <div class="row-fluid">  <!--  whole content -->
+        <div class="span2"> <!-- left menu -->
+          <div class="tabbable">
+          <br/>
+          <ul class="nav nav-pills nav-stacked">  
+            <li class="nav-header">Menu</li>  
+            <li class="active"><a href="#identities" data-toggle="tab"><i class="icon-tasks"></i> Spojené identity</a></li>  
+            <li class="divider"></li>  
+            <li><a href="#help" data-toggle="tab" id="helpLink"><i class="icon-flag"></i> Nápověda</a></li>  
+          </ul>  
+          </div>
+        </div> <!-- left menu -->
+
+        <div class="span10">
+        <div class="tab-content"> <!-- content -->
+          <div class="tab-pane active" id="identities"> <!-- profile tab -->
+            <div class="page-header"><h2>Spojené identity</h2></div>
+            <div id="identities-table-fed"></div>
+            <p><a href="/ic-fed/index-fed-cs.html?target=https://einfra.cesnet.cz/apps/cpk/"><button class="btn btn-success" id="new-identity">Spojit novou externí identitu</button></a></p>
+          </div> <!-- identities tab -->
+
+           <div class="tab-pane" id="help"> <!-- help tab -->
+            <div class="page-header"><h2>Nápověda</h2></div>
+            <p>Tato aplikace slouží ke spojení Vaší institucionální identity, kterou poskytuje Vaše organizace přes <a href="http://www.eduid.cz">eduID.cz</a> s identitou v <a href="http://www.mojeid.cz">mojeID</a></p>
+          </div>
+        </div> <!-- conent -->
+        </div>
+
+      </div> <!-- whole content -->
+
+    </div> <!-- main container -->
+
+  </body>
+</html>
