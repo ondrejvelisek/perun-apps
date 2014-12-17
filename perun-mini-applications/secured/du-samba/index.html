@@ -3,18 +3,26 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <link href="https://fonts.googleapis.com/css?family=Oswald&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-        
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../icomoon/icomoon.css" rel="stylesheet">
-        <link href="../css/multilevel-dropdown.css" rel="stylesheet">
-        <link href="../css/layout.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
 
-        <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        
-        <link rel="icon" type="image/ico" href="../img/favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Oswald&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+        <link href="../../bootstrap/css/bootstrap.min.css"  rel="stylesheet">
+        <link href="../../css/multilevel-dropdown.css" rel="stylesheet">
+        <link href="../../icomoon/icomoon.css" rel="stylesheet">
+        <link href="../../css/layout.css" rel="stylesheet">
+        <link href="css/main.css"  rel="stylesheet">
+
+        <script src="../../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+        <link rel="shortcut icon" href="../../img/favicons/favicon.ico">
+        <link rel="icon" sizes="16x16 32x32 64x64" href="../../img/favicons/favicon.ico">
+        <link rel="icon" type="image/png" sizes="64x64" href="../../img/favicons/favicon-64.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../img/favicons/favicon-32.png">
+        <link rel="apple-touch-icon" href="../../img/favicons/favicon-57.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../img/favicons/favicon-144.png">
+        <meta name="msapplication-TileImage" content="../../img/favicons/favicon-white-144.png">
+        <meta name="msapplication-TileColor" content="#00569c">
+
         <title>Nastavení hesla pro DÚ SAMBA</title>
     </head>
     <body>
@@ -22,17 +30,19 @@
         <div id="cesnet_linker_placeholder"></div>
 
 
-            <div id="header">
+        <div id="header">
+            <div class="container">
                 <div class="row">
-                    <div class="col-sm-2">
+                    <!--<div class="col-md-2">
                         <div class="logo">
                         </div>
-                    </div>
-                    <div class="col-sm-8">
+                    </div>-->
+                    <div class="col-md-10">
                         <div class="title">
-                            <h1>Nastavení hesla pro službu SAMBA - DÚ CESNET</h1>                        </div>
+                            <h1>Nastavení hesla pro službu SAMBA - DÚ CESNET</h1>                        
+                        </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-md-2">
                         <div class="user">
                             Uživatel
                             <span id="user-titleBefore"></span>
@@ -44,66 +54,67 @@
                     </div>
                 </div>
             </div>
+        </div>
 
 
         <div id="wrap">
-        <div class="container"> <!-- main container -->
-            <div class="row">
-<!--
-                 <div id="sidebar" class="col-md-3 col-sm-4">
-                        <ul class="nav nav-pills nav-stacked">
-                                <li class="active">
-                                   <a href="/apps/user-profile/"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Bact to User Profile</a>
-                                </li>
-                        </ul>
-                  </div>
-                  -->
+            <div class="container"> <!-- main container -->
+                <div class="row">
+                    <!--
+                                     <div id="sidebar" class="col-md-3 col-sm-4">
+                                            <ul class="nav nav-pills nav-stacked">
+                                                    <li class="active">
+                                                       <a href="/apps/user-profile/"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Bact to User Profile</a>
+                                                    </li>
+                                            </ul>
+                                      </div>
+                    -->
 
 
-                <div class="col-md-9 col-sm-8">
-                    <div class="tab-content" id="content">  <!-- content -->
+                    <div class="col-md-8">
+                        <div class="tab-content" id="content">  <!-- content -->
 
-                        <div class="tab-pane active" id="altPasswords"> <!-- alternative passwords tab -->
+                            <div class="tab-pane active" id="altPasswords"> <!-- alternative passwords tab -->
 
 
-                            <h3>Nastavte si heslo pro SAMBA službu</h3>
+                                <h3>Nastavte si heslo pro SAMBA službu</h3>
 
-                            <form class="form-horizontal" role="form" id="createAltPassword">
+                                <form class="form-horizontal" role="form" id="createAltPassword">
 
-                                <div class="form-group">
-                                    <div class="col-md-7">
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" id="sambaPassword" placeholder="" required>
-                                            <span class="input-group-btn">
-                                                <button type="submit" class="btn btn-success">Nastavit heslo</button>
-                                            </span>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" id="sambaPassword" placeholder="" required>
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="btn btn-success">Nastavit heslo</button>
+                                                </span>
+                                            </div>
+                                            <p class="help-block" id="sambaPassword-info">
+                                            </p>
                                         </div>
-                                         <p class="help-block" id="sambaPassword-info">
-                                        </p>
                                     </div>
-                                </div>
 
 
-                            </form>
+                                </form>
 
-                        </div> <!-- alternative passwords tab -->
+                            </div> <!-- alternative passwords tab -->
 
-                    </div> <!-- content -->
-                </div> 
+                        </div> <!-- content -->
+                    </div> 
 
 
-            </div>
-        </div> <!-- main container -->
-      </div> <!-- /#wrap -->
+                </div>
+            </div> <!-- main container -->
+        </div> <!-- /#wrap -->
 
-       <div id="footer">
+        <div id="footer">
             <footer>
                 <div class="container">
                     <div class="row">
                         <div class="col col-md-3">
                             <div class="logo-wrapper">
                                 <a href="http://www.cesnet.cz/">
-                                    <img src="/img/logo-cesnet.png" class="img-responsive" alt="cesnet logo">
+                                    <img src="../../img/logo-cesnet.png" class="img-responsive" alt="cesnet logo">
                                 </a>
                             </div>
                         </div>
@@ -135,7 +146,7 @@
                 </div>
             </footer>
         </div>
- 
+
         <div id="flowMessager">
             <!-- contend loaded by JavaScript -->
         </div>
@@ -151,15 +162,18 @@
 
         <script type="text/javascript" async src="https://linker2.cesnet.cz/linker.js"></script>
 
-        <script src="../js/jquery/jquery-1.11.1.min.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-latest.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+        <script src="../../bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>
+
         <script src="js/Configuration.js"></script>
-        <script src="../js/PerunUtils.js"></script>
-        <script src="../js/PerunTable.js"></script>
-        <script src="../js/PerunUserLoader.js"></script>
-        <script src="../js/PerunConnectionTester.js"></script>
-        <script src="../js/Messager.js"></script>
-        <script src="../js/LoadImage.js"></script>
+        <script src="../../js/PerunUtils.js"></script>
+        <script src="../../js/PerunConnectionTester.js"></script>
+        <script src="../../js/PerunTable.js"></script>
+        <script src="../../js/PerunUserLoader.js"></script>
+        <script src="../../js/Messager.js"></script>
+        <script src="../../js/LoadImage.js"></script>
 
         <script src="js/AlternativePassword.js"></script>
         <!--<script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>-->
