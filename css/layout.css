@@ -57,25 +57,28 @@ dl dd .btn {
 #content .dropdown-menu a[data-value] {
   cursor: pointer;
 }
-#content table {
+table {
   margin-bottom: 6px;
 }
-#content table thead th.col-button,
-#content table thead th.col-number,
-#content table thead th.col-boolean,
-#content table thead th.col-icon {
+table thead th.col-button,
+table thead th.col-button2,
+table thead th.col-number,
+table thead th.col-boolean,
+table thead th.col-icon {
   width: 1%;
 }
-#content table tbody td.col-button {
+table tbody td.col-button,
+table tbody td.col-button2 {
   padding: 1px 0px;
   text-align: center;
 }
-#content table tbody td.col-button .btn {
+table tbody td.col-button .btn,
+table tbody td.col-button2 .btn {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
 }
-#content .clicable {
+.clicable {
   cursor: pointer;
 }
 #flowMessager {

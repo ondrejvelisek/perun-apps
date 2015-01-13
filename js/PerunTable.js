@@ -30,6 +30,9 @@ function PerunTable() {
 
         }
     }
+    this.addValue = function (value) {
+        this.values.push(value);
+    }
 
     /**
      * Draws the table and returns the HTML string
@@ -63,6 +66,9 @@ function PerunTable() {
                 switch (column.type) {
                     case "button":
                         html += (new TableButton(this.values[row][column.btnId], column.btnName, column.btnText, column.btnType)).html();
+                        break;
+                    case "button2":
+                        html += this.values[row][column.button].html();
                         break;
                     case "number":
                         html += (1 + parseInt(row));
@@ -103,14 +109,23 @@ function PerunTable() {
 
 
 
-function TableButton(id, name, title, type) {
+function TableButton(id, name, title, type, action) {
     this.id = id;
     this.name = name;
     this.title = title;
     this.type = type;
+    this.action = action;
 
     this.html = function () {
-        var html = '<button id="' + this.name + "-" + this.id + '" class="btn btn-' + this.type + '">' + this.title + '</button>';
+        var onclick = "";
+        if (this.action) {
+            onclick = 'onclick="' + this.action.fnc.name + '(' + this.action.params + ')"';
+        }
+        var html = '<button ' + onclick + ' id="' + this.name + "-" + this.id + '" class="btn btn-' + this.type + '">' + this.title + '</button>';
         return html;
+    };
+
+    this.getAction = function () {
+        return this.action;
     };
 }
