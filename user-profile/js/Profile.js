@@ -6,7 +6,6 @@
 
 
 function entryPoint(user) {
-    //checkUserEinfraLogin(user);
     loadUserAttributes(user);
     loadProjects(user);
     loadIdentities(user);
@@ -82,8 +81,9 @@ function loadUserAttributes(user) {
         (flowMessager.newMessage("User attributes", "can't be loaded because user isn't loaded.", "danger")).draw();
         return;
     }
+
     var loadImage = new LoadImage($('#user-attributes [id^="user-"], #user-displayName'), "20px");
-    
+
     callPerun("attributesManager", "getAttributes", {user: user.id}, function(userAttributes) {
         if (!userAttributes) {
             (flowMessager.newMessage("User attributes", "can't be loaded.", "danger")).draw();
@@ -94,10 +94,10 @@ function loadUserAttributes(user) {
             userAttributesFriendly[userAttributes[attrId].friendlyName] = userAttributes[attrId].value;
         }
         fillUserAttributes(userAttributesFriendly);
+	    loadImage.hide();
         if (!userAttributesFriendly["login-namespace:einfra"]) {
-	    $(".hide-without-login").hide(0);
-	}
-	loadImage.hide();
+            $(".hide-without-login").hide(0);
+        }
         //(flowMessager.newMessage("User data", "was loaded successfully.", "success")).draw();
     });
 }
