@@ -51,7 +51,6 @@ function fillResources(resourcesAll, member) {
             table.addValue({name: resource.name, action: action});
             table.values.sort(function(a, b) { return a.name.localeCompare(b.name); });
             $("#mailinglists-table").html(table.draw());
-            console.log(table.values);
         }
     }
 }
