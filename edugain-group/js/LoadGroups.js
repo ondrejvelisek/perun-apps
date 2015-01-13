@@ -113,6 +113,10 @@ function loadGroups(vo) {
         callBackAfter(loadGroups);
         fillGroups(groupsWithMembersGroup);
         loadImage.hide();
+    }, function(data) {
+        if (data.name != "PrivilegeException") {
+            (flowMessager.newMessage(data.name, data.message, "danger")).draw();
+        }
     });
 }
 
