@@ -1,4 +1,43 @@
-# netBeans
+# Ignore Java project files #
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignore Maven target #
+
+**/target
+
+# Ignore IntelliJ project files #
+
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Ignore Eclipse project files #
+
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+.externalToolBuilders/
+*.launch
+.cproject
+.buildpath
+
+# Ignore NetBeans project files #
+
 nbproject/private/
 nbproject/
 build/
@@ -8,21 +47,16 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
-# Windows image file caches
+# LINUX ignore #
+
+.*
+!.gitignore
+!.gitattributes
+*~
+
+# Window ignore #
+
 Thumbs.db
 ehthumbs.db
-
-# Folder config file
 Desktop.ini
-
-# Recycle Bin used on file shares
 $RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
