@@ -57,13 +57,14 @@ function fillResources(resourcesAll, member) {
 
 
 function subscribe(memberId, resourceId) {
-  callPerun("attributesManager", "getAttribute", { member : memberId, resource : resourceId, attributeName : 'urn:perun:member_resource:attribute-def:def:optOutMailingList' }, function(attr) {
-      attr.value = '';
-      callPerunPost("attributesManager", "setAttribute", { member : memberId, resource : resourceId, attribute : attr }, function() {
-          alert("Check");
-          window.location.reload();
-      });
-  });
+    var loadImage = new LoadImage($("#mailinglists-table .subscribe-"+resourceId), "32px");
+    callPerun("attributesManager", "getAttribute", { member : memberId, resource : resourceId, attributeName : 'urn:perun:member_resource:attribute-def:def:optOutMailingList' }, function(attr) {
+        attr.value = '';
+        callPerunPost("attributesManager", "setAttribute", { member : memberId, resource : resourceId, attribute : attr }, function() {
+            loadImage.hide();
+            //window.location.reload();
+        });
+    });
 }
 
 function unsubscribe(memberId, resourceId) {
