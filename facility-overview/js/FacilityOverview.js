@@ -84,6 +84,7 @@ function loadOwners(facility) {
 
 
 function fillHosts(hosts) {
+    hosts.sort(function(a,b) { return a.name.localeCompare(b.name); });
     var hostsTable = new PerunTable();
     hostsTable.addColumn({type: "text", title: "Host name", name: "name"});
     hostsTable.addColumn({type: "list", title: "Owners", name: "owners"});
