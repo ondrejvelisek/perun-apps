@@ -97,6 +97,9 @@ function loadAllMembers(vo) {
     }, function(data) {
         if (data.name != "PrivilegeException") {
             (flowMessager.newMessage(data.name, data.message, "danger")).draw();
+        } else {
+            allMembers = [];
+            callBackAfter(loadAllMembers);
         }
     });
 }

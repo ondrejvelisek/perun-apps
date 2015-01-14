@@ -116,6 +116,11 @@ function loadGroups(vo) {
     }, function(data) {
         if (data.name != "PrivilegeException") {
             (flowMessager.newMessage(data.name, data.message, "danger")).draw();
+        } else {
+            allVoGroups = [];
+            callBackAfter(loadGroups);
+            fillGroups([]);
+            loadImage.hide();
         }
     });
 }
