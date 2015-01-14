@@ -1,7 +1,7 @@
 configuration = {
-    RPC_URL: "http://localhost/krb/rpc/jsonp/",
-    TEST_RPC_URL: "http://localhost/krb/rpc/",
-    TESTING_CONNECTION: false, //because localhost hasnt got access and throws error
+    RPC_URL: "/fed/rpc/jsonp/",
+    TEST_RPC_URL: "/fed/rpc/",
+    TESTING_CONNECTION: true,
 
     LOADER_IMAGE: '../../img/loader_white-bg.gif'
 };
