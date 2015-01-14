@@ -17,6 +17,7 @@ function entryPoint(user) {
 function loadResources(vo) {
     callPerun("resourcesManager", "getResources", {vo: vo.id}, function(resources) {
         resourcesCount = resources.length;
+        addProgressBar(1);
         loadFacilities(resources);
     });
 }
@@ -24,7 +25,9 @@ function loadResources(vo) {
 function loadFacilities(resources) {
     for(var i in resources) {
         callPerun("resourcesManager", "getFacility", {resource: resources[i].id}, function(facility) {
+            addProgressBar(10/resourcesCount);
             $.when(loadHosts(facility), loadOwners(facility)).done(function(hosts, owners){
+                addProgressBar(10/resourcesCount);
                 loadHostsAttrs(hosts[0], getTechnicalOwners(owners[0]));
             });
         });
@@ -36,7 +39,7 @@ function loadFacilities(resources) {
 function loadHostsAttrs(hosts, owners) {
     if (hosts.length == 0) {
         resourcesCurrent++;
-        addProgressBar(100/resourcesCount);
+        addProgressBar(80/resourcesCount);
         return;
     }
     var hostsCount = hosts.length;
@@ -62,7 +65,7 @@ function loadHostsAttrs(hosts, owners) {
             }
             hostsFriendly.push({name: host.hostname, owners: owners, isMonitored: isMonitored, isManaged: isManaged});
             hostsCurrent++;
-            addProgressBar((100/resourcesCount)/hostsCount);
+            addProgressBar((80/resourcesCount)/hostsCount);
             if (hostsCurrent == hostsCount) {
                 resourcesCurrent++;
                 if (resourcesCurrent == resourcesCount) {
