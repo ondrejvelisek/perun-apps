@@ -147,6 +147,7 @@ function addGroupAdminRole(groupId, voId) {
     roles.GROUPADMIN.Group.push(groupId);
     if (roles.GROUPADMIN.Vo.indexOf(voId) < 0) {
         roles.GROUPADMIN.Vo.push(voId);
+        loadAllMembers({id: voId});
     }
 }
 
