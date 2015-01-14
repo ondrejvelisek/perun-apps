@@ -75,9 +75,9 @@ function PerunTable() {
                         break;
                     case "boolean":
                         if (this.values[row][column.name] === true) {
-                            html += "<i class='glyphicon glyphicon-ok'></i>";
+                            html += "<i class='glyphicon glyphicon-ok true'></i>";
                         } else if (this.values[row][column.name] === false) {
-                            html += "<i class='glyphicon glyphicon-remove'></i>";
+                            html += "<i class='glyphicon glyphicon-remove false'></i>";
                         } else {
                             html += " ";
                         }
@@ -88,6 +88,14 @@ function PerunTable() {
                         } else {
                             html += "<i class='glyphicon " + this.values[row][column.name] + "' title='" + column.description + "' data-toggle='tooltip'></i>";
                             //need active tooltip after table will be draw -- table.find('[data-toggle="tooltip"]').tooltip();
+                        }
+                        break;
+                    case "list":
+                        for (var i in this.values[row][column.name]) {
+                            html += this.values[row][column.name][i];
+                            if (i != this.values[row][column.name].length-1) {
+                                html += ", ";
+                            }
                         }
                         break;
                     default :

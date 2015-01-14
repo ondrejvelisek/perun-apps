@@ -9,7 +9,7 @@
  */
 function callPerun(manager, method, args, callBack, perunError, perunComplete) {
 
-    $.ajax({
+    return $.ajax({
         url: configuration.RPC_URL + manager + "/" + method,
         data: args,
         dataType: "jsonp",
@@ -18,7 +18,9 @@ function callPerun(manager, method, args, callBack, perunError, perunComplete) {
         {
             if (!data) {
                 (flowMessager.newMessage(manager + " " + method, "hasn't returned data", "warning")).draw();
-                callBack();
+                if (callBack) {
+                    callBack();
+                }
             } else if (typeof data.errorId !== "undefined") {
                 if (perunError) {
                     perunError(data);
@@ -26,7 +28,9 @@ function callPerun(manager, method, args, callBack, perunError, perunComplete) {
                     (flowMessager.newMessage(data.name, data.message, "danger")).draw();
                 }
             } else {
-                callBack(data);
+                if (callBack) {
+                    callBack(data);
+                }
             }
         },
         statusCode: {
@@ -52,7 +56,7 @@ function callPerun(manager, method, args, callBack, perunError, perunComplete) {
 
 function callPerunPost(manager, method, args, callBack, perunError, perunComplete) {
 
-    $.ajax({
+    return $.ajax({
         url: configuration.RPC_URL + manager + "/" + method,
         data: JSON.stringify(args),
         dataType: "jsonp",

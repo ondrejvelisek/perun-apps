@@ -1,0 +1,25 @@
+
+body {
+    background-color: #EEE;
+}
+
+#header {
+    background-color: #FFF;
+    box-shadow: 0px 0px 16px #CCC;
+}
+#header .logo {
+    height: 20px;
+}
+#header .logo img {
+    height: 34px;
+    margin-top: -6px;
+}
+#header .user {
+    margin-top: 15px;
+}
+.col-boolean .true {
+    color: green;
+}
+.col-boolean .false {
+    color: #DD0022;
+}
