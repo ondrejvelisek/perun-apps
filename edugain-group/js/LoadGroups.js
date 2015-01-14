@@ -362,6 +362,7 @@ function removeManagers(form, group) {
 function deleteGroup(group) {
     callPerunPost("groupsManager", "deleteGroup", {group: group.id, force: 1}, 
     function () {
+        innerTabs.getTabByName(group.id).place.find(".modal").modal('hide');
         innerTabs.removeTab(group.id);
         (flowMessager.newMessage(group.name, "was deleted successfully", "success")).draw();
         loadGroups(vo);
