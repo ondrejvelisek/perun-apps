@@ -10,12 +10,14 @@ var hostsFriendly = [];
 
 function entryPoint(user) {
     callPerun("vosManager", "getVoByShortName", {shortName: voShortName}, function(vo) {
-        loadResources(vo);
+        callPerun("membersManager", "getMemberByUser", {vo: vo.id, user: user.id}, function(member) {
+            loadResources(member);
+        });
     });
 }
 
-function loadResources(vo) {
-    callPerun("resourcesManager", "getResources", {vo: vo.id}, function(resources) {
+function loadResources(member) {
+    callPerun("resourcesManager", "getAllowedResources", {member: member.id}, function(resources) {
         resourcesCount = resources.length;
         addProgressBar(1);
         loadFacilities(resources);
