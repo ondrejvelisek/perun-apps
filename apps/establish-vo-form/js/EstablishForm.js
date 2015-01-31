@@ -16,9 +16,14 @@ $(document).ready(function() {
         var subject = "Application for establish new VO";
         var text = getTextFromForm(form);
         form[0].reset();
-        callPerunPost("rtMessagesManager", "sentMessageToRT", {queue: queue, subject: subject, text: text}, function() {
-            (flowMessager.newMessage("Application", "was send successfully", "success")).draw();
-        });
+        if (!isDevel()) {
+            callPerunPost("rtMessagesManager", "sentMessageToRT", {queue: queue, subject: subject, text: text}, function() {
+                (flowMessager.newMessage("Application", "was send successfully", "success")).draw();
+            });
+        } else {
+            console.log("This is devel mode. Everything seems fine. But final message to RT hasn't been send.");
+            (staticMessager.newMessage("Devel", "This is devel mode. Everything seems fine. But final message to RT hasn't been send.", "warning")).draw();
+        }
         
         function getTextFromForm(form) {
             var text = 'Request has been created, detailed information follow: \n ';
