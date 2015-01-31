@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     var secret = getURLParameter("secret");
 
-    callExternalScript("unsubscribe.cgi", {secret: secret}, function(data) {
+    callExternalScript("scripts/unsubscribe.cgi", {secret: secret}, function(data) {
         if (data.errorId) {
             switch (data.name) {
                 case "MemberNotExistsException":

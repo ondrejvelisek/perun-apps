@@ -15,7 +15,7 @@ $(document).ready(function() {
         var surname = form.find("input#surname");
         var email = form.find("input#email");
         
-        callExternalScript("sendSubscribeEmail.cgi", {name: name.val(), surname: surname.val(), email: email.val()}, function(data) {
+        callExternalScript("scripts/sendSubscribeEmail.cgi", {name: name.val(), surname: surname.val(), email: email.val()}, function(data) {
             if (data.errorId) {
                 switch (data.name) {
                     case "EmailNotSendException":

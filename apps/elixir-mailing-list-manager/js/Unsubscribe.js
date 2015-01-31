@@ -13,7 +13,7 @@ $(document).ready(function() {
 
         var email = form.find("input#email");
         
-        callExternalScript("sendUnsubscribeEmail.cgi", {email: email.val()}, function(data) {
+        callExternalScript("scripts/sendUnsubscribeEmail.cgi", {email: email.val()}, function(data) {
             if (data.errorId) {
                 switch (data.name) {
                     case "EmailNotSendException":
