@@ -3,7 +3,7 @@ var voShortName = 'meta';
 var serviceName = "mailman_meta";
 
 function entryPoint(user) {
-    loadUserAttributes(user);
+    //loadUserAttributes(user);
     getMember(user, voShortName);
 }
 
@@ -88,7 +88,7 @@ function loadUserAttributes(user) {
         return;
     }
 
-    var loadImage = new LoadImage($('#user-attributes [id^="user-"], #user-displayName'), "20px");
+    var loadImage = new LoadImage($('.user-attributes [id^="user-"], .user-displayName'), "20px");
 
     callPerun("attributesManager", "getAttributes", {user: user.id}, function(userAttributes) {
         if (!userAttributes) {
@@ -111,6 +111,6 @@ function fillUserAttributes(userAttributesFriendly) {
     }
     for (var attrName in userAttributesFriendly) {
         var attrId = attrName.split(':').join('-');
-        $("#user-"+attrId).text(userAttributesFriendly[attrName]);
+        $(".user-"+attrId).text(userAttributesFriendly[attrName]);
     }
 }

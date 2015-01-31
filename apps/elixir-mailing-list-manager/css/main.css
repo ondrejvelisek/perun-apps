@@ -29,6 +29,13 @@ h6 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+#header .title {
+  font-style: italic;
+}
+#header .title img {
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
 #menu .nav-pills > .active > a,
 #menu .nav-pills > .active > a:hover,
 #menu .nav-pills > .active > a:focus {

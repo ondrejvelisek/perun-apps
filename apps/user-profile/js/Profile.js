@@ -21,7 +21,7 @@ $(document).ready(function() {
 
     $("#preferredLanguage.dropdown-menu > li > a[data-value]").click(function() {
         var clicked = this;
-        var loadImage = new LoadImage($('#user-preferredLanguage'), "20px");
+        var loadImage = new LoadImage($('.user-preferredLanguage'), "20px");
         
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:preferredLanguage"}, function(preferredLanguage) {
             preferredLanguage.value = $(clicked).attr("data-value").trim();
@@ -37,7 +37,7 @@ $(document).ready(function() {
 
     $("#timezone.dropdown-menu.multi-level li>a[data-value]").click(function() {
         var clicked = this;
-        var loadImage = new LoadImage($('#user-timezone'), "20px");
+        var loadImage = new LoadImage($('.user-timezone'), "20px");
         
         callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:timezone"}, function(timezone) {
             timezone.value = $(clicked).attr("data-value").trim();
@@ -82,7 +82,7 @@ function loadUserAttributes(user) {
         return;
     }
 
-    var loadImage = new LoadImage($('#user-attributes [id^="user-"], #user-displayName'), "20px");
+    var loadImage = new LoadImage($('.user-attributes [id^="user-"], .user-displayName'), "20px");
 
     callPerun("attributesManager", "getAttributes", {user: user.id}, function(userAttributes) {
         if (!userAttributes) {
@@ -109,7 +109,7 @@ function fillUserAttributes(userAttributesFriendly) {
     }
     for (var attrName in userAttributesFriendly) {
         var attrId = attrName.split(':').join('-');
-        $("#user-"+attrId).text(userAttributesFriendly[attrName]);
+        $(".user-"+attrId).text(userAttributesFriendly[attrName]);
     }
 }
 

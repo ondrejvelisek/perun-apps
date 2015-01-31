@@ -1,8 +1,15 @@
-<!DOCTYPE html>                                                                                                                                                                                
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
 
         <meta http-equiv="cache-control" content="max-age=0" />
         <meta http-equiv="cache-control" content="no-cache" />
@@ -10,14 +17,14 @@
         <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
         <meta http-equiv="pragma" content="no-cache" />
 
-        <!--<link href="https://fonts.googleapis.com/css?family=Oswald&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
-        -->
+        <link href="https://fonts.googleapis.com/css?family=Oswald&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
         <link href="/apps-include/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="/apps-include/icomoon/icomoon.css" rel="stylesheet">
-        <link href="/apps-include/css/multilevel-dropdown.css" rel="stylesheet">
+        <!--<link href="/apps-include/css/multilevel-dropdown.css" rel="stylesheet">-->
+        <link href="/apps-include/css/metacentrum.css" rel="stylesheet">
         <link href="/apps-include/css/layout.css" rel="stylesheet">
         <link href="../non/css/main.css" rel="stylesheet">
-        <link href="../non/css/additional.css" rel="stylesheet">
 
         <script src="/apps-include/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
@@ -33,36 +40,34 @@
         <title>Alternative password manager</title>
     </head>
     <body>
-
+        <!------------ LINKER ------->
         <div id="cesnet_linker_placeholder" data-lang="en"></div>
 
+        <div id="wrap">
 
-        <div id="header">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="logo">
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="title">
-                        <h2>Alternative password manager</h2>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="user">
-                        logged in as
-                        <span id="user-titleBefore"></span>
-                        <span id="user-firstName"></span>
-                        <span id="user-middleName">...</span>
-                        <span id="user-lastName"></span>
-                        <span id="user-titleAfter"></span>
+            <div id="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="logo">
+                                <a href="http://perun.cesnet.cz"><img src="/apps-include/img/perun-color-logo.png" alt="perun logo"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="title">
+                                <h3><img src="/apps-include/img/metalogo_pruhledne_150.png" alt="MetaCentrum logo"> Alternative password manager</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="user">
+                                <span class="user-firstName">logged as ...</span> <span class="user-lastName"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
-        <div id="wrap">
             <div class="container"> <!-- main container -->
                 <div class="row">
 
@@ -196,10 +201,11 @@
         </div>
         </noscript>
 
-        <script type="text/javascript" async src="https://linker2.cesnet.cz/linker.js"></script>
-
-        <script src="/apps-include/js/vendor/jquery-1.11.1.min.js"></script>
+        <script src="//code.jquery.com/jquery-latest.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/apps-include/js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
         <script src="/apps-include/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" async src="https://linker.cesnet.cz/linker.js"></script>
+
         <script src="../non/js/Configuration.js"></script>
         <script src="/apps-include/js/PerunUtils.js"></script>
         <script src="/apps-include/js/PerunTable.js"></script>

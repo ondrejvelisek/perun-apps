@@ -25,12 +25,12 @@ function fillUserInfo(user) {
         (flowMessager.newMessage("User info","can't be fill because user isn't loaded.","danger")).draw();
         return;
     }
-    $("#user-id").text(user.id);
-    $("#user-titleBefore").text((user.titleBefore) ? user.titleBefore : "");
-    $("#user-firstName").text((user.firstName) ? user.firstName : "");
-    $("#user-middleName").text((user.middleName) ? user.middleName : "");
-    $("#user-lastName").text((user.lastName) ? user.lastName : "");
-    $("#user-titleAfter").text((user.titleAfter) ? user.titleAfter : "");
+    $(".user-id").text(user.id);
+    $(".user-titleBefore").text((user.titleBefore) ? user.titleBefore : "");
+    $(".user-firstName").text((user.firstName) ? user.firstName : "");
+    $(".user-middleName").text((user.middleName) ? user.middleName : "");
+    $(".user-lastName").text((user.lastName) ? user.lastName : "");
+    $(".user-titleAfter").text((user.titleAfter) ? user.titleAfter : "");
 }
 
 function fillRolesInfo(roles) {
@@ -38,7 +38,7 @@ function fillRolesInfo(roles) {
         (flowMessager.newMessage("Roles info","can't be fill because roles aren't loaded.","danger")).draw();
         return;
     }
-    $("#user-roles").html("");
+    $(".user-roles").html("");
     for(var i in roles) {
         var item;
         switch(i) {
@@ -73,7 +73,7 @@ function fillRolesInfo(roles) {
                 item = "";
             break;
         }
-        $("#user-roles").append("<li>" + item + "</li>");
+        $(".user-roles").append("<li>" + item + "</li>");
     }
 }
 

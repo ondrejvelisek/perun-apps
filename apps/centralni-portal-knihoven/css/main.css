@@ -4,6 +4,15 @@
     color: white;
 }
 
+#header h1,
+#header h2,
+#header h3,
+#header h4,
+#header h5,
+#header h6 {
+    display: inline-block;
+}
+
 .nav-pills>li.active>a, 
 .nav-pills>li.active>a:hover, 
 .nav-pills>li.active>a:focus {

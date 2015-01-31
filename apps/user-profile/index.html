@@ -6,9 +6,8 @@
     <head>
         <meta charset="utf-8">
         <!--[if IE]>
-            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -23,8 +22,9 @@
         <link href="/apps-include/bootstrap/css/bootstrap.min.css"  rel="stylesheet">
         <link href="/apps-include/css/multilevel-dropdown.css" rel="stylesheet">
         <link href="/apps-include/icomoon/icomoon.css" rel="stylesheet">
+        <link href="/apps-include/css/metacentrum.css" rel="stylesheet">
         <link href="/apps-include/css/layout.css" rel="stylesheet">
-        <link href="../non/css/main.css"  rel="stylesheet">
+        <link href="../non/css/main.css" rel="stylesheet">
 
         <script src="/apps-include/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
@@ -40,36 +40,34 @@
         <title>User profile in eInfrastructure</title>
     </head>
     <body>
-        <div class="sr-only"><a href="#content">Přeskočit na obsah</a></div>
+        <!------------ LINKER ------->
+        <div id="cesnet_linker_placeholder" data-lang="en"></div>
 
-        <div id="cesnet_linker_placeholder"
-             data-lang="en"
-             data-dimensions-brand-width="283"
-             data-dimensions-brand-gap="9"
-             data-dimensions-max-width="1170">
-            <noscript>
-            <div class="cl_actions">
-                <a href="?lang=cs"><img alt="česká vlajka" src="data:image/gif;base64,R0lGODlhEgANALMAADV4zfLy8s3NzUiCz+cAAJ2dnexvbbfN6+3t7d4AAPj4+N/f3+hfXZIzXKK/5MFZbSH5BAAAAAAALAAAAAASAA0AAARNsMhJKx0H6b26X4I0YEpplkEahMU4OKeiBsgqujCqbqw7ALDZBtFzAQAPg9LAaDJvP0CDQE1Yr4nbcUolYK9abvVrvTXIaNEZTba4LREAOw=="></a>
-                <a href="?lang=en"><img alt="english flag" src="data:image/gif;base64,R0lGODlhEgANALMAAPv7+wAAPPsAAAUVh52dnfZgVXOQxU50qyhNp6Zxmb/I4qOx1/iPjVRuwXMQKdOi0CH5BAAAAAAALAAAAAASAA0AAARtkMhJKz3roK2cU0OIOIdkMIBiGEBRAE2zvIaELAzaAIIAM7SBzdB4vHi+FwgRkCgA0GgvGlVIHIWedrt1OKnQKdhKGDQGT59YkAg1yywXAgkYtASNd3yxoYcWPAgSBw4hAwEdHwGLAQZvFpAUEQA7"></a>
-                <a href="?do=login"><img alt="ikonka uživatele" src="data:image/gif;base64,R0lGODlhFgAaAKIAAJ6enktNSnFyccnJyVpbWWVmZMrKyomKiSH5BAAAAAAALAAAAAAWABoAAAOzGLpB9Y+wSaEtNN+bmTuCFWKdQhzDAAgCMByFVBJuWhuDUCrF+oCPlawDOCwAssJrh4oJXsHcLnAb4KzGaeGasg6GOwAXO2VUs2WCQA0AQMCUVkpXDKDauknLwP9SjVt9bgsoXSlGIDSGODoCY100MI84apMAVJdihikPkwcEKlSPX6CbBp+hmpsSqimnBJStVpcBjouSAz2PJHZ9s7Z7rlIMcnxFOCiCvBMFAgfPbc+JEwkAOw=="> Přihlášení</a>
-            </div>
-            Nemáte povolený JavaScript. Přehled služeb e-infrastruktury CESNET získáte na stránce: <a href="http://cesnet.cz/sluzby">http://cesnet.cz/sluzby</a>.
-            </noscript>
-        </div>
+        <div id="wrap">
 
-        <div id="header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="title">
-                            <h2>eInfrastructure User Profile</h2>
+            <div id="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="logo">
+                                <a href="http://perun.cesnet.cz"><img src="/apps-include/img/perun-color-logo.png" alt="perun logo"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="title">
+                                <h3><img src="/apps-include/img/metalogo_pruhledne_150.png" alt="MetaCentrum logo"> eInfrastructure User Profile</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="user">
+                                <span class="user-firstName">logged as ...</span> <span class="user-lastName"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="wrap">
+
             <div class="container">
                 <!--[if lt IE 7]>
                         <div class="row"><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p></div>
@@ -142,22 +140,22 @@
                             <div class="tab-pane active" id="profile"> <!-- profile tab -->
                                 <div class="page-header">
                                     <h1>
-                                        <span id="user-displayName"> ... </span>
+                                        <span class="user-displayName"> ... </span>
                                     </h1>
                                 </div>
 
-                                <dl class="dl-horizontal" id="user-attributes">
+                                <dl class="dl-horizontal user-attributes">
                                     <dt class="hide-without-login">Login</dt>
-                                    <dd class="hide-without-login" id="user-login-namespace-einfra"> ... </dd>
+                                    <dd class="hide-without-login user-login-namespace-einfra"> ... </dd>
                                     <dt>Organization</dt>
-                                    <dd id="user-organization"> ... </dd>
+                                    <dd class="user-organization"> ... </dd>
                                     <dt>E-mail</dt>
-                                    <dd id="user-preferredMail"> ... </dd>
+                                    <dd class="user-preferredMail"> ... </dd>
                                     <dt>Phone</dt>
-                                    <dd id="user-phone"> ... </dd>
+                                    <dd class="user-phone"> ... </dd>
                                     <dt>Preffered language</dt>
                                     <dd>
-                                        <span id="user-preferredLanguage"> ... </span>
+                                        <span class="user-preferredLanguage"> ... </span>
                                         <div class="btn-group">
                                             <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
                                                 <i class="caret"></i>
@@ -174,7 +172,7 @@
                                     </dd>
                                     <dt>Your timezone</dt>
                                     <dd>
-                                        <span id="user-timezone"> ... </span>
+                                        <span class="user-timezone"> ... </span>
                                         <div class="btn-group">
                                             <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
                                                 <i class="icon caret"></i>
