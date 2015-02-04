@@ -2,7 +2,7 @@ $(document).ready(function() {
     if (!isDevel()) {
         // Methods which check if the Perun connection is OK
         executeQuery();
-	//setTimeout(executeQuery, 5000);
+	    //setTimeout(executeQuery, 5000);
     }
 });
 
