@@ -82,7 +82,7 @@ function loadUserAttributes(user) {
         return;
     }
 
-    var loadImage = new LoadImage($('.user-attributes [id^="user-"], .user-displayName'), "20px");
+    var loadImage = new LoadImage($('.user-attributes, .user-displayName'), "40px");
 
     callPerun("attributesManager", "getAttributes", {user: user.id}, function(userAttributes) {
         if (!userAttributes) {

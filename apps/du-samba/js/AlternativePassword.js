@@ -31,6 +31,7 @@ function loadAlternativePasswords(user) {
         (flowMessager.newMessage("Aplikaci", "nelze načíst, protože nejsou dostupné informace o uživateli")).draw();
         return;
     }
+
     callPerun("attributesManager", "getAttribute", {user: user.id, attributeName: "urn:perun:user:attribute-def:def:altPasswords:samba-du"}, function(altPasswords) {
         if (!altPasswords) {
             (flowMessager.newMessage("Aplikaci", "nelze načíst.", "danger")).draw();

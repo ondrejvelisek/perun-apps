@@ -13,7 +13,7 @@ function loadIdentities(user) {
         (flowMessager.newMessage("Identities", "can't be loaded because user isn't loaded", "danger")).draw();
         return;
     }
-    var loadImage = new LoadImage($("#federations-table, #certificates-table"), "auto");
+    var loadImage = new LoadImage($("#identities-table-fed"), "auto");
 
     callPerun("usersManager", "getUserExtSources", {user: user.id}, function (extSources) {
         if (!extSources) {
