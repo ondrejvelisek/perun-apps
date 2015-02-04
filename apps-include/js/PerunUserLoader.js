@@ -3,7 +3,11 @@ var user;
 var roles;
 
 $(document).ready(function() {
-    loadUser();
+    if (getAuthz() == "non") {
+        chooseAuthz(window.location.pathname);
+    } else {
+        loadUser();
+    }
 });
 
 function loadUser() {
@@ -84,4 +88,20 @@ function logout() {
         (staticMessager.newMessage("User","was logged out successfully","success")).draw();
         callBackAfter("logout");
     });
+}
+
+function chooseAuthz(url) {
+    var modal = new Modal("Authenticated section", "chooseAuthz", $("body"));
+    modal.init();
+    var body = "You are going to visit an authenticated section. You have to log in. Please select your preferable type of authentication.";
+    var footer = "<a href='" + changeAuthz(url, "krb") + "' class='btn btn-lg btn-default'>Kerberos</a>";
+    footer += "<a href='" + changeAuthz(url, "fed") + "' class='btn btn-lg btn-default'>Federation</a>";
+    footer += "<a href='" + changeAuthz(url, "cert") + "' class='btn btn-lg btn-default'>Certificate</a>";
+    modal.addBody(body);
+    modal.addFooter(footer);
+    modal.getSelf().modal('show');
+
+    function changeAuthz(url, authz) {
+        return url.replace("/non/", "/" + authz + "/");
+    }
 }
