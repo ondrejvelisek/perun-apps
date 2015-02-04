@@ -20,9 +20,9 @@ function getAuthz() {
 
 function getRpcUrl() {
     if (isDevel()) {
-        return "https://perun-dev.meta.zcu.cz/krb/rpc/jsonp/"
+        return "https://perun-dev.meta.zcu.cz/krb/rpc/"
     }
-    return "/" + getAuthz() + "/rpc/jsonp/";
+    return "/" + getAuthz() + "/rpc/";
 }
 
 /**
@@ -37,7 +37,7 @@ function getRpcUrl() {
 function callPerun(manager, method, args, callBack, perunError, perunComplete) {
 
     return $.ajax({
-        url: getRpcUrl() + manager + "/" + method,
+        url: getRpcUrl() + "jsonp/" + manager + "/" + method,
         data: args,
         dataType: "jsonp",
         type: "get",
@@ -84,7 +84,7 @@ function callPerun(manager, method, args, callBack, perunError, perunComplete) {
 function callPerunPost(manager, method, args, callBack, perunError, perunComplete) {
 
     return $.ajax({
-        url: getRpcUrl() + manager + "/" + method,
+        url: getRpcUrl() + "jsonp/" + manager + "/" + method,
         data: JSON.stringify(args),
         dataType: "jsonp",
         contentType: "application/json; charset=utf-8",

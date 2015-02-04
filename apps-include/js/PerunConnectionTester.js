@@ -15,7 +15,7 @@ function reloadMsg() {
 
 function executeQuery() {
         $.ajax({
-            url: configuration.TEST_RPC_URL,
+            url: getRpcUrl(),
             success: function(data) {
                 if (!(data.indexOf("OK!") == 0)) {
                     reloadMsg();
