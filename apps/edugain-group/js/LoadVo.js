@@ -12,7 +12,9 @@ function entryPoint(user) {
 }
 
 $(document).ready(function () {
-
+    if (getAuthz() == "non") {
+        window.location.href = "../non/help.html";
+    }
 });
 
 var vo;
